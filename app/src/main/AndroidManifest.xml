@@ -13,11 +13,12 @@
         android:theme="@style/Theme.FinalProjectApartTalk"
         tools:targetApi="31">
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/Base.Theme.ApartTalk">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
