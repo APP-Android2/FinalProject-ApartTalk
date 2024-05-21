@@ -16,10 +16,10 @@ class EntireMenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentEntireMenuBinding.inflate(layoutInflater)
-        return binding.root
         settingToolbar()
         settingEvent()
         extraEvent()
+        return binding.root
     }
 
 
@@ -27,7 +27,6 @@ class EntireMenuFragment : Fragment() {
     private fun settingToolbar(){
         with(binding){
             toolbarMenu.apply {
-                toolbarTextMenu.text = "메뉴"
                 inflateMenu(R.menu.menu_setting)
                 setOnMenuItemClickListener {
                     //설정 액티비티로 이동

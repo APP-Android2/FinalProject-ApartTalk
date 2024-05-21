@@ -11,12 +11,11 @@
         android:id="@+id/toolbarMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/toolbarTextMenu"
@@ -29,7 +28,7 @@
             android:textColor="@color/black"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="12dp" />
-        
+
     </com.google.android.material.appbar.MaterialToolbar>
 
     <TextView
