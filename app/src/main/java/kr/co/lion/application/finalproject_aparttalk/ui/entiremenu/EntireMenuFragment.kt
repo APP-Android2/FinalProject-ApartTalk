@@ -18,4 +18,6 @@ class EntireMenuFragment : Fragment() {
         binding = FragmentEntireMenuBinding.inflate(layoutInflater)
         return binding.root
     }
+
+
 }
