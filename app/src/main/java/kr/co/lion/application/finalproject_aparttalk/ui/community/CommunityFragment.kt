@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
 import androidx.fragment.app.Fragment
@@ -9,10 +10,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.transition.MaterialSharedAxis
+import kr.co.lion.application.finalproject_aparttalk.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityBinding
+import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityTabFragmentName
 
 class CommunityFragment : Fragment() {
@@ -44,8 +47,11 @@ class CommunityFragment : Fragment() {
                 inflateMenu(R.menu.menu_community)
                 setOnMenuItemClickListener {
                     when(it.itemId) {
+                        // 검색 버튼
                         R.id.menuItemCommunitySearch -> {
-
+                            val intent = Intent(mainActivity, CommunityActivity::class.java)
+                            intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_SEARCH_FRAGMENT)
+                            startActivity(intent)
                         }
                     }
                     true
