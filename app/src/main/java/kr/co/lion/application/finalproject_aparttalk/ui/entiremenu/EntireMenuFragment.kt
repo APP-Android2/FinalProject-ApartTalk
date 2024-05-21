@@ -17,7 +17,83 @@ class EntireMenuFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentEntireMenuBinding.inflate(layoutInflater)
         return binding.root
+        settingToolbar()
+        settingEvent()
+        extraEvent()
     }
 
 
+    //툴바 설정
+    private fun settingToolbar(){
+        with(binding){
+            toolbarMenu.apply {
+                toolbarTextMenu.text = "메뉴"
+                inflateMenu(R.menu.menu_setting)
+                setOnMenuItemClickListener {
+                    //설정 액티비티로 이동
+
+                    true
+                }
+
+            }
+        }
+    }
+
+    //클릭 이벤트
+    private fun settingEvent(){
+        with(binding){
+            imageMyPageMenu.setOnClickListener {
+                //마이페이지로 이동
+            }
+
+            LinearWriteMenu.setOnClickListener {
+                //내가 쓴 글로 이동
+            }
+
+            LinearReservationMenu.setOnClickListener {
+                //예약 내역으로 이동
+            }
+
+            LinearContactMenu.setOnClickListener {
+                //고객센터로 이동
+            }
+
+            buttonResParkingMenu.setOnClickListener {
+                //방문 주차 예약으로 이동
+            }
+            buttonVoteMenu.setOnClickListener {
+                //전자 투표로 이동
+            }
+            buttonFireMenu.setOnClickListener {
+                //소방 점검으로 이동
+            }
+            buttonContactMenu.setOnClickListener {
+                //관리사무소 문의로 이동
+            }
+            buttonBroadcastMenu.setOnClickListener {
+                //안내방송으로 이동
+            }
+            buttonAptSchduleMenu.setOnClickListener {
+                //아파트 일정으로 이동
+            }
+            buttonAptInfoMenu.setOnClickListener {
+                //아파트 운영정보로 이동
+            }
+        }
+    }
+
+    //하단 정보 클릭 이벤트
+    private fun extraEvent(){
+        with(binding){
+            textCompanyInfo.setOnClickListener {
+                //회사 소개
+            }
+            textUseMenu.setOnClickListener {
+                //이용약관
+            }
+            textUserInfoMenu.setOnClickListener {
+                //개인정보 보호 방침
+            }
+        }
+    }
 }

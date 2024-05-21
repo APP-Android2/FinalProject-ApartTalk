@@ -8,7 +8,7 @@
     tools:context=".ui.entiremenu.EntireMenuFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar4"
+        android:id="@+id/toolbarMenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -16,7 +16,21 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:id="@+id/toolbarTextMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/notosans_bold"
+            android:text="전체"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/black"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="12dp" />
+        
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <TextView
         android:id="@+id/textNameMenu"
@@ -29,7 +43,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toStartOf="@+id/textUserCheckMenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar4" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMenu" />
 
     <TextView
         android:id="@+id/textUserCheckMenu"
@@ -40,7 +54,7 @@
         android:text="미인증"
         android:textColor="@color/gray"
         app:layout_constraintStart_toEndOf="@+id/textNameMenu"
-        app:layout_constraintTop_toBottomOf="@+id/materialToolbar4" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarMenu" />
 
     <TextView
         android:id="@+id/textAddressMenu"
@@ -71,6 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textAddressMenu">
 
         <LinearLayout
+            android:id="@+id/LinearWriteMenu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -93,6 +108,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearReservationMenu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -114,6 +130,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearContactMenu"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -350,7 +367,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView8"
+                            android:id="@+id/textViewAddInfo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
