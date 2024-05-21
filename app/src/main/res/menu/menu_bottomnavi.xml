@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/community_item"
+        android:enabled="true"
+        android:icon="@drawable/icon_chat"
+        android:title="커뮤니티" />
+    <item
+        android:id="@+id/location_item"
+        android:enabled="true"
+        android:icon="@drawable/icon_location"
+        android:title="주변 시설" />
+    <item
+        android:id="@+id/home_item"
+        android:enabled="true"
+        android:icon="@drawable/icon_home"
+        android:title="메인" />
+    <item
+        android:id="@+id/facility_item"
+        android:enabled="true"
+        android:icon="@drawable/icon_facility"
+        android:title="이용 시설" />
+    <item
+        android:id="@+id/entiremenu_item"
+        android:enabled="true"
+        android:icon="@drawable/icon_menu"
+        android:title="전체" />
+</menu>
