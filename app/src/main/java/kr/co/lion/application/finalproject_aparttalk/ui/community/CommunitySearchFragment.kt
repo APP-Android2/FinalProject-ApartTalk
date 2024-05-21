@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommuni
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunitySearchBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunitySearchBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabEtcBinding
+import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class CommunitySearchFragment : Fragment() {
     lateinit var fragmentCommunitySearchBinding: FragmentCommunitySearchBinding
@@ -89,6 +91,10 @@ class CommunitySearchFragment : Fragment() {
                 textViewCommunityListLikeCntSearch.text = "999"
                 textViewCommunityListCommentCntSearch.text = "999"
                 textViewCommunityListDateSearch.text = "2024.05.17"
+
+                linearLayoutCommunityListSearch.setOnClickListener {
+                    communityActivity.replaceFragment(CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT, false, true, null)
+                }
             }
         }
     }

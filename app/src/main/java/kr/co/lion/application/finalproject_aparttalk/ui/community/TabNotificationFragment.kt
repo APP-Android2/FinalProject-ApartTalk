@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,10 +9,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import kr.co.lion.application.finalproject_aparttalk.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentTabNotificationBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabNotificationBinding
+import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class TabNotificationFragment : Fragment() {
     lateinit var fragmentTabNotificationBinding: FragmentTabNotificationBinding
@@ -108,6 +111,14 @@ class TabNotificationFragment : Fragment() {
                 textViewCommunityListLikeCntNotification.text = "999"
                 textViewCommunityListCommentCntNotification.text = "999"
                 textViewCommunityListDateNotification.text = "2024.05.17"
+
+                linearLayoutCommunityListNotification.setOnClickListener {
+                    val intent = Intent(mainActivity, CommunityActivity::class.java)
+                    intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
+                    // 게시글 번호도 주기
+                    // communityIntent.putExtra("postIdx", searchList[position].postIdx)
+                    startActivity(intent)
+                }
             }
         }
     }

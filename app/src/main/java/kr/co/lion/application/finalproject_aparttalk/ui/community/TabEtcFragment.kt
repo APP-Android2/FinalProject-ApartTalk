@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,11 +9,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import kr.co.lion.application.finalproject_aparttalk.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentTabEtcBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabEtcBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabTradeBinding
+import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class TabEtcFragment : Fragment() {
     lateinit var fragmentTabEtcBinding: FragmentTabEtcBinding
@@ -108,6 +111,14 @@ class TabEtcFragment : Fragment() {
                 textViewCommunityListLikeCntEtc.text = "999"
                 textViewCommunityListCommentCntEtc.text = "999"
                 textViewCommunityListDateEtc.text = "2024.05.17"
+
+                linearLayoutCommunityListEtc.setOnClickListener {
+                    val intent = Intent(mainActivity, CommunityActivity::class.java)
+                    intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
+                    // 게시글 번호도 주기
+                    // communityIntent.putExtra("postIdx", searchList[position].postIdx)
+                    startActivity(intent)
+                }
             }
         }
     }

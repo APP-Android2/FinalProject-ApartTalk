@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityCommunityBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityDetailFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunitySearchFragment
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
@@ -50,7 +51,7 @@ class CommunityActivity : AppCompatActivity() {
                 newFragment = CommunitySearchFragment()
             }
             CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT -> {
-                //newFragment = FarmingLifeFarmDetailFragment(data)
+                newFragment = CommunityDetailFragment(data)
             }
             CommunityFragmentName.COMMUNITY_ADD_FRAGMENT -> {
                 //newFragment = FarmingLifeActivityDetailFragment(data)
