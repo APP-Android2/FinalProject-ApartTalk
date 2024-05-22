@@ -16,6 +16,10 @@
             android:name=".ui.location.LocationShowActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.entiremenu.AptSchedule.AptScheduleActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
