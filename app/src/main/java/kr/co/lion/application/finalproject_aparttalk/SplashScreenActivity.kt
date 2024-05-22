@@ -20,7 +20,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun showSplashScreen(){
         lifecycleScope.launch {
             delay(2000)
-            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
             finish()
         }
     }

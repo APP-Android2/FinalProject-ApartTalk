@@ -19,4 +19,8 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="CustomTheme_Login" parent="Base.Theme.FinalProjectApartTalk">
+        <item name="colorPrimary">@color/first</item>
+    </style>
+    
 </resources>
