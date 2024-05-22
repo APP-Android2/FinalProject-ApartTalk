@@ -46,6 +46,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.media3.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -55,4 +56,8 @@ dependencies {
 
     //GifImageView 사용
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.19")
+
+    implementation("com.google.android.material:material:1.11.0")
+    implementation ("androidx.viewpager2:viewpager2:1.0.0")
+
 }
