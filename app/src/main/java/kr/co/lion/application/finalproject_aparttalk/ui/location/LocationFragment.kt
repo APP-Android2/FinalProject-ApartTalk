@@ -37,12 +37,7 @@ class LocationFragment : Fragment() {
         locationViewPager.adapter = LocationAdapter(fragmentList, requireActivity())
 
         //tabLayout 텍스트 추가
-        val tabTextList = ArrayList<String?>()
-        tabTextList.add("전체")
-        tabTextList.add("음식점")
-        tabTextList.add("병원")
-        tabTextList.add("약국")
-        tabTextList.add("카페")
+        val tabTextList = arrayOf<String?>("전체", "음식점", "병원", "약국", "카페")
 
         locationViewPager.post {
             TabLayoutMediator(locationTabLayout, locationViewPager){ tab, position ->
