@@ -18,7 +18,7 @@
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
-        app:boxStrokeColor="@color/third"
+        app:boxStrokeColor="@color/color_text_input_stroke"
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
         app:hintEnabled="false"
@@ -39,7 +39,8 @@
             android:paddingBottom="5dp"
             android:textColor="@color/black"
             android:textSize="14sp"
-            tools:textColorHint="@color/lightGray" />
+            tools:textColorHint="@color/lightGray"
+            android:includeFontPadding="false"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <ScrollView

@@ -30,7 +30,9 @@
                 android:fontFamily="@font/notosans_bold"
                 android:text="커뮤니티"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:includeFontPadding="false"
+                android:layout_gravity="center_vertical"/>
 
         </LinearLayout>
 
