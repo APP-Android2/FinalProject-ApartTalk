@@ -103,7 +103,7 @@ class CommunityAddFragment(data: Bundle?) : Fragment() {
         }
     }
 
-    // 등록 버튼 활성화/비활성화
+    // 등록 버튼 활성화 / 비활성화
     private fun settingButtonCommunityAdd() {
         fragmentCommunityAddBinding.apply {
 

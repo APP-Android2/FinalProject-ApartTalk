@@ -23,6 +23,8 @@ class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailF
         fragmentCommunityBottomSheetBinding = FragmentCommunityBottomSheetBinding.inflate(inflater)
         communityActivity = activity as CommunityActivity
 
+        settingCommunityBottom()
+
         return fragmentCommunityBottomSheetBinding.root
     }
 

@@ -12,6 +12,7 @@ import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityCommunityBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityAddFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityDetailFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityModifyFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunitySearchFragment
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
@@ -48,17 +49,21 @@ class CommunityActivity : AppCompatActivity() {
         // 이름으로 분기한다.
         // Fragment의 객체를 생성하여 변수에 담아준다.
         when(name){
+            // 검색
             CommunityFragmentName.COMMUNITY_SEARCH_FRAGMENT -> {
                 newFragment = CommunitySearchFragment()
             }
+            // 상세조회
             CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT -> {
                 newFragment = CommunityDetailFragment(data)
             }
+            // 글 작성
             CommunityFragmentName.COMMUNITY_ADD_FRAGMENT -> {
                 newFragment = CommunityAddFragment(data)
             }
+            // 글 수정
             CommunityFragmentName.COMMUNITY_MODIFY_FRAGMENT -> {
-                //newFragment = FarmingLifeActivityDetailFragment(data)
+                newFragment = CommunityModifyFragment(data)
             }
         }
         if(data != null){
