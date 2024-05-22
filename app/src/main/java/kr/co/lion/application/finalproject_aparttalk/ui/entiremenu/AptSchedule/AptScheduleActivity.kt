@@ -1,6 +1,8 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule
 
+import android.app.ActionBar
 import android.os.Bundle
+import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -33,8 +35,6 @@ class AptScheduleActivity : AppCompatActivity() {
     fun setToolbar(){
         binding.apply {
             toolbarAptSchedule.apply {
-                // 타이틀
-                title = "아파트 일정"
                 // 뒤로가기
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
