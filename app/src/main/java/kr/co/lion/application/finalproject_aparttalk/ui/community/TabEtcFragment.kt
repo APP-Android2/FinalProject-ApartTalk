@@ -36,7 +36,9 @@ class TabEtcFragment : Fragment() {
     private fun settingFabTabEtcAdd() {
         fragmentTabEtcBinding.apply {
             fabTabEtcAdd.setOnClickListener {
-
+                val intent = Intent(mainActivity, CommunityActivity::class.java)
+                intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_ADD_FRAGMENT)
+                startActivity(intent)
             }
         }
     }

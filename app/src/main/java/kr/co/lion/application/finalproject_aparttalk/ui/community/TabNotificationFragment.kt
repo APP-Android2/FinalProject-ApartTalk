@@ -36,7 +36,9 @@ class TabNotificationFragment : Fragment() {
     private fun settingFabTabNotificationAdd() {
         fragmentTabNotificationBinding.apply {
             fabTabNotificationAdd.setOnClickListener {
-
+                val intent = Intent(mainActivity, CommunityActivity::class.java)
+                intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_ADD_FRAGMENT)
+                startActivity(intent)
             }
         }
     }

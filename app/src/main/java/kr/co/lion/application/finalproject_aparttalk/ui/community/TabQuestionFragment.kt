@@ -35,7 +35,9 @@ class TabQuestionFragment : Fragment() {
     private fun settingFabTabQuestionAdd() {
         fragmentTabQuestionBinding.apply {
             fabTabQuestionAdd.setOnClickListener {
-
+                val intent = Intent(mainActivity, CommunityActivity::class.java)
+                intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_ADD_FRAGMENT)
+                startActivity(intent)
             }
         }
     }

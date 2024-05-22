@@ -37,7 +37,9 @@ class TabTradeFragment : Fragment() {
     private fun settingFabTabTradeAdd() {
         fragmentTabTradeBinding.apply {
             fabTabTradeAdd.setOnClickListener {
-
+                val intent = Intent(mainActivity, CommunityActivity::class.java)
+                intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_ADD_FRAGMENT)
+                startActivity(intent)
             }
         }
     }
