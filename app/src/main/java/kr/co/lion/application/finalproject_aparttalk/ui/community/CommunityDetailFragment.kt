@@ -47,13 +47,19 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                     when(it.itemId) {
                         // 더보기
                         R.id.menuItemCommunityKebab -> {
-
+                            settingCommunityBottom()
                         }
                     }
                     true
                 }
             }
         }
+    }
+
+    // 커뮤니티 바텀시트 띄우기
+    private fun settingCommunityBottom() {
+        val communityBottomSheetFragment = CommunityBottomSheetFragment(this, 0)
+        communityBottomSheetFragment.show(communityActivity.supportFragmentManager, "CommunityBottomSheetFragment")
     }
 
     // 커뮤니티 글 상세조회 뷰페이저 설정
