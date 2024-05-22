@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.ItemExtraMenuBinding
 import kr.co.lion.application.finalproject_aparttalk.model.LocationExtraData
 
-class ExtraAdapter : ListAdapter<LocationExtraData, ExtraAdapter.ExtraViewHolder>(differ) {
+class ExtraAdapter() : ListAdapter<LocationExtraData, ExtraAdapter.ExtraViewHolder>(differ) {
+
+    private lateinit var recyclerviewClick: ExtraItemOnClickListener
 
 
     inner class ExtraViewHolder(val binding: ItemExtraMenuBinding) : RecyclerView.ViewHolder(binding.root){
@@ -38,7 +40,17 @@ class ExtraAdapter : ListAdapter<LocationExtraData, ExtraAdapter.ExtraViewHolder
 
     override fun onBindViewHolder(holder: ExtraViewHolder, position: Int) {
         holder.bind(currentList[position])
+        holder.binding.root.setOnClickListener {
+            recyclerviewClick.extraRecyclerviewClickListener()
+        }
     }
 
+    interface ExtraItemOnClickListener{
+        fun extraRecyclerviewClickListener()
+    }
+
+    fun setExtraRecyclerviewClick(recyclerviewClick: ExtraItemOnClickListener){
+        this.recyclerviewClick = recyclerviewClick
+    }
 
 }

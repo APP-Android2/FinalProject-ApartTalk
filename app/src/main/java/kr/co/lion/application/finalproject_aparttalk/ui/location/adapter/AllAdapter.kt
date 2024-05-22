@@ -10,6 +10,8 @@ import kr.co.lion.application.finalproject_aparttalk.model.LocationAllData
 
 class AllAdapter : ListAdapter<LocationAllData, AllAdapter.AllViewHolder>(differ) {
 
+    private lateinit var recyclerviewClick: ItemOnClickListener
+
     inner class AllViewHolder(val binding: ItemAllMenuBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(locationAllData: LocationAllData) {
             binding.textMenuTitleAll.text = locationAllData.title
@@ -38,5 +40,16 @@ class AllAdapter : ListAdapter<LocationAllData, AllAdapter.AllViewHolder>(differ
 
     override fun onBindViewHolder(holder: AllViewHolder, position: Int) {
         holder.bind(currentList[position])
+        holder.binding.root.setOnClickListener {
+            recyclerviewClick.recyclerviewClickListener()
+        }
+    }
+
+    interface ItemOnClickListener{
+        fun recyclerviewClickListener()
+    }
+
+    fun setRecyclerviewClick(recyclerviewClick : ItemOnClickListener){
+        this.recyclerviewClick = recyclerviewClick
     }
 }

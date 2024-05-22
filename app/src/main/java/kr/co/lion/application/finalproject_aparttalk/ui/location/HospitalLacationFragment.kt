@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.location
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +17,16 @@ class HospitalLacationFragment : Fragment() {
 
     lateinit var binding: FragmentHospitalLacationBinding
 
-    val extraAdapter = ExtraAdapter()
+    val extraAdapter : ExtraAdapter by lazy {
+        val adapter = ExtraAdapter()
+        adapter.setExtraRecyclerviewClick(object : ExtraAdapter.ExtraItemOnClickListener{
+            override fun extraRecyclerviewClickListener() {
+                startActivity(Intent(requireActivity(), LocationShowActivity::class.java))
+            }
+
+        })
+        adapter
+    }
 
     val locationExtraData = mutableListOf<LocationExtraData>()
 
