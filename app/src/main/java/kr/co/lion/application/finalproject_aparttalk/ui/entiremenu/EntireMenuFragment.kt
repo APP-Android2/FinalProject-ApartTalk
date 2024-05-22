@@ -41,7 +41,7 @@ class EntireMenuFragment : Fragment() {
     //클릭 이벤트
     private fun settingEvent(){
         with(binding){
-            imageMyPageMenu.setOnClickListener {
+            mypageMenu.setOnClickListener {
                 //마이페이지로 이동
             }
 
