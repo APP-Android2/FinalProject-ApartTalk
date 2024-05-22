@@ -24,7 +24,7 @@
         android:backgroundTint="@color/white"
         app:tabBackground="@color/white"
         app:tabIndicatorColor="@color/white"
-        app:tabIndicatorHeight="1dp"
+        app:tabIndicatorFullWidth="true"
         app:tabRippleColor="@android:color/transparent"
         app:tabSelectedTextColor="@color/third"
         app:tabTextColor="@color/lightGray" />

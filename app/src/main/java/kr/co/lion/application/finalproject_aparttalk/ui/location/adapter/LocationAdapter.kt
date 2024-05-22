@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.location
+package kr.co.lion.application.finalproject_aparttalk.ui.location.adapter
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment

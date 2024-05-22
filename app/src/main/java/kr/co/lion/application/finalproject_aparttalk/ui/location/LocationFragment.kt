@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayoutMediator
-import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentLocationBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.location.adapter.LocationAdapter
 
 class LocationFragment : Fragment() {
 
