@@ -24,8 +24,8 @@
             android:layout_gravity="center"
             android:fontFamily="@font/notosans_bold"
             android:text="전체"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@color/black"
+            android:textSize="20sp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="12dp" />
 
