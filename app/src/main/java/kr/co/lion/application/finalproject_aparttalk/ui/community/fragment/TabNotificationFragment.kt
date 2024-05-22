@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.community
+package kr.co.lion.application.finalproject_aparttalk.ui.community.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +9,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import kr.co.lion.application.finalproject_aparttalk.CommunityActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
-import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentTabNotificationBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabNotificationBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityTabNotificationRecyclerViewAdapter
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class TabNotificationFragment : Fragment() {
@@ -69,58 +69,10 @@ class TabNotificationFragment : Fragment() {
     private fun settingRecyclerViewTabNotification() {
         fragmentTabNotificationBinding.apply {
             recyclerViewTabNotification.apply {
-                adapter = CommunityTabNotificationRecyclerViewAdapter()
+                adapter = CommunityTabNotificationRecyclerViewAdapter(requireContext())
                 layoutManager = LinearLayoutManager(mainActivity)
                 val deco = MaterialDividerItemDecoration(mainActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)
-            }
-        }
-    }
-
-    // 커뮤니티 공지 탭 리사이클러뷰 어댑터
-    inner class CommunityTabNotificationRecyclerViewAdapter : RecyclerView.Adapter<CommunityTabNotificationRecyclerViewAdapter.CommunityTabNotificationViewHolder>() {
-        inner class CommunityTabNotificationViewHolder(rowCommunityTabNotificationBinding: RowCommunityTabNotificationBinding) : RecyclerView.ViewHolder(rowCommunityTabNotificationBinding.root) {
-            val rowCommunityTabNotificationBinding : RowCommunityTabNotificationBinding
-
-            init {
-                this.rowCommunityTabNotificationBinding = rowCommunityTabNotificationBinding
-
-                this.rowCommunityTabNotificationBinding.root.layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            }
-
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityTabNotificationViewHolder {
-            val rowCommunityTabNotificationBinding = RowCommunityTabNotificationBinding.inflate(layoutInflater)
-            val communityTabNotificationViewHolder = CommunityTabNotificationViewHolder(rowCommunityTabNotificationBinding)
-
-            return communityTabNotificationViewHolder
-        }
-
-        override fun getItemCount(): Int {
-            return 10
-        }
-
-        override fun onBindViewHolder(holder: CommunityTabNotificationViewHolder, position: Int) {
-            holder.rowCommunityTabNotificationBinding.apply {
-                textViewCommunityListLabelNotification.text = "공지"
-                textViewCommunityListTitleNotification.text = "글 제목입니다 $position"
-                textViewCommunityListContentNotification.text = "글 내용입니다 글 내용입니다 글 내용입니다\n" +
-                        "글 내용입니다 글 내용입니다 글 내용입니다 "
-                textViewCommunityListLikeCntNotification.text = "999"
-                textViewCommunityListCommentCntNotification.text = "999"
-                textViewCommunityListDateNotification.text = "2024.05.17"
-
-                linearLayoutCommunityListNotification.setOnClickListener {
-                    val intent = Intent(mainActivity, CommunityActivity::class.java)
-                    intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
-                    // 게시글 번호도 주기
-                    // communityIntent.putExtra("postIdx", searchList[position].postIdx)
-                    startActivity(intent)
-                }
             }
         }
     }

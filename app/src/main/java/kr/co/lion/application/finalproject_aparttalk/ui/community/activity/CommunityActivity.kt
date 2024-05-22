@@ -1,19 +1,17 @@
-package kr.co.lion.application.finalproject_aparttalk
+package kr.co.lion.application.finalproject_aparttalk.ui.community.activity
 
 import android.os.Bundle
 import android.os.SystemClock
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
+import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityCommunityBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityAddFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityDetailFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityModifyFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunitySearchFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityAddFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityDetailFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityModifyFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunitySearchFragment
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class CommunityActivity : AppCompatActivity() {

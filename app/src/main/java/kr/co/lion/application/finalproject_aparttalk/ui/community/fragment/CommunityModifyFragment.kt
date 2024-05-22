@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.community
+package kr.co.lion.application.finalproject_aparttalk.ui.community.fragment
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -11,10 +11,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.lion.application.finalproject_aparttalk.CommunityActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityModifyBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityModifyImageBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityModifyImageViewPager2Adapter
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class CommunityModifyFragment(data: Bundle?) : Fragment() {
@@ -50,44 +51,13 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
     private fun settingViewPager2CommunityModifyImage() {
         fragmentCommunityModifyBinding.apply {
             viewPager2CommunityModifyImage.apply {
-                adapter = CommunityModifyImageViewPager2Adapter()
+                adapter = CommunityModifyImageViewPager2Adapter(requireContext())
             }
 
             circleIndicatorCommunityModify.setViewPager(viewPager2CommunityModifyImage)
             viewPager2CommunityModifyImage.adapter?.registerAdapterDataObserver(
                 circleIndicatorCommunityModify.adapterDataObserver
             )
-        }
-    }
-
-    // 커뮤니티 글 수정 뷰페이저 어댑터
-    inner class CommunityModifyImageViewPager2Adapter : RecyclerView.Adapter<CommunityModifyImageViewPager2Adapter.CommunityModifyImageViewHolder>(){
-        inner class CommunityModifyImageViewHolder(rowCommunityModifyImageBinding: RowCommunityModifyImageBinding) : RecyclerView.ViewHolder(rowCommunityModifyImageBinding.root) {
-            val rowCommunityModifyImageBinding: RowCommunityModifyImageBinding
-
-            init {
-                this.rowCommunityModifyImageBinding = rowCommunityModifyImageBinding
-
-                this.rowCommunityModifyImageBinding.root.layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityModifyImageViewHolder {
-            val rowCommunityModifyImageBinding = RowCommunityModifyImageBinding.inflate(layoutInflater)
-            val communityModifyImageViewHolder = CommunityModifyImageViewHolder(rowCommunityModifyImageBinding)
-
-            return communityModifyImageViewHolder
-        }
-
-        override fun getItemCount(): Int {
-            return 5
-        }
-
-        override fun onBindViewHolder(holder: CommunityModifyImageViewHolder, position: Int) {
-            holder.rowCommunityModifyImageBinding.imageViewRowCommunityModify.setImageResource(R.drawable.ic_launcher_foreground)
         }
     }
 

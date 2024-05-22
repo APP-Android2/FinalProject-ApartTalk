@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CommunityActivity">
+    tools:context=".ui.community.activity.CommunityActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/containerCommunity"

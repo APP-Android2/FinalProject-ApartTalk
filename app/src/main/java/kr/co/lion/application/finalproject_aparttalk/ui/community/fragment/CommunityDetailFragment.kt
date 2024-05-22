@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.community
+package kr.co.lion.application.finalproject_aparttalk.ui.community.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.lion.application.finalproject_aparttalk.CommunityActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityDetailBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityDetailCommentBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityDetailImageBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.SwipeHelperCallback
+import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailCommentRecyclerViewAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailImageViewPager2Adapter
 
 class CommunityDetailFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityDetailBinding: FragmentCommunityDetailBinding
@@ -66,44 +68,13 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     private fun settingViewPager2CommunityDetailImage() {
         fragmentCommunityDetailBinding.apply {
             viewPager2CommunityDetailImage.apply {
-                adapter = CommunityDetailImageViewPager2Adapter()
+                adapter = CommunityDetailImageViewPager2Adapter(requireContext())
             }
 
             circleIndicatorCommunityDetail.setViewPager(viewPager2CommunityDetailImage)
             viewPager2CommunityDetailImage.adapter?.registerAdapterDataObserver(
                 circleIndicatorCommunityDetail.adapterDataObserver
             )
-        }
-    }
-
-    // 커뮤니티 글 상세조회 뷰페이저 어댑터
-    inner class CommunityDetailImageViewPager2Adapter : RecyclerView.Adapter<CommunityDetailImageViewPager2Adapter.CommunityDetailImageViewHolder>(){
-        inner class CommunityDetailImageViewHolder(rowCommunityDetailImageBinding: RowCommunityDetailImageBinding) : RecyclerView.ViewHolder(rowCommunityDetailImageBinding.root) {
-            val rowCommunityDetailImageBinding: RowCommunityDetailImageBinding
-
-            init {
-                this.rowCommunityDetailImageBinding = rowCommunityDetailImageBinding
-
-                this.rowCommunityDetailImageBinding.root.layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT
-                )
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityDetailImageViewHolder {
-            val rowCommunityDetailImageBinding = RowCommunityDetailImageBinding.inflate(layoutInflater)
-            val communityDetailImageViewHolder = CommunityDetailImageViewHolder(rowCommunityDetailImageBinding)
-
-            return communityDetailImageViewHolder
-        }
-
-        override fun getItemCount(): Int {
-            return 5
-        }
-
-        override fun onBindViewHolder(holder: CommunityDetailImageViewHolder, position: Int) {
-            holder.rowCommunityDetailImageBinding.imageViewRowCommunityDetail.setImageResource(R.drawable.ic_launcher_foreground)
         }
     }
 
@@ -126,12 +97,12 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     private fun settingRecyclerViewCommunityDetailComment() {
         fragmentCommunityDetailBinding.apply {
             recyclerViewCommunityDetailComment.apply {
-                adapter = CommunityDetailCommentRecyclerViewAdapter()
+                adapter = CommunityDetailCommentRecyclerViewAdapter(requireContext())
                 layoutManager = LinearLayoutManager(communityActivity)
             }
 
             // 리사이클러뷰에 스와이프, 드래그 기능 달기
-            val swipeHelperCallback = SwipeHelperCallback(CommunityDetailCommentRecyclerViewAdapter()).apply {
+            val swipeHelperCallback = SwipeHelperCallback(CommunityDetailCommentRecyclerViewAdapter(requireContext())).apply {
                 // 스와이프한 뒤 고정시킬 위치 지정
                 setClamp(resources.displayMetrics.widthPixels.toFloat() * 2 / 7)    // 1080 / 4 = 270
             }
@@ -141,40 +112,6 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
             fragmentCommunityDetailBinding.recyclerViewCommunityDetailComment.setOnTouchListener { _, _ ->
                 swipeHelperCallback.removePreviousClamp(fragmentCommunityDetailBinding.recyclerViewCommunityDetailComment)
                 false
-            }
-        }
-    }
-
-    // 커뮤니티 댓글 어댑터
-    inner class CommunityDetailCommentRecyclerViewAdapter : RecyclerView.Adapter<CommunityDetailCommentRecyclerViewAdapter.CommunityDetailViewHolder>(){
-        inner class CommunityDetailViewHolder(rowCommunityDetailCommentBinding: RowCommunityDetailCommentBinding) : RecyclerView.ViewHolder(rowCommunityDetailCommentBinding.root) {
-            val rowCommunityDetailCommentBinding: RowCommunityDetailCommentBinding
-
-            init {
-                this.rowCommunityDetailCommentBinding = rowCommunityDetailCommentBinding
-
-                this.rowCommunityDetailCommentBinding.root.layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommunityDetailViewHolder {
-            val rowCommunityDetailCommentBinding = RowCommunityDetailCommentBinding.inflate(layoutInflater)
-            val communityDetailViewHolder = CommunityDetailViewHolder(rowCommunityDetailCommentBinding)
-
-            return communityDetailViewHolder
-        }
-
-        override fun getItemCount(): Int {
-            return 10
-        }
-
-        override fun onBindViewHolder(holder: CommunityDetailViewHolder, position: Int) {
-            holder.rowCommunityDetailCommentBinding.apply {
-                textViewRowCommunityDetailCommentWriter.text = "댓글 작성자"
-                textViewRowCommunityDetailCommentContent.text = "댓글입니다 댓글입니다 댓글입니다 댓글입니다 (100자 제한)"
             }
         }
     }

@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.ItemTouchHelper.RIGHT
 import androidx.recyclerview.widget.ItemTouchHelper.UP
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityDetailFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailCommentRecyclerViewAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityDetailFragment
 import kotlin.math.min
 
 // 롱터치 후 드래그, 스와이프 동작 제어
-class SwipeHelperCallback(val recyclerViewAdapter : CommunityDetailFragment.CommunityDetailCommentRecyclerViewAdapter)  : ItemTouchHelper.Callback() {
+class SwipeHelperCallback(val recyclerViewAdapter : CommunityDetailCommentRecyclerViewAdapter)  : ItemTouchHelper.Callback() {
 
     // swipe_view 를 swipe 했을 때 <삭제> 화면이 보이도록 고정하기 위한 변수들
     private var currentPosition: Int? = null    // 현재 선택된 recycler view의 position
