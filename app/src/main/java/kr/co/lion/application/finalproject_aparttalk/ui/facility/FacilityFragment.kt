@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.facility
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,7 +24,7 @@ class FacilityFragment : Fragment() {
         val adapter = FacilityAdapter()
         adapter.setGridRecyclerviewClick(object : FacilityAdapter.FacilityItemClickListener{
             override fun gridRecyclerClickListener() {
-
+                startActivity(Intent(requireActivity(), FacReservationActivity::class.java))
             }
 
         })
