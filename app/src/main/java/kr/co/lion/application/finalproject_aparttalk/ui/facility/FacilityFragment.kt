@@ -62,10 +62,6 @@ class FacilityFragment : Fragment() {
 
                 facilityAdapter.submitList(itemList)
 
-
-                // DividerItemDecoration 추가
-                val dividerItemDecoration = DividerItemDecoration(requireContext(), gridLayoutManager.orientation)
-                recyclerviewGridFacility.addItemDecoration(dividerItemDecoration)
             }
         }
     }
