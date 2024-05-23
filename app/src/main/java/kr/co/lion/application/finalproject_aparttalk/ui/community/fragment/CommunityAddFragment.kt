@@ -16,6 +16,7 @@ import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityAddBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityAddImageBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityAddImageViewPager2Adapter
+import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
 
 class CommunityAddFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityAddBinding: FragmentCommunityAddBinding
@@ -111,8 +112,12 @@ class CommunityAddFragment(data: Bundle?) : Fragment() {
             textViewCommunityAddContent.addTextChangedListener(textWatcher)
 
             buttonCommunityAdd.setOnClickListener {
-
-
+                val dialog = DialogConfirm(
+                    "게시글 등록 완료",
+                    "게시글 등록이 완료되었습니다.\n확인하러 가시겠습니까?",
+                    communityActivity
+                )
+                dialog.show(communityActivity.supportFragmentManager, "DialogConfirm")
             }
         }
     }
