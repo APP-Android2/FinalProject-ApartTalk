@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:textColor="@color/black"
     android:background="@color/white"
+    android:fontFamily="@font/notosans_semibold"
     android:padding="14dp">
 
 </TextView>

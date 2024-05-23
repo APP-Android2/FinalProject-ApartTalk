@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.facility
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
@@ -35,8 +36,12 @@ class FacReservationActivity : AppCompatActivity() {
 
     //Adapter 연결
     private fun connectingAdapter(){
-        val facReservationArray = resources.getStringArray(R.array.reservation_time)
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, facReservationArray)
-        binding.autoCompleteTextview.setAdapter(arrayAdapter)
+        binding.apply {
+            ArrayAdapter.createFromResource(this@FacReservationActivity, R.array.reservation_time, R.layout.dropdown_item)
+                .also { adapter ->
+                    adapter.setDropDownViewResource(R.layout.dropdown_item)
+                    timeSpinner.adapter = adapter
+                }
+        }
     }
 }

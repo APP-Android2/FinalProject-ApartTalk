@@ -5,6 +5,7 @@
 
 
     <string-array name="reservation_time">
+        <item>시간을 선택해주세요.</item>
         <item>09:00 ~ 10:00</item>
         <item>10:00 ~ 11:00</item>
         <item>11:00 ~ 12:00</item>
