@@ -52,4 +52,6 @@ dependencies {
 
     //GifImageView 사용
     implementation("pl.droidsonroids.gif:android-gif-drawable:1.2.19")
+    //youtubePlayer 라이브러리를 사용
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 }

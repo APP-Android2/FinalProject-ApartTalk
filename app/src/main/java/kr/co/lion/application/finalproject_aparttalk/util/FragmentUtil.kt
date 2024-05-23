@@ -8,3 +8,8 @@ enum class MainFragmentName(val str:String){
     ENTIRE_MENU_FRAGMENT("EntireMenuFragment"),
     ALARM_FRAGMENT("AlarmFragment")
 }
+
+// 프래그먼트들의 이름
+enum class FireCheckFragmentName(var str:String){
+    FIRE_CHECK_MAIN_FRAGMENT("FireCheckMainFragment.kt"),
+}
