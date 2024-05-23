@@ -5,14 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirmCancel
+import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirmCancelInterface
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityBottomSheetBinding
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailFragment, communityIdx:Int) : BottomSheetDialogFragment() {
+class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailFragment, communityIdx:Int) : BottomSheetDialogFragment(),
+    DialogConfirmCancelInterface {
     lateinit var fragmentCommunityBottomSheetBinding: FragmentCommunityBottomSheetBinding
     lateinit var communityActivity: CommunityActivity
 
@@ -39,7 +43,15 @@ class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailF
 
             // 삭제
             buttonCommunityDetailDelete.setOnClickListener {
-
+                val dialog = DialogConfirmCancel(
+                    this@CommunityBottomSheetFragment,
+                    "게시글을 삭제하시겠습니까?",
+                    "한 번 삭제한 게시물은 복원할 수 없습니다.",
+                    communityActivity,
+                    0
+                )
+                dialog.show(communityActivity.supportFragmentManager, "DialogConfirmCancel")
+                dismiss()
             }
         }
     }
@@ -70,6 +82,14 @@ class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailF
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
         bottomSheet.layoutParams = layoutParams
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+    }
+
+    override fun onConfirmButtonClick(id: Int) {
+        // 삭제 기능 넣을 것
+    }
+
+    override fun onConfirmButtonClick(activity: AppCompatActivity) {
 
     }
 
