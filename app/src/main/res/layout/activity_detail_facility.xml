@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.facility.DetailFacilityActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarDetailFacility"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" >
+
+        <TextView
+            android:id="@+id/detailFacilityToolbarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/notosans_bold"
+            android:text="상세 정보"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+            android:id="@+id/springDotIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:dampingRatio="0.5"
+            app:dotsColor="@color/third"
+            app:dotsCornerRadius="10dp"
+            app:dotsSize="10dp"
+            app:dotsSpacing="6dp"
+            app:dotsStrokeWidth="1dp"
+            app:stiffness="300"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/textDetailName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_semibold"
+            android:gravity="center"
+            android:text="101동 놀이터"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textDetailInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="여기는 101동 옆 놀이터입니다 이곳은 00 테마를 적용하여 만든 놀이터입니다. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Material3.CardView.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:cardBackgroundColor="@color/fourth"
+            app:strokeColor="@color/fourth"
+            android:padding="10dp"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:src="@drawable/icon_error_circle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:fontFamily="@font/notosans_semibold"
+                    android:includeFontPadding="false"
+                    android:text="이용시간 : 09:00 ~ 19:00시"
+                    android:textColor="@color/black" />
+
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <Button
+            android:id="@+id/buttonGoReservation"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:backgroundTint="#73C0B0"
+            android:text="예약하기"
+            android:textColor="@color/black" />
+    </LinearLayout>
+</LinearLayout>
