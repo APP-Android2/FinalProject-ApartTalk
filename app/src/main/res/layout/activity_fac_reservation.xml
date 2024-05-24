@@ -74,14 +74,14 @@
             android:layout_height="5dp"
             android:layout_marginTop="20dp"/>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:backgroundTint="@color/fourth"
             android:padding="10dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="8dp">
+            app:strokeColor="@color/fourth">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,15 +108,16 @@
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:padding="10dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp"
-            app:cardElevation="8dp">
+            app:strokeColor="@color/fourth">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -158,15 +159,16 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:padding="10dp"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="10dp"
-            app:cardElevation="8dp">
+            app:strokeColor="@color/fourth">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -209,7 +211,7 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="match_parent"

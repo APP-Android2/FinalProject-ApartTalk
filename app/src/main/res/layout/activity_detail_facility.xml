@@ -80,14 +80,15 @@
             android:text="여기는 101동 옆 놀이터입니다 이곳은 00 테마를 적용하여 만든 놀이터입니다. ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" />
 
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Material3.CardView.Outlined"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:backgroundTint="@color/fourth"
+            app:cardBackgroundColor="@color/fourth"
+            app:strokeColor="@color/fourth"
             android:padding="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="8dp">
+            app:cardCornerRadius="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,7 +115,7 @@
             </LinearLayout>
 
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
