@@ -24,7 +24,7 @@ class FacilityFragment : Fragment() {
         val adapter = FacilityAdapter()
         adapter.setGridRecyclerviewClick(object : FacilityAdapter.FacilityItemClickListener{
             override fun gridRecyclerClickListener() {
-                startActivity(Intent(requireActivity(), FacReservationActivity::class.java))
+                startActivity(Intent(requireActivity(), DetailFacilityActivity::class.java))
             }
 
         })

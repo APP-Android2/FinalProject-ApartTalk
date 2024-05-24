@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosans_semibold"
-            android:text="예약자"
+            android:text="홍길동"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -78,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
+            android:backgroundTint="@color/fourth"
             android:padding="10dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp">
@@ -98,10 +99,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/notosans_semibold"
                     android:includeFontPadding="false"
-                    android:text="이용시간 : 09:00 ~ 19:00시" />
+                    android:text="이용시간 : 09:00 ~ 19:00시"
+                    android:textColor="@color/black" />
 
 
             </LinearLayout>
@@ -190,7 +191,7 @@
                         android:fontFamily="@font/notosans_semibold"
                         android:includeFontPadding="false"
                         android:layout_marginLeft="15dp"
-                        android:text="예약후에 노쇼를 할 경우 불이익"
+                        android:text="예약 후에 노쇼를 할 경우 불이익"
                         android:textColor="@color/black"/>
 
 
