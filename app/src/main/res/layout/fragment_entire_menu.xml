@@ -199,33 +199,39 @@
 
             <Button
                 android:id="@+id/buttonResParkingMenu"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="start|center_vertical"
                 android:text="방문 주차 예약"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:icon="@drawable/icon_person"
+                app:iconTint="@color/black" />
 
             <Button
                 android:id="@+id/buttonVoteMenu"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="start|center_vertical"
                 android:text="전자 투표"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:icon="@drawable/icon_car"
+                app:iconTint="@color/black" />
 
             <Button
                 android:id="@+id/buttonFireMenu"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="start|center_vertical"
                 android:text="소방 점검"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:icon="@drawable/icon_fire"
+                app:iconTint="@color/black" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
@@ -245,43 +251,51 @@
 
             <Button
                 android:id="@+id/buttonContactMenu"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="start|center_horizontal"
                 android:text="관리사무소 문의"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:icon="@drawable/icon_management_office"
+                app:iconTint="@color/black" />
 
             <Button
                 android:id="@+id/buttonBroadcastMenu"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="start|center_horizontal"
                 android:text="안내 방송"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:icon="@drawable/icon_campaign"
+                app:iconTint="@color/black" />
 
             <Button
                 android:id="@+id/buttonAptSchduleMenu"
-                style="@style/Widget.Material3.Button.TextButton"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="start|center_horizontal"
                 android:text="아파트 일정"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:icon="@drawable/icon_calendar"
+                app:iconTint="@color/black" />
 
             <Button
                 android:id="@+id/buttonAptInfoMenu"
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="start|center_horizontal"
                 android:text="아파트 운영정보"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:icon="@drawable/icon_apartment"
+                app:iconTint="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
