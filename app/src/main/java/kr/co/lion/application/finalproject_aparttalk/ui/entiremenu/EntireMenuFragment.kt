@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -69,6 +70,7 @@ class EntireMenuFragment : Fragment() {
         with(binding){
             textCompanyInfo.setOnClickListener {
                 //회사 소개
+                startActivity(Intent(requireActivity(), CompanyInfoActivity::class.java))
             }
             textUseMenu.setOnClickListener {
                 //이용약관
