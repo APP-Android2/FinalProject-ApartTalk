@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:text="주소와 입주민 인증 정보는\n어떻게 조회되나요?"
+        android:textAppearance="?attr/textAppearanceHeadline6"
+        android:paddingBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:text="주소와 입주민 인증 정보는 회원정보와 관리자모드에서 전산 프로\n그램에 등록한 입주자 정보가 일치하면 자동으로 연동돼요.\n\n입주자 카드로 작성했다더라도 전산 프로그램에 등록되지 않으면 연동되지 않아요\n\n연동되지 않는 경우에도 주소는 직접 등록할 수 있지만 입주민 인\n증되지 않아요.\n\n입주민 인증이 되지 않은 경우 관리사무소로 통화, 세대주(또는 세대원), 이름, 휴대폰 번호를 전산 프로그램에 등록해달라고 해주세요.\n\n'모바일 입주민 카드' 또는 '민원관리' 서비스 이용 단지인 경우, 해당 서비스를 통해 입주민 정보 등록을 요청할 수 있어요.\n\n관리사무소에서 입주자 정보를 등록하면 다음날부터 앱에서 입주민 인증을 진행할 수 있어요.\n\n세대주, 세대원의 표기가 잘못된 경우 관리사무소에 수정을 요청해 다시 등록해달라고 해주세요.\n\n입주민 인증 정보를 다시 불러오려면 하단의 다른 메뉴를 누르고 다시 들어와주세요."
+        android:paddingTop="8dp"/>
+</LinearLayout>

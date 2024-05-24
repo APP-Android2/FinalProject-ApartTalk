@@ -19,6 +19,9 @@
             android:name=".ui.facility.FacReservationActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.community.activity.CommunityActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.location.LocationShowActivity"
             android:exported="false" />
         <activity
