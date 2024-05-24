@@ -6,17 +6,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentEntireMenuBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
+import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
 
 class EntireMenuFragment : Fragment() {
 
     lateinit var binding:FragmentEntireMenuBinding
+    lateinit var mainActivity: MainActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentEntireMenuBinding.inflate(layoutInflater)
+        mainActivity = activity as MainActivity
+
+        settingToolbar()
         settingEvent()
         extraEvent()
         return binding.root
@@ -55,6 +62,9 @@ class EntireMenuFragment : Fragment() {
             }
             buttonBroadcastMenu.setOnClickListener {
                 //안내방송으로 이동
+                val intent = Intent(mainActivity, BroadcastActivity::class.java)
+                intent.putExtra("fragmentName", BroadcastFragmentName.BROADCAST_FRAGMENT)
+                startActivity(intent)
             }
             buttonAptSchduleMenu.setOnClickListener {
                 //아파트 일정으로 이동
