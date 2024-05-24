@@ -19,6 +19,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!-- 아파트 정보 영역 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/homeAptInformationLayout"
                 android:layout_width="match_parent"
@@ -214,11 +215,10 @@
                             app:layout_constraintEnd_toEndOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
                 </LinearLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- 아파트 일정 영역 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/homeAptScheduleLayout"
                 android:layout_width="match_parent"
@@ -249,7 +249,6 @@
                         android:fontFamily="@font/notosans_semibold"
                         android:includeFontPadding="false"
                         android:textSize="18dp"/>
-
                 </LinearLayout>
 
                 <CalendarView
@@ -466,8 +465,670 @@
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>
                 </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- 공지사항 영역 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeNotificationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
 
+                <LinearLayout
+                    android:id="@+id/homeNotificationTitleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_campaign"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="공지사항"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:includeFontPadding="false"
+                        android:textSize="18dp"/>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/homeNotificationRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/homeNotificationTitleLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="20dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 주변 편의시설 영역 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeLocationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeLocationTitleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/icon_location" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="주변 편의시설"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:textSize="18dp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:clickable="true">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="전체보기"
+                            android:textColor="@color/lightGray"
+                            android:textSize="12sp"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="@font/notosans_regular"
+                            android:includeFontPadding="false"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/icon_next"
+                            android:backgroundTint="@color/lightGray"/>
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintTop_toBottomOf="@+id/homeLocationTitleLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewRestaurant"
+                            style="?attr/materialCardViewFilledStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="3dp"
+                            app:cardUseCompatPadding="true"
+                            app:strokeColor="@color/lightGray"
+                            android:clickable="true">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp">
+
+                                <ImageView
+                                    android:id="@+id/imageViewHomeLocationRestaurant"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:scaleType="centerCrop"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/icon_restaurant" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="음식점"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/notosans_semibold"
+                                    android:includeFontPadding="false"
+                                    app:layout_constraintTop_toBottomOf="@+id/imageViewHomeLocationRestaurant"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewHospital"
+                            style="?attr/materialCardViewFilledStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginLeft="10dp"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="3dp"
+                            app:cardUseCompatPadding="true"
+                            app:strokeColor="@color/lightGray"
+                            android:clickable="true">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp">
+
+                                <ImageView
+                                    android:id="@+id/imageViewHomeLocationHospital"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:scaleType="centerCrop"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/icon_hospital" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="병원"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/notosans_semibold"
+                                    android:includeFontPadding="false"
+                                    app:layout_constraintTop_toBottomOf="@+id/imageViewHomeLocationHospital"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewPharmacy"
+                            style="?attr/materialCardViewFilledStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginLeft="10dp"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="3dp"
+                            app:cardUseCompatPadding="true"
+                            app:strokeColor="@color/lightGray"
+                            android:clickable="true">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp">
+
+                                <ImageView
+                                    android:id="@+id/imageViewHomeLocationPharmacy"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:scaleType="centerCrop"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/icon_pharmacy" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="약국"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/notosans_semibold"
+                                    android:includeFontPadding="false"
+                                    app:layout_constraintTop_toBottomOf="@+id/imageViewHomeLocationPharmacy"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardViewCafe"
+                            style="?attr/materialCardViewFilledStyle"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginLeft="10dp"
+                            android:backgroundTint="@color/white"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="3dp"
+                            app:cardUseCompatPadding="true"
+                            app:strokeColor="@color/lightGray"
+                            android:clickable="true">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="10dp">
+
+                                <ImageView
+                                    android:id="@+id/imageViewHomeLocationCafe"
+                                    android:layout_width="60dp"
+                                    android:layout_height="60dp"
+                                    android:scaleType="centerCrop"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:srcCompat="@drawable/icon_cafe" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="카페"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/notosans_semibold"
+                                    android:includeFontPadding="false"
+                                    app:layout_constraintTop_toBottomOf="@+id/imageViewHomeLocationCafe"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- 전체 영역 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/homeAllLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp">
+
+                <LinearLayout
+                    android:id="@+id/homeAllTitleLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="20dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_apps"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="전체"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:includeFontPadding="false"
+                        android:textSize="18dp"/>
+                </LinearLayout>
+                
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    style="?attr/materialCardViewFilledStyle"
+                    android:backgroundTint="@color/white"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="3dp"
+                    app:cardUseCompatPadding="true"
+                    app:strokeColor="@color/lightGray"
+                    android:layout_marginHorizontal="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/homeAllTitleLayout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="20dp"
+                        android:orientation="vertical">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/homeAllMyPageLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/imageHomeAllMyPage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_person"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+                            
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="마이페이지"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/notosans_semibold"
+                                android:includeFontPadding="false"
+                                app:layout_constraintStart_toEndOf="@+id/imageHomeAllMyPage"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_next"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/homeAllVisitCarLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageHomeAllVisitCar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_car"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="방문 주차 예약"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/notosans_semibold"
+                                android:includeFontPadding="false"
+                                app:layout_constraintStart_toEndOf="@+id/imageHomeAllVisitCar"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_next"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/homeAllVoteLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageHomeAllVote"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_vote"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="주민 투표"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/notosans_semibold"
+                                android:includeFontPadding="false"
+                                app:layout_constraintStart_toEndOf="@+id/imageHomeAllVote"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_next"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/homeAllManagementOfficeLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageHomeAllManagementOffice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_management_office"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="관리사무소 문의"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/notosans_semibold"
+                                android:includeFontPadding="false"
+                                app:layout_constraintStart_toEndOf="@+id/imageHomeAllManagementOffice"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_next"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/homeAllAnnouncementLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageHomeAllAnnouncement"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_announcement"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="안내 방송"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/notosans_semibold"
+                                android:includeFontPadding="false"
+                                app:layout_constraintStart_toEndOf="@+id/imageHomeAllAnnouncement"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_next"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/homeAllAptScheduleLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageHomeAllAptSchedule"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_calendar"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="아파트 일정"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/notosans_semibold"
+                                android:includeFontPadding="false"
+                                app:layout_constraintStart_toEndOf="@+id/imageHomeAllAptSchedule"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_next"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/homeAllFireLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageHomeAllFire"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_fire"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="소방 점검"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/notosans_semibold"
+                                android:includeFontPadding="false"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/imageHomeAllFire"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_next"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/homeAllAptInfoLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp">
+
+                            <ImageView
+                                android:id="@+id/imageHomeAllAptInfo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_apartment"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="20dp"
+                                android:text="아파트 운영 정보"
+                                android:textSize="16sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/notosans_semibold"
+                                android:includeFontPadding="false"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/imageHomeAllAptInfo"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_next"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

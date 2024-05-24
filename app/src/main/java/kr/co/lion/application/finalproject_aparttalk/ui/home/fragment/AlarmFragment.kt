@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.home
+package kr.co.lion.application.finalproject_aparttalk.ui.home.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
