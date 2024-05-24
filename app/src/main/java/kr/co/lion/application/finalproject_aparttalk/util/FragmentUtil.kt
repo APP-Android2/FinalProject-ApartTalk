@@ -22,3 +22,8 @@ enum class CommunityFragmentName(val str:String) {
     COMMUNITY_ADD_FRAGMENT("CommunityAddFragment"),
     COMMUNITY_MODIFY_FRAGMENT("CommunityModifyFragment"),
 }
+
+enum class BroadcastFragmentName(val str: String) {
+    BROADCAST_FRAGMENT("BroadcastFragment"),
+    BROADCAST_DETIAL_FRAGMENT("BroadcastDetailFragment")
+}
