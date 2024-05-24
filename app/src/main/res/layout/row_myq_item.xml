@@ -23,7 +23,9 @@
                 android:layout_marginTop="10dp"
                 android:text="TextView"
                 android:textColor="#73C0B0"
-                android:textSize="18dp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,6 +39,8 @@
                 android:gravity="right"
                 android:padding="4dp"
                 android:text="TextView"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:textColor="#4DB6AC"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +55,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="TextView"
-            android:textSize="14dp"
+            android:textSize="14sp"
+            android:fontFamily="@font/notosans_regular"
+            android:includeFontPadding="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rowMyQTextViewTitle" />
 

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.reservation.ReservationConfirmFragment" >
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/reservationConfirmToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp">
+
+        <TextView
+            android:id="@+id/reservationConfirmTextViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/notosans_semibold"
+            android:text="2024.05.17"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/reservationConfirmImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reservationConfirmTextViewDate" />
+
+        <TextView
+            android:id="@+id/reservationConfirmTextViewFacility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
+            android:text="수영장"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/reservationConfirmImageView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/reservationConfirmTextViewReservedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/notosans_medium"
+            android:includeFontPadding="false"
+            android:text="2024.05.19"
+            app:layout_constraintStart_toEndOf="@+id/reservationConfirmImageView"
+            app:layout_constraintTop_toBottomOf="@+id/reservationConfirmTextViewFacility" />
+
+        <TextView
+            android:id="@+id/reservationConfirmTextViewTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/notosans_medium"
+            android:includeFontPadding="false"
+            android:text="15:00 ~ 17:00"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/reservationConfirmImageView"
+            app:layout_constraintTop_toBottomOf="@+id/reservationConfirmTextViewReservedDate" />
+
+        <TextView
+            android:id="@+id/reservationConfirmTextViewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="40,000 원"
+            android:textColor="@color/third"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/reservationConfirmImageView"
+            app:layout_constraintTop_toBottomOf="@+id/reservationConfirmTextViewTime" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@color/lightGray" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/reservationConfirmTextViewReservationInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
+            android:text="예약자 정보"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/reservationConfirmReservationPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/notosans_medium"
+            android:includeFontPadding="false"
+            android:text="예약자"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reservationConfirmTextViewReservationInfo" />
+
+        <TextView
+            android:id="@+id/reservationConfirmTextViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="58dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/notosans_medium"
+            android:includeFontPadding="false"
+            android:text="홍길동"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/reservationConfirmTextViewPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/notosans_medium"
+            android:includeFontPadding="false"
+            android:text="휴대폰 번호"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reservationConfirmReservationPerson" />
+
+        <TextView
+            android:id="@+id/reservationConfirmTextViewPhoneNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/notosans_medium"
+            android:includeFontPadding="false"
+            android:text="010-1234-5678"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reservationConfirmTextViewName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/lightGray" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/reservationConfirmButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/style_pointbutton_radias"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
+            android:text="확인"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.979" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</LinearLayout>
