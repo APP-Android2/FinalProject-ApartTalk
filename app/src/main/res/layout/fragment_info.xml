@@ -30,8 +30,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="196dp"
                 android:text="홍길동"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +52,9 @@
                 android:layout_height="wrap_content"
                 android:text="이름"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 app:layout_constraintEnd_toStartOf="@+id/userInfoTextViewName"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +67,9 @@
                 android:layout_marginTop="15dp"
                 android:text="이메일"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 app:layout_constraintEnd_toStartOf="@+id/userInfoTextViewEmail"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +82,9 @@
                 android:layout_marginTop="15dp"
                 android:text="로그인 방식"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userInfoEmail" />
 
@@ -88,7 +96,9 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="15dp"
                 android:text="TextView"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/userInfoTextViewEmail"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +112,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userInfoTextViewBirth" />
@@ -115,7 +127,9 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/userInfoTextViewEmail"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +144,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:text="생년월일"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 app:layout_constraintBottom_toTopOf="@+id/userInfoEmail"
                 app:layout_constraintEnd_toStartOf="@+id/userInfoTextViewEmail"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -142,7 +158,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -154,7 +172,9 @@
                 android:layout_marginTop="35dp"
                 android:layout_marginBottom="15dp"
                 android:text="휴대폰 번호"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 app:layout_constraintBottom_toTopOf="@+id/userInfoBirth"
                 app:layout_constraintEnd_toStartOf="@+id/userInfoTextViewPhoneNumber"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -169,7 +189,9 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="16dp"
                 android:text="TextView"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userInfoTextViewEmail" />
@@ -196,7 +218,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="우리집 정보"
-                android:textSize="20dp"
+                android:textSize="20sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:textStyle="bold" />
 
             <ImageView
@@ -219,7 +243,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="입주민 인증"
-                android:textSize="14dp" />
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/userInfoTextViewCertification"
@@ -227,6 +253,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
                 android:text="미인증"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:textColor="#FF0000" />
 
             <ImageView
@@ -248,14 +277,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="주소"
-                android:textSize="14dp" />
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/userInfoTextViewAdress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="마재마을 송촌 파인힐 \n104동 806호"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:textStyle="bold" />
 
         </LinearLayout>

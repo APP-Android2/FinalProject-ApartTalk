@@ -15,7 +15,7 @@
             android:id="@+id/serviceToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/white"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
@@ -33,16 +33,22 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:text="공지사항" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:text="FAQ" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:text="1:1문의" />
         </com.google.android.material.tabs.TabLayout>
     <ScrollView
