@@ -6,22 +6,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityCompanyInfoBinding
+import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityPrivacyPolicyBinding
 
-class CompanyInfoActivity : AppCompatActivity() {
+class PrivacyPolicyActivity : AppCompatActivity() {
 
-    lateinit var binding:ActivityCompanyInfoBinding
+    lateinit var binding:ActivityPrivacyPolicyBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCompanyInfoBinding.inflate(layoutInflater)
+        binding = ActivityPrivacyPolicyBinding.inflate(layoutInflater)
         setContentView(binding.root)
         settingToolbar()
 
     }
 
+
     private fun settingToolbar(){
         with(binding){
-            toolbarCompanyInfo.apply {
+            toolbarPrivacyPolicy.apply {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     finish()

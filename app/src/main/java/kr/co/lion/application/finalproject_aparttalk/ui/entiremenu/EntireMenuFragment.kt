@@ -74,9 +74,11 @@ class EntireMenuFragment : Fragment() {
             }
             textUseMenu.setOnClickListener {
                 //이용약관
+                startActivity(Intent(requireActivity(), UserAgreementActivity::class.java))
             }
             textUserInfoMenu.setOnClickListener {
                 //개인정보 보호 방침
+                startActivity(Intent(requireActivity(), PrivacyPolicyActivity::class.java))
             }
         }
     }

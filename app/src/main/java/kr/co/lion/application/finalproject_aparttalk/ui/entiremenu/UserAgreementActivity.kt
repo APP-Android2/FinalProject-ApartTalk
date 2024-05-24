@@ -6,22 +6,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityCompanyInfoBinding
+import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityUserAgreementBinding
 
-class CompanyInfoActivity : AppCompatActivity() {
+class UserAgreementActivity : AppCompatActivity() {
 
-    lateinit var binding:ActivityCompanyInfoBinding
+    lateinit var binding: ActivityUserAgreementBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCompanyInfoBinding.inflate(layoutInflater)
+        binding = ActivityUserAgreementBinding.inflate(layoutInflater)
         setContentView(binding.root)
         settingToolbar()
-
     }
 
     private fun settingToolbar(){
         with(binding){
-            toolbarCompanyInfo.apply {
+            toolbarUserAgree.apply {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     finish()
