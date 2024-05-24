@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/reservationCancelTextViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2024.05.19"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewReservationCancelLabelEtc"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
+            android:background="@drawable/community_label_border"
+            android:fontFamily="@font/notosans_semibold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="text"
+            android:textColor="@color/sixth"
+            android:textSize="12sp"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/reservationCancelImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            card_view:layout_constraintStart_toStartOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/reservationCancelTextViewDate"
+            card_view:srcCompat="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/reservationCancelTextViewFacility"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/notosans_bold"
+            android:includeFontPadding="false"
+            android:text="수영장"
+            android:textSize="14sp"
+            card_view:layout_constraintStart_toEndOf="@+id/reservationCancelImageView"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/reservationCancelTextViewTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/notosans_regular"
+            android:includeFontPadding="false"
+            android:text="15:00 ~ 17:00"
+            android:textSize="12sp"
+            card_view:layout_constraintStart_toEndOf="@+id/reservationCancelImageView"
+            card_view:layout_constraintTop_toBottomOf="@+id/reservationCancelTextViewFacility" />
+
+        <TextView
+            android:id="@+id/reservationCancelTextViewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/notosans_regular"
+            android:includeFontPadding="false"
+            android:text="20,000 2인"
+            android:textSize="12sp"
+            card_view:layout_constraintStart_toEndOf="@+id/reservationCancelImageView"
+            card_view:layout_constraintTop_toBottomOf="@+id/reservationCancelTextViewTime" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

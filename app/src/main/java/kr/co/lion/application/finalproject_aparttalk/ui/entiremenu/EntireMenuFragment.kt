@@ -29,22 +29,6 @@ class EntireMenuFragment : Fragment() {
         return binding.root
     }
 
-
-    //툴바 설정
-    private fun settingToolbar(){
-        with(binding){
-            toolbarMenu.apply {
-                inflateMenu(R.menu.menu_setting)
-                setOnMenuItemClickListener {
-                    //설정 액티비티로 이동
-
-                    true
-                }
-
-            }
-        }
-    }
-
     //클릭 이벤트
     private fun settingEvent(){
         with(binding){
@@ -96,12 +80,15 @@ class EntireMenuFragment : Fragment() {
         with(binding){
             textCompanyInfo.setOnClickListener {
                 //회사 소개
+                startActivity(Intent(requireActivity(), CompanyInfoActivity::class.java))
             }
             textUseMenu.setOnClickListener {
                 //이용약관
+                startActivity(Intent(requireActivity(), UserAgreementActivity::class.java))
             }
             textUserInfoMenu.setOnClickListener {
                 //개인정보 보호 방침
+                startActivity(Intent(requireActivity(), PrivacyPolicyActivity::class.java))
             }
         }
     }

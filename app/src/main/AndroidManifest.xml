@@ -19,6 +19,15 @@
             android:name=".ui.broadcast.fragment.activity.BroadcastActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.entiremenu.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.entiremenu.UserAgreementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.entiremenu.CompanyInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.facility.DetailFacilityActivity"
             android:exported="false" />
         <activity

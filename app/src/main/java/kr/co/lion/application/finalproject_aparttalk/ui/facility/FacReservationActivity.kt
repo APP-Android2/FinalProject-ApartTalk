@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityFacReservationBinding
+import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
 
 class FacReservationActivity : AppCompatActivity() {
 
@@ -19,6 +20,7 @@ class FacReservationActivity : AppCompatActivity() {
         setContentView(binding.root)
         settingToolbar()
         connectingAdapter()
+        settingEvent()
 
     }
 
@@ -42,6 +44,16 @@ class FacReservationActivity : AppCompatActivity() {
                     adapter.setDropDownViewResource(R.layout.dropdown_item)
                     timeSpinner.adapter = adapter
                 }
+        }
+    }
+
+    private fun settingEvent(){
+        binding.apply {
+            buttonReserve.setOnClickListener {
+                val dialog = DialogConfirm("예약 완료", "예약이 완료되셨습니다.\n결제는 현장에서 진행해주시면 됩니다.", this@FacReservationActivity)
+                dialog.show(this@FacReservationActivity.supportFragmentManager, "DialogConfirm")
+
+            }
         }
     }
 

@@ -132,6 +132,8 @@
             android:layout_height="40dp"
             android:backgroundTint="#73C0B0"
             android:text="예약하기"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
             android:textColor="@color/black" />
     </LinearLayout>
 </LinearLayout>

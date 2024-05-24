@@ -59,6 +59,7 @@ class DetailFacilityActivity : AppCompatActivity() {
         with(binding){
             buttonGoReservation.setOnClickListener {
                 startActivity(Intent(this@DetailFacilityActivity, FacReservationActivity::class.java))
+                finish()
             }
         }
     }
