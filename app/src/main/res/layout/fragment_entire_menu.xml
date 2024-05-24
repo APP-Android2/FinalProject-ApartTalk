@@ -205,6 +205,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="start|center_vertical"
                 android:text="방문 주차 예약"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 app:icon="@drawable/icon_person"
                 app:iconTint="@color/black" />
@@ -217,6 +218,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="start|center_vertical"
                 android:text="전자 투표"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 app:icon="@drawable/icon_car"
                 app:iconTint="@color/black" />
@@ -229,6 +231,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="start|center_vertical"
                 android:text="소방 점검"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 app:icon="@drawable/icon_fire"
                 app:iconTint="@color/black" />
@@ -257,6 +260,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="start|center_horizontal"
                 android:text="관리사무소 문의"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 app:icon="@drawable/icon_management_office"
                 app:iconTint="@color/black" />
@@ -269,6 +273,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="start|center_horizontal"
                 android:text="안내 방송"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 app:icon="@drawable/icon_campaign"
                 app:iconTint="@color/black" />
@@ -280,6 +285,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="start|center_horizontal"
+                android:textSize="16sp"
                 android:text="아파트 일정"
                 android:textColor="@color/black"
                 app:icon="@drawable/icon_calendar"
@@ -293,6 +299,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="start|center_horizontal"
                 android:text="아파트 운영정보"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 app:icon="@drawable/icon_apartment"
                 app:iconTint="@color/black" />
