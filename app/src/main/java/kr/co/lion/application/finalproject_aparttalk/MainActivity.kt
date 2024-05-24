@@ -11,8 +11,8 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityMainBin
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.EntireMenuFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.facility.FacilityFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.home.AlarmFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.home.HomeFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.home.fragment.AlarmFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.home.fragment.HomeFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.location.LocationFragment
 import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
 

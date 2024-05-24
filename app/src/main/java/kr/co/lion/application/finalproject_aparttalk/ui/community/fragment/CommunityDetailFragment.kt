@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityDetailBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityDetailCommentBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityDetailImageBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.SwipeHelperCallback
+import kr.co.lion.application.finalproject_aparttalk.util.SwipeHelperCallback
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailCommentRecyclerViewAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailImageViewPager2Adapter
 

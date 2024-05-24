@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui
+package kr.co.lion.application.finalproject_aparttalk.util
 
 import android.graphics.Canvas
 import android.view.View
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.ItemTouchHelper.UP
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailCommentRecyclerViewAdapter
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityDetailFragment
 import kotlin.math.min
 
 // 롱터치 후 드래그, 스와이프 동작 제어
