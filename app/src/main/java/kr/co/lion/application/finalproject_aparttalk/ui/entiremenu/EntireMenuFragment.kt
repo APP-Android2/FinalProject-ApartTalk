@@ -15,13 +15,12 @@ import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
 class EntireMenuFragment : Fragment() {
 
     lateinit var binding:FragmentEntireMenuBinding
-    lateinit var mainActivity: MainActivity
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentEntireMenuBinding.inflate(layoutInflater)
-        mainActivity = activity as MainActivity
 
 
         settingEvent()
@@ -62,7 +61,7 @@ class EntireMenuFragment : Fragment() {
             }
             buttonBroadcastMenu.setOnClickListener {
                 //안내방송으로 이동
-                val intent = Intent(mainActivity, BroadcastActivity::class.java)
+                val intent = Intent(requireActivity(), BroadcastActivity::class.java)
                 intent.putExtra("fragmentName", BroadcastFragmentName.BROADCAST_FRAGMENT)
                 startActivity(intent)
             }
