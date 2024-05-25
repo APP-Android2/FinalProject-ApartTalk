@@ -23,7 +23,7 @@ class EntireMenuFragment : Fragment() {
         binding = FragmentEntireMenuBinding.inflate(layoutInflater)
         mainActivity = activity as MainActivity
 
-        settingToolbar()
+
         settingEvent()
         extraEvent()
         return binding.root
