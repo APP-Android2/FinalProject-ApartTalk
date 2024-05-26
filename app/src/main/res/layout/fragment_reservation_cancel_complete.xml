@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
             android:text="2024.05.17"
             android:textSize="18sp" />
 
@@ -47,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/notosans_semibold"
             android:includeFontPadding="false"
             android:text="수영장"
@@ -85,7 +86,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
             android:text="40,000 원"
             android:textColor="@color/third"
             android:textSize="18sp" />

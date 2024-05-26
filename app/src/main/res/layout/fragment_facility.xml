@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
             android:fontFamily="@font/notosans_bold"
+            android:includeFontPadding="false"
             android:text="이용시설"
             android:textColor="@color/black"
             android:textSize="18sp" />
