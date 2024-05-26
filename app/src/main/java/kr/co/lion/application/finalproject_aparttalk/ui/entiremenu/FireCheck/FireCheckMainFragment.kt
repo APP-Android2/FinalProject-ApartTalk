@@ -22,10 +22,23 @@ class FireCheckMainFragment : Fragment() {
         fragmentFireCheckMainBinding = FragmentFireCheckMainBinding.inflate(layoutInflater)
         fireCheckActivity = activity as FireCheckActivity
 
+        setToolbar()
         setYoutube()
         setEvent()
 
         return fragmentFireCheckMainBinding.root
+    }
+
+    fun setToolbar(){
+        fragmentFireCheckMainBinding.apply {
+            toolbarFireCheck1.apply {
+                // 뒤로가기
+                setNavigationIcon(R.drawable.icon_back)
+                setNavigationOnClickListener {
+                    fireCheckActivity.removeFragment(FireCheckFragmentName.FIRE_CHECK_MAIN_FRAGMENT)
+                }
+            }
+        }
     }
     fun setEvent(){
         fragmentFireCheckMainBinding.apply {

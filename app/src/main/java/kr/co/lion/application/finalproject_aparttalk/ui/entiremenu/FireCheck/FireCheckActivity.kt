@@ -23,7 +23,7 @@ import kr.co.lion.application.finalproject_aparttalk.util.FireCheckFragmentName
 
 class FireCheckActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityFireCheckBinding
+    lateinit var binding: ActivityFireCheckBinding
 
     // 프래그먼트의 주소값을 담을 프로퍼티
     var oldFragment: Fragment? = null
@@ -35,10 +35,8 @@ class FireCheckActivity : AppCompatActivity() {
         binding = ActivityFireCheckBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // MainFragment가 나타나도록 한다.
+        // FireCheckMainFragment 나타나도록 한다.
         replaceFragment(FireCheckFragmentName.FIRE_CHECK_MAIN_FRAGMENT, false, false, null)
-
-        setToolbar()
     }
 
     // 지정한 Fragment를 보여주는 메서드
@@ -134,18 +132,5 @@ class FireCheckActivity : AppCompatActivity() {
 
         // 지정한 이름으로 있는 Fragment를 BackStack에서 제거한다.
         supportFragmentManager.popBackStack(name.str, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-    }
-
-    // 툴바 구성
-    fun setToolbar(){
-        binding.apply {
-            toolbarFireCheck.apply {
-                // 뒤로가기
-                setNavigationIcon(R.drawable.icon_back)
-                setNavigationOnClickListener {
-                    // 전화면으로 돌아가기. (홈화면 또는 전체메뉴화면)
-                }
-            }
-        }
     }
 }

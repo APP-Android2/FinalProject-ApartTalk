@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireCheckSelfBinding
+import kr.co.lion.application.finalproject_aparttalk.util.FireCheckFragmentName
 
 class FireCheckSelfFragment : Fragment() {
 
@@ -18,9 +19,24 @@ class FireCheckSelfFragment : Fragment() {
         fragmentFireCheckSelfBinding = FragmentFireCheckSelfBinding.inflate(layoutInflater)
         fireCheckActivity = activity as FireCheckActivity
 
+        setToolbar()
         setButton()
 
         return fragmentFireCheckSelfBinding.root
+    }
+
+    // 툴바 구성
+    fun setToolbar(){
+        fragmentFireCheckSelfBinding.apply {
+            toolbarFireCheck2.apply {
+                // 뒤로가기
+                setNavigationIcon(R.drawable.icon_back)
+                setNavigationOnClickListener {
+                    // 전화면으로 돌아가기.
+                    fireCheckActivity.removeFragment(FireCheckFragmentName.FIRE_CHECK_SELF_FRAGMENT)
+                }
+            }
+        }
     }
 
     fun setButton(){
