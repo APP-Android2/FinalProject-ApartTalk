@@ -16,7 +16,7 @@
         android:theme="?attr/actionBarTheme" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/voteTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="안전한 정보 보호를 위해\n등록된 휴대폰 번호를 입력해주세요"
