@@ -18,6 +18,63 @@ class FireCheckSelfFragment : Fragment() {
         fragmentFireCheckSelfBinding = FragmentFireCheckSelfBinding.inflate(layoutInflater)
         fireCheckActivity = activity as FireCheckActivity
 
+        setButton()
+
         return fragmentFireCheckSelfBinding.root
+    }
+
+    fun setButton(){
+        fragmentFireCheckSelfBinding.apply {
+            // 소화기 cardViewFireCheck1
+              // buttonFireExtinguisher1
+            buttonFireExtinguisher1.setOnClickListener {
+                setBottomSheet()
+            }
+              // buttonFireExtinguisher2
+            buttonFireExtinguisher2.setOnClickListener {
+                setBottomSheet()
+            }
+              // buttonFireExtinguisher3
+            buttonFireExtinguisher3.setOnClickListener {
+                setBottomSheet()
+            }
+              // buttonFireExtinguisher4
+            buttonFireExtinguisher4.setOnClickListener {
+                setBottomSheet()
+            }
+            // 경보설비 cardViewFireCheck2
+              // buttonFireWarning1
+            buttonFireWarning1.setOnClickListener {
+                setBottomSheet()
+            }
+              // buttonFireWarning2
+            buttonFireWarning2.setOnClickListener {
+                setBottomSheet()
+            }
+            // 피난설비 cardViewFireCheck3
+              // buttonRunFacility1
+            buttonRunFacility1.setOnClickListener {
+                setBottomSheet()
+            }
+              // buttonRunFacility2
+            buttonRunFacility2.setOnClickListener {
+                setBottomSheet()
+            }
+            // 기타설비 cardViewFireCheck4
+              // buttonEtcFacility1
+            buttonEtcFacility1.setOnClickListener {
+                setBottomSheet()
+            }
+              // buttonEtcFacility2
+            buttonEtcFacility2.setOnClickListener {
+                setBottomSheet()
+            }
+        }
+    }
+
+    fun setBottomSheet(){
+        // 바텀시트 화면이 나타나게 한다.
+        val fireProcessBottomSheetFragment = FireProcessBottomSheetFragment()
+        fireProcessBottomSheetFragment.show(childFragmentManager, fireProcessBottomSheetFragment.tag)
     }
 }

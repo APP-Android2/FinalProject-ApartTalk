@@ -10,6 +10,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireCheckMainBinding
+import kr.co.lion.application.finalproject_aparttalk.util.FireCheckFragmentName
 
 class FireCheckMainFragment : Fragment() {
 
@@ -33,8 +34,9 @@ class FireCheckMainFragment : Fragment() {
                 val fireLawBottomSheetFragment = FireLawBottomSheetFragment()
                 fireLawBottomSheetFragment.show(childFragmentManager, fireLawBottomSheetFragment.tag)
             }
-            cardViewFireCheck3.setOnClickListener {
+            cardViewFireCheck2.setOnClickListener {
                 // 프래그먼트 나타나게 한다.
+                fireCheckActivity.replaceFragment(FireCheckFragmentName.FIRE_CHECK_SELF_FRAGMENT, false, false, null)
             }
         }
     }

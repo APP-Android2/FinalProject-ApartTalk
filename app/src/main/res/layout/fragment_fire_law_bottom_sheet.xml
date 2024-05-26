@@ -21,7 +21,7 @@
         android:id="@+id/textViewFireProcessSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/notosans_semibold"
+        android:fontFamily="@font/notosans_bold"
         android:gravity="center"
         android:text="소방법 개정 주요 내용"
         android:textSize="18sp" />

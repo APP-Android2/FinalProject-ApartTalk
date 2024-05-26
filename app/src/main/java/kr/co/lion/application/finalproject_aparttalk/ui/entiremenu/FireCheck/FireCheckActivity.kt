@@ -35,6 +35,9 @@ class FireCheckActivity : AppCompatActivity() {
         binding = ActivityFireCheckBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // MainFragment가 나타나도록 한다.
+        replaceFragment(FireCheckFragmentName.FIRE_CHECK_MAIN_FRAGMENT, false, false, null)
+
         setToolbar()
     }
 
@@ -60,6 +63,9 @@ class FireCheckActivity : AppCompatActivity() {
         when(name){
             FireCheckFragmentName.FIRE_CHECK_MAIN_FRAGMENT -> {
                 newFragment = FireCheckMainFragment()
+            }
+            FireCheckFragmentName.FIRE_CHECK_SELF_FRAGMENT -> {
+                newFragment = FireCheckSelfFragment()
             }
         }
 

@@ -43,18 +43,14 @@ class FireLawBottomSheetFragment : BottomSheetDialogFragment() {
 
     // BottomSheet의 높이를 설정해준다.
     fun setBottomSheetHeight(bottomSheetDialog: BottomSheetDialog){
-
+        // BottomSheet의 기본 뷰 객체를 가져온다
         val bottomSheet = bottomSheetDialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)!!
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-
-        // 화면 높이의 2/3 크기로 설정
-        val screenHeight = resources.displayMetrics.heightPixels
-        val desiredHeight = (screenHeight * 0.66).toInt()
-
+        // BottomSheet 높이를 설정할 수 있는 객체를 생성한다.
+        val behavior = BottomSheetBehavior.from(bottomSheet)
+        // 높이를 설정한다.
         val layoutParams = bottomSheet.layoutParams
-        layoutParams.height = desiredHeight
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
         bottomSheet.layoutParams = layoutParams
-
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 }
