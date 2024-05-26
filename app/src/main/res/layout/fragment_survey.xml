@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ui.vote.SurveyFragment" >
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/surveyToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:gravity="start"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/surveyTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="오늘 저녁 뭐 먹을까요?"
+            android:textSize="20sp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <CheckBox
+            android:id="@+id/surveyCheckBox1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="치킨"
+            android:fontFamily="@font/notosans_regular"
+            android:includeFontPadding="false"/>
+
+        <CheckBox
+            android:id="@+id/surveyCheckBox2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="피자"
+            android:fontFamily="@font/notosans_regular"
+            android:includeFontPadding="false"/>
+
+        <CheckBox
+            android:id="@+id/surveyCheckBox3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="햄버거"
+            android:fontFamily="@font/notosans_regular"
+            android:includeFontPadding="false"/>
+
+        <TextView
+            android:id="@+id/surveyContentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="오늘 뭘 먹을지 매우매우 고민이 되는데 주민여러분들의 추천을 받습니다~"
+            android:fontFamily="@font/notosans_regular"
+            android:includeFontPadding="false"
+            android:textSize="16sp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/surveyButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="설문조사 참여"
+                android:fontFamily="@font/notosans_semibold"
+                android:includeFontPadding="false"
+                android:backgroundTint="@color/second"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</LinearLayout>
