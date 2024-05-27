@@ -196,7 +196,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonCommunityAdd"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="220dp"
                     android:layout_marginBottom="25dp"
                     android:backgroundTint="@color/white"
