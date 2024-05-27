@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_weight="5"
-                    android:drawableRight="@drawable/icon_forward"
+                    android:drawableRight="@drawable/icon_navigate_next"
                     android:fontFamily="@font/notosans_semibold"
                     android:text=" APARTTALK 가 알려주는 절차와 함께 점검 시작하기"
                     android:textAlignment="center"
