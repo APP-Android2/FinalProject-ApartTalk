@@ -41,8 +41,6 @@ class CommunityTabEtcRecyclerViewAdapter(val context: Context) : RecyclerView.Ad
         holder.rowCommunityTabEtcBinding.apply {
             textViewCommunityListLabelEtc.text = "기타"
             textViewCommunityListTitleEtc.text = "글 제목입니다 $position"
-            textViewCommunityListContentEtc.text = "글 내용입니다 글 내용입니다 글 내용입니다\n" +
-                    "글 내용입니다 글 내용입니다 글 내용입니다 "
             textViewCommunityListLikeCntEtc.text = "999"
             textViewCommunityListCommentCntEtc.text = "999"
             textViewCommunityListDateEtc.text = "2024.05.17"
