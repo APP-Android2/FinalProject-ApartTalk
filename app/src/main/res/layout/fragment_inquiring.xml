@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ui.inquiry.InquiringFragment">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/inquiringToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"/>
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/inquiringTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/third"
+        app:tabIndicatorHeight="2dp"
+        app:tabIndicatorGravity="bottom"
+        app:tabTextColor="@color/lightGray"
+        app:tabSelectedTextColor="@android:color/black"
+        app:tabIndicatorFullWidth="true">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문의중" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변완료" />
+    </com.google.android.material.tabs.TabLayout>
+
+
+    <com.google.android.material.search.SearchBar
+        android:id="@+id/inquiringSearchbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="키워드 검색"
+        android:textAppearance="@color/lightGray"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/inquiringRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_margin="8dp" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/inquiringFloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/icon_add"
+        app:backgroundTint="@color/third"
+        app:tint="@android:color/white"/>
+</LinearLayout>
