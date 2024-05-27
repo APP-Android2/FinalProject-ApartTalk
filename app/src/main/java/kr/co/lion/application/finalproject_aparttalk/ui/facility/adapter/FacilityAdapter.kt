@@ -40,7 +40,7 @@ class FacilityAdapter : ListAdapter<FacilityData, FacilityAdapter.FacilityViewHo
 
     override fun onBindViewHolder(holder: FacilityViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.binding.buttonFacilityGrid.setOnClickListener {
+        holder.binding.root.setOnClickListener {
             gridRecyclerviewClick.gridRecyclerClickListener()
         }
     }
