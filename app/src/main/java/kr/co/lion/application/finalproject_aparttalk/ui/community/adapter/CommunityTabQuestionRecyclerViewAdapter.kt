@@ -39,8 +39,6 @@ class CommunityTabQuestionRecyclerViewAdapter(val context: Context) : RecyclerVi
         holder.rowCommunityTabQuestionBinding.apply {
             textViewCommunityListLabelQuestion.text = "질문"
             textViewCommunityListTitleQuestion.text = "글 제목입니다 $position"
-            textViewCommunityListContentQuestion.text = "글 내용입니다 글 내용입니다 글 내용입니다\n" +
-                    "글 내용입니다 글 내용입니다 글 내용입니다 "
             textViewCommunityListLikeCntQuestion.text = "999"
             textViewCommunityListCommentCntQuestion.text = "999"
             textViewCommunityListDateQuestion.text = "2024.05.17"
