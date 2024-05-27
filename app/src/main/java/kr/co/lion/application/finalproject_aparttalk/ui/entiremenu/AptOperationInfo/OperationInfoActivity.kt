@@ -18,18 +18,7 @@ class OperationInfoActivity : AppCompatActivity() {
         binding = ActivityOperationInfoBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_operation_info)
 
-        setToolbar()
     }
 
-    fun setToolbar(){
-        binding.apply {
-            toolbarAptOperationInfo.apply {
-                // 뒤로가기
-                setNavigationIcon(R.drawable.icon_back)
-                setNavigationOnClickListener {
-                    // 전체메뉴로 돌아가기
-                }
-            }
-        }
-    }
+
 }

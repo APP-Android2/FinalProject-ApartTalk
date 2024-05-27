@@ -14,12 +14,9 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.entiremenu.AptOperationInfo.OperationInfoActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ui.broadcast.activity.BroadcastActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.broadcast.fragment.activity.BroadcastActivity"
             android:exported="false" />
         <activity
             android:name=".ui.entiremenu.PrivacyPolicyActivity"
