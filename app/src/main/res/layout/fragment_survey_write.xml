@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="ui.vote.SurveyWriteFragment">
+
+    <TextView
+        android:id="@+id/surveyWriteTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="설문조사"
+        android:textSize="20sp"
+        android:fontFamily="@font/notosans_semibold"
+        android:includeFontPadding="false"/>
+
+    <TextView
+        android:id="@+id/surveyWriteTextView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="설문조사는 입주민도 만들 수 있어요!"
+        android:textSize="16sp"
+        android:fontFamily="@font/notosans_semibold"
+        android:includeFontPadding="false"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="20dp"
+        android:background="#000000" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/surveyWriteRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/surveyWriteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="설문 조사 만들기"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
+            android:backgroundTint="@color/second"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

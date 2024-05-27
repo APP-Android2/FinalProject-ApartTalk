@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_rounding"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ui.entiremenu.FireCheck.FireLawBottomSheetFragment">
+
+    <TextView
+        android:id="@+id/textViewFireLawDate"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:fontFamily="@font/notosans_semibold"
+        android:gravity="center"
+        android:text="2022년 12월 1일 "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewFireProcessSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosans_bold"
+        android:gravity="center"
+        android:text="소방법 개정 주요 내용"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewFireProcessSub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/notosans_medium"
+        android:gravity="left"
+        android:text="2022년 12월 1일부터 시행된  소방법 개정 사항에 대해 자세히 설명드리겠습니다."
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewFireProcess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/notosans_medium"
+        android:gravity="center|left"
+        android:text="소방시설 관리업 등록 기준 강화: 소방시설 관리업 등록 시 기술인력 및 장비 기준이 강화되었습니다. 이를 통해 소방시설 관리의 전문성과 안전성을 높이고자 하였습니다.\n
+소방시설 관리업 등록 변경 신고 서류 추가: 소방시설 관리업체의 등록 사항 변경 시 첨부해야 하는 서류가 추가되었습니다. 이를 통해 관리업체의 자격 및 능력을 지속적으로 확인할 수 있게 되었습니다.\n
+소방시설 관리업 행정처분 기준 강화: 소방시설 관리업체에 대한 행정처분 기준이 강화되었습니다. 이를 통해 소방시설 관리의 책임성을 높이고자 하였습니다.\n
+소방시설 설치·유지·관리 기준 강화: 소방시설 설치, 유지, 관리 기준이 강화되었습니다. 이를 통해 소방시설의 실효성과 안전성을 높이고자 하였습니다.\n
+이번 소방법 개정은 소방시설 관리의 전문성과 안전성을 높이기 위한 목적으로 이루어졌습니다. 소방시설 관리업체와 건물 관리자들은 이번 개정 사항을 숙지하고 적극적으로 대응해야 할 것입니다."
+        android:textSize="14sp" />
+
+</LinearLayout>

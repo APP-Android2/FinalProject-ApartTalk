@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ui.service.SingleServiceFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".fragment.service.SingleServiceFragment">
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/singleServiceToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingHorizontal="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/singleServiceTextViewQType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/notosans_bold"
+                    android:includeFontPadding="false"
+                    android:text="아파트톡의 중심은 항상 고객님입니다."
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/singleServiceTextViewQTypeInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/notosans_regular"
+                    android:includeFontPadding="false"
+                    android:text="이용하며 느끼는 불편한 점이나 바라는 점을 알려주세요 \n소중한 의견으로 한 걸음 더 다가가는 아파트톡이 되겠습니다"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/singleServiceTextViewQTypeInfoTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="문의량이 많은 경우 답변은 24시간 이상 소요될 수 있습니다"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/notosans_semibold"
+                    android:includeFontPadding="false"
+                    android:textSize="14sp" />
+
+
+                <TextView
+                    android:id="@+id/singleServiceTextViewQTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="제목"
+                    android:fontFamily="@font/notosans_bold"
+                    android:includeFontPadding="false"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="clear_text"
+                    app:hintAnimationEnabled="false"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/singleServiceInputQTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="제목 입력"
+                        android:fontFamily="@font/notosans_bold"
+                        android:includeFontPadding="false"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/singleServiceTextViewQContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/notosans_medium"
+                    android:includeFontPadding="false"
+                    android:layout_marginBottom="4dp"
+                    android:text="내용"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:endIconMode="clear_text"
+                    app:hintAnimationEnabled="false"
+                    app:hintEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/singleServiceInputQContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:gravity="top"
+                        android:hint="의견을 남겨주세요"
+                        android:fontFamily="@font/notosans_medium"
+                        android:includeFontPadding="false"
+                        android:inputType="text|textMultiLine"
+                        android:textSize="14sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/singleServiceButtonQ"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/style_pointbutton_radias"
+                android:text="문의하기"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

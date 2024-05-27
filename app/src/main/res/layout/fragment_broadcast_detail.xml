@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.broadcast.fragment.BroadcastDetailFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarBroadcastDetail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewBroadcastDetailToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/notosans_bold"
+            android:text="지난 안내 방송"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="22dp"
+            android:includeFontPadding="false"/>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <TextView
+        android:id="@+id/textViewBroadcastDetailSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="text"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/notosans_semibold"
+        android:includeFontPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/toolbarBroadcastDetail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewBroadcastDetailContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/dropdown_box_border"
+        android:fontFamily="@font/notosans_regular"
+        android:includeFontPadding="false"
+        android:gravity="top"
+        android:lines="20"
+        android:maxLines="20"
+        android:padding="10dp"
+        android:text="text"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBroadcastDetailSubject" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonBroadcastDetailConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginHorizontal="20dp"
+        android:backgroundTint="@color/third"
+        android:fontFamily="@font/notosans_bold"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="확인"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

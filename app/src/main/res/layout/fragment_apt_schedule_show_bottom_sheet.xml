@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_rounding"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ui.entiremenu.AptSchedule.AptScheduleShowBottomSheetFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/icon_donut3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0.3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewAptScheduleShowDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2024-05-21-화"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#7E7A7A" />
+
+            <TextView
+                android:id="@+id/textViewAptScheduleShowTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="17:00 - 18:00"
+                android:textColor="#7E7A7A" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewAptScheduleShowSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="아파트 전체 엘레베이터 점검"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewAptScheduleShowContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="아파트 엘리베이터 전체 점검 안내 안녕하세요. 입주민 여러분, 오늘 아파트 내 모든 엘리베이터에 대한 정기 점검이 진행될 예정입니다. 이는 「승강기 안전관리법」에 따른 것으로, 주민 여러분의 안전을 위해 반드시 필요한 조치입니다. 점검 시간 동안 엘리베이터 이용에 다소 불편이 있을 수 있음을 양해해 주시기 바랍니다. 특히 고층에 거주하시는 분들께서는 점검 시간대에 엘리베이터 이용을 자제해 주시길 부탁드립니다. 점검 완료 후에는 안전하고 원활한 엘리베이터 운행이 가능할 것입니다. 이번 점검으로 입주민 여러분의 안전이 더욱 확보되기를 바랍니다. 불편을 드려 죄송합니다. 감사합니다." />
+</LinearLayout>
