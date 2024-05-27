@@ -6,16 +6,30 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.co.lion.application.finalproject_aparttalk.R
+import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityOperationInfoBinding
 
 class OperationInfoActivity : AppCompatActivity() {
+
+    private  lateinit var  binding: ActivityOperationInfoBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        binding = ActivityOperationInfoBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_operation_info)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        setToolbar()
+    }
+
+    fun setToolbar(){
+        binding.apply {
+            toolbarAptOperationInfo.apply {
+                // 뒤로가기
+                setNavigationIcon(R.drawable.icon_back)
+                setNavigationOnClickListener {
+                    // 전체메뉴로 돌아가기
+                }
+            }
         }
     }
 }
