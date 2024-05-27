@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".ui.entiremenu.AptSchedule.AptScheduleActivity">
 
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" >
+        android:theme="?attr/actionBarTheme">
 
         <TextView
             android:id="@+id/textViewToolbar"
@@ -33,156 +34,81 @@
         android:layout_marginTop="70dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="400dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textAptGas"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:drawableLeft="@drawable/icon_donut1"
+                android:fontFamily="@font/notosans_medium"
+                android:text="  가스점검"
+                android:textSize="12sp" />
 
-                <ImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/icon_donut1" />
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="6"
-                    android:text="가스점검" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textElevator"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:drawableLeft="@drawable/icon_donut3"
+                android:fontFamily="@font/notosans_medium"
+                android:text="  엘레베이터 점검 "
+                android:textSize="12sp" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/icon_donut2" />
-
-                <TextView
-                    android:id="@+id/voteTextView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="6"
-                    android:text="소독" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/textAptTrash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_donut5"
+                android:fontFamily="@font/notosans_medium"
+                android:text="  쓰레기 점검"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textAptDisinfection"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:drawableLeft="@drawable/icon_donut2"
+                android:fontFamily="@font/notosans_medium"
+                android:text="  소독"
+                android:textSize="12sp" />
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/icon_donut3" />
-
-                <TextView
-                    android:id="@+id/voteTextView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="6"
-                    android:text="엘레베이터 점검" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textMarketPlace"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:drawableLeft="@drawable/icon_donut4"
+                android:fontFamily="@font/notosans_medium"
+                android:text="  알뜰장"
+                android:textSize="12sp" />
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/icon_donut4" />
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="6"
-                    android:text="알뜰장" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/textAdministration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_donut6"
+                android:fontFamily="@font/notosans_medium"
+                android:text="  관리비공개"
+                android:textSize="12sp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/icon_donut5" />
-
-                <TextView
-                    android:id="@+id/voteTextView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="6"
-                    android:text="쓰레기 점검" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/icon_donut6" />
-
-                <TextView
-                    android:id="@+id/voteTextView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="6"
-                    android:text="관리비공개" />
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 
     <ScrollView

@@ -39,8 +39,6 @@ class CommunityTabTradeRecyclerViewAdapter(val context: Context) : RecyclerView.
         holder.rowCommunityTabTradeBinding.apply {
             textViewCommunityListLabelTrade.text = "거래"
             textViewCommunityListTitleTrade.text = "글 제목입니다 $position"
-            textViewCommunityListContentTrade.text = "글 내용입니다 글 내용입니다 글 내용입니다\n" +
-                    "글 내용입니다 글 내용입니다 글 내용입니다 "
             textViewCommunityListLikeCntTrade.text = "999"
             textViewCommunityListCommentCntTrade.text = "999"
             textViewCommunityListDateTrade.text = "2024.05.17"

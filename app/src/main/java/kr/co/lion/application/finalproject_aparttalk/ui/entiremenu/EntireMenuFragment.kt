@@ -10,6 +10,8 @@ import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentEntireMenuBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
 
 class EntireMenuFragment : Fragment() {
@@ -55,6 +57,7 @@ class EntireMenuFragment : Fragment() {
             }
             buttonFireMenu.setOnClickListener {
                 //소방 점검으로 이동
+                startActivity(Intent(requireActivity(), FireCheckActivity::class.java))
             }
             buttonContactMenu.setOnClickListener {
                 //관리사무소 문의로 이동
@@ -67,6 +70,7 @@ class EntireMenuFragment : Fragment() {
             }
             buttonAptSchduleMenu.setOnClickListener {
                 //아파트 일정으로 이동
+                startActivity(Intent(requireActivity(), AptScheduleActivity::class.java))
             }
             buttonAptInfoMenu.setOnClickListener {
                 //아파트 운영정보로 이동

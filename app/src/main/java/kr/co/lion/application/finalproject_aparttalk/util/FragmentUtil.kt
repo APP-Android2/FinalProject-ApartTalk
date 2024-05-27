@@ -32,3 +32,9 @@ enum class AptOperationInfoFragmentName(val str: String) {
     OPERATION_FIRST_FRAGMENT("OperationFirstFragment"),
     OPERATION_SECOND_FRAGMENT("OperationSecondFragment"),
 }
+
+// 프래그먼트들의 이름
+enum class FireCheckFragmentName(var str:String){
+    FIRE_CHECK_MAIN_FRAGMENT("FireCheckMainFragment.kt"),
+    FIRE_CHECK_SELF_FRAGMENT("FireCheckSelfFragment.kt"),
+}

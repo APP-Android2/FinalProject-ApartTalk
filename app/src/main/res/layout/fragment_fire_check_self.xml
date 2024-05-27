@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    android:transitionGroup="true"
+    tools:context=".ui.entiremenu.FireCheck.FireCheckSelfFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarFireCheck2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <TextView
+            android:id="@+id/textViewToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="소방점검"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textFireCheckSelf1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="5"
+                android:drawableLeft="@drawable/icon_build"
+
+                android:fontFamily="@font/notosans_semibold"
+                android:text="  APARTTALK 와 함께 점검하기 !"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textFireCheckSelf2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/notosans_medium"
+                android:includeFontPadding="false"
+                android:text="셀프로 하는 공공주택 소방점검 방법"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textFireCheckSelf3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="5"
+                android:drawableLeft="@drawable/icon_notification"
+                android:fontFamily="@font/notosans_semibold"
+                android:text="  참고사항"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textFireCheckSelf31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="5"
+                android:fontFamily="@font/notosans_medium"
+                android:text="공동주택의 준공 연도, 층수, 면적 등\n구조에 따라 설치된 소방 설비가 다르므로\n점거해야 할 소방시설의 종류를\n관리사무소(소방안전관리자)에서 확인하세요"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewFireCheck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                app:cardBackgroundColor="#B8D7D5"
+                app:strokeColor="#000000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/textViewFireCheck1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/textview_round"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:gravity="center"
+                        android:text="준비물"
+                        android:textColor="#4B908E"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/textViewFireCheck2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="40"
+                        android:fontFamily="@font/notosans_medium"
+                        android:text="소방시설 외관점검표 (세대 점검표),  펜"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textFireCheckSelf4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:drawableLeft="@drawable/icon_check"
+                    android:fontFamily="@font/notosans_regular"
+                    android:includeFontPadding="false"
+                    android:text="  점검 방법 살펴보기 "
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewFireCheck1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#B8D7D5"
+                app:strokeColor="#000000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewFireExtinguisher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/icon_fire_extinguisher"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:includeFontPadding="false"
+                        android:text="소화기"
+                        android:textAlignment="center"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/buttonFireExtinguisher1"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="간이소화기"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+
+                        <Button
+                            android:id="@+id/buttonFireExtinguisher2"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="자동확산 소화기"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/buttonFireExtinguisher3"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="주거용 주방\n자동소화장치"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+
+                        <Button
+                            android:id="@+id/buttonFireExtinguisher4"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="스프링쿨러"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewFireCheck2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#B8D7D5"
+                app:strokeColor="#000000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewFireWarning"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/icon_fire_warning"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:includeFontPadding="false"
+                        android:text="경보설비"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/buttonFireWarning1"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="화재감지기"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+
+                        <Button
+                            android:id="@+id/buttonFireWarning2"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="가스누설 경보기"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewFireCheck3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#B8D7D5"
+                app:strokeColor="#000000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewRunFacility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/icon_run"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:includeFontPadding="false"
+                        android:text="피난설비"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/buttonRunFacility1"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="완강기"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+
+                        <Button
+                            android:id="@+id/buttonRunFacility2"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="피난구용\n 내림용 사다리"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewFireCheck4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="#B8D7D5"
+                app:strokeColor="#000000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/textViewEtcFacility"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/icon_etc"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:includeFontPadding="false"
+                        android:text="기타설비"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="50dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/buttonEtcFacility1"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="대피공간"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+
+                        <Button
+                            android:id="@+id/buttonEtcFacility2"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="150dp"
+                            android:layout_height="60dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_weight="1"
+                            android:backgroundTint="#FFFFFF"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:includeFontPadding="false"
+                            android:text="경량 칸막이"
+                            android:textColor="@color/black"
+                            app:iconTint="@color/black"
+                            app:strokeColor="#4B908E"
+                            app:strokeWidth="2dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/textViewlastMent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_regular"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="빠진 항목이 없는지 최종 컴토를 마친 후,\n작성 완료한 점검표를 관리사무소에 제출하면\n모든 점검은 끝이 납니다. " />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

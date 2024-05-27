@@ -17,9 +17,6 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.RowCalendarApts
 class AptScheduleActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAptScheduleBinding
-
-    // bottomSheetBehavior
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,6 +36,7 @@ class AptScheduleActivity : AppCompatActivity() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기. (홈화면 또는 전체메뉴화면)
+                    finish()
                 }
             }
         }
@@ -92,7 +90,6 @@ class AptScheduleActivity : AppCompatActivity() {
 
             // 항목을 누르면 동작하는 리스너
             holder.rowCalendarAptsheduleBinding.root.setOnClickListener {
-                // 바텀시트 화면이 나타나게 한다.
                 // 바텀시트 화면이 나타나게 한다.
                 val bottomSheetFragment = AptScheduleShowBottomSheetFragment()
                 bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)

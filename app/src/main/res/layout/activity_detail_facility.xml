@@ -40,17 +40,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
+        <me.relex.circleindicator.CircleIndicator3
             android:id="@+id/springDotIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:dampingRatio="0.5"
-            app:dotsColor="@color/third"
-            app:dotsCornerRadius="10dp"
-            app:dotsSize="10dp"
-            app:dotsSpacing="6dp"
-            app:dotsStrokeWidth="1dp"
-            app:stiffness="300"
+            app:ci_animator="@animator/scale_with_alpha"
+            app:ci_drawable="@drawable/indicator_selected"
+            app:ci_drawable_unselected="@drawable/indicator_unselected"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"/>
 
@@ -131,9 +127,13 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:backgroundTint="#73C0B0"
-            android:text="예약하기"
             android:fontFamily="@font/notosans_semibold"
             android:includeFontPadding="false"
-            android:textColor="@color/black" />
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="예약하기"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:cornerRadius="10dp" />
     </LinearLayout>
 </LinearLayout>

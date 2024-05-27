@@ -51,6 +51,12 @@ class FacReservationActivity : AppCompatActivity() {
         binding.apply {
             buttonReserve.setOnClickListener {
                 val dialog = DialogConfirm("예약 완료", "예약이 완료되셨습니다.\n결제는 현장에서 진행해주시면 됩니다.", this@FacReservationActivity)
+                dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
+                    override fun okButtonClick() {
+                        finish()
+                    }
+
+                })
                 dialog.show(this@FacReservationActivity.supportFragmentManager, "DialogConfirm")
 
             }

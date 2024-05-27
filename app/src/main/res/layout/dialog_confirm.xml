@@ -54,6 +54,7 @@
         android:includeFontPadding="false"
         android:text="확인"
         android:textSize="16sp"
+        android:textColor="@color/black"
         android:backgroundTint="@color/third"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

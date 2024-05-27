@@ -39,8 +39,6 @@ class CommunityTabNotificationRecyclerViewAdapter(val context: Context) : Recycl
         holder.rowCommunityTabNotificationBinding.apply {
             textViewCommunityListLabelNotification.text = "공지"
             textViewCommunityListTitleNotification.text = "글 제목입니다 $position"
-            textViewCommunityListContentNotification.text = "글 내용입니다 글 내용입니다 글 내용입니다\n" +
-                    "글 내용입니다 글 내용입니다 글 내용입니다 "
             textViewCommunityListLikeCntNotification.text = "999"
             textViewCommunityListCommentCntNotification.text = "999"
             textViewCommunityListDateNotification.text = "2024.05.17"

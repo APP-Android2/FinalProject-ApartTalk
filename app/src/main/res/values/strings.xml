@@ -3,6 +3,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- permission fragment-->
+    <string name="permission_Title">아파트톡 접근 권한 안내</string>
+    <string name="permission_SubTitle">편리한 아파트톡 이용을 위해 권한을 허용해주세요</string>
+    <string name="permission_notification_Explain">알림 기능 필요 시 접근</string>
+    <string name="permission_Location_Explain">지도 사용 시 접근</string>
+    <string name="permission_Photo_Explain">사진 촬영 시 접근</string>
+    <string name="permission_Camera_Explain">사진 첨부 시 접근</string>
+    <string name="permission_Explain">접근 권한은 해당 기능 이용 시 허용이 필요하며, 허용하지 않아도 해당 기능을 제외한 서비스 이용이 가능합니다. 휴대폰 \'설정\' 에서도 접근 권한을 변경하실 수 있습니다.</string>
 
     <string-array name="reservation_time">
         <item>시간을 선택해주세요.</item>

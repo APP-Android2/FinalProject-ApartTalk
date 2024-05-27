@@ -39,8 +39,6 @@ class CommunitySearchRecyclerViewAdapter(val context: Context) : RecyclerView.Ad
         holder.rowCommunitySearchBinding.apply {
             textViewCommunityListLabelSearch.text = "기타"
             textViewCommunityListTitleSearch.text = "글 제목입니다 $position"
-            textViewCommunityListContentSearch.text = "글 내용입니다 글 내용입니다 글 내용입니다\n" +
-                    "글 내용입니다 글 내용입니다 글 내용입니다 "
             textViewCommunityListLikeCntSearch.text = "999"
             textViewCommunityListCommentCntSearch.text = "999"
             textViewCommunityListDateSearch.text = "2024.05.17"
