@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.entiremenu.CompanyInfoActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarCompanyInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/companyGifImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="회사소개"
+            android:textSize="20sp"
+            android:fontFamily="@font/notosans_bold"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
+
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/companyGifImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/aparttalkcompany"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/textCompanyInfoTitle"
+        app:layout_constraintTop_toBottomOf="@id/toolbarCompanyInfo"/>
+
+    <TextView
+        android:id="@+id/textCompanyInfoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/companyGifImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/notosans_semibold"
+        android:textColor="@color/black"
+        android:includeFontPadding="false"
+        android:layout_marginTop="10dp"
+        android:text="(주)아파트톡"
+        android:textSize="20sp"/>
+
+
+    <TextView
+        android:id="@+id/textCompanyInfoOwnerNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textCompanyInfoTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/notosans_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/gray"
+        android:text="사업자등록번호 : 000-00-00000"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/textCompanyInfoAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textCompanyInfoOwnerNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/notosans_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/gray"
+        android:text="서울 종로구 종로3길17"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/textCompanyInfoCustomerCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textCompanyInfoAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/notosans_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/gray"
+        android:text="고객센터 : 0000-0000"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/textCompanyInfoFax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textCompanyInfoCustomerCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/notosans_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/gray"
+        android:text="Fax : 02-0000-0000"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/textCompanyInfoOwnerExtraInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textCompanyInfoFax"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="@font/notosans_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/gray"
+        android:text="APTTALK ALL RIGHTS RESERVED"
+        android:textSize="12sp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

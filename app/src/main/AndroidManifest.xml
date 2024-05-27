@@ -19,6 +19,33 @@
             android:name=".ui.entiremenu.FireCheck.FireCheckActivity"
             android:exported="true" />
         <activity
+            android:name=".ui.broadcast.activity.BroadcastActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.broadcast.fragment.activity.BroadcastActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.entiremenu.PrivacyPolicyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.entiremenu.UserAgreementActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.entiremenu.CompanyInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.facility.DetailFacilityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.facility.FacReservationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.community.activity.CommunityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.location.LocationShowActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.entiremenu.AptSchedule.AptScheduleActivity"
             android:exported="true" />
         <activity

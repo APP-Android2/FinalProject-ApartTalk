@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.vote.VoteFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/voteToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:gravity="start"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/voteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/notosans_bold"
+            android:includeFontPadding="false"
+            android:text="동 대표 선거"
+            android:textSize="20sp" />
+
+        <CheckBox
+            android:id="@+id/voteCheckBox1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기호 1번 000"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <CheckBox
+            android:id="@+id/voteCheckBox2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기호 2번 000"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <CheckBox
+            android:id="@+id/voteCheckBox3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기호 3번 000"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="20dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/voteTextView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기호 1번 공약"
+            android:textSize="18sp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <TextView
+            android:id="@+id/voteTextView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="저는 기호 1번 000 입니다."
+            android:textSize="16sp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="20dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/voteTextView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기호 2번 공약"
+            android:textSize="18dp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <TextView
+            android:id="@+id/voteTextView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="저는 기호 2번 000 입니다."
+            android:textSize="16sp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="20dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/voteTextView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="기호 3번 공약"
+            android:textSize="18sp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <TextView
+            android:id="@+id/voteTextView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="저는 기호 3번 000 입니다."
+            android:textSize="16sp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="20dp"
+            android:background="#000000" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/voteButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="투표하기"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/second"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</LinearLayout>

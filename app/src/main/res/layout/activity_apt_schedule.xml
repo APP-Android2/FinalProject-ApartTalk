@@ -80,7 +80,7 @@
                     app:srcCompat="@drawable/icon_donut2" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/voteTextView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -107,7 +107,7 @@
                     app:srcCompat="@drawable/icon_donut3" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/voteTextView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -155,7 +155,7 @@
                     app:srcCompat="@drawable/icon_donut5" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/voteTextView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -176,7 +176,7 @@
                     app:srcCompat="@drawable/icon_donut6" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/voteTextView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

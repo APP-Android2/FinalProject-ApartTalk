@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.location.LocationShowActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbarLocationShow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" >
+
+        <TextView
+            android:id="@+id/locationShowText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/notosans_bold"
+            android:text="상세 정보"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp" >
+
+            <TextView
+                android:id="@+id/textLocationShowTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_bold"
+                android:text="아파트톡 삼겹살"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textLocationShowCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="음식점"
+                android:textColor="@color/gray" />
+
+            <TextView
+                android:id="@+id/textLocationShowAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/notosans_regular"
+                android:text="서울시 종로구 종로3길 17"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textLocationShowNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_regular"
+                android:text="010-0000-0000"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textLocationShowDistance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="우리집에서부터 400m 떨어져있어요"
+                android:textColor="@color/gray" />
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/location_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</LinearLayout>

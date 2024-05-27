@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.vote.VoteHistoryFragment" >
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/voteHistoryToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/voteHistoryTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_semibold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="00 선거"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/voteHistoryTextView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/notosans_regular"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="2024년 04/01 ~ 04/07"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/voteHistoryTextView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/notosans_regular"
+            android:includeFontPadding="false"
+            android:text="2024년 04/01일부터 04/07일까지 진행된00 투표의 결과는 \n1번 후보자 : 35표\n2번 후보자 : 64표\n2번 후보자가 당선되었습니다! "
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/voteHistoryButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="확인"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/second"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

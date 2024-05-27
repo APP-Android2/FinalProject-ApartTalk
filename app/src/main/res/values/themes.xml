@@ -19,7 +19,10 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-
-
+    <!-- Tab Font 설정 -->
+    <style name="MySelectedTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/notosans_semibold</item>
+    </style>
 
 </resources>

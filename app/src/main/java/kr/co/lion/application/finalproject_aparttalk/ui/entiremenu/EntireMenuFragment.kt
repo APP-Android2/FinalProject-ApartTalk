@@ -1,47 +1,37 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentEntireMenuBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
+import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
 
 class EntireMenuFragment : Fragment() {
 
     lateinit var binding:FragmentEntireMenuBinding
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentEntireMenuBinding.inflate(layoutInflater)
-        settingToolbar()
+
+
         settingEvent()
         extraEvent()
         return binding.root
     }
 
-
-    //툴바 설정
-    private fun settingToolbar(){
-        with(binding){
-            toolbarMenu.apply {
-                inflateMenu(R.menu.menu_setting)
-                setOnMenuItemClickListener {
-                    //설정 액티비티로 이동
-
-                    true
-                }
-
-            }
-        }
-    }
-
     //클릭 이벤트
     private fun settingEvent(){
         with(binding){
-            imageMyPageMenu.setOnClickListener {
+            mypageMenu.setOnClickListener {
                 //마이페이지로 이동
             }
 
@@ -71,6 +61,9 @@ class EntireMenuFragment : Fragment() {
             }
             buttonBroadcastMenu.setOnClickListener {
                 //안내방송으로 이동
+                val intent = Intent(requireActivity(), BroadcastActivity::class.java)
+                intent.putExtra("fragmentName", BroadcastFragmentName.BROADCAST_FRAGMENT)
+                startActivity(intent)
             }
             buttonAptSchduleMenu.setOnClickListener {
                 //아파트 일정으로 이동
@@ -86,12 +79,15 @@ class EntireMenuFragment : Fragment() {
         with(binding){
             textCompanyInfo.setOnClickListener {
                 //회사 소개
+                startActivity(Intent(requireActivity(), CompanyInfoActivity::class.java))
             }
             textUseMenu.setOnClickListener {
                 //이용약관
+                startActivity(Intent(requireActivity(), UserAgreementActivity::class.java))
             }
             textUserInfoMenu.setOnClickListener {
                 //개인정보 보호 방침
+                startActivity(Intent(requireActivity(), PrivacyPolicyActivity::class.java))
             }
         }
     }
