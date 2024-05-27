@@ -3,11 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_login"
-    app:startDestination="@+id/navigation_login">
+    app:startDestination="@+id/loginFragment">
 
     <fragment
-        android:id="@+id/navigation_login"
+        android:id="@+id/loginFragment"
         android:name="kr.co.lion.application.finalproject_aparttalk.ui.login.LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_login2Fragment"
+            app:destination="@id/login2Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/login2Fragment"
+        android:name="kr.co.lion.application.finalproject_aparttalk.ui.login.Login2Fragment"
+        android:label="fragment_login2"
+        tools:layout="@layout/fragment_login2" />
 
 </navigation>
