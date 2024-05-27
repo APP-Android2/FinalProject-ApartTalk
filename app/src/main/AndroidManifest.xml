@@ -30,9 +30,6 @@
             android:name=".ui.broadcast.activity.BroadcastActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.broadcast.fragment.activity.BroadcastActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.entiremenu.PrivacyPolicyActivity"
             android:exported="false" />
         <activity
