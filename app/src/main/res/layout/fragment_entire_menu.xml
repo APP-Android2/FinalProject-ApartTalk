@@ -97,8 +97,8 @@
 
                     <ImageView
                         android:id="@+id/imageMyPageMenu"
-                        android:layout_width="55dp"
-                        android:layout_height="55dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_gravity="center|end"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
@@ -209,6 +209,7 @@
                 android:text="방문 주차 예약"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                app:rippleColor="@color/fourth"
                 app:icon="@drawable/icon_person"
                 app:iconTint="@color/black" />
 
@@ -222,6 +223,7 @@
                 android:text="전자 투표"
                 android:textSize="16sp"
                 android:textColor="@color/black"
+                app:rippleColor="@color/fourth"
                 app:icon="@drawable/icon_car"
                 app:iconTint="@color/black" />
 
@@ -235,6 +237,7 @@
                 android:text="소방 점검"
                 android:textSize="16sp"
                 android:textColor="@color/black"
+                app:rippleColor="@color/fourth"
                 app:icon="@drawable/icon_fire"
                 app:iconTint="@color/black" />
 
@@ -265,6 +268,7 @@
                 android:text="관리사무소 문의"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                app:rippleColor="@color/fourth"
                 app:icon="@drawable/icon_management_office"
                 app:iconTint="@color/black" />
 
@@ -278,6 +282,7 @@
                 android:text="안내 방송"
                 android:textSize="16sp"
                 android:textColor="@color/black"
+                app:rippleColor="@color/fourth"
                 app:icon="@drawable/icon_campaign"
                 app:iconTint="@color/black" />
 
@@ -291,6 +296,7 @@
                 android:textSize="16sp"
                 android:text="아파트 일정"
                 android:textColor="@color/black"
+                app:rippleColor="@color/fourth"
                 app:icon="@drawable/icon_calendar"
                 app:iconTint="@color/black" />
 
@@ -305,11 +311,12 @@
                 android:textSize="16sp"
                 android:textColor="@color/black"
                 app:icon="@drawable/icon_apartment"
+                app:rippleColor="@color/fourth"
                 app:iconTint="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="140dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/lightGray"
                 android:orientation="horizontal">
@@ -410,7 +417,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Copyright © Apart Talk. 2010-2024 All Rights Reserved."
+                            android:text="Copyright © Apart Talk. 2010-2024 \nAll Rights Reserved."
                             android:textColor="@color/gray"
                             android:textSize="10sp" />
                     </LinearLayout>
