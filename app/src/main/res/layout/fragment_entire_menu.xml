@@ -340,13 +340,13 @@
                 app:iconTint="@color/black" />
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/lightGray"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="10dp">
 
                 <ImageView
                     android:id="@+id/imageViewLogoMenu"
@@ -354,6 +354,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:paddingLeft="10dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/image_aparttalk" />
 
                 <LinearLayout
