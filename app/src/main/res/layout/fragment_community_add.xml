@@ -201,7 +201,7 @@
                     android:layout_marginBottom="25dp"
                     android:backgroundTint="@color/white"
                     android:enabled="false"
-                    android:fontFamily="@font/notosans_bold"
+                    android:fontFamily="@font/notosans_semibold"
                     android:includeFontPadding="false"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
