@@ -215,7 +215,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCommunityAddContent"
                     app:strokeColor="@color/third"
-                    app:strokeWidth="1dp" />
+                    app:strokeWidth="1dp"
+                    app:rippleColor="@color/fourth"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
