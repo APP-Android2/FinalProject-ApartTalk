@@ -2,13 +2,11 @@ package kr.co.lion.application.finalproject_aparttalk
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.ui.login.LoginActivity
 
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +18,7 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun showSplashScreen(){
         lifecycleScope.launch {
             delay(2000)
-            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
             finish()
         }
     }

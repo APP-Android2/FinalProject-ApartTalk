@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_signup"
+    app:startDestination="@id/signUp1Fragment">
+
+    <fragment
+        android:id="@+id/signUp1Fragment"
+        android:name="kr.co.lion.application.finalproject_aparttalk.ui.login.SignUp1Fragment"
+        android:label="fragment_sign_up1"
+        tools:layout="@layout/fragment_sign_up1" >
+        <action
+            android:id="@+id/action_signUp1Fragment_to_signUp2Fragment"
+            app:destination="@id/signUp2Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUp2Fragment"
+        android:name="kr.co.lion.application.finalproject_aparttalk.ui.login.SignUp2Fragment"
+        android:label="fragment_sign_up2"
+        tools:layout="@layout/fragment_sign_up2" >
+        <action
+            android:id="@+id/action_signUp2Fragment_to_signUp3Fragment"
+            app:destination="@id/signUp3Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUp3Fragment"
+        android:name="kr.co.lion.application.finalproject_aparttalk.ui.login.SignUp3Fragment"
+        android:label="fragment_sign_up3"
+        tools:layout="@layout/fragment_sign_up3" >
+        <action
+            android:id="@+id/action_signUp3Fragment_to_signUp4Fragment"
+            app:destination="@id/signUp4Fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUp4Fragment"
+        android:name="kr.co.lion.application.finalproject_aparttalk.ui.login.SignUp4Fragment"
+        android:label="fragment_sign_up4"
+        tools:layout="@layout/fragment_sign_up4" />
+</navigation>

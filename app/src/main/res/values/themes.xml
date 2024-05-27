@@ -6,6 +6,8 @@
         <!-- 상태바의 색상을 바꿔보자 -->
         <item name="colorPrimaryDark">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="fontFamily">@font/notosans_semibold</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="Theme.FinalProjectApartTalk" parent="Base.Theme.FinalProjectApartTalk" />
@@ -19,6 +21,19 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="CustomTheme" parent="Base.Theme.FinalProjectApartTalk">
+        <item name="colorPrimary">@color/second</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <!-- 체크박스 -->
+    <style name="CustomCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="buttonTint">@color/checkbox_tint</item>
+        <item name="buttonIconTint">@color/checkbox_icon_tint</item>
+      
     <!-- Tab Font 설정 -->
     <style name="MySelectedTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>
