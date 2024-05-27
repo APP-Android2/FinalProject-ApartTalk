@@ -52,7 +52,7 @@
                     app:srcCompat="@drawable/icon_repair" />
 
                 <TextView
-                    android:id="@+id/textView1"
+                    android:id="@+id/textFireCheckSelf1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -64,7 +64,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textFireCheckSelf2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="43dp"
@@ -89,7 +89,7 @@
                     app:srcCompat="@drawable/icon_notification" />
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textFireCheckSelf3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
@@ -161,7 +161,7 @@
                     app:srcCompat="@drawable/icon_check" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/textFireCheckSelf4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"

@@ -48,7 +48,7 @@
                 app:srcCompat="@drawable/icon_house" />
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/textFirecheck1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
@@ -116,7 +116,7 @@
                     app:srcCompat="@drawable/icon_question_mark" />
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textViewFireCheck3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/notosans_semibold"
@@ -142,7 +142,7 @@
                 app:srcCompat="@drawable/icon_build" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textViewFirecheck4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
@@ -153,7 +153,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textViewFireCheck5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -197,7 +197,7 @@
                     android:textSize="14sp" />
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/imageFireCkeckNext"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"

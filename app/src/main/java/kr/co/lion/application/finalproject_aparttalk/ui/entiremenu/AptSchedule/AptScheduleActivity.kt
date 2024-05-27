@@ -36,6 +36,7 @@ class AptScheduleActivity : AppCompatActivity() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기. (홈화면 또는 전체메뉴화면)
+                    finish()
                 }
             }
         }

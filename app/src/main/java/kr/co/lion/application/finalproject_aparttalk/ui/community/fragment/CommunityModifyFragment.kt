@@ -119,6 +119,12 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
                     "게시글 수정이 완료되었습니다.\n확인하러 가시겠습니까?",
                     communityActivity
                 )
+                dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
+                    override fun okButtonClick() {
+                        dialog.dismiss()
+                    }
+
+                })
                 dialog.show(communityActivity.supportFragmentManager, "DialogConfirm")
 
             }
