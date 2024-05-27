@@ -27,3 +27,8 @@ enum class BroadcastFragmentName(val str: String) {
     BROADCAST_FRAGMENT("BroadcastFragment"),
     BROADCAST_DETIAL_FRAGMENT("BroadcastDetailFragment")
 }
+
+enum class AptOperationInfoFragmentName(val str: String) {
+    OPERATION_FIRST_FRAGMENT("OperationFirstFragment"),
+    OPERATION_SECOND_FRAGMENT("OperationSecondFragment"),
+}

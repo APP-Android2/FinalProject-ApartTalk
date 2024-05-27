@@ -4,13 +4,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".ui.entiremenu.AptOperationInfo.OperationInfoActivity">
 
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.OperationFirstFragment"
+        android:name="kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.OperationFirstFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

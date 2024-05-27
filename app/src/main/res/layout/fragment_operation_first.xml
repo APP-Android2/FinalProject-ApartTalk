@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".ui.entiremenu.AptOperationInfo.OperationFirstFragment">
+    tools:context=".ui.entiremenu.AptOperationInfo.fragment.OperationFirstFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarAptOperationInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" >
+        android:theme="?attr/actionBarTheme">
 
         <TextView
             android:id="@+id/textViewToolbar"
@@ -70,7 +71,7 @@
             app:strokeColor="#000000"
             app:strokeWidth="2dp"
             tools:insetBottom="0dp"
-            tools:insetTop="0dp"/>
+            tools:insetTop="0dp" />
 
         <Button
             android:id="@+id/buttonOperationInfo3"
@@ -91,7 +92,7 @@
             app:strokeColor="#000000"
             app:strokeWidth="2dp"
             tools:insetBottom="0dp"
-            tools:insetTop="0dp"/>
+            tools:insetTop="0dp" />
 
         <Button
             android:id="@+id/buttonOperationInfo4"
@@ -111,7 +112,7 @@
             app:strokeColor="#000000"
             app:strokeWidth="2dp"
             tools:insetBottom="0dp"
-            tools:insetTop="0dp"/>
+            tools:insetTop="0dp" />
 
         <Button
             android:id="@+id/buttonOperationInfo5"
@@ -124,14 +125,14 @@
             android:fontFamily="@font/notosans_semibold"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="제무제표"
+            android:text="재무제표"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:iconTint="@color/black"
             app:strokeColor="#000000"
             app:strokeWidth="2dp"
             tools:insetBottom="0dp"
-            tools:insetTop="0dp"/>
+            tools:insetTop="0dp" />
 
         <Button
             android:id="@+id/buttonOperationInfo6"
@@ -151,7 +152,7 @@
             app:strokeColor="#000000"
             app:strokeWidth="2dp"
             tools:insetBottom="0dp"
-            tools:insetTop="0dp"/>
+            tools:insetTop="0dp" />
 
         <Button
             android:id="@+id/buttonOperationInfo7"
@@ -171,7 +172,7 @@
             app:strokeColor="#000000"
             app:strokeWidth="2dp"
             tools:insetBottom="0dp"
-            tools:insetTop="0dp"/>
+            tools:insetTop="0dp" />
     </LinearLayout>
 
 </LinearLayout>
