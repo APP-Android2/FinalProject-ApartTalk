@@ -91,8 +91,6 @@ class Login2Fragment : Fragment() {
 
             override fun afterTextChanged(s: Editable?) {
 
-                Log.d("test1234", "s의 길이 ${s?.length}")
-
                 if (s?.length == 6) {
                     binding.login2LoginButton.isEnabled = true
                     binding.login2LoginButton.alpha = 1.0f

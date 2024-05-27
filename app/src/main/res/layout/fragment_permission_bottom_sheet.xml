@@ -274,12 +274,16 @@
     <Button
         android:id="@+id/Permission_Button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/third"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="확인"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:cornerRadius="10dp" />
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        app:rippleColor="@color/fourth" />
+
 </LinearLayout>

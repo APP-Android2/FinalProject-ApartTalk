@@ -115,12 +115,15 @@
     <Button
         android:id="@+id/signup3_agree_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:backgroundTint="@color/third"
         android:enabled="true"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="다음"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:cornerRadius="10dp" />
+        app:cornerRadius="10dp"
+        app:rippleColor="@color/fourth" />
 
 </LinearLayout>
