@@ -51,7 +51,7 @@ class DetailFacilityActivity : AppCompatActivity() {
 
             adapter.submitList(imageResIds)
 
-            springDotIndicator.setViewPager2(viewPagerDetail)
+            springDotIndicator.setViewPager(viewPagerDetail)
         }
     }
 
