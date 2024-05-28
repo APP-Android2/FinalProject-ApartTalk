@@ -7,7 +7,7 @@
     android:background="@drawable/bottom_sheet_rounding"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.entiremenu.AptSchedule.AptScheduleShowBottomSheetFragment">
+    tools:context=".ui.entiremenu.AptSchedule.fragment.AptScheduleShowBottomSheetFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageViewAptBottom"
             android:layout_width="60dp"
             android:layout_height="30dp"
             android:layout_weight="1"

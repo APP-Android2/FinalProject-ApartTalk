@@ -99,19 +99,51 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Spinner
-            android:id="@+id/itemInquirespinner"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutReserveCancelAddType"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/style_spinner"
-            android:spinnerMode="dialog" />
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="20dp"
+            android:textColorHint="@color/lightGray"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/color_text_input_stroke"
+            app:endIconMode="dropdown_menu"
+            app:endIconTint="@android:color/transparent"
+            app:hintTextColor="@color/third"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintViewPager"
+            app:startIconDrawable="@drawable/icon_drop_down"
+            app:startIconScaleType="center"
+            app:startIconTint="@color/lightGray"
+            tools:layout_constraintEnd_toEndOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/textViewReserveCancelAddType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawablePadding="0dp"
+                android:fontFamily="@font/notosans_semibold"
+                android:hint="신청 사유"
+                android:includeFontPadding="false"
+                android:inputType="none"
+                android:popupBackground="@drawable/dropdown_box_border"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="8dp"
             app:endIconMode="clear_text"
             app:hintAnimationEnabled="false"
@@ -138,7 +170,7 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/reservationCancelButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="5dp"
@@ -147,7 +179,7 @@
             android:includeFontPadding="false"
             android:text="예약 취소하기"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

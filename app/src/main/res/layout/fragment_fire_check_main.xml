@@ -39,21 +39,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageViewHomeIcon"
-                android:layout_width="0.5dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/icon_house" />
-
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/textFirecheck1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
+                android:drawableLeft="@drawable/icon_house"
                 android:fontFamily="@font/notosans_semibold"
-                android:text="우리집도 점검하자 !"
+                android:text="  우리집도 점검하자 !"
                 android:textColor="#000000"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -80,9 +73,11 @@
 
                 <TextView
                     android:id="@+id/textViewFireCheck2"
-                    android:layout_width="341dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:fontFamily="@font/notosans_medium"
                     android:text="저희 APARTTALK 에서는  소방시설법 개정에 따라 귀하 세대의 소방시설 점검을 장려하고 있습니다 ."
                     android:textAlignment="center"
@@ -109,16 +104,11 @@
 
                 <!-- Media -->
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="9dp"
-                    app:srcCompat="@drawable/icon_question_mark" />
-
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/textViewFireCheck3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_question_mark"
                     android:fontFamily="@font/notosans_semibold"
                     android:text="소방시설법 규칙이란"
                     android:textSize="12sp" />
@@ -133,27 +123,20 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imageViewBuildIcon"
-                android:layout_width="17dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/icon_build" />
-
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textViewFirecheck4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
+                android:drawableLeft="@drawable/icon_build"
                 android:fontFamily="@font/notosans_semibold"
-                android:text="소방점검 절차에 따라 점검하기 !"
+                android:text="  소방점검 절차에 따라 점검하기 !"
                 android:textColor="#000000"
                 android:textSize="18sp" />
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textViewFireCheck5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -191,18 +174,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_weight="5"
+                    android:drawableRight="@drawable/icon_navigate_next"
                     android:fontFamily="@font/notosans_semibold"
                     android:text=" APARTTALK 가 알려주는 절차와 함께 점검 시작하기"
                     android:textAlignment="center"
                     android:textSize="14sp" />
-
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/icon_next" />
 
             </LinearLayout>
 

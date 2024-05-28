@@ -36,6 +36,7 @@ class FireCheckMainFragment : Fragment() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     fireCheckActivity.removeFragment(FireCheckFragmentName.FIRE_CHECK_MAIN_FRAGMENT)
+                    fireCheckActivity.finish()
                 }
             }
         }
@@ -49,7 +50,7 @@ class FireCheckMainFragment : Fragment() {
             }
             cardViewFireCheck2.setOnClickListener {
                 // 프래그먼트 나타나게 한다.
-                fireCheckActivity.replaceFragment(FireCheckFragmentName.FIRE_CHECK_SELF_FRAGMENT, false, false, null)
+                fireCheckActivity.replaceFragment(FireCheckFragmentName.FIRE_CHECK_SELF_FRAGMENT, true, false, null)
             }
         }
     }

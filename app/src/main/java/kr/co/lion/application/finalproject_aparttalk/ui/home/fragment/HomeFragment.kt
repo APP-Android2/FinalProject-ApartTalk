@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.home.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,7 +12,13 @@ import com.google.android.material.divider.MaterialDividerItemDecoration
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentHomeBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.OperationInfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.home.adapter.HomeNotificationRecyclerView
+import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
+import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
 
 class HomeFragment : Fragment() {
 
@@ -25,6 +32,7 @@ class HomeFragment : Fragment() {
         mainActivity = activity as MainActivity
 
         settingRecyclerViewHomeNotification()
+        settingEvent()
 
         return binding.root
     }
@@ -35,6 +43,42 @@ class HomeFragment : Fragment() {
             homeNotificationRecyclerView.apply {
                 adapter = HomeNotificationRecyclerView(requireContext())
                 layoutManager = LinearLayoutManager(mainActivity)
+            }
+        }
+    }
+
+    //클릭 이벤트
+    private fun settingEvent(){
+        binding.apply {
+            homeAllMyPageLayout.setOnClickListener {
+                startActivity(Intent(requireActivity(), InfoActivity::class.java))
+            }
+            homeAllVisitCarLayout.setOnClickListener {
+                //방문 주차 예약
+            }
+            homeAllVisitCarLayout.setOnClickListener {
+                //주민 투표
+            }
+            homeAllManagementOfficeLayout.setOnClickListener {
+                //관리실 문의
+            }
+            homeAllAnnouncementLayout.setOnClickListener {
+                //안내방송
+                val intent = Intent(requireActivity(), BroadcastActivity::class.java)
+                intent.putExtra("fragmentName", BroadcastFragmentName.BROADCAST_FRAGMENT)
+                startActivity(intent)
+            }
+            homeAllAptScheduleLayout.setOnClickListener {
+                //아파트 일정
+                startActivity(Intent(requireActivity(), AptScheduleActivity::class.java))
+            }
+            homeAllFireLayout.setOnClickListener {
+                //소방
+                startActivity(Intent(requireActivity(), FireCheckActivity::class.java))
+            }
+            homeAllAptInfoLayout.setOnClickListener {
+                //아파트 운영
+                startActivity(Intent(requireActivity(), OperationInfoActivity::class.java))
             }
         }
     }

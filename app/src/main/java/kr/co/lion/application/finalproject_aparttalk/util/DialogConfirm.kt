@@ -21,6 +21,8 @@ class DialogConfirm(
 
     lateinit var dialogConfirmBinding: DialogConfirmBinding
 
+    private lateinit var buttonClickListener: OnButtonClickListener
+
     var subject = subject
     var content = content
     var activity = activity
@@ -56,10 +58,19 @@ class DialogConfirm(
             // 확인 버튼
             // 바텀 시트 닫기 / 게시글 등록 / 게시글 수정 등 처리 했다라는 걸 알려주는 용도로만 사용하는 것은 어떨까요?
             buttonDialogConfirm.setOnClickListener {
+                buttonClickListener.okButtonClick()
                 dismiss()
             }
 
         }
+    }
+
+    interface OnButtonClickListener{
+        fun okButtonClick()
+    }
+
+    fun setDialogButtonClickListener(buttonClickListener: OnButtonClickListener){
+        this.buttonClickListener = buttonClickListener
     }
 
 

@@ -5,56 +5,91 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.tabs.TabLayout
+import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentMyWriteBinding
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentServiceBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.service.AnnouncementFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.service.FAQFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.service.MyQFragment
+import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MyWriteFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MyWriteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
+    lateinit var tab1 : MyWroteFragment
+    lateinit var tab2 : MyLikeFragment
+
+    lateinit var fragmentMyWriteBinding : FragmentMyWriteBinding
+    lateinit var myWriteActivity : MyWriteActivity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_write, container, false)
+
+
+        fragmentMyWriteBinding = FragmentMyWriteBinding.inflate(layoutInflater)
+        myWriteActivity = activity as MyWriteActivity
+
+        settingTabLayout()
+        settingToolbar()
+
+        return fragmentMyWriteBinding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MyWriteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MyWriteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun settingTabLayout(){
+        fragmentMyWriteBinding.apply {
+            myWriteTabLayout.apply {
+
+                tab1 = MyWroteFragment()
+                tab2 = MyLikeFragment()
+
+                childFragmentManager.beginTransaction().replace(R.id.myWriteFrameLayout, tab1). commit()
+
+                myWriteTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+                    override fun onTabSelected(tab: TabLayout.Tab?) {
+
+                        when (tab?.position) {
+                            0 -> {
+                                childFragmentManager.beginTransaction()
+                                    .replace(R.id.myWriteFrameLayout, tab1).commit()
+                            }
+
+                            1 -> {
+                                childFragmentManager.beginTransaction()
+                                    .replace(R.id.myWriteFrameLayout, tab2).commit()
+                            }
+
+                        }
+                    }
+
+
+                    override fun onTabUnselected(p0: TabLayout.Tab?) {
+                    }
+
+
+                    override fun onTabReselected(p0: TabLayout.Tab?) {
+
+                    }
+                })
+            }
+        }
+    }
+
+    fun settingToolbar(){
+        fragmentMyWriteBinding.apply {
+            myWriteToolbar.apply {
+                // 뒤로가기
+                setNavigationIcon(R.drawable.icon_back)
+                setNavigationOnClickListener {
+                    // 전화면으로 돌아가기.
+                    myWriteActivity.finish()
                 }
             }
+        }
     }
+
+
 }

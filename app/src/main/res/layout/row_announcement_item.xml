@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rowAnnouncementLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,26 +14,26 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/rowFAQTextViewTitle"
+            android:id="@+id/rowAnnouncementTextViewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
             android:text="TextView"
             android:textColor="#73C0B0"
             android:textSize="18dp"
-            android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/rowFAQTextViewDate"
+            android:id="@+id/rowAnnouncementTextViewDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="TextView"
             android:fontFamily="@font/notosans_regular"
             android:includeFontPadding="false"
+            android:text="TextView"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rowMyQTextViewTitle" />

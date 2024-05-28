@@ -37,68 +37,53 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageViewRepairIcon"
-                    android:layout_width="17dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/icon_repair" />
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:fontFamily="@font/notosans_semibold"
-                    android:text="APARTTALK 와 함께 점검하기 !"
-
-                    android:textColor="#000000"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textFireCheckSelf1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="5"
+                android:drawableLeft="@drawable/icon_build"
+
+                android:fontFamily="@font/notosans_semibold"
+                android:text="  APARTTALK 와 함께 점검하기 !"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textFireCheckSelf2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:fontFamily="@font/notosans_medium"
                 android:includeFontPadding="false"
                 android:text="셀프로 하는 공공주택 소방점검 방법"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/textFireCheckSelf3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="5"
+                android:drawableLeft="@drawable/icon_notification"
+                android:fontFamily="@font/notosans_semibold"
+                android:text="  참고사항"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textFireCheckSelf31"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imageViewNotificationIcon"
-                    android:layout_width="21dp"
-                    android:layout_height="20dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/icon_notification" />
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="5"
-                    android:fontFamily="@font/notosans_medium"
-                    android:text="참고사항\n\n공동주택의 준공 연도, 층수, 면적 등\n구조에 따라 설치된 소방 설비가 다르므로\n점거해야 할 소방시설의 종류를\n관리사무소(소방안전관리자)에서 확인하세요"
-
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-            </LinearLayout>
+                android:layout_marginLeft="10dp"
+                android:layout_weight="5"
+                android:fontFamily="@font/notosans_medium"
+                android:text="공동주택의 준공 연도, 층수, 면적 등\n구조에 따라 설치된 소방 설비가 다르므로\n점거해야 할 소방시설의 종류를\n관리사무소(소방안전관리자)에서 확인하세요"
+                android:textColor="#000000"
+                android:textSize="14sp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardViewFireCheck"
@@ -146,29 +131,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="120dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageViewCheckIcon"
-                    android:layout_width="17dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="right"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/icon_check" />
-
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/textFireCheckSelf4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
+                    android:drawableLeft="@drawable/icon_check"
                     android:fontFamily="@font/notosans_regular"
                     android:includeFontPadding="false"
-
-                    android:text="점검 방법 살펴보기 "
+                    android:text="  점검 방법 살펴보기 "
                     android:textColor="#000000"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -188,29 +164,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="80dp"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
 
-                    <ImageView
-                        android:id="@+id/imageViewFireExtinguisher"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/icon_fire_extinguisher" />
-
                     <TextView
                         android:id="@+id/textViewFireExtinguisher"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="12dp"
-                        android:layout_weight="10"
+                        android:drawableLeft="@drawable/icon_fire_extinguisher"
                         android:fontFamily="@font/notosans_semibold"
                         android:includeFontPadding="false"
                         android:text="소화기"
+                        android:textAlignment="center"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -326,26 +294,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="80dp"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
 
-                    <ImageView
-                        android:id="@+id/imageViewFireWargning"
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/icon_fire_warning" />
-
                     <TextView
                         android:id="@+id/textViewFireWarning"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="10"
+                        android:drawableLeft="@drawable/icon_fire_warning"
                         android:fontFamily="@font/notosans_semibold"
                         android:includeFontPadding="false"
                         android:text="경보설비"
@@ -422,26 +381,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="80dp"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
 
-                    <ImageView
-                        android:id="@+id/imageViewRunFacility"
-                        android:layout_width="20dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/icon_facility" />
-
                     <TextView
                         android:id="@+id/textViewRunFacility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="10"
+                        android:drawableLeft="@drawable/icon_run"
                         android:fontFamily="@font/notosans_semibold"
                         android:includeFontPadding="false"
                         android:text="피난설비"
@@ -519,26 +469,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="80dp"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:padding="10dp">
 
 
-                    <ImageView
-                        android:id="@+id/imageViewEtcFacility"
-                        android:layout_width="20dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:src="@drawable/icon_etc" />
-
                     <TextView
                         android:id="@+id/textViewEtcFacility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="10"
+                        android:drawableLeft="@drawable/icon_etc"
                         android:fontFamily="@font/notosans_semibold"
                         android:includeFontPadding="false"
                         android:text="기타설비"

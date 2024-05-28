@@ -11,9 +11,21 @@
         android:id="@+id/editUserInfoNumberToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="#FFFFFF"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme">
+
+        <TextView
+            android:id="@+id/editInfoTextViewNumberToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="내 정보 수정"
+            android:fontFamily="@font/notosans_bold"
+            android:textSize="20sp"
+            android:includeFontPadding="false" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <TextView
         android:id="@+id/voteTextView"
@@ -63,7 +75,7 @@
         android:paddingHorizontal="16dp">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/UserInfoNumberButton"
+            android:id="@+id/editUserInfoNumberButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -71,8 +83,9 @@
             android:background="@drawable/style_pointbutton_radias"
             android:text="다음"
             android:textColor="@color/white"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
             android:textSize="16dp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

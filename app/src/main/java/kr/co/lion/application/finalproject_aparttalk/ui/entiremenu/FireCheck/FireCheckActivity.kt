@@ -1,21 +1,13 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck
 
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.os.SystemClock
-import android.widget.MediaController
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityFireCheckBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleShowBottomSheetFragment
 import kr.co.lion.application.finalproject_aparttalk.util.FireCheckFragmentName
 
 class FireCheckActivity : AppCompatActivity() {

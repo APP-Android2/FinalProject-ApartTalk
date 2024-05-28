@@ -35,6 +35,13 @@
 
     </string-array>
 
+    <string-array name="type_reserve">
+        <item>단순 변심</item>
+        <item>옵션 재선택</item>
+        <item>기타</item>
+
+    </string-array>
+
 
     <string name="terms_of_service">
         1. 목적\n

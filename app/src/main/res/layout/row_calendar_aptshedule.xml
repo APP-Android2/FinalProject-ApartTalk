@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="70dp"
-            android:layout_height="30dp"
+            android:layout_height="22dp"
             android:layout_weight="1"
             android:src="@drawable/icon_donut1" />
 
@@ -29,16 +29,22 @@
                 android:id="@+id/textViewRowCalendarDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_regular"
+                android:includeFontPadding="false"
                 android:text="0000-00-00-요일"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#7E7A7A" />
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/textViewRowCalendarTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_regular"
+                android:includeFontPadding="false"
                 android:text="00:00 - 00:00"
-                android:textColor="#7E7A7A" />
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -46,7 +52,10 @@
         android:id="@+id/textviewRowCalendarSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
+        android:fontFamily="@font/notosans_semibold"
         android:text="일정 제목"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="16sp" />
 </LinearLayout>

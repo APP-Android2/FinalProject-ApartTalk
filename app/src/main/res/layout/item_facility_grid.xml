@@ -30,13 +30,16 @@
             android:text="TextView"
             android:textSize="10sp" />
 
-        <Button
-            android:id="@+id/buttonFacilityGrid"
-            style="@style/Widget.Material3.Button.TextButton"
-            android:layout_width="80dp"
+        <TextView
+            android:id="@+id/textViewFacilityGrid"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/notosans_semibold"
+            android:gravity="center"
             android:text="상세보기"
             android:textColor="@color/black" />
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

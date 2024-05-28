@@ -557,24 +557,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:clickable="true">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="전체보기"
-                            android:textColor="@color/lightGray"
-                            android:textSize="12sp"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/notosans_regular"
-                            android:includeFontPadding="false"/>
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/icon_next"
-                            android:backgroundTint="@color/lightGray"/>
-                    </LinearLayout>
+                        android:clickable="true"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <HorizontalScrollView
@@ -584,7 +567,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/homeLocationTitleLayout"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginHorizontal="20dp">
+                    android:layout_marginHorizontal="20dp"
+                    android:scrollbars="none">
 
                     <LinearLayout
                         android:layout_width="match_parent"
