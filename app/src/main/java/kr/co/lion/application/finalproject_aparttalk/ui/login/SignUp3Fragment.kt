@@ -31,10 +31,10 @@ class SignUp3Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initializeDataStates()
-        setupEmailEditTextListeners()
-        setupGenderSelection()
-        setupNextButton()
-        setupBackProcess()
+        selectGenderRadioButton()
+        emailEditTextListeners()
+        nextButton()
+        backProcess()
     }
 
     private fun initializeDataStates() {
@@ -51,23 +51,7 @@ class SignUp3Fragment : Fragment() {
         }
     }
 
-    private fun setupEmailEditTextListeners() {
-        binding.signup3EmailEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                isInputValid()
-                true
-            } else {
-                false
-            }
-        }
-        binding.signup3EmailEditText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
-            if (!hasFocus) {
-                isInputValid()
-            }
-        }
-    }
-
-    private fun setupGenderSelection() {
+    private fun selectGenderRadioButton() {
         binding.signup3GenderRadioGroup.setOnCheckedChangeListener { _, checkedId ->
             Tools.hideSoftInput(requireActivity())
             val selectedGender = when (checkedId) {
@@ -79,13 +63,18 @@ class SignUp3Fragment : Fragment() {
         }
     }
 
-    private fun setupNextButton() {
-        binding.signup3AgreeButton.setOnClickListener {
-            if (isInputValid()) {
-                viewModel.setEmail(binding.signup3EmailEditText.text.toString().trim())
-                findNavController().navigate(R.id.action_signUp3Fragment_to_signUp4Fragment)
+    private fun emailEditTextListeners() {
+        binding.signup3EmailEditText.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                isInputValid()
+                true
             } else {
-                Tools.showSoftInput(requireContext(), binding.signup3EmailEditText)
+                false
+            }
+        }
+        binding.signup3EmailEditText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+            if (!hasFocus) {
+                isInputValid()
             }
         }
     }
@@ -107,11 +96,22 @@ class SignUp3Fragment : Fragment() {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
     }
 
-    private fun setupBackProcess() {
+    private fun nextButton() {
+        binding.signup3AgreeButton.setOnClickListener {
+            if (isInputValid()) {
+                viewModel.setEmail(binding.signup3EmailEditText.text.toString().trim())
+                findNavController().navigate(R.id.action_signUp3Fragment_to_signUp4Fragment)
+            } else {
+                Tools.showSoftInput(requireContext(), binding.signup3EmailEditText)
+            }
+        }
+    }
+
+    private fun backProcess() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             Tools.hideSoftInput(requireActivity())
-            viewModel.setGender("선택안함")
-            viewModel.setEmail("")
+            viewModel.initializeGender()
+            viewModel.initializeEmail()
             findNavController().popBackStack()
         }
     }

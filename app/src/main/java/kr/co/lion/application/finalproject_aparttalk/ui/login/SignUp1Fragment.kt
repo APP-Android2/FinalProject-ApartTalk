@@ -28,7 +28,6 @@ class SignUp1Fragment : Fragment() {
         initializeDataStates()
         updateCheckBoxStates()
         updateButtonState()
-
         nextButton()
     }
 

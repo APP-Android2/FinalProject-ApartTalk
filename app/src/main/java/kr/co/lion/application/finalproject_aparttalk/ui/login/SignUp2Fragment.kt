@@ -32,11 +32,11 @@ class SignUp2Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initializeDataStates()
-        setupNameEditTextListeners()
-        setupSelectBirthButton()
-        setupAgreeButton()
-        setupBackButton()
+        nameEditTextListeners()
+        selectBirthButton()
         updateButtonState()
+        nextButton()
+        backProcess()
     }
 
     private fun initializeDataStates() {
@@ -57,7 +57,7 @@ class SignUp2Fragment : Fragment() {
         }
     }
 
-    private fun setupNameEditTextListeners() {
+    private fun nameEditTextListeners() {
         if (viewModel.name.value.isNullOrEmpty()) {
             Tools.showSoftInput(requireContext(), binding.signup2NameEditText)
         }
@@ -83,30 +83,10 @@ class SignUp2Fragment : Fragment() {
         }
     }
 
-    private fun setupSelectBirthButton() {
+    private fun selectBirthButton() {
         binding.signup2SelectBirth.setOnClickListener {
             Tools.hideSoftInput(requireActivity())
             showDatePickerDialog()
-        }
-    }
-
-    private fun setupAgreeButton() {
-        binding.signup2AgreeButton.setOnClickListener {
-            handleNameValidation()
-            if (isNameValid(binding.signup2NameEditText.text.toString().trim())) {
-                next()
-            } else {
-                Tools.showSoftInput(requireContext(), binding.signup2NameEditText)
-            }
-        }
-    }
-
-    private fun setupBackButton() {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            Tools.hideSoftInput(requireActivity())
-            viewModel.setName("")
-            viewModel.setBirthDate(null, null, null)
-            findNavController().popBackStack()
         }
     }
 
@@ -118,7 +98,7 @@ class SignUp2Fragment : Fragment() {
         val datePickerDialogFragment = DatePickerDialogFragment(initialYear, initialMonth, initialDay) { year, month, day ->
             onDateSelected(year, month, day)
         }
-        datePickerDialogFragment.show(parentFragmentManager, "datePicker")
+        datePickerDialogFragment.show(parentFragmentManager, datePickerDialogFragment.tag)
     }
 
     private fun onDateSelected(year: Int, month: Int, day: Int) {
@@ -154,6 +134,26 @@ class SignUp2Fragment : Fragment() {
         Tools.hideSoftInput(requireActivity())
         findNavController().navigate(R.id.action_signUp2Fragment_to_signUp3Fragment)
         viewModel.setName(binding.signup2NameEditText.text.toString().trim())
+    }
+
+    private fun nextButton() {
+        binding.signup2AgreeButton.setOnClickListener {
+            handleNameValidation()
+            if (isNameValid(binding.signup2NameEditText.text.toString().trim())) {
+                next()
+            } else {
+                Tools.showSoftInput(requireContext(), binding.signup2NameEditText)
+            }
+        }
+    }
+
+    private fun backProcess() {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            Tools.hideSoftInput(requireActivity())
+            viewModel.initializeName()
+            viewModel.initializeBirthDate()
+            findNavController().popBackStack()
+        }
     }
 
     override fun onDestroyView() {
