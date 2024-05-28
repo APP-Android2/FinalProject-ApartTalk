@@ -41,37 +41,37 @@ class OperationFirstFragment : Fragment() {
     fun setButton() {
         fragmentOperationFirstBinding.apply {
             // 계약서 정보 button
-            buttonOperationInfo1.setOnClickListener {
+            layoutOperationInfo1.setOnClickListener {
                 // OperationSecondFragment 화면을 띄운다
                 operationInfoActivity.replaceFragment(AptOperationInfoFragmentName.OPERATION_SECOND_FRAGMENT, true, false, null)
             }
             // 관리규악 button
-            buttonOperationInfo2.setOnClickListener {
+            layoutOperationInfo2.setOnClickListener {
                 // OperationSecondFragment 화면을 띄운다
                 operationInfoActivity.replaceFragment(AptOperationInfoFragmentName.OPERATION_SECOND_FRAGMENT, true, false, null)
             }
             // 입찰공고 button
-            buttonOperationInfo3.setOnClickListener {
+            layoutOperationInfo3.setOnClickListener {
                 // OperationSecondFragment 화면을 띄운다
                 operationInfoActivity.replaceFragment(AptOperationInfoFragmentName.OPERATION_SECOND_FRAGMENT, true, false, null)
             }
             // 부과명세서 button
-            buttonOperationInfo4.setOnClickListener {
+            layoutOperationInfo4.setOnClickListener {
                 // OperationSecondFragment 화면을 띄운다
                 operationInfoActivity.replaceFragment(AptOperationInfoFragmentName.OPERATION_SECOND_FRAGMENT, true, false, null)
             }
             // 제무제표 button
-            buttonOperationInfo5.setOnClickListener {
+            layoutOperationInfo5.setOnClickListener {
                 // OperationSecondFragment 화면을 띄운다
                 operationInfoActivity.replaceFragment(AptOperationInfoFragmentName.OPERATION_SECOND_FRAGMENT, true, false, null)
             }
             // 안전관리계획 button
-            buttonOperationInfo6.setOnClickListener {
+            layoutOperationInfo6.setOnClickListener {
                 // OperationSecondFragment 화면을 띄운다
                 operationInfoActivity.replaceFragment(AptOperationInfoFragmentName.OPERATION_SECOND_FRAGMENT, true, false, null)
             }
             // 수선계획 button
-            buttonOperationInfo7.setOnClickListener {
+            layoutOperationInfo7.setOnClickListener {
                 // OperationSecondFragment 화면을 띄운다
                 operationInfoActivity.replaceFragment(AptOperationInfoFragmentName.OPERATION_SECOND_FRAGMENT, true, false, null)
             }
