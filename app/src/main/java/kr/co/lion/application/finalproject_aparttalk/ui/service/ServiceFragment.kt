@@ -21,7 +21,7 @@ class ServiceFragment : Fragment() {
 
     lateinit var fragmentServiceBinding: FragmentServiceBinding
     lateinit var serviceActivity: ServiceActivity
-    lateinit var mainActivity: MainActivity
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +29,7 @@ class ServiceFragment : Fragment() {
     ): View? {
         fragmentServiceBinding = FragmentServiceBinding.inflate(layoutInflater)
         serviceActivity = activity as ServiceActivity
-        mainActivity = activity as MainActivity
+
 
         settingTabLayout()
 
@@ -87,7 +87,7 @@ class ServiceFragment : Fragment() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기.
-                    mainActivity.removeFragment(MainFragmentName.ENTIRE_MENU_FRAGMENT)
+                    serviceActivity.finish()
                 }
             }
         }

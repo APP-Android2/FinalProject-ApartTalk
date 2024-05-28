@@ -21,7 +21,6 @@ class ReservationFragment : Fragment() {
     lateinit var tab2 : ReservationCancelFragment
 
     lateinit var fragmentReservationBinding : FragmentReservationBinding
-    lateinit var mainActivity : MainActivity
     lateinit var reserveActivity : ReserveActivity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +29,6 @@ class ReservationFragment : Fragment() {
 
 
         fragmentReservationBinding = FragmentReservationBinding.inflate(layoutInflater)
-        mainActivity = activity as MainActivity
         reserveActivity = activity as ReserveActivity
 
         settingTabLayout()
@@ -46,7 +44,7 @@ class ReservationFragment : Fragment() {
                 tab1 = ReservationCompleteFragment()
                 tab2 = ReservationCancelFragment()
 
-                childFragmentManager.beginTransaction().replace(R.id.myWriteFrameLayout, tab1). commit()
+                childFragmentManager.beginTransaction().replace(R.id.reservationFrameLayout, tab1). commit()
 
                 reservationTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
                     override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -85,7 +83,7 @@ class ReservationFragment : Fragment() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기.
-                    mainActivity.removeFragment(MainFragmentName.ENTIRE_MENU_FRAGMENT)
+                    reserveActivity.finish()
                 }
             }
         }

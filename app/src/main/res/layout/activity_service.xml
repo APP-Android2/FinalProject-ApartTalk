@@ -9,8 +9,8 @@
     tools:context=".ui.service.ServiceActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/myWriteFragmentContainerView"
+        android:id="@+id/serviceFragmentContainerView"
         android:name="kr.co.lion.application.finalproject_aparttalk.ui.service.ServiceFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>

@@ -8,10 +8,6 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityMyWriteBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.info.EditUserInfoFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.info.EditUserInfoNumberFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoFragment
-import kr.co.lion.application.finalproject_aparttalk.util.InfoFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.MyWriteFragmentName
 
 class MyWriteActivity : AppCompatActivity() {
@@ -109,7 +105,7 @@ class MyWriteActivity : AppCompatActivity() {
             // Fragment를 교체한다.(이전 Fragment가 없으면 새롭게 추가하는 역할을 수행한다)
             // 첫 번째 매개 변수 : Fragment를 배치할 FragmentContainerView의 ID
             // 두 번째 매개 변수 : 보여주고하는 Fragment 객체를
-            fragmentTransaction.replace(R.id.infoFragmentContainerView, newFragment!!)
+            fragmentTransaction.replace(R.id.myWriteFragmentContainerView, newFragment!!)
 
             // addToBackStack 변수의 값이 true면 새롭게 보여질 Fragment를 BackStack에 포함시켜 준다.
             if(addToBackStack == true){
