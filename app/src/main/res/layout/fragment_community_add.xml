@@ -37,14 +37,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarCommunityAdd"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbarCommunityAdd">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingHorizontal="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -184,9 +184,8 @@
                         android:gravity="top"
                         android:hint="글 내용을 작성해주세요. (최대 2000자)"
                         android:includeFontPadding="false"
-                        android:lines="10"
+                        android:minLines="10"
                         android:maxLength="2000"
-                        android:maxLines="30"
                         android:text=""
                         android:textColor="@color/black"
                         android:textColorHint="@color/lightGray"
@@ -202,6 +201,7 @@
                     android:backgroundTint="@color/white"
                     android:enabled="false"
                     android:fontFamily="@font/notosans_semibold"
+                    android:gravity="bottom|center"
                     android:includeFontPadding="false"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
@@ -209,16 +209,17 @@
                     android:textColor="@color/third"
                     android:textSize="16sp"
                     app:cornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayoutCommunityAddContent"
+                    app:rippleColor="@color/fourth"
                     app:strokeColor="@color/third"
                     app:strokeWidth="1dp"
-                    app:rippleColor="@color/fourth"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayoutCommunityAddContent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
