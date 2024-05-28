@@ -5,56 +5,75 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSurveyListBinding
+import kr.co.lion.application.finalproject_aparttalk.databinding.RowSurveyBinding
+import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SurveyListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SurveyListFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    lateinit var fragmentSurveyListBinding: FragmentSurveyListBinding
+    lateinit var voteActivity: VoteActivity
+    lateinit var mainActivity: MainActivity
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+
+        fragmentSurveyListBinding = FragmentSurveyListBinding.inflate(inflater)
+        voteActivity = voteActivity as VoteActivity
+        mainActivity = mainActivity as MainActivity
+
+        surveyListRecyclerView()
+        surveyListButton()
+
+        return fragmentSurveyListBinding.root
+    }
+
+    // recylerView
+    fun surveyListRecyclerView(){
+        fragmentSurveyListBinding.apply {
+            surveyListRecyclerView.apply {
+
+                adapter = SurveyListAdapter()
+                layoutManager = LinearLayoutManager(context)
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_survey_list, container, false)
+    // button
+
+    fun surveyListButton(){
+        fragmentSurveyListBinding.apply {
+            surveyListButton.setOnClickListener {
+                mainActivity.replaceFragment(MainFragmentName.HOME_FRAGMENT,false,null)
+            }
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SurveyListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SurveyListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    // Adapter
+    inner class SurveyListAdapter : RecyclerView.Adapter<SurveyListAdapter.SurveyListViewHolder>(){
+        inner class SurveyListViewHolder(val rowSurveyBinding: RowSurveyBinding) : RecyclerView.ViewHolder(rowSurveyBinding.root)
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SurveyListViewHolder {
+            // LayoutInflater를 parent.context로부터 가져옴
+            val layoutInflater = LayoutInflater.from(parent.context)
+            // RowReviewListBinding 인플레이션
+            val binding = RowSurveyBinding.inflate(layoutInflater, parent, false)
+            // ViewHolder 인스턴스 생성 및 반환
+            return SurveyListViewHolder(binding)
+        }
+
+        override fun getItemCount(): Int {
+            return 10
+        }
+
+        override fun onBindViewHolder(holder: SurveyListViewHolder, position: Int) {
+            holder.rowSurveyBinding.rowSurveyTextView1.text = "오늘 저녁 뭐 먹을까요? $position"
+            holder.rowSurveyBinding.rowSurveyTextView2.text = "2024년 04/01 $position"
+        }
     }
 }
