@@ -33,7 +33,7 @@
     <style name="CustomCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="buttonTint">@color/checkbox_tint</item>
         <item name="buttonIconTint">@color/checkbox_icon_tint</item>
-      
+    </style>
     <!-- Tab Font 설정 -->
     <style name="MySelectedTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>
