@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="20dp"
+    android:background="#FFFFFF"
     tools:context="ui.inquiry.InquiryWriteFragment">
 
 
@@ -26,8 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:hint="제목을 입력해 주세요"
-            app:hintEnabled="true">
+            android:hint="제목을 입력해 주세요">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inquiryWriteEditTextTitle"
@@ -73,8 +73,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
-            app:hint="내용을 입력해주세요."
-            app:hintEnabled="true">
+            android:hint="내용을 입력해주세요.">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inquiryWriteEditTextContent"
