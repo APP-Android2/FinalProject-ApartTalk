@@ -53,6 +53,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/icon_donut1"
                 android:fontFamily="@font/notosans_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
                 android:text="  가스점검"
                 android:textSize="12sp" />
 
@@ -62,7 +64,9 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/icon_donut3"
                 android:fontFamily="@font/notosans_medium"
-                android:text="  엘레베이터 점검 "
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="  엘레베이터 점검   "
                 android:textSize="12sp" />
 
             <TextView
@@ -71,6 +75,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/icon_donut5"
                 android:fontFamily="@font/notosans_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
                 android:text="  쓰레기 점검"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -87,6 +93,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/icon_donut2"
                 android:fontFamily="@font/notosans_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
                 android:text="  소독"
                 android:textSize="12sp" />
 
@@ -96,6 +104,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/icon_donut4"
                 android:fontFamily="@font/notosans_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
                 android:text="  알뜰장"
                 android:textSize="12sp" />
 
@@ -105,6 +115,8 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/icon_donut6"
                 android:fontFamily="@font/notosans_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
                 android:text="  관리비공개"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -124,7 +136,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewAptSchedule"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:padding="10dp" />
         </LinearLayout>
     </ScrollView>
 
