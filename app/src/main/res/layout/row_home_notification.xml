@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/linearLayoutHomeNotification"
+                android:id="@+id/linearLayoutHomeListNotification"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -34,44 +34,30 @@
                 app:layout_constraintVertical_bias="0.0">
 
                 <TextView
-                    android:id="@+id/textViewHomeLabelNotification"
+                    android:id="@+id/textViewHomeListLabelNotification"
                     android:layout_width="60dp"
-                    android:layout_height="20dp"
+                    android:layout_height="25dp"
                     android:background="@drawable/community_label_border"
                     android:gravity="center"
                     android:text="text"
                     android:textColor="@color/sixth"
-                    android:textSize="12sp"
+                    android:textSize="16sp"
                     android:includeFontPadding="false"
                     android:fontFamily="@font/notosans_semibold"/>
 
                 <TextView
-                    android:id="@+id/textViewHomeTitleNotification"
+                    android:id="@+id/textViewHomeListTitleNotification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:maxLines="1"
                     android:ellipsize="end"
                     android:fontFamily="@font/notosans_semibold"
                     android:text="text"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:includeFontPadding="false"
                     android:layout_gravity="center_vertical"/>
-
-                <TextView
-                    android:id="@+id/textViewHomeContentNotification"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:minLines="2"
-                    android:maxLines="2"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/notosans_regular"
-                    android:text="text"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:includeFontPadding="false"/>
 
                 <LinearLayout
                     android:id="@+id/linearLayout3"
@@ -83,7 +69,7 @@
                     app:layout_constraintBottom_toBottomOf="parent">
 
                     <ImageView
-                        android:id="@+id/imageViewHomeLikeNotification"
+                        android:id="@+id/imageViewHomeListLikeNotification"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_marginRight="2dp"
@@ -91,17 +77,17 @@
                         tools:layout_editor_absoluteX="260dp" />
 
                     <TextView
-                        android:id="@+id/textViewHomeLikeCntNotification"
+                        android:id="@+id/textViewCommunityListLikeCntNotification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="text"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:includeFontPadding="false"
                         android:layout_gravity="center_vertical"/>
 
                     <ImageView
-                        android:id="@+id/imageViewHomeCommentNotification"
+                        android:id="@+id/imageViewHomeListCommentNotification"
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:layout_marginLeft="7dp"
@@ -110,13 +96,13 @@
                         tools:layout_editor_absoluteX="260dp" />
 
                     <TextView
-                        android:id="@+id/textViewHomeCommentCntNotification"
+                        android:id="@+id/textViewHomeListCommentCntNotification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:text="text"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:includeFontPadding="false"
                         android:layout_gravity="center_vertical"/>
 
@@ -128,12 +114,12 @@
                         android:background="@color/black" />
 
                     <TextView
-                        android:id="@+id/textViewHomeDateNotification"
+                        android:id="@+id/textViewHomeListDateNotification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="text"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
+                        android:textSize="14sp"
                         android:includeFontPadding="false"
                         android:layout_gravity="center_vertical"/>
 
@@ -151,14 +137,14 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:cardCornerRadius="10dp"
-                app:layout_constraintBottom_toBottomOf="@id/linearLayoutHomeNotification"
+                app:layout_constraintBottom_toBottomOf="@id/linearLayoutHomeListNotification"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/linearLayoutHomeNotification"
+                app:layout_constraintTop_toTopOf="@id/linearLayoutHomeListNotification"
                 app:strokeWidth="0dp">
 
                 <ImageView
-                    android:id="@+id/imageViewHomeNotification"
+                    android:id="@+id/imageViewHomeListNotification"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
