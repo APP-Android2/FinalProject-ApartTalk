@@ -25,7 +25,7 @@ class VoteTabFragment : Fragment() {
 
     lateinit var fragmentVoteTabBinding: FragmentVoteTabBinding
     lateinit var voteActivity: VoteActivity
-    lateinit var mainActivity: MainActivity
+
 
     // 프래그먼트 객체를 담을 변수
     var oldFragment: Fragment? = null
@@ -35,7 +35,7 @@ class VoteTabFragment : Fragment() {
         // Inflate the layout for this fragment
         fragmentVoteTabBinding = FragmentVoteTabBinding.inflate(inflater)
         voteActivity = activity as VoteActivity
-        mainActivity = activity as MainActivity
+
 
         voteTabToolbar()
         voteTabLayout()
@@ -52,7 +52,7 @@ class VoteTabFragment : Fragment() {
                 // Back
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
-                    mainActivity.replaceFragment(MainFragmentName.HOME_FRAGMENT,false,null)
+                    voteActivity.finish()
                 }
             }
         }
@@ -92,7 +92,7 @@ class VoteTabFragment : Fragment() {
         SystemClock.sleep(200)
 
         // Fragment를 교체할 수 있는 객체를 추출한다.
-        val fragmentTransaction = mainActivity.supportFragmentManager.beginTransaction()
+        val fragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
 
         // oldFragment에 newFragment가 가지고 있는 Fragment 객체를 담아준다.
         if(newFragment != null){
@@ -184,7 +184,7 @@ class VoteTabFragment : Fragment() {
             // Fragment를 교체한다.(이전 Fragment가 없으면 새롭게 추가하는 역할을 수행한다)
             // 첫 번째 매개 변수 : Fragment를 배치할 FragmentContainerView의 ID
             // 두 번째 매개 변수 : 보여주고하는 Fragment 객체를
-            fragmentTransaction.replace(R.id.containerViewFireCheck, newFragment!!)
+            fragmentTransaction.replace(R.id.voteTabFrameLayout, newFragment!!)
 
             // addToBackStack 변수의 값이 true면 새롭게 보여질 Fragment를 BackStack에 포함시켜 준다.
             if(addToBackStack == true){
@@ -201,7 +201,7 @@ class VoteTabFragment : Fragment() {
         SystemClock.sleep(200)
 
         // 지정한 이름으로 있는 Fragment를 BackStack에서 제거한다.
-        mainActivity.supportFragmentManager.popBackStack(name.str, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        requireActivity().supportFragmentManager.popBackStack(name.str, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
 }
