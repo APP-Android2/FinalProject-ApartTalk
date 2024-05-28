@@ -33,6 +33,7 @@ class OperationFirstFragment : Fragment() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전체메뉴로 돌아가기
+                    operationInfoActivity.finish()
                 }
             }
         }
