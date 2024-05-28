@@ -82,6 +82,19 @@ class HomeFragment : Fragment() {
                 //아파트 운영
                 startActivity(Intent(requireActivity(), OperationInfoActivity::class.java))
             }
+
+            cardViewRestaurant.setOnClickListener {
+                //음식점
+            }
+            cardViewHospital.setOnClickListener {
+                //병원
+            }
+            cardViewPharmacy.setOnClickListener {
+                //약국
+            }
+            cardViewCafe.setOnClickListener {
+                //카페
+            }
         }
     }
 
