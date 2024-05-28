@@ -35,17 +35,17 @@ class SignUpViewModel : ViewModel() {
     }
 
     // --- SignUp3 ---
-    private val _gender = MutableLiveData<String>()
+    private val _gender = MutableLiveData<String>().apply { value = "선택안함" }
     val gender: LiveData<String> get() = _gender
 
-    fun setGender(gender: String){
+    fun setGender(gender: String) {
         _gender.value = gender
     }
 
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> get() = _email
 
-    fun setEmail(email: String){
+    fun setEmail(email: String) {
         _email.value = email
     }
 

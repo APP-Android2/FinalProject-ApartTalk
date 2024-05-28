@@ -46,7 +46,7 @@
         android:textSize="16sp" />
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/signup4_find_apartment"
+        android:id="@+id/signup4_apart_layout"
         style="@style/Widget.Material3.CardView.Filled"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,18 +60,25 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/signup4_apart_name_textView"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signup4_apart_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="아파트명 검색"
-                android:textSize="15sp" />
+                android:background="@android:color/transparent"
+                android:hint="아파트명 검색"
+                android:inputType="text"
+                android:textColorHint="@color/gray"
+                android:textSize="15sp"
+                android:focusable="false"
+                android:clickable="false"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_search" />
+                android:src="@drawable/icon_search"
+                android:focusable="false"
+                android:clickable="false"/>
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -114,34 +121,31 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1001"
+                    android:layout_weight="1"
+                    android:inputType="text"
+                    android:text="000동"
                     android:textAlignment="center"
                     android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="동"
+                    android:text="/"
                     android:textAlignment="center"
+                    android:textColor="#3C3C3C"
                     android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="1001"
-                    android:textAlignment="center"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="호"
+                    android:layout_weight="1"
+                    android:text="000호"
                     android:textAlignment="center"
                     android:textSize="14sp" />
 

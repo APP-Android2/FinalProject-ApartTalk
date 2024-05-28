@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".ui.login.SignUp3Fragment">
@@ -57,24 +56,34 @@
             android:text="*"
             android:textColor="#D50000"
             android:textSize="16sp" />
-
     </LinearLayout>
 
     <RadioGroup
+        android:id="@+id/signup3_gender_radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RadioButton
+            android:id="@+id/signup3_radio_button_none"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="선택안함"
+            android:textSize="14sp" />
+
+        <RadioButton
+            android:id="@+id/signup3_radio_button_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:text="남자"
             android:textSize="14sp" />
 
         <RadioButton
+            android:id="@+id/signup3_radio_button_female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:text="여자"
             android:textSize="14sp" />
     </RadioGroup>
@@ -82,12 +91,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="30dp"
         android:text="이메일"
         android:textColor="@color/black"
         android:textSize="16sp" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signup3_email_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -97,9 +107,11 @@
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
         app:boxStrokeWidth="0dp"
+        app:endIconMode="clear_text"
         app:hintEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/signup3_email_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="이메일을 입력해주세요"

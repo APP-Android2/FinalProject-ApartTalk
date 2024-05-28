@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
-import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp4Binding
 
 class SignUp4Fragment : Fragment() {
@@ -28,16 +27,20 @@ class SignUp4Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        searchApartmentButton()
+        setupListeners()
         completeButton()
         backProcess()
     }
 
-    private fun searchApartmentButton(){
-        binding.signup4FindApartment.setOnClickListener {
-            val bottomSheet = ApartmentBottomSheetFragment()
-            bottomSheet.show(requireActivity().supportFragmentManager, bottomSheet.tag)
+    private fun setupListeners() {
+        binding.signup4ApartLayout.setOnClickListener {
+            showBottomSheet()
         }
+    }
+
+    private fun showBottomSheet() {
+        val bottomSheet = ApartmentBottomSheetFragment()
+        bottomSheet.show(requireActivity().supportFragmentManager, bottomSheet.tag)
     }
 
     private fun completeButton(){
