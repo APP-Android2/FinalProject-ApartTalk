@@ -50,7 +50,7 @@
         app:tabIndicatorFullWidth="true"
         app:tabSelectedTextColor="@color/black"
         app:tabTextAppearance="@style/MySelectedTabTextAppearance"
-        app:tabTextColor="@color/lightGray"
+        app:tabTextColor="@color/gray"
         app:tabIndicatorColor="@color/third"
         app:tabIndicatorHeight="2dp"
         app:tabIndicatorGravity="bottom"
