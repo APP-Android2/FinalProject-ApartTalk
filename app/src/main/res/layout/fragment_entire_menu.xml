@@ -221,12 +221,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="start|center_vertical"
-                android:text="전자 투표"
-                android:textSize="16sp"
+                android:text="주민 투표"
                 android:textColor="@color/black"
-                app:rippleColor="@color/fourth"
+                android:textSize="16sp"
                 app:icon="@drawable/icon_car"
-                app:iconTint="@color/black" />
+                app:iconTint="@color/black"
+                app:rippleColor="@color/fourth" />
 
             <Button
                 android:id="@+id/buttonFireMenu"

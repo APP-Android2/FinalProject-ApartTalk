@@ -15,7 +15,6 @@ class InfoFragment : Fragment() {
 
     lateinit var fragmentInfoBinding: FragmentInfoBinding
     lateinit var infoActivity: InfoActivity
-    lateinit var mainActivity: MainActivity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -23,7 +22,6 @@ class InfoFragment : Fragment() {
 
         fragmentInfoBinding = FragmentInfoBinding.inflate(layoutInflater)
         infoActivity = activity as InfoActivity
-        mainActivity = activity as MainActivity
 
         settingToolbar()
 
@@ -37,7 +35,7 @@ class InfoFragment : Fragment() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기.
-                    mainActivity.removeFragment(MainFragmentName.ENTIRE_MENU_FRAGMENT)
+                    infoActivity.finish()
                 }
                 inflateMenu(R.menu.menu_userinfo)
                 setOnMenuItemClickListener {

@@ -13,6 +13,10 @@ import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.Broad
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.OperationInfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyWriteActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.reservation.ReserveActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.service.ServiceActivity
 import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
 
 class EntireMenuFragment : Fragment() {
@@ -36,18 +40,22 @@ class EntireMenuFragment : Fragment() {
         with(binding){
             mypageMenu.setOnClickListener {
                 //마이페이지로 이동
+                startActivity(Intent(requireActivity(), InfoActivity::class.java))
             }
 
             LinearWriteMenu.setOnClickListener {
                 //내가 쓴 글로 이동
+                startActivity(Intent(requireActivity(), MyWriteActivity::class.java))
             }
 
             LinearReservationMenu.setOnClickListener {
                 //예약 내역으로 이동
+                startActivity(Intent(requireActivity(), ReserveActivity::class.java))
             }
 
             LinearContactMenu.setOnClickListener {
                 //고객센터로 이동
+                startActivity(Intent(requireActivity(), ServiceActivity::class.java))
             }
 
             buttonResParkingMenu.setOnClickListener {

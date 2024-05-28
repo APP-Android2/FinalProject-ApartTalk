@@ -23,7 +23,6 @@ class MyWriteFragment : Fragment() {
     lateinit var tab2 : MyLikeFragment
 
     lateinit var fragmentMyWriteBinding : FragmentMyWriteBinding
-    lateinit var mainActivity : MainActivity
     lateinit var myWriteActivity : MyWriteActivity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,7 +31,6 @@ class MyWriteFragment : Fragment() {
 
 
         fragmentMyWriteBinding = FragmentMyWriteBinding.inflate(layoutInflater)
-        mainActivity = activity as MainActivity
         myWriteActivity = activity as MyWriteActivity
 
         settingTabLayout()
@@ -87,7 +85,7 @@ class MyWriteFragment : Fragment() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기.
-                    mainActivity.removeFragment(MainFragmentName.ENTIRE_MENU_FRAGMENT)
+                    myWriteActivity.finish()
                 }
             }
         }
