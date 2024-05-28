@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -24,7 +24,7 @@
             android:exported="false"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".ui.entiremenu.FireCheck.FireCheckActivity"
+            android:name=".ui.entiremenu.AptOperationInfo.OperationInfoActivity"
             android:exported="true" />
         <activity
             android:name=".ui.broadcast.activity.BroadcastActivity"
@@ -59,7 +59,7 @@
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.ApartTalk" >
+            android:theme="@style/Base.Theme.ApartTalk">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
