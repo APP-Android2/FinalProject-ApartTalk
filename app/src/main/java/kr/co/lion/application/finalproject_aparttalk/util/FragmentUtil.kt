@@ -38,3 +38,34 @@ enum class FireCheckFragmentName(var str:String){
     FIRE_CHECK_MAIN_FRAGMENT("FireCheckMainFragment.kt"),
     FIRE_CHECK_SELF_FRAGMENT("FireCheckSelfFragment.kt"),
 }
+
+enum class InfoFragmentName(var str:String){
+    EDIT_USER_INFO_FRAGMENT("EditUserInfoFragment.kt"),
+    EDIT_USER_INFO_NUMBER_FRAGMENT("EditUserInfoNumberFragment.kt"),
+    INFO_FRAGMENT("InfoFragment.kt")
+}
+
+enum class ServiceFragmentName(var str:String){
+    SERVICE_FRAGMENT("ServiceFragment.kt"),
+    SINGLE_SERVICE_FRAGMENT("SingleServiceFragment,kt"),
+    VIEW_MY_Q_FRAGMENT("ViewMyQFragment.kt"),
+    MY_Q_FRAGMENT("MyQFragment.kt"),
+    F_A_Q_FRAGMENT("FAQFragment.kt"),
+    ANNOUNCEMENT_FRAGMENT("AnnouncementFragment.kt"),
+    VIEW_ANNOUNCEMENT_FRAGMENT("ViewAnnouncementFragment.kt"),
+    VIEW_FAQ_FRAGMENT("ViewFAQFragment.kt"),
+}
+
+enum class MyWriteFragmentName(var str:String){
+    MY_WRITE_FRAGMENT("MyWriteFragment.kt"),
+    MY_WROTE_FRAGMENT("MyWroteFragment.kt"),
+    MY_LIKE_FRAGMENT("MyLikeFragment.kt")
+}
+
+enum class ReserveFragmentName(var str:String){
+    RESERVATION_FRAGMENT("ReservationFragment.kt"),
+    RESERVATION_CONFIRM_FRAGMENT("ReservationConfirmFragment.kt"),
+    RESERVATION_COMPLETE_FRAGMENT("ReservationCompleteFragment.kt"),
+    RESERVATION_CANCEL_FRAGMENT("ReservationCancelFragment.kt"),
+    RESERVATION_CANCEL_COMPLETE_FRAGMENT("ReservationCancelCompleteFragment.kt")
+}

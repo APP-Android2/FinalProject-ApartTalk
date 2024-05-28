@@ -11,9 +11,21 @@
         android:id="@+id/editUserInfoToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="#FFFFFF"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
+        android:theme="?attr/actionBarTheme">
+
+    <TextView
+        android:id="@+id/editInfoTextViewToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="내 정보 수정"
+        android:fontFamily="@font/notosans_bold"
+        android:textSize="20sp"
+        android:includeFontPadding="false" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -169,7 +181,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/UserInfoEditButton"
+                android:id="@+id/userInfoEditButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

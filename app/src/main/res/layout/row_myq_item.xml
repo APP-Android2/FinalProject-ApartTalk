@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rowMyQLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
@@ -17,30 +18,30 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/rowFAQTextViewTitle"
+                android:id="@+id/rowMyQTextViewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="TextView"
-                android:textColor="#73C0B0"
                 android:fontFamily="@font/notosans_bold"
                 android:includeFontPadding="false"
+                android:text="TextView"
+                android:textColor="#73C0B0"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/customTextView"
+                android:id="@+id/myQCustomTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_border"
+                android:fontFamily="@font/notosans_bold"
                 android:gravity="right"
+                android:includeFontPadding="false"
                 android:padding="4dp"
                 android:text="TextView"
-                android:fontFamily="@font/notosans_bold"
-                android:includeFontPadding="false"
                 android:textColor="#4DB6AC"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,14 +51,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/rowFAQTextViewDate"
+            android:id="@+id/rowMyQTextViewContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="TextView"
-            android:textSize="14sp"
             android:fontFamily="@font/notosans_regular"
             android:includeFontPadding="false"
+            android:text="TextView"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rowMyQTextViewTitle" />
 
