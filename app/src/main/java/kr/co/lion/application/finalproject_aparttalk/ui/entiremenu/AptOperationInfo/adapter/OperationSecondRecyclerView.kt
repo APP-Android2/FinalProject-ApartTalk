@@ -1,14 +1,13 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowOperationInfoShowBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.OperationInfoShowBottomSheetFragment
 
-class OperationSecondAdapter(private val fragmentManager: FragmentManager) : RecyclerView.Adapter<OperationSecondAdapter.ViewHolder>(){
+class OperationSecondRecyclerView(private val fragmentManager: FragmentManager) : RecyclerView.Adapter<OperationSecondRecyclerView.ViewHolder>(){
 
     inner class ViewHolder(rowOperationInfoShowBinding: RowOperationInfoShowBinding) : RecyclerView.ViewHolder(rowOperationInfoShowBinding.root) {
         val rowOperationInfoShowBinding : RowOperationInfoShowBinding
