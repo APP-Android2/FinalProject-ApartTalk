@@ -5,56 +5,62 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import kr.co.lion.application.finalproject_aparttalk.R
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationCancelCompleteBinding
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationConfirmBinding
+import kr.co.lion.application.finalproject_aparttalk.util.ReserveFragmentName
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ReservationCancelCompleteFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ReservationCancelCompleteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var fragmentReservationCancelCompleteBinding: FragmentReservationCancelCompleteBinding
+    lateinit var reserveActivity: ReserveActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reservation_cancel_complete, container, false)
+
+
+        fragmentReservationCancelCompleteBinding = FragmentReservationCancelCompleteBinding.inflate(inflater)
+        reserveActivity = activity as ReserveActivity
+
+        settingToolbar()
+        settingButton()
+        settingData()
+
+        return fragmentReservationCancelCompleteBinding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ReservationCancelFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ReservationCancelCompleteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    fun settingToolbar(){
+        fragmentReservationCancelCompleteBinding.apply {
+            reservationCancelToolbar.apply {
+                // 뒤로가기
+                setNavigationIcon(R.drawable.icon_back)
+                setNavigationOnClickListener {
+                    // 전화면으로 돌아가기.
+                    reserveActivity.removeFragment(ReserveFragmentName.RESERVATION_FRAGMENT)
                 }
+
             }
+        }
+    }
+     fun settingData() {
+        fragmentReservationCancelCompleteBinding.apply {
+            // 드롭다운 설정
+            val typeArray = resources.getStringArray(R.array.type_reserve)
+            val typeArrayAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_reserve, typeArray)
+            textViewReserveCancelAddType.setAdapter(typeArrayAdapter)
+        }
+    }
+
+    fun settingButton(){
+        fragmentReservationCancelCompleteBinding.apply{
+            reservationCancelButton.apply {
+                reserveActivity.replaceFragment(ReserveFragmentName.RESERVATION_FRAGMENT, true, true, null)
+            }
+        }
     }
 }

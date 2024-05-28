@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/rowMyLikeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,29 +38,29 @@
                     android:id="@+id/textViewMyLikeListTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginTop="5dp"
-                    android:maxLines="1"
                     android:ellipsize="end"
                     android:fontFamily="@font/notosans_semibold"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:text="text"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:includeFontPadding="false"
-                    android:layout_gravity="center_vertical"/>
+                    android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/textVieMyLikeListContent"
+                    android:id="@+id/textViewMyLikeListContent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:minLines="2"
-                    android:maxLines="2"
                     android:ellipsize="end"
                     android:fontFamily="@font/notosans_regular"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:minLines="2"
                     android:text="text"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
-                    android:includeFontPadding="false"/>
+                    android:textSize="12sp" />
 
                 <LinearLayout
                     android:id="@+id/linearLayoutMyLikeList2"
@@ -82,11 +83,11 @@
                         android:id="@+id/textViewMyLikeListLikeCnt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:includeFontPadding="false"
                         android:text="text"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:includeFontPadding="false"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:id="@+id/imageViewMyLikeListComment"
@@ -101,12 +102,12 @@
                         android:id="@+id/textViewMyLikeListCommentCnt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
+                        android:includeFontPadding="false"
                         android:text="text"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:includeFontPadding="false"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="12sp" />
 
                     <View
                         android:id="@+id/divider"
@@ -119,11 +120,11 @@
                         android:id="@+id/textViewMyLikeListDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:includeFontPadding="false"
                         android:text="text"
                         android:textColor="@color/black"
-                        android:textSize="12sp"
-                        android:includeFontPadding="false"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="12sp" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
