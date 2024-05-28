@@ -22,6 +22,7 @@ class LocationFragment : Fragment() {
     }
 
 
+    //이 부분 다시 수정하기
     private fun initView(){
         val locationViewPager = binding.viewPagerLocation
         val locationTabLayout = binding.tabLocation

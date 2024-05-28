@@ -4,31 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#FFFFFF"
-    tools:context=".ui.vote.VoteFragment"
-    android:padding="20dp">
+    android:orientation="vertical"
+    tools:context=".ui.vote.VoteFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/voteToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:gravity="start"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        android:gravity="start"/>
+        android:theme="?attr/actionBarTheme" >
+
+        <TextView
+            android:id="@+id/voteToolbarText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/notosans_bold"
+            android:text="주민 투표"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/voteTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:fontFamily="@font/notosans_bold"
+            android:gravity="center"
             android:includeFontPadding="false"
             android:text="동 대표 선거"
             android:textSize="20sp" />
@@ -37,31 +49,31 @@
             android:id="@+id/voteCheckBox1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기호 1번 000"
             android:fontFamily="@font/notosans_semibold"
             android:includeFontPadding="false"
-            android:theme="@style/CustomCheckBox"
-            android:textSize="16sp"/>
+            android:text="기호 1번 000"
+            android:textSize="16sp"
+            android:theme="@style/CustomCheckBox" />
 
         <CheckBox
             android:id="@+id/voteCheckBox2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기호 2번 000"
             android:fontFamily="@font/notosans_semibold"
             android:includeFontPadding="false"
-            android:theme="@style/CustomCheckBox"
-            android:textSize="16sp"/>
+            android:text="기호 2번 000"
+            android:textSize="16sp"
+            android:theme="@style/CustomCheckBox" />
 
         <CheckBox
             android:id="@+id/voteCheckBox3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기호 3번 000"
             android:fontFamily="@font/notosans_semibold"
             android:includeFontPadding="false"
-            android:theme="@style/CustomCheckBox"
-            android:textSize="16sp"/>
+            android:text="기호 3번 000"
+            android:textSize="16sp"
+            android:theme="@style/CustomCheckBox" />
 
         <View
             android:layout_width="match_parent"
@@ -73,19 +85,19 @@
             android:id="@+id/voteTextView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기호 1번 공약"
-            android:textSize="18sp"
             android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:text="기호 1번 공약"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/voteTextView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="저는 기호 1번 000 입니다."
-            android:textSize="16sp"
             android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:text="저는 기호 1번 000 입니다."
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
@@ -97,19 +109,19 @@
             android:id="@+id/voteTextView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기호 2번 공약"
-            android:textSize="18dp"
             android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:text="기호 2번 공약"
+            android:textSize="18dp" />
 
         <TextView
             android:id="@+id/voteTextView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="저는 기호 2번 000 입니다."
-            android:textSize="16sp"
             android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:text="저는 기호 2번 000 입니다."
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
@@ -121,19 +133,19 @@
             android:id="@+id/voteTextView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="기호 3번 공약"
-            android:textSize="18sp"
             android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:text="기호 3번 공약"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/voteTextView6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="저는 기호 3번 000 입니다."
-            android:textSize="16sp"
             android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:text="저는 기호 3번 000 입니다."
+            android:textSize="16sp" />
 
         <View
             android:layout_width="match_parent"
@@ -149,10 +161,10 @@
                 android:id="@+id/voteButton"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:text="투표하기"
-                android:textSize="16sp"
-                android:textColor="@color/black"
                 android:background="@drawable/style_pointbutton_radias"
+                android:text="투표하기"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

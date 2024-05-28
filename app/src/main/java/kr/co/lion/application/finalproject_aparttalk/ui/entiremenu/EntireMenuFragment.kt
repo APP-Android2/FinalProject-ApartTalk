@@ -17,6 +17,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyWriteActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.reservation.ReserveActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.service.ServiceActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.vote.VoteActivity
 import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
 
 class EntireMenuFragment : Fragment() {
@@ -63,6 +64,7 @@ class EntireMenuFragment : Fragment() {
             }
             buttonVoteMenu.setOnClickListener {
                 //전자 투표로 이동
+                startActivity(Intent(requireActivity(), VoteActivity::class.java))
             }
             buttonFireMenu.setOnClickListener {
                 //소방 점검으로 이동
