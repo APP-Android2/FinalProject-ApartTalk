@@ -7,7 +7,7 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.ItemApartmentBi
 
 class ApartmentAdapter(
     private var apartments: List<Pair<String, String>>,
-    private val onItemClicked: () -> Unit
+    private val onItemClicked: (apartmentName: String, apartmentAddress: String) -> Unit
 ) : RecyclerView.Adapter<ApartmentAdapter.ApartmentViewHolder>() {
 
     inner class ApartmentViewHolder(private val binding: ItemApartmentBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -15,7 +15,7 @@ class ApartmentAdapter(
             binding.itemApartmentName.text = apartment.first
             binding.itemApartmentAddress.text = apartment.second
             binding.root.setOnClickListener {
-                onItemClicked()
+                onItemClicked(apartment.first, apartment.second)
             }
         }
     }
@@ -25,11 +25,11 @@ class ApartmentAdapter(
         return ApartmentViewHolder(binding)
     }
 
+    override fun getItemCount() = apartments.size
+
     override fun onBindViewHolder(holder: ApartmentViewHolder, position: Int) {
         holder.bind(apartments[position])
     }
-
-    override fun getItemCount() = apartments.size
 
     fun updateData(newApartments: List<Pair<String, String>>) {
         apartments = newApartments
