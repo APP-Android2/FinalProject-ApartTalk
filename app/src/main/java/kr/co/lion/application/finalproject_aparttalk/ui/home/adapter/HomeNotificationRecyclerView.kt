@@ -36,15 +36,13 @@ class HomeNotificationRecyclerView(val context: Context)  : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: HomeNotificationViewHolder, position: Int) {
         holder.rowHomeNotificationBinding.apply {
-            textViewHomeLabelNotification.text = "공지"
-            textViewHomeTitleNotification.text = "글 제목입니다 $position"
-            textViewHomeContentNotification.text = "글 내용입니다 글 내용입니다 글 내용입니다\n" +
-                    "글 내용입니다 글 내용입니다 글 내용입니다 "
-            textViewHomeLikeCntNotification.text = "999"
-            textViewHomeCommentCntNotification.text = "999"
-            textViewHomeDateNotification.text = "2024.05.17"
+            textViewHomeListLabelNotification.text = "공지"
+            textViewHomeListTitleNotification.text = "글 제목입니다 $position"
+            textViewCommunityListLikeCntNotification.text = "999"
+            textViewHomeListCommentCntNotification.text = "999"
+            textViewHomeListDateNotification.text = "2024.05.17"
 
-            linearLayoutHomeNotification.setOnClickListener {
+            linearLayoutHomeListNotification.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
                 // 게시글 번호도 주기
