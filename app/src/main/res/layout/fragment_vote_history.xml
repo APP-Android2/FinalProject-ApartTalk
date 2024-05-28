@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.vote.VoteHistoryFragment" >
+    tools:context=".ui.vote.VoteHistoryFragment"
+    android:background="#FFFFFF"
+    android:padding="20dp">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/voteHistoryToolbar"
@@ -56,14 +58,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/voteHistoryButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="확인"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/black"
-            android:backgroundTint="@color/second"
+            android:background="@drawable/style_pointbutton_radias"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

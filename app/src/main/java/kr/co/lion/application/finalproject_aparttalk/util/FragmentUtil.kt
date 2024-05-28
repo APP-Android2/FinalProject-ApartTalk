@@ -39,6 +39,17 @@ enum class FireCheckFragmentName(var str:String){
     FIRE_CHECK_SELF_FRAGMENT("FireCheckSelfFragment.kt"),
 }
 
+
+enum class VoteFragmentName(var str:String){
+    VOTE_FRAGMENT("VoteFragment"),
+    VOTE_HISTORY_FRAGMENT("VoteHistoryFragment"),
+    VOTE_LIST_FRAGMENT("VoteListFragment"),
+    VOTE_TAB_FRAGMENT("VoteTabFragment"),
+    SURVEY_FRAGMENT("SurveyFragment"),
+    SURVEY_LIST_FRAGMENT("SurveyListFragment"),
+    SURVEY_WRITE_FRAGMENT("SurveyWriteFragment")
+}
+
 enum class InfoFragmentName(var str:String){
     EDIT_USER_INFO_FRAGMENT("EditUserInfoFragment.kt"),
     EDIT_USER_INFO_NUMBER_FRAGMENT("EditUserInfoNumberFragment.kt"),

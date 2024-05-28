@@ -5,7 +5,9 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.vote.VoteFragment">
+    android:background="#FFFFFF"
+    tools:context=".ui.vote.VoteFragment"
+    android:padding="20dp">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/voteToolbar"
@@ -19,8 +21,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/voteTextView"
@@ -38,7 +39,9 @@
             android:layout_height="wrap_content"
             android:text="기호 1번 000"
             android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:theme="@style/CustomCheckBox"
+            android:textSize="16sp"/>
 
         <CheckBox
             android:id="@+id/voteCheckBox2"
@@ -46,7 +49,9 @@
             android:layout_height="wrap_content"
             android:text="기호 2번 000"
             android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:theme="@style/CustomCheckBox"
+            android:textSize="16sp"/>
 
         <CheckBox
             android:id="@+id/voteCheckBox3"
@@ -54,7 +59,9 @@
             android:layout_height="wrap_content"
             android:text="기호 3번 000"
             android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"/>
+            android:includeFontPadding="false"
+            android:theme="@style/CustomCheckBox"
+            android:textSize="16sp"/>
 
         <View
             android:layout_width="match_parent"
@@ -138,14 +145,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/voteButton"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="투표하기"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/second"
+                android:background="@drawable/style_pointbutton_radias"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
