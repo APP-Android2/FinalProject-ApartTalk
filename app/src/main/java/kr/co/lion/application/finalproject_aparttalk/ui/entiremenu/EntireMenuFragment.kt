@@ -15,6 +15,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.A
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyWriteActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.parking.ParkingActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.reservation.ReserveActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.service.ServiceActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.vote.VoteActivity
@@ -61,6 +62,7 @@ class EntireMenuFragment : Fragment() {
 
             buttonResParkingMenu.setOnClickListener {
                 //방문 주차 예약으로 이동
+                startActivity(Intent(requireActivity(), ParkingActivity::class.java))
             }
             buttonVoteMenu.setOnClickListener {
                 //전자 투표로 이동

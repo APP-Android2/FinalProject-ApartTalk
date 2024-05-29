@@ -6,14 +6,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kr.co.lion.application.finalproject_aparttalk.R
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentParkingCheckBinding
+import kr.co.lion.application.finalproject_aparttalk.util.ParkingFragmentName
 
 class ParkingCheckFragment : Fragment() {
 
+    lateinit var binding:FragmentParkingCheckBinding
+
+    lateinit var parkingActivity: ParkingActivity
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_parking_check, container, false)
+        binding = FragmentParkingCheckBinding.inflate(layoutInflater)
+        parkingActivity = activity as ParkingActivity
+        settingToolbar()
+        settingEvent()
+        return binding.root
+    }
+
+    //툴바 설정
+    private fun settingToolbar(){
+        binding.apply {
+            toolbarParking.apply {
+                setNavigationIcon(R.drawable.icon_back)
+                setNavigationOnClickListener {
+                    requireActivity().finish()
+                }
+            }
+        }
+    }
+
+    private fun settingEvent(){
+        binding.apply {
+            floatButtonReserveParking.setOnClickListener {
+                parkingActivity.replaceFragment(ParkingFragmentName.PARKING_RESERVE_FRAGMENT, true, null)
+
+            }
+        }
     }
 }
