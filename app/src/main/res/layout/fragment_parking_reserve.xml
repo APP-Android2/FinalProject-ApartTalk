@@ -10,7 +10,7 @@
     tools:context=".ui.parking.ParkingReserveFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar"
+        android:id="@+id/toolbarParkingRes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
@@ -139,7 +139,7 @@
                 android:textColor="@color/first" />
 
             <CalendarView
-                android:id="@+id/homeCalendarView"
+                android:id="@+id/parkingCalendarView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp" />
@@ -161,6 +161,9 @@
                     android:id="@+id/textViewParkingVisitDate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
                     android:fontFamily="@font/notosans_semibold"
                     android:gravity="center_vertical"
                     android:hint="방문 일자"
@@ -191,20 +194,27 @@
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonGoParking"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_gravity="end"
-                    android:backgroundTint="#73C0B0"
+                    android:layout_marginTop="220dp"
+                    android:layout_marginBottom="25dp"
+                    android:backgroundTint="@color/white"
+                    android:enabled="false"
                     android:fontFamily="@font/notosans_semibold"
+                    android:gravity="bottom|center"
                     android:includeFontPadding="false"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
-                    android:text="예약하기"
-                    android:textColor="@color/black"
+                    android:text="등록"
+                    android:textColor="@color/third"
                     android:textSize="16sp"
-                    app:cornerRadius="10dp" />
+                    app:cornerRadius="10dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:rippleColor="@color/fourth"
+                    app:strokeColor="@color/third"
+                    app:strokeWidth="1dp" />
 
             </LinearLayout>
 

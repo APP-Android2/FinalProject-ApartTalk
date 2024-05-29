@@ -6,11 +6,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.replace
+import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityParkingBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityAddFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityDetailFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityModifyFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunitySearchFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.EntireMenuFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.facility.FacilityFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.home.fragment.AlarmFragment
@@ -23,6 +29,9 @@ import kr.co.lion.application.finalproject_aparttalk.util.ParkingFragmentName
 class ParkingActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityParkingBinding
+
+    var oldFragment: Fragment? = null
+    var newFragment: Fragment? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityParkingBinding.inflate(layoutInflater)
@@ -32,31 +41,36 @@ class ParkingActivity : AppCompatActivity() {
     }
 
     //Fragment 교체
-    fun replaceFragment(name: ParkingFragmentName, addToBackStack: Boolean, data:Bundle?){
-
+    fun replaceFragment(name: ParkingFragmentName, addToBackStack:Boolean, data:Bundle?){
         SystemClock.sleep(200)
-
+        // Fragment를 교체할 수 있는 객체를 추출한다.
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-
-        when(name){
-            ParkingFragmentName.PARKING_CHECK_FRAGMENT -> fragmentTransaction.replace(R.id.parkingContainer, ParkingCheckFragment())
-            ParkingFragmentName.PARKING_RESERVE_FRAGMENT -> fragmentTransaction.replace(R.id.parkingContainer, ParkingReserveFragment())
-
+        // oldFragment에 newFragment가 가지고 있는 Fragment 객체를 담아준다.
+        if(newFragment != null){
+            oldFragment = newFragment
         }
-
-        if (addToBackStack){
-            if (supportFragmentManager.backStackEntryCount > 0){
-                val lastFragmentName = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount -1).name
-
-                if (lastFragmentName != name.str){
-                    fragmentTransaction.addToBackStack(name.str)
-                }else{
-                    fragmentTransaction.addToBackStack(name.str)
-                }
+        // 이름으로 분기한다.
+        // Fragment의 객체를 생성하여 변수에 담아준다.
+        when(name){
+            // 검색
+            ParkingFragmentName.PARKING_CHECK_FRAGMENT -> {
+                newFragment = ParkingCheckFragment()
+            }
+            ParkingFragmentName.PARKING_RESERVE_FRAGMENT -> {
+                newFragment = ParkingReserveFragment()
             }
         }
-        fragmentTransaction.commit()
+        if(data != null){
+            newFragment?.arguments = data
+        }
 
+        if(newFragment != null){
+            fragmentTransaction.replace(R.id.parkingContainer, newFragment!!)
+            if(addToBackStack){
+                fragmentTransaction.addToBackStack(name.str)
+            }
+            fragmentTransaction.commit()
+        }
     }
 
     fun removeFragment(name: ParkingFragmentName){

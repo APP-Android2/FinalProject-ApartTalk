@@ -39,7 +39,7 @@ class ParkingCheckFragment : Fragment() {
 
     private fun settingEvent(){
         binding.apply {
-            floatButtonReserveParking.setOnClickListener {
+            parkingAdd.setOnClickListener {
                 parkingActivity.replaceFragment(ParkingFragmentName.PARKING_RESERVE_FRAGMENT, true, null)
 
             }
