@@ -40,7 +40,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView
@@ -61,6 +61,7 @@
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/signup2_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -70,6 +71,7 @@
         app:boxCornerRadiusTopEnd="10dp"
         app:boxCornerRadiusTopStart="10dp"
         app:boxStrokeWidth="0dp"
+        app:endIconMode="clear_text"
         app:hintEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -78,13 +80,14 @@
             android:layout_height="wrap_content"
             android:hint="이름을 입력해주세요"
             android:inputType="text"
+            android:maxLength="20"
             android:textSize="14sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal">
 
         <TextView

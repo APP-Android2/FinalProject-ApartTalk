@@ -9,7 +9,7 @@
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="30dp"
     app:contentPadding="30dp"
-    tools:context=".ui.login.DatePickerDialogFragment">
+    tools:context=".ui.login.ApartmentDongHoPickerDialogFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="생년월일"
+            android:text="아파트 동호수"
             android:textSize="20sp" />
 
         <LinearLayout
@@ -28,22 +28,18 @@
             android:orientation="horizontal">
 
             <NumberPicker
-                android:id="@+id/date_year_picker"
+                android:id="@+id/apart_dong_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1" />
 
-            <NumberPicker
-                android:id="@+id/date_month_picker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="10dp"
-                android:layout_weight="1" />
+            <Space
+                android:layout_width="16dp"
+                android:layout_height="match_parent" />
 
             <NumberPicker
-                android:id="@+id/date_day_picker"
+                android:id="@+id/apart_ho_picker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -58,7 +54,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/date_picker_cancel_button"
+                android:id="@+id/apart_dong_ho_cancel_button"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginRight="8dp"
@@ -75,7 +71,7 @@
                 app:strokeWidth="1dp" />
 
             <Button
-                android:id="@+id/date_picker_confirm_button"
+                android:id="@+id/apart_dong_ho_confirm_button"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="8dp"
