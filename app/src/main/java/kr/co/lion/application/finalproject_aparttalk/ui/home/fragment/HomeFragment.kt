@@ -87,22 +87,22 @@ class HomeFragment : Fragment() {
             cardViewRestaurant.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putInt("tabPosition", 1) // 음식점
-                mainActivity.replaceFragment(MainFragmentName.LOCATION_FRAGMENT, true, bundle)
+                mainActivity.replaceFragment(MainFragmentName.LOCATION_FRAGMENT, false, bundle)
             }
             cardViewHospital.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putInt("tabPosition", 2) // 병원
-                mainActivity.replaceFragment(MainFragmentName.LOCATION_FRAGMENT, true, bundle)
+                mainActivity.replaceFragment(MainFragmentName.LOCATION_FRAGMENT, false, bundle)
             }
             cardViewPharmacy.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putInt("tabPosition", 3) // 약국
-                mainActivity.replaceFragment(MainFragmentName.LOCATION_FRAGMENT, true, bundle)
+                mainActivity.replaceFragment(MainFragmentName.LOCATION_FRAGMENT, false, bundle)
             }
             cardViewCafe.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putInt("tabPosition", 4) // 카페
-                mainActivity.replaceFragment(MainFragmentName.LOCATION_FRAGMENT, true, bundle)
+                mainActivity.replaceFragment(MainFragmentName.LOCATION_FRAGMENT, false, bundle)
             }
         }
     }
