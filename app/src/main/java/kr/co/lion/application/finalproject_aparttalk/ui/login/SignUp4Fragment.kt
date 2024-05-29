@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
+import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp4Binding
 
 class SignUp4Fragment : Fragment() {
@@ -31,6 +32,7 @@ class SignUp4Fragment : Fragment() {
         initializeDataStates()
         searchApartButton()
         selectApartDongHoButton()
+        selectIsApartCertificationRadioButton()
         completeButton()
         backProcess()
     }
@@ -41,14 +43,24 @@ class SignUp4Fragment : Fragment() {
             updateApartDongHoState(apartName.isNotEmpty())
             updateButtonState(apartName.isNotEmpty())
             viewModel.initializeApartDongHo()
+            viewModel.initializeIsApartCertification()
         }
 
         viewModel.apartDong.observe(viewLifecycleOwner) { dong ->
             binding.signup4ApartDong.text = "${dong ?: ""}동"
+            viewModel.initializeIsApartCertification()
+            updateIsApartCertificationState(dong != null)
         }
 
         viewModel.apartHo.observe(viewLifecycleOwner) { ho ->
             binding.signup4ApartHo.text = "${ho ?: ""}호"
+        }
+
+        viewModel.isApartCertification.observe(viewLifecycleOwner) { isApartCertification ->
+            when (isApartCertification) {
+                true -> binding.signup4RadioButtonRequest.isChecked = true
+                false -> binding.signup4RadioButtonDefer.isChecked = true
+            }
         }
     }
 
@@ -90,6 +102,21 @@ class SignUp4Fragment : Fragment() {
         viewModel.setApartDongHo(dong, ho)
     }
 
+    private fun updateIsApartCertificationState(isApartDongHoExist:Boolean){
+        binding.signup4IsapartcertificationLayout.isVisible = isApartDongHoExist
+    }
+
+    private fun selectIsApartCertificationRadioButton() {
+        binding.signup4ApartcertificationRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+            val selected = when (checkedId) {
+                R.id.signup4_radio_button_request -> true
+                R.id.signup4_radio_button_defer -> false
+                else -> false
+            }
+            viewModel.setIsApartCertification(selected)
+        }
+    }
+
     private fun updateButtonState(isApartInfoExist:Boolean) {
         binding.signup4AgreeButton.isEnabled = isApartInfoExist
         binding.signup4AgreeButton.alpha = if (isApartInfoExist) 1.0f else 0.5f
@@ -108,6 +135,7 @@ class SignUp4Fragment : Fragment() {
     private fun backProcess(){
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             viewModel.initializeApartInfo()
+            viewModel.initializeIsApartCertification()
             findNavController().popBackStack()
         }
     }

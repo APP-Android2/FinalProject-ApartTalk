@@ -22,6 +22,17 @@ class SignUpViewModel : ViewModel() {
         _isCompleteInputUserInfo.value = isComplete
     }
 
+    // 회원 아파트 인증 여부
+    private val _isApartCertification = MutableLiveData<Boolean>().apply { value = false }
+    val isApartCertification: LiveData<Boolean> get() = _isApartCertification
+
+    fun initializeIsApartCertification(){
+        _isApartCertification.value = false
+    }
+    fun setIsApartCertification(isCertification: Boolean){
+        _isApartCertification.value = isCertification
+    }
+
     // --- SignUp1 ---
     var checkbox1Checked: Boolean = false
     var checkbox2Checked: Boolean = false
@@ -122,10 +133,11 @@ class SignUpViewModel : ViewModel() {
 
         var s = "로그인 타입 : ${_loginType.value}\n" +
                 "회원 정보 입력 완료 여부 : ${_isCompleteInputUserInfo.value}\n" +
+                "회원 아파트 인증 여부 : ${_isApartCertification.value}\n" +
                 "체크1 : ${checkbox1Checked}\n" +
                 "체크2 : ${checkbox2Checked}\n" +
                 "체크3 : ${checkbox3Checked}\n" +
-                "${_birthYear.value}년 ${_birthMonth.value}월 ${_birthDay.value}일\n" +
+                "생년월일 : ${_birthYear.value}년 ${_birthMonth.value}월 ${_birthDay.value}일\n" +
                 "성별 : ${_gender.value}\n" +
                 "이메일 : ${_email.value}\n" +
                 "아파트 이름 : ${_apartName.value}\n" +

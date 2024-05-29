@@ -170,6 +170,58 @@
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/signup4_isapartcertification_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:text="아파트 입주민 인증 신청"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="#D50000"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/signup4_apartcertification_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/signup4_radio_button_defer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="인증 보류"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/signup4_radio_button_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="인증 신청"
+                android:textSize="14sp" />
+        </RadioGroup>
+    </LinearLayout>
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -179,6 +231,7 @@
         android:id="@+id/signup4_agree_button"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="30dp"
         android:alpha="0.5"
         android:backgroundTint="@color/third"
         android:enabled="false"
