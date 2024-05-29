@@ -14,6 +14,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationI
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.inquiry.InquiryActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyWriteActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.reservation.ReserveActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.service.ServiceActivity
@@ -72,6 +73,7 @@ class EntireMenuFragment : Fragment() {
             }
             buttonContactMenu.setOnClickListener {
                 //관리사무소 문의로 이동
+                startActivity(Intent(requireActivity(), InquiryActivity::class.java))
             }
             buttonBroadcastMenu.setOnClickListener {
                 //안내방송으로 이동

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
     android:background="#FFFFFF"
     tools:context="ui.inquiry.InquiryWriteFragment">
 
@@ -14,28 +13,37 @@
         android:id="@+id/inquiryWriteToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"/>
+        android:background="@color/white"
+        app:titleCentered="true"/>
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="제목을 입력해 주세요"
-            app:hintEnabled="true">
+            app:hintEnabled="true"
+            android:textColorHint="@color/gray"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/color_text_input_stroke"
+            app:hintTextColor="@color/third">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inquiryWriteEditTextTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="제목을 입력해 주세요" />
+                android:hint="제목을 입력해 주세요"
+                android:textColorHint="@color/gray"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
@@ -49,12 +57,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/dropdown_box_border"
                 android:text="공개"
                 android:textSize="18sp"
                 android:fontFamily="@font/notosans_semibold"
                 android:includeFontPadding="false"
-                android:textColor="@color/lightGray" />
+                android:textColor="@color/gray"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/inquiryWriteButtonPrivate"
@@ -67,7 +76,7 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/notosans_semibold"
                 android:includeFontPadding="false"
-                android:textColor="@color/lightGray" />
+                android:textColor="@color/gray" />
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -76,6 +85,11 @@
             android:layout_marginTop="16dp"
             android:layout_weight="1"
             android:hint="내용을 입력해주세요."
+            android:textColorHint="@color/gray"
+            app:boxBackgroundColor="@color/white"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="@color/color_text_input_stroke"
+            app:hintTextColor="@color/third"
             app:hintEnabled="true">
 
 
@@ -85,6 +99,7 @@
                 android:layout_height="match_parent"
                 android:gravity="top"
                 android:hint="내용을 입력해주세요."
+                android:textColorHint="@color/gray"
                 android:inputType="textMultiLine"
                 android:maxLines="10"
                 android:minHeight="200dp"
@@ -94,7 +109,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="20dp">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/inquiryWriteButtonSubmit"
