@@ -15,11 +15,11 @@ class SignUpViewModel : ViewModel() {
     }
 
     // 회원 정보 입력 완료 여부
-    private val _isCompleteGetUserInfo = MutableLiveData<Boolean>().apply { value = false }
-    val isCompleteGetUserInfo: LiveData<Boolean> get() = _isCompleteGetUserInfo
+    private val _isCompleteInputUserInfo = MutableLiveData<Boolean>().apply { value = false }
+    val isCompleteInputUserInfo: LiveData<Boolean> get() = _isCompleteInputUserInfo
 
-    fun setIsCompleteGetUserInfo(isComplete: Boolean){
-        _isCompleteGetUserInfo.value = isComplete
+    fun setIsCompleteInputUserInfo(isComplete: Boolean){
+        _isCompleteInputUserInfo.value = isComplete
     }
 
     // --- SignUp1 ---
@@ -84,53 +84,53 @@ class SignUpViewModel : ViewModel() {
     }
 
     // --- SignUp4 ---
-    private val _apartmentName = MutableLiveData<String>()
-    val apartmentName: LiveData<String> get() = _apartmentName
+    private val _apartName = MutableLiveData<String>()
+    val apartName: LiveData<String> get() = _apartName
 
-    private val _apartmentAddress = MutableLiveData<String>()
-    val apartmentAddress: LiveData<String> get() = _apartmentAddress
+    private val _apartAddress = MutableLiveData<String>()
+    val apartAddress: LiveData<String> get() = _apartAddress
 
-    private val _apartmentDong = MutableLiveData<Int?>()
-    val apartmentDong: LiveData<Int?> get() = _apartmentDong
+    private val _apartDong = MutableLiveData<Int?>()
+    val apartDong: LiveData<Int?> get() = _apartDong
 
-    private val _apartmentHo = MutableLiveData<Int?>()
-    val apartmentHo: LiveData<Int?> get() = _apartmentHo
+    private val _apartHo = MutableLiveData<Int?>()
+    val apartHo: LiveData<Int?> get() = _apartHo
 
-    fun initializeApartmentInfo(){
-        _apartmentName.value = ""
-        _apartmentAddress.value = ""
-        _apartmentDong.value = null
-        _apartmentHo.value = null
+    fun initializeApartInfo(){
+        _apartName.value = ""
+        _apartAddress.value = ""
+        _apartDong.value = null
+        _apartHo.value = null
     }
 
-    fun initializeApartmentDongHo(){
-        _apartmentDong.value = null
-        _apartmentHo.value = null
+    fun initializeApartDongHo(){
+        _apartDong.value = null
+        _apartHo.value = null
     }
 
-    fun setApartmentInfo(apartmentName: String, apartmentAddress: String) {
-        _apartmentName.value = apartmentName
-        _apartmentAddress.value = apartmentAddress
+    fun setApartInfo(apartName: String, apartAddress: String) {
+        _apartName.value = apartName
+        _apartAddress.value = apartAddress
     }
 
-    fun setApartmentDongHo(dong: Int, ho: Int){
-        _apartmentDong.value = dong
-        _apartmentHo.value = ho
+    fun setApartDongHo(dong: Int, ho: Int){
+        _apartDong.value = dong
+        _apartHo.value = ho
     }
 
     fun userAllInfo(){
 
         var s = "로그인 타입 : ${_loginType.value}\n" +
-                "회원 정보 입력 완료 여부 : ${_isCompleteGetUserInfo.value}\n" +
+                "회원 정보 입력 완료 여부 : ${_isCompleteInputUserInfo.value}\n" +
                 "체크1 : ${checkbox1Checked}\n" +
                 "체크2 : ${checkbox2Checked}\n" +
                 "체크3 : ${checkbox3Checked}\n" +
                 "${_birthYear.value}년 ${_birthMonth.value}월 ${_birthDay.value}일\n" +
                 "성별 : ${_gender.value}\n" +
                 "이메일 : ${_email.value}\n" +
-                "아파트 이름 : ${_apartmentName.value}\n" +
-                "아파트 주소 : ${_apartmentAddress.value}\n" +
-                "${_apartmentDong.value}동 ${_apartmentHo.value}호"
+                "아파트 이름 : ${_apartName.value}\n" +
+                "아파트 주소 : ${_apartAddress.value}\n" +
+                "${_apartDong.value}동 ${_apartHo.value}호"
 
         Log.d("test1234", s)
     }

@@ -29,44 +29,44 @@ class SignUp4Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initializeDataStates()
-        searchApartmentButton()
+        searchApartButton()
         selectApartDongHoButton()
         completeButton()
         backProcess()
     }
 
     private fun initializeDataStates() {
-        viewModel.apartmentName.observe(viewLifecycleOwner) { apartmentName ->
-            binding.signup4ApartName.text = apartmentName
-            updateApartDongHoState(apartmentName.isNotEmpty())
-            updateButtonState(apartmentName.isNotEmpty())
-            viewModel.initializeApartmentDongHo()
+        viewModel.apartName.observe(viewLifecycleOwner) { apartName ->
+            binding.signup4ApartName.text = apartName
+            updateApartDongHoState(apartName.isNotEmpty())
+            updateButtonState(apartName.isNotEmpty())
+            viewModel.initializeApartDongHo()
         }
 
-        viewModel.apartmentDong.observe(viewLifecycleOwner) { dong ->
+        viewModel.apartDong.observe(viewLifecycleOwner) { dong ->
             binding.signup4ApartDong.text = "${dong ?: ""}동"
         }
 
-        viewModel.apartmentHo.observe(viewLifecycleOwner) { ho ->
+        viewModel.apartHo.observe(viewLifecycleOwner) { ho ->
             binding.signup4ApartHo.text = "${ho ?: ""}호"
         }
     }
 
-    private fun searchApartmentButton() {
+    private fun searchApartButton() {
         binding.signup4ApartLayout.setOnClickListener {
-            showApartmentListBottomSheet()
+            showApartListBottomSheet()
         }
     }
 
-    private fun showApartmentListBottomSheet() {
-        val apartmentBottomSheetFragment = ApartmentBottomSheetFragment{ apartmentName, apartmentAddress ->
-            onApartmentSelected(apartmentName, apartmentAddress)
+    private fun showApartListBottomSheet() {
+        val apartmentBottomSheetFragment = ApartmentBottomSheetFragment{ apartName, apartAddress ->
+            onApartSelected(apartName, apartAddress)
         }
         apartmentBottomSheetFragment.show(requireActivity().supportFragmentManager, apartmentBottomSheetFragment.tag)
     }
 
-    private fun onApartmentSelected(apartmentName: String, apartmentAddress: String){
-        viewModel.setApartmentInfo(apartmentName, apartmentAddress)
+    private fun onApartSelected(apartName: String, apartAddress: String){
+        viewModel.setApartInfo(apartName, apartAddress)
     }
 
     private fun updateApartDongHoState(isApartInfoExist:Boolean){
@@ -75,19 +75,19 @@ class SignUp4Fragment : Fragment() {
 
     private fun selectApartDongHoButton(){
         binding.signup4SelectApartDongHo.setOnClickListener {
-            showApartmentDongHoDialog()
+            showApartDongHoDialog()
         }
     }
 
-    private fun showApartmentDongHoDialog() {
+    private fun showApartDongHoDialog() {
         val apartmentDongHoPickerDialogFragment = ApartmentDongHoPickerDialogFragment{ dong, ho ->
-            onApartmentDongHoSelected(dong, ho)
+            onApartDongHoSelected(dong, ho)
         }
         apartmentDongHoPickerDialogFragment.show(requireActivity().supportFragmentManager, apartmentDongHoPickerDialogFragment.tag)
     }
 
-    private fun onApartmentDongHoSelected(dong: Int, ho: Int){
-        viewModel.setApartmentDongHo(dong, ho)
+    private fun onApartDongHoSelected(dong: Int, ho: Int){
+        viewModel.setApartDongHo(dong, ho)
     }
 
     private fun updateButtonState(isApartInfoExist:Boolean) {
@@ -97,7 +97,7 @@ class SignUp4Fragment : Fragment() {
 
     private fun completeButton(){
         binding.signup4AgreeButton.setOnClickListener {
-            viewModel.setIsCompleteGetUserInfo(true)
+            viewModel.setIsCompleteInputUserInfo(true)
             viewModel.userAllInfo()
             (activity as? SignUpActivity)?.setResultAndFinish()
             startActivity(Intent(requireContext(), MainActivity::class.java))
@@ -107,7 +107,7 @@ class SignUp4Fragment : Fragment() {
 
     private fun backProcess(){
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            viewModel.initializeApartmentInfo()
+            viewModel.initializeApartInfo()
             findNavController().popBackStack()
         }
     }
