@@ -24,8 +24,8 @@ class MainActivity : AppCompatActivity() {
     private val backPressHandler = Handler(Looper.getMainLooper())
     private val backPressRunnable = Runnable { backPressedOnce = false }
 
-    // 현재 표시된 프래그먼트 이름 저장
-    private var currentFragmentName: MainFragmentName? = null
+    // 현재 선택된 Fragment ID 저장
+    private var currentSelectedItemId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView(){
-        replaceFragment(MainFragmentName.HOME_FRAGMENT, true, null)
+        replaceFragment(MainFragmentName.HOME_FRAGMENT, false, null)
         binding.bottomNavi.selectedItemId = R.id.home_item
     }
 
@@ -64,25 +64,31 @@ class MainActivity : AppCompatActivity() {
     //bottomNavi 클릭 이벤트
     private fun bottomNaviClick(){
         binding.bottomNavi.setOnItemSelectedListener {
+
+            // 현재 선택된 아이템과 동일한 경우 아무 작업도 하지 않음
+            if (currentSelectedItemId == it.itemId) {
+                return@setOnItemSelectedListener true
+            }
+
             when(it.itemId){
                 R.id.community_item -> {
-                    replaceFragment(MainFragmentName.COMMUNITY_FRAGMENT, true, null)
+                    replaceFragment(MainFragmentName.COMMUNITY_FRAGMENT, false, null)
                     true
                 }
                 R.id.location_item -> {
-                    replaceFragment(MainFragmentName.LOCATION_FRAGMENT, true, null)
+                    replaceFragment(MainFragmentName.LOCATION_FRAGMENT, false, null)
                     true
                 }
                 R.id.home_item -> {
-                    replaceFragment(MainFragmentName.HOME_FRAGMENT, true, null)
+                    replaceFragment(MainFragmentName.HOME_FRAGMENT, false, null)
                     true
                 }
                 R.id.facility_item -> {
-                    replaceFragment(MainFragmentName.FACILITY_FRAGMENT, true, null)
+                    replaceFragment(MainFragmentName.FACILITY_FRAGMENT, false, null)
                     true
                 }
                 R.id.entiremenu_item -> {
-                    replaceFragment(MainFragmentName.ENTIRE_MENU_FRAGMENT,true,null)
+                    replaceFragment(MainFragmentName.ENTIRE_MENU_FRAGMENT,false,null)
                     true
                 }
                 else -> {
@@ -96,13 +102,19 @@ class MainActivity : AppCompatActivity() {
     //Fragment 교체
     fun replaceFragment(name: MainFragmentName, addToBackStack: Boolean, data: Bundle?) {
         // 현재 표시된 프래그먼트와 같은 경우 아무 작업도 하지 않음
-        if (currentFragmentName == name) {
+        if (currentSelectedItemId == name.id) {
             return
         }
 
-        SystemClock.sleep(200)
-
         val fragmentTransaction = supportFragmentManager.beginTransaction()
+
+        // 전환 애니메이션 추가
+        fragmentTransaction.setCustomAnimations(
+            android.R.anim.fade_in,  // 들어올 때 애니메이션
+            android.R.anim.fade_out, // 나갈 때 애니메이션
+            android.R.anim.fade_in,  // 다시 들어올 때 애니메이션 (뒤로가기)
+            android.R.anim.fade_out  // 다시 나갈 때 애니메이션 (뒤로가기)
+        )
 
         val fragment = when (name) {
             MainFragmentName.COMMUNITY_FRAGMENT -> CommunityFragment()
@@ -125,7 +137,8 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
 
         // 현재 표시된 프래그먼트 이름 업데이트
-        currentFragmentName = name
+        currentSelectedItemId = name.id
+        binding.bottomNavi.selectedItemId = name.id
     }
 
     fun removeFragment() {
