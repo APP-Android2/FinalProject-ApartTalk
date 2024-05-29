@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityMainBinding
@@ -34,19 +35,21 @@ class MainActivity : AppCompatActivity() {
         bottomNaviClick()
         initView()
 
+        onBackProcess()
     }
 
-    @Deprecated("This method has been deprecated in favor of using the\n{@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
-    override fun onBackPressed() {
-        if (backPressedOnce) {
-            super.onBackPressed()
-            return
-        }
-
-        this.backPressedOnce = true
-        Toast.makeText(this, "뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
-
-        backPressHandler.postDelayed(backPressRunnable, 2000)
+    private fun onBackProcess() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (backPressedOnce) {
+                    finish()
+                } else {
+                    backPressedOnce = true
+                    Toast.makeText(this@MainActivity, "뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+                    backPressHandler.postDelayed(backPressRunnable, 2000)
+                }
+            }
+        })
     }
 
     override fun onDestroy() {
