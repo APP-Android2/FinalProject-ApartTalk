@@ -10,8 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.divider.MaterialDividerItemDecoration
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentParkingReserveBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.parking.adapter.ParkingReserveAdapter
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
 import kr.co.lion.application.finalproject_aparttalk.util.ParkingFragmentName
 import java.text.SimpleDateFormat
@@ -25,6 +28,17 @@ class ParkingReserveFragment : Fragment() {
 
     lateinit var parkingActivity: ParkingActivity
 
+    val parkingAdapter: ParkingReserveAdapter by lazy {
+        val adapter = ParkingReserveAdapter()
+        adapter.setRecyclerview(object : ParkingReserveAdapter.ItemOnClickListener{
+            override fun recyclerviewOnClickListener() {
+                //클릭 이벤트
+                //클릭하면 정보를 가져와서 보여준다
+            }
+        })
+        adapter
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -33,6 +47,7 @@ class ParkingReserveFragment : Fragment() {
         settingToolbar()
         settingButtonParkingAdd()
         settingCal()
+        connectAdapter()
         return binding.root
     }
 
@@ -43,6 +58,17 @@ class ParkingReserveFragment : Fragment() {
                 setNavigationOnClickListener {
                     parkingActivity.removeFragment(ParkingFragmentName.PARKING_RESERVE_FRAGMENT)
                 }
+            }
+        }
+    }
+
+    private fun connectAdapter(){
+        binding.apply {
+            parkingReserveRecyclerview.apply {
+                adapter = parkingAdapter
+                layoutManager = LinearLayoutManager(requireActivity())
+                val deco = MaterialDividerItemDecoration(requireActivity(), MaterialDividerItemDecoration.VERTICAL)
+                addItemDecoration(deco)
             }
         }
     }
