@@ -110,10 +110,10 @@ class MainActivity : AppCompatActivity() {
 
         // 전환 애니메이션 추가
         fragmentTransaction.setCustomAnimations(
-            android.R.anim.fade_in,  // 들어올 때 애니메이션
-            android.R.anim.fade_out, // 나갈 때 애니메이션
-            android.R.anim.fade_in,  // 다시 들어올 때 애니메이션 (뒤로가기)
-            android.R.anim.fade_out  // 다시 나갈 때 애니메이션 (뒤로가기)
+            android.R.anim.fade_in,  // 들어올 때
+            android.R.anim.fade_out, // 나갈 때
+            android.R.anim.fade_in,  // 다시 들어올 때 (뒤로가기)
+            android.R.anim.fade_out  // 다시 나갈 때 (뒤로가기)
         )
 
         val fragment = when (name) {
