@@ -301,7 +301,7 @@
 
 
                     <TextView
-                        android:id="@+id/textViewFireWarning"
+                        android:id="@+id/textViewAlarmFacility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/icon_fire_warning"
@@ -324,7 +324,7 @@
                         android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/buttonFireWarning1"
+                            android:id="@+id/buttonFireAlarmFacility1"
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="150dp"
                             android:layout_height="60dp"
@@ -342,7 +342,7 @@
                             app:strokeWidth="2dp" />
 
                         <Button
-                            android:id="@+id/buttonFireWarning2"
+                            android:id="@+id/buttonFireAlarmFacility2"
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="150dp"
                             android:layout_height="60dp"
@@ -391,7 +391,7 @@
                         android:id="@+id/textViewRunFacility"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/icon_run"
+                        android:drawableLeft="@drawable/icon_fire_run"
                         android:fontFamily="@font/notosans_semibold"
                         android:includeFontPadding="false"
                         android:text="피난설비"
