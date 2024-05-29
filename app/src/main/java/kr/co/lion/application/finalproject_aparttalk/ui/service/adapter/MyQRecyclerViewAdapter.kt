@@ -19,7 +19,7 @@ class MyQRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<MyQRec
 
             this.rowMyQItemBinding.root.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
         }
     }
@@ -45,7 +45,7 @@ class MyQRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<MyQRec
 
 
             rowMyQLayout.setOnClickListener {
-                (context as ServiceActivity).replaceFragment(ServiceFragmentName.VIEW_ANNOUNCEMENT_FRAGMENT, true, true, null)
+                (context as ServiceActivity).replaceFragment(ServiceFragmentName.VIEW_MY_Q_FRAGMENT, true, true, null)
             }
         }
     }
