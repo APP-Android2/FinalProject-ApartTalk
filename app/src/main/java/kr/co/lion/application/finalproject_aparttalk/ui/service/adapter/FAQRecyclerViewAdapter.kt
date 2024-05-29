@@ -19,7 +19,7 @@ class FAQRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<FAQRec
 
             this.rowFAQItemBinding.root.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
         }
     }
@@ -43,7 +43,7 @@ class FAQRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<FAQRec
 
 
             rowFAQLayout.setOnClickListener {
-                (context as ServiceActivity).replaceFragment(ServiceFragmentName.VIEW_ANNOUNCEMENT_FRAGMENT, true, true, null)
+                (context as ServiceActivity).replaceFragment(ServiceFragmentName.VIEW_FAQ_FRAGMENT, true, true, null)
             }
         }
     }
