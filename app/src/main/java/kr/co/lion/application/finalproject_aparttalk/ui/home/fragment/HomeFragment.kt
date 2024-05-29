@@ -20,6 +20,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.home.adapter.HomeNotific
 import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.vote.VoteActivity
 import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
+import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
 
 class HomeFragment : Fragment() {
 
@@ -81,6 +82,19 @@ class HomeFragment : Fragment() {
             homeAllAptInfoLayout.setOnClickListener {
                 //아파트 운영
                 startActivity(Intent(requireActivity(), OperationInfoActivity::class.java))
+            }
+
+            cardViewRestaurant.setOnClickListener {
+
+            }
+            cardViewHospital.setOnClickListener {
+
+            }
+            cardViewPharmacy.setOnClickListener {
+
+            }
+            cardViewCafe.setOnClickListener {
+
             }
         }
     }

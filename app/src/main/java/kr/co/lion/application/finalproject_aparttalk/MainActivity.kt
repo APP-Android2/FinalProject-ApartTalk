@@ -115,8 +115,8 @@ class MainActivity : AppCompatActivity() {
                     fragmentTransaction.addToBackStack(name.str)
                 }
             }
-            fragmentTransaction.commit()
         }
+        fragmentTransaction.commit()
 
     }
 
