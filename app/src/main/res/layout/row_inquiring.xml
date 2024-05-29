@@ -6,85 +6,92 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        android:background="@drawable/style_pointbutton_radias"
+        android:padding="1dp"> <!-- 테두리 두께 설정 -->
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            app:cardCornerRadius="8dp"
+            app:cardElevation="4dp"
+            android:background="@android:color/white"> <!-- 카드뷰 배경색 설정 -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/rowinquiringTextViewLabel"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:background="@drawable/community_label_border"
-                    android:fontFamily="@font/notosans_semibold"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="비공개"
-                    android:textColor="@color/sixth"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/rowinquiringTextViewLabel1"
-                    android:layout_width="50dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/dropdown_box_border"
-                    android:fontFamily="@font/notosans_semibold"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="답변중"
-                    android:textColor="@color/third"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-
-            <TextView
-                android:id="@+id/rowinquiringTextViewTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="작성인의 요청으로 내용이 비공개 입니다"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:layout_marginBottom="8dp"
-                android:drawableLeft="@drawable/icon_alarm"
-                android:drawablePadding="8dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/rowinquiringTextViewDate"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2024-05-17"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray" />
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/rowinquiringTextViewLabel"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/community_label_border"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="비공개"
+                        android:textColor="@color/sixth"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/rowinquiringTextViewLabel1"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="8dp"
+                        android:background="@drawable/dropdown_box_border"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="답변중"
+                        android:textColor="@color/third"
+                        android:textSize="12sp" />
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/rowinquiringTextViewTime"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/rowinquiringTextViewTitle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="14:06"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/darker_gray"
-                    android:layout_marginLeft="16dp" />
+                    android:text="작성인의 요청으로 내용이 비공개 입니다"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black"
+                    android:layout_marginBottom="8dp"
+                    android:drawableLeft="@drawable/icon_alarm"
+                    android:drawablePadding="8dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/rowinquiringTextViewDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2024-05-17"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/rowinquiringTextViewTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="14:06"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:layout_marginLeft="16dp" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </LinearLayout>

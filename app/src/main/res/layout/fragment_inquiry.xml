@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="20dp"
     android:background="#FFFFFF"
     tools:context=".ui.inquiry.InquiryFragment">
 
@@ -13,109 +13,116 @@
         android:id="@+id/toolbarInquiry"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white" />
-
-
-    <TextView
-        android:id="@+id/inquiryTextViewTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="공동현관문 출입키 재발급 관련 문의 드립니다."
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:background="@color/white"
+        app:titleCentered="true"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp">
-
-        <TextView
-            android:id="@+id/inquiryTextViewName"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:fontFamily="@font/notosans_regular"
-            android:includeFontPadding="false"
-            android:text="최나연"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            android:layout_marginStart="8dp"/>
-
-        <TextView
-            android:id="@+id/inquiryTextViewDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2024-03-19"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:fontFamily="@font/notosans_regular"
-            android:includeFontPadding="false"
-            android:gravity="start"
-            android:layout_marginStart="8dp"/>
-
-        <TextView
-            android:id="@+id/inquiryTextViewTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="13:30"
-            android:layout_marginStart="8dp"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"
-            android:fontFamily="@font/notosans_regular"
-            android:includeFontPadding="false"/>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@drawable/dropdown_box_border"
-        android:layout_margin="16dp">
+        android:padding="20dp">
 
         <TextView
-            android:id="@+id/inquiryTextViewContent"
+            android:id="@+id/inquiryTextViewTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="안녕하세요! 아파트 공동현관문 출입키 재발급 문제에 대해 궁금한 점이 있습니다. 먼저, 출입키를 분실했을 때 어떤 절차로 재발급을 받을 수 있나요? 그리고 출입키 재발급 비용은 대략 얼마나 드나요? 아파트마다 차이가 있나요? 또한 출입키가 지급되는 아파트에서는 비밀번호 설정이 가능한지 궁금합니다. 재발급 시 본인 확인 절차는 어떻게 이루어지나요? 신분증 제시 등이 필요한지 궁금합니다. 마지막으로, 이런 경우 관리사무소에 직접 문의하는 것이 가장 좋은 방법일까요? 궁금한 점이 많아서 자세히 설명해 주시면 감사하겠습니다."
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:fontFamily="@font/notosans_regular"
-            android:includeFontPadding="false"/>
-    </LinearLayout>
+            android:padding="16dp"
+            android:text="공동현관문 출입키 재발급 관련 문의 드립니다."
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/inquiryTextViewAnswerTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/notosans_bold"
-        android:includeFontPadding="false"
-        android:text="답변"
-        android:textSize="18sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        android:background="@drawable/community_label_border"
-        android:layout_margin="16dp">
-
-        <TextView
-            android:id="@+id/inquiryTextViewAnswer"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="답변입니다. 답변입니다. 답변입니다."
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:fontFamily="@font/notosans_regular"
-            android:includeFontPadding="false"/>
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/inquiryTextViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/notosans_regular"
+                android:includeFontPadding="false"
+                android:text="최나연"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/inquiryTextViewDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/notosans_regular"
+                android:gravity="start"
+                android:includeFontPadding="false"
+                android:text="2024-03-19"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/inquiryTextViewTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/notosans_regular"
+                android:includeFontPadding="false"
+                android:text="13:30"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/dropdown_box_border"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/inquiryTextViewContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_regular"
+                android:includeFontPadding="false"
+                android:text="안녕하세요! 아파트 공동현관문 출입키 재발급 문제에 대해 궁금한 점이 있습니다. 먼저, 출입키를 분실했을 때 어떤 절차로 재발급을 받을 수 있나요? 그리고 출입키 재발급 비용은 대략 얼마나 드나요? 아파트마다 차이가 있나요? 또한 출입키가 지급되는 아파트에서는 비밀번호 설정이 가능한지 궁금합니다. 재발급 시 본인 확인 절차는 어떻게 이루어지나요? 신분증 제시 등이 필요한지 궁금합니다. 마지막으로, 이런 경우 관리사무소에 직접 문의하는 것이 가장 좋은 방법일까요? 궁금한 점이 많아서 자세히 설명해 주시면 감사하겠습니다."
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/inquiryTextViewAnswerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/notosans_bold"
+            android:includeFontPadding="false"
+            android:text="답변"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/community_label_border"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/inquiryTextViewAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosans_regular"
+                android:includeFontPadding="false"
+                android:text="답변입니다. 답변입니다. 답변입니다."
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>
