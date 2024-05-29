@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityMainBinding
@@ -23,6 +24,10 @@ class MainActivity : AppCompatActivity() {
     private var backPressedOnce = false
     private val backPressHandler = Handler(Looper.getMainLooper())
     private val backPressRunnable = Runnable { backPressedOnce = false }
+
+    // 현재 선택된 Fragment ID 저장
+    private var currentSelectedItemId: Int? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,19 +35,21 @@ class MainActivity : AppCompatActivity() {
         bottomNaviClick()
         initView()
 
+        onBackProcess()
     }
 
-    @Deprecated("This method has been deprecated in favor of using the\n{@link OnBackPressedDispatcher} via {@link #getOnBackPressedDispatcher()}.\n      The OnBackPressedDispatcher controls how back button events are dispatched\n      to one or more {@link OnBackPressedCallback} objects.")
-    override fun onBackPressed() {
-        if (backPressedOnce) {
-            super.onBackPressed()
-            return
-        }
-
-        this.backPressedOnce = true
-        Toast.makeText(this, "뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
-
-        backPressHandler.postDelayed(backPressRunnable, 2000)
+    private fun onBackProcess() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (backPressedOnce) {
+                    finish()
+                } else {
+                    backPressedOnce = true
+                    Toast.makeText(this@MainActivity, "뒤로 가기 버튼을 한 번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+                    backPressHandler.postDelayed(backPressRunnable, 2000)
+                }
+            }
+        })
     }
 
     override fun onDestroy() {
@@ -51,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initView(){
-        replaceFragment(MainFragmentName.HOME_FRAGMENT, true, null)
+        replaceFragment(MainFragmentName.HOME_FRAGMENT, false, null)
         binding.bottomNavi.selectedItemId = R.id.home_item
     }
 
@@ -60,25 +67,31 @@ class MainActivity : AppCompatActivity() {
     //bottomNavi 클릭 이벤트
     private fun bottomNaviClick(){
         binding.bottomNavi.setOnItemSelectedListener {
+
+            // 현재 선택된 아이템과 동일한 경우 아무 작업도 하지 않음
+            if (currentSelectedItemId == it.itemId) {
+                return@setOnItemSelectedListener true
+            }
+
             when(it.itemId){
                 R.id.community_item -> {
-                    replaceFragment(MainFragmentName.COMMUNITY_FRAGMENT, true, null)
+                    replaceFragment(MainFragmentName.COMMUNITY_FRAGMENT, false, null)
                     true
                 }
                 R.id.location_item -> {
-                    replaceFragment(MainFragmentName.LOCATION_FRAGMENT, true, null)
+                    replaceFragment(MainFragmentName.LOCATION_FRAGMENT, false, null)
                     true
                 }
                 R.id.home_item -> {
-                    replaceFragment(MainFragmentName.HOME_FRAGMENT, true, null)
+                    replaceFragment(MainFragmentName.HOME_FRAGMENT, false, null)
                     true
                 }
                 R.id.facility_item -> {
-                    replaceFragment(MainFragmentName.FACILITY_FRAGMENT, true, null)
+                    replaceFragment(MainFragmentName.FACILITY_FRAGMENT, false, null)
                     true
                 }
                 R.id.entiremenu_item -> {
-                    replaceFragment(MainFragmentName.ENTIRE_MENU_FRAGMENT,true,null)
+                    replaceFragment(MainFragmentName.ENTIRE_MENU_FRAGMENT,false,null)
                     true
                 }
                 else -> {
@@ -90,37 +103,48 @@ class MainActivity : AppCompatActivity() {
 
 
     //Fragment 교체
-    fun replaceFragment(name:MainFragmentName, addToBackStack: Boolean, data:Bundle?){
-
-        SystemClock.sleep(200)
+    fun replaceFragment(name: MainFragmentName, addToBackStack: Boolean, data: Bundle?) {
+        // 현재 표시된 프래그먼트와 같은 경우 아무 작업도 하지 않음
+        if (currentSelectedItemId == name.id) {
+            return
+        }
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        when(name){
-            MainFragmentName.COMMUNITY_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, CommunityFragment())
-            MainFragmentName.LOCATION_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, LocationFragment())
-            MainFragmentName.HOME_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, HomeFragment())
-            MainFragmentName.FACILITY_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, FacilityFragment())
-            MainFragmentName.ENTIRE_MENU_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, EntireMenuFragment())
-            MainFragmentName.ALARM_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, AlarmFragment())
+        // 전환 애니메이션 추가
+        fragmentTransaction.setCustomAnimations(
+            android.R.anim.fade_in,  // 들어올 때
+            android.R.anim.fade_out, // 나갈 때
+            android.R.anim.fade_in,  // 다시 들어올 때 (뒤로가기)
+            android.R.anim.fade_out  // 다시 나갈 때 (뒤로가기)
+        )
+
+        val fragment = when (name) {
+            MainFragmentName.COMMUNITY_FRAGMENT -> CommunityFragment()
+            MainFragmentName.LOCATION_FRAGMENT -> LocationFragment()
+            MainFragmentName.HOME_FRAGMENT -> HomeFragment()
+            MainFragmentName.FACILITY_FRAGMENT -> FacilityFragment()
+            MainFragmentName.ENTIRE_MENU_FRAGMENT -> EntireMenuFragment()
+            MainFragmentName.ALARM_FRAGMENT -> AlarmFragment()
         }
 
-        if (addToBackStack){
-            if (supportFragmentManager.backStackEntryCount > 0){
-                val lastFragmentName = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount -1).name
+        if (data != null) {
+            fragment.arguments = data
+        }
 
-                if (lastFragmentName != name.str){
-                    fragmentTransaction.addToBackStack(name.str)
-                }else{
-                    fragmentTransaction.addToBackStack(name.str)
-                }
-            }
+        fragmentTransaction.replace(R.id.main_container, fragment)
+
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(name.str)
         }
         fragmentTransaction.commit()
 
+        // 현재 표시된 프래그먼트 이름 업데이트
+        currentSelectedItemId = name.id
+        binding.bottomNavi.selectedItemId = name.id
     }
 
-    fun removeFragment(){
+    fun removeFragment() {
         SystemClock.sleep(200)
         supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
