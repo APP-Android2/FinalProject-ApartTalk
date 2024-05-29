@@ -47,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <CheckBox
@@ -59,10 +60,13 @@
             android:theme="@style/CustomCheckBox" />
 
         <ImageButton
+            android:id="@+id/signup1_checkbox1_content"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="38dp"
             android:backgroundTint="@android:color/transparent"
-            android:padding="0dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/icon_forward" />
 
     </LinearLayout>
@@ -70,6 +74,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <CheckBox
@@ -82,16 +87,20 @@
             android:theme="@style/CustomCheckBox" />
 
         <ImageButton
+            android:id="@+id/signup1_checkbox2_content"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="38dp"
             android:backgroundTint="@android:color/transparent"
-            android:padding="0dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/icon_forward" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <CheckBox
@@ -104,10 +113,13 @@
             android:theme="@style/CustomCheckBox" />
 
         <ImageButton
+            android:id="@+id/signup1_checkbox3_content"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="38dp"
             android:backgroundTint="@android:color/transparent"
-            android:padding="0dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:scaleType="fitCenter"
             android:src="@drawable/icon_forward" />
     </LinearLayout>
 
