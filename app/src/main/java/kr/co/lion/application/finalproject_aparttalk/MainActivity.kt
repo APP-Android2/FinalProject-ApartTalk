@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
     private var backPressedOnce = false
     private val backPressHandler = Handler(Looper.getMainLooper())
     private val backPressRunnable = Runnable { backPressedOnce = false }
+
+    // 현재 표시된 프래그먼트 이름 저장
+    private var currentFragmentName: MainFragmentName? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -90,37 +94,41 @@ class MainActivity : AppCompatActivity() {
 
 
     //Fragment 교체
-    fun replaceFragment(name:MainFragmentName, addToBackStack: Boolean, data:Bundle?){
+    fun replaceFragment(name: MainFragmentName, addToBackStack: Boolean, data: Bundle?) {
+        // 현재 표시된 프래그먼트와 같은 경우 아무 작업도 하지 않음
+        if (currentFragmentName == name) {
+            return
+        }
 
         SystemClock.sleep(200)
 
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        when(name){
-            MainFragmentName.COMMUNITY_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, CommunityFragment())
-            MainFragmentName.LOCATION_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, LocationFragment())
-            MainFragmentName.HOME_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, HomeFragment())
-            MainFragmentName.FACILITY_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, FacilityFragment())
-            MainFragmentName.ENTIRE_MENU_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, EntireMenuFragment())
-            MainFragmentName.ALARM_FRAGMENT -> fragmentTransaction.replace(R.id.main_container, AlarmFragment())
+        val fragment = when (name) {
+            MainFragmentName.COMMUNITY_FRAGMENT -> CommunityFragment()
+            MainFragmentName.LOCATION_FRAGMENT -> LocationFragment()
+            MainFragmentName.HOME_FRAGMENT -> HomeFragment()
+            MainFragmentName.FACILITY_FRAGMENT -> FacilityFragment()
+            MainFragmentName.ENTIRE_MENU_FRAGMENT -> EntireMenuFragment()
+            MainFragmentName.ALARM_FRAGMENT -> AlarmFragment()
         }
 
-        if (addToBackStack){
-            if (supportFragmentManager.backStackEntryCount > 0){
-                val lastFragmentName = supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount -1).name
+        if (data != null) {
+            fragment.arguments = data
+        }
 
-                if (lastFragmentName != name.str){
-                    fragmentTransaction.addToBackStack(name.str)
-                }else{
-                    fragmentTransaction.addToBackStack(name.str)
-                }
-            }
+        fragmentTransaction.replace(R.id.main_container, fragment)
+
+        if (addToBackStack) {
+            fragmentTransaction.addToBackStack(name.str)
         }
         fragmentTransaction.commit()
 
+        // 현재 표시된 프래그먼트 이름 업데이트
+        currentFragmentName = name
     }
 
-    fun removeFragment(){
+    fun removeFragment() {
         SystemClock.sleep(200)
         supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
