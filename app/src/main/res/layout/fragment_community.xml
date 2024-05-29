@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.community.fragment.CommunityFragment"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:transitionGroup="true"
+    tools:context=".ui.community.fragment.CommunityFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarCommunity"
@@ -26,13 +27,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginRight="5dp"
                 android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
                 android:text="커뮤니티"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                android:includeFontPadding="false"
-                android:layout_gravity="center_vertical"/>
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -47,34 +48,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbarCommunity"
+        app:tabIndicatorColor="@color/third"
         app:tabIndicatorFullWidth="true"
+        app:tabIndicatorGravity="bottom"
+        app:tabIndicatorHeight="2dp"
+        app:tabRippleColor="@color/fourth"
         app:tabSelectedTextColor="@color/black"
         app:tabTextAppearance="@style/MySelectedTabTextAppearance"
-        app:tabTextColor="@color/gray"
-        app:tabIndicatorColor="@color/third"
-        app:tabIndicatorHeight="2dp"
-        app:tabIndicatorGravity="bottom"
-        app:tabRippleColor="@color/fourth">
+        app:tabTextColor="@color/gray">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="공지"/>
+            android:text="공지" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="질문"/>
+            android:text="질문" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="거래"/>
+            android:text="거래" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="기타"/>
+            android:text="기타" />
 
     </com.google.android.material.tabs.TabLayout>
 
