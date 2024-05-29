@@ -65,6 +65,7 @@ enum class ServiceFragmentName(var str:String){
     ANNOUNCEMENT_FRAGMENT("AnnouncementFragment.kt"),
     VIEW_ANNOUNCEMENT_FRAGMENT("ViewAnnouncementFragment.kt"),
     VIEW_FAQ_FRAGMENT("ViewFAQFragment.kt"),
+    VIEW_MYQ_FRAGMENT("ViewMyQFragment.kt")
 }
 
 enum class MyWriteFragmentName(var str:String){

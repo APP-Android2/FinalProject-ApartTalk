@@ -20,7 +20,7 @@ class AnnouncementRecyclerViewAdapter(val context: Context) : RecyclerView.Adapt
 
             this.rowAnnouncementItemBinding.root.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT
             )
         }
     }

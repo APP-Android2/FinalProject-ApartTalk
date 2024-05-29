@@ -72,6 +72,9 @@ class ServiceActivity : AppCompatActivity() {
             ServiceFragmentName.VIEW_FAQ_FRAGMENT -> {
                 newFragment = ViewFAQFragment()
             }
+            ServiceFragmentName.VIEW_MYQ_FRAGMENT -> {
+                newFragment = ViewMyQFragment()
+            }
         }
 
 

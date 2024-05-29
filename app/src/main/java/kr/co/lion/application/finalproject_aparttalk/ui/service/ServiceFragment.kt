@@ -32,6 +32,7 @@ class ServiceFragment : Fragment() {
 
 
         settingTabLayout()
+        settingToolbar()
 
         return fragmentServiceBinding.root
     }
