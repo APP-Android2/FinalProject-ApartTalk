@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp1Binding
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.PrivacyPolicyActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.UserAgreementActivity
 
 class SignUp1Fragment : Fragment() {
 
@@ -28,6 +31,8 @@ class SignUp1Fragment : Fragment() {
         initializeDataStates()
         updateCheckBoxStates()
         updateButtonState()
+        checkBox1ContentButton()
+        checkBox2ContentButton()
         nextButton()
     }
 
@@ -77,6 +82,18 @@ class SignUp1Fragment : Fragment() {
         val isChecked3 = binding.signup1Checkbox3.isChecked
 
         binding.signup1AllCheckbox.isChecked = isChecked1 && isChecked2 && isChecked3
+    }
+
+    private fun checkBox1ContentButton(){
+        binding.signup1Checkbox1Content.setOnClickListener {
+            startActivity(Intent(requireActivity(), UserAgreementActivity::class.java))
+        }
+    }
+
+    private fun checkBox2ContentButton(){
+        binding.signup1Checkbox2Content.setOnClickListener {
+            startActivity(Intent(requireActivity(), PrivacyPolicyActivity::class.java))
+        }
     }
 
     private fun updateButtonState() {
