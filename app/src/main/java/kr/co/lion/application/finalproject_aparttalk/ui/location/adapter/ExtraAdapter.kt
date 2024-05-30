@@ -7,27 +7,28 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.ItemExtraMenuBinding
 import kr.co.lion.application.finalproject_aparttalk.model.LocationExtraData
+import kr.co.lion.application.finalproject_aparttalk.model.Place
 
-class ExtraAdapter() : ListAdapter<LocationExtraData, ExtraAdapter.ExtraViewHolder>(differ) {
+class ExtraAdapter() : ListAdapter<Place, ExtraAdapter.ExtraViewHolder>(differ) {
 
     private lateinit var recyclerviewClick: ExtraItemOnClickListener
 
 
     inner class ExtraViewHolder(val binding: ItemExtraMenuBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(locationExtraData: LocationExtraData){
-            binding.textTitleMenuExtra.text = locationExtraData.title
-            binding.textAddressMenuExtra.text = locationExtraData.address
+        fun bind(locationExtraData: Place){
+            binding.textTitleMenuExtra.text = locationExtraData.place_name
+            binding.textAddressMenuExtra.text = locationExtraData.road_address_name
         }
     }
 
     companion object{
-        val differ = object : DiffUtil.ItemCallback<LocationExtraData>(){
-            override fun areItemsTheSame(oldItem: LocationExtraData, newItem: LocationExtraData): Boolean {
-                return oldItem.title == newItem.title
+        val differ = object : DiffUtil.ItemCallback<Place>(){
+            override fun areItemsTheSame(oldItem: Place, newItem: Place): Boolean {
+                return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: LocationExtraData, newItem: LocationExtraData): Boolean {
+            override fun areContentsTheSame(oldItem: Place, newItem: Place): Boolean {
                 return oldItem == newItem
             }
 

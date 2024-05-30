@@ -68,10 +68,10 @@ class AllLocationFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             //화면이 생성될 때 즉시 데이터 받아오기
-            viewModel.searchFacilityPlace("127.05897078335246", "37.506051888130386", 2000)
-            viewModel.searchFacilityPlace("127.05897078335246", "37.506051888130386", 2000)
-            viewModel.searchFacilityPlace("127.05897078335246", "37.506051888130386", 2000)
-            viewModel.searchFacilityPlace("127.05897078335246", "37.506051888130386", 2000)
+            viewModel.searchLocationPlace("127.05897078335246", "37.506051888130386", 2000)
+            viewModel.searchLocationPlace("127.05897078335246", "37.506051888130386", 2000)
+            viewModel.searchLocationPlace("127.05897078335246", "37.506051888130386", 2000)
+            viewModel.searchLocationPlace("127.05897078335246", "37.506051888130386", 2000)
         }
     }
 }

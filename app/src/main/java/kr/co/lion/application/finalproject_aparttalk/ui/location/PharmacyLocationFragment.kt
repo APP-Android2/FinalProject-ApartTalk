@@ -29,7 +29,7 @@ class PharmacyLocationFragment : Fragment() {
 
     }
 
-    val locationExtraData = mutableListOf<LocationExtraData>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,12 +47,6 @@ class PharmacyLocationFragment : Fragment() {
                 val deco = MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)
 
-
-                //임의 설정
-                val info = LocationExtraData(title = "아파트톡 약국", address = "서울 종로구 종로3길17")
-                locationExtraData.add(info)
-
-                extraAdapter.submitList(locationExtraData)
             }
         }
     }

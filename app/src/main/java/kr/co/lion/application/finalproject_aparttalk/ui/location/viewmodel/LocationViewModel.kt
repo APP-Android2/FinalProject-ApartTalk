@@ -21,7 +21,7 @@ class LocationViewModel : ViewModel() {
 
     private val collectedPlaces = mutableListOf<Place>()
 
-    fun searchFacilityPlace(x: String, y: String, radius: Int) {
+    fun searchLocationPlace(x: String, y: String, radius: Int) {
         viewModelScope.launch {
             try {
                 val responses = mutableListOf<ResultKeyword>()
