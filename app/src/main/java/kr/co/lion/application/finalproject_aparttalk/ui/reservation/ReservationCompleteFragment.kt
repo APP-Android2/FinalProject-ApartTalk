@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationCompleteBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyWriteActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.MyLikeRecyclerViewAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.reservation.adapter.ReservationCompleteRecyclerViewAdapter
 
 
-class ReservationCompleteFragment : Fragment() {
+class ReservationCompleteFragment() : Fragment() {
 
     lateinit var fragmentReservationCompleteBinding: FragmentReservationCompleteBinding
     lateinit var reserveActivity: ReserveActivity

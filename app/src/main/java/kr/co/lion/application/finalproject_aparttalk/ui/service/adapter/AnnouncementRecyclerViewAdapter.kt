@@ -20,7 +20,7 @@ class AnnouncementRecyclerViewAdapter(val context: Context) : RecyclerView.Adapt
 
             this.rowAnnouncementItemBinding.root.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.WRAP_CONTENT
             )
         }
     }
@@ -52,5 +52,4 @@ class AnnouncementRecyclerViewAdapter(val context: Context) : RecyclerView.Adapt
     override fun getItemCount(): Int {
         return 10
     }
-
 }

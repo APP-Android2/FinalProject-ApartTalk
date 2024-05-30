@@ -81,6 +81,7 @@ class MyWriteFragment : Fragment() {
     fun settingToolbar(){
         fragmentMyWriteBinding.apply {
             myWriteToolbar.apply {
+                textViewMyWriteToolbarTitle.text = "내가 쓴글"
                 // 뒤로가기
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {

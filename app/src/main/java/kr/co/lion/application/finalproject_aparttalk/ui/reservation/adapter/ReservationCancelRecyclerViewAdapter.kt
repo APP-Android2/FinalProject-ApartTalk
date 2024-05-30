@@ -1,6 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.reservation.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -47,7 +48,7 @@ class ReservationCancelRecyclerViewAdapter(val context: Context) : RecyclerView.
             reservationCancelTextViewTime.text = "15:00 ~ 17:00"
             reservationCancelTextViewFacility.text = "수영장"
 
-            rowCancelCardView.setOnClickListener {
+            reservationCancelLayout.setOnClickListener {
                 (context as ReserveActivity).replaceFragment(
                     ReserveFragmentName.RESERVATION_CANCEL_COMPLETE_FRAGMENT, true, true, null
                 )

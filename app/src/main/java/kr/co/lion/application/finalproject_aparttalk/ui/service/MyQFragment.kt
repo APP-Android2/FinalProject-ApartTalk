@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFAQBinding
@@ -29,20 +30,44 @@ class MyQFragment : Fragment() {
         fragmentMyQBinding = FragmentMyQBinding.inflate(inflater)
         serviceActivity = activity as ServiceActivity
 
-        settingFloatingButton()
+//        settingFloatingButton()
         settingRecyclerview()
+        settingFabTabMyQAddButton()
 
         // Inflate the layout for this fragment
         return fragmentMyQBinding.root
     }
 
-    fun settingFloatingButton(){
+    fun settingFabTabMyQAddButton(){
         fragmentMyQBinding.apply {
             myQFloatingActionButton.setOnClickListener{
                 serviceActivity.replaceFragment(ServiceFragmentName.SINGLE_SERVICE_FRAGMENT, true, true, null)
             }
         }
     }
+
+    // 플로팅 버튼 리사이클러뷰 스크롤 시 안 보이게
+//    fun settingFloatingButton() {
+//        fragmentMyQBinding.apply {
+//            recyclerViewMyQ.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//                var temp: Int = 0
+//
+//                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                    if (temp == 1) {
+//                        super.onScrolled(recyclerView, dx, dy)
+//                    }
+//                    myQFloatingActionButton.visibility = View.GONE
+//                }
+//
+//                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                    super.onScrollStateChanged(recyclerView, newState)
+//                    myQFloatingActionButton.visibility = View.VISIBLE
+//                    temp = 1
+//                }
+//            })
+//        }
+//    }
+
     fun settingRecyclerview(){
         fragmentMyQBinding.apply{
             recyclerViewMyQ.apply{
