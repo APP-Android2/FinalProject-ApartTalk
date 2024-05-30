@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentOperationSecondBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.OperationInfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.adapter.OperationSecondRecyclerView
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.adapter.OperationViewPagerAdapter
 import kr.co.lion.application.finalproject_aparttalk.util.AptOperationInfoFragmentName
 
 class OperationSecondFragment : Fragment() {
@@ -25,7 +27,7 @@ class OperationSecondFragment : Fragment() {
         operationInfoActivity = activity as OperationInfoActivity
 
         setToolbar()
-        setRecyclerView()
+        setupViewPager()
 
         return fragmentOperationSecondBinding.root
     }
@@ -43,18 +45,21 @@ class OperationSecondFragment : Fragment() {
         }
     }
 
-    // RecyclerView 설정
-    fun setRecyclerView(){
-        fragmentOperationSecondBinding.apply {
-            recyclerOperationInfoList.apply {
-                // 어댑터 설정
-                adapter = OperationSecondRecyclerView(childFragmentManager)
-                // 레이아웃
-                layoutManager = LinearLayoutManager(requireContext())
-                // 데코
-                val deco = MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
-                addItemDecoration(deco)
+    private fun setupViewPager(){
+        val adapter = OperationViewPagerAdapter(requireActivity())
+        fragmentOperationSecondBinding.viewPagerAptOperationInfo.adapter = adapter
+
+        TabLayoutMediator(fragmentOperationSecondBinding.tabLayoutAptOperationInfo, fragmentOperationSecondBinding.viewPagerAptOperationInfo) { tab, position ->
+            tab.text = when(position){
+                0 -> "계약서정보"
+                1 -> "관리규악"
+                2 -> "입찰공고"
+                3 -> "부과명세서"
+                4 -> "재무제표"
+                5 -> "안전관리계획"
+                6 -> "수선계획"
+                else -> null
             }
-        }
+        }.attach()
     }
 }
