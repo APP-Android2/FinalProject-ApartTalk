@@ -1,8 +1,16 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
 }
+
+val localProperties = Properties()
+localProperties.load(project.rootProject.file("local.properties").inputStream())
+val kakaoApikey = localProperties.getProperty("KAKAO_API_KEY")?:""
+val nativeAppkey = localProperties.getProperty("NATIVE_APP_KEY")?:""
+val kakaoRestApiKey = localProperties.getProperty("KAKAO_REST_API_KEY")?:""
 
 android {
     namespace = "kr.co.lion.application.finalproject_aparttalk"
@@ -14,6 +22,10 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "KAKAO_API_KEY", kakaoApikey)
+        buildConfigField("String", "KAKAO_REST_API_KEY", kakaoRestApiKey)
+        manifestPlaceholders["NATIVE_APP_KEY"] = nativeAppkey
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,6 +47,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures{
+        buildConfig = true
         viewBinding = true
         dataBinding = true
     }
@@ -79,4 +92,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx:22.0.0")
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
+
+    implementation ("com.kakao.sdk:v2-all:2.20.1")
 }

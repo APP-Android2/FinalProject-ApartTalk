@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.kakao.sdk.common.KakaoSdk
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFacilityBinding
 import kr.co.lion.application.finalproject_aparttalk.model.FacilityModel
@@ -64,4 +65,5 @@ class FacilityFragment : Fragment() {
             }
         }
     }
+
 }
