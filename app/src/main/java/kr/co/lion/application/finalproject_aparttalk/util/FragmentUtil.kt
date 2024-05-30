@@ -84,10 +84,16 @@ enum class ReserveFragmentName(var str:String){
     RESERVATION_CANCEL_COMPLETE_FRAGMENT("ReservationCancelCompleteFragment.kt")
 }
 
+enum class ParkingFragmentName(var str:String){
+    PARKING_CHECK_FRAGMENT("ParkingCheckFragment"),
+    PARKING_RESERVE_FRAGMENT("ParkingReserveFragment")
+}
+
 enum class InquiryFragmentName(var str:String){
     INQUIRY_FRAGMENT("InquiryFragment"),
     INQUIRY_COMPLETE_FRAGMENT("InquiryCompleteFragment"),
     INQUIRY_WRITE_FRAGMENT("InquiryWriteFragment"),
     INQUIRING_FRAGMENT("InquiringFragment"),
     INQUIRY_TAB_FRAGMENT("InquiryTabFragment")
+
 }
