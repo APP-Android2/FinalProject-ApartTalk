@@ -69,6 +69,7 @@
                     android:includeFontPadding="false"
                     android:maxLength="30"
                     android:text=""
+                    android:inputType="number"
                     android:textColor="@color/black"
                     android:textColorHint="@color/lightGray"
                     android:textSize="12sp" />
@@ -96,6 +97,7 @@
                     android:hint="차주 번호"
                     android:includeFontPadding="false"
                     android:maxLength="30"
+                    android:inputType="number"
                     android:text=""
                     android:textColor="@color/black"
                     android:textColorHint="@color/lightGray"
