@@ -37,14 +37,15 @@ class LocationFragment : Fragment() {
 
         locationViewPager.adapter = LocationAdapter(fragmentList, requireActivity())
 
-        //tabLayout 텍스트 추가
         val tabTextList = arrayOf<String?>("전체", "음식점", "병원", "약국", "카페")
 
-        locationViewPager.post {
-            TabLayoutMediator(locationTabLayout, locationViewPager){ tab, position ->
-                tab.text = tabTextList[position]
+        // TabLayout ViewPager 연결
+        TabLayoutMediator(locationTabLayout, locationViewPager) { tab, position ->
+            tab.text = tabTextList[position]
+        }.attach()
 
-            }.attach()
-        }
+        // 전달된 인덱스로 초기 탭 선택
+        val tabPosition = arguments?.getInt("tabPosition", 0) ?: 0
+        locationViewPager.currentItem = tabPosition
     }
 }

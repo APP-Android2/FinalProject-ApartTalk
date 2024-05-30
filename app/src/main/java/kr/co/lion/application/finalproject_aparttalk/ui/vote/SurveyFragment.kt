@@ -1,10 +1,15 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.vote
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toolbar
+import androidx.core.content.ContextCompat
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSurveyBinding
 import kr.co.lion.application.finalproject_aparttalk.util.VoteFragmentName
@@ -27,7 +32,7 @@ class SurveyFragment : Fragment() {
     fun surveyToolbar(){
         fragmentSurveyBinding.apply {
             surveyToolbar.apply {
-                // title
+                //title
                 title = "주민 투표"
                 // back
                 setNavigationIcon(R.drawable.icon_back)

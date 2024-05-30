@@ -1,60 +1,114 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.inquiry
 
+import android.app.AlertDialog
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.FrameLayout
+import android.widget.TextView
+import android.widget.Toolbar
+import androidx.core.content.ContextCompat
 import kr.co.lion.application.finalproject_aparttalk.R
+import kr.co.lion.application.finalproject_aparttalk.databinding.DialogConfirmCancelBinding
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentInquiryWriteBinding
+import kr.co.lion.application.finalproject_aparttalk.util.InquiryFragmentName
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [InquiryWriteFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InquiryWriteFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    lateinit var fragmentInquiryWriteBinding: FragmentInquiryWriteBinding
+    lateinit var inquiryActivity: InquiryActivity
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+
+        fragmentInquiryWriteBinding = FragmentInquiryWriteBinding.inflate(inflater)
+        inquiryActivity = activity as InquiryActivity
+
+        // 소프트 입력 모드 설정
+        inquiryActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+
+        inquiryWriteToolbar()
+        setupButtons()
+
+        return fragmentInquiryWriteBinding.root
+    }
+
+    fun inquiryWriteToolbar(){
+        fragmentInquiryWriteBinding.apply {
+            inquiryWriteToolbar.apply {
+                //title
+                title = "문의글 작성"
+                // back
+                setNavigationIcon(R.drawable.icon_back)
+                setNavigationOnClickListener {
+                    inquiryActivity.removeFragment(InquiryFragmentName.INQUIRY_WRITE_FRAGMENT)
+                    inquiryActivity.replaceFragment(InquiryFragmentName.INQUIRY_TAB_FRAGMENT,false,true,null)
+                }
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inquiry_write, container, false)
+
+    fun setupButtons() {
+        fragmentInquiryWriteBinding.apply {
+            inquiryWriteButton.setOnClickListener {
+                // 공개 버튼을 눌렀을 때 비공개 버튼의 선택을 해제
+                inquiryWriteButtonPrivate.isSelected = false
+                inquiryWriteButton.setBackgroundResource(R.drawable.button_setting) // 선택된 버튼의 배경 변경
+                inquiryWriteButtonPrivate.setBackgroundResource(R.color.white) // 선택되지 않은 버튼의 배경 변경
+
+                // 글씨 색상 변경
+                inquiryWriteButton.setTextColor(resources.getColor(R.color.black, null)) // 선택된 버튼의 글씨 색상 변경
+                inquiryWriteButtonPrivate.setTextColor(resources.getColor(R.color.gray, null)) // 선택되지 않은 버튼의 글씨 색상 변경
+            }
+
+            inquiryWriteButtonPrivate.setOnClickListener {
+                // 비공개 버튼을 눌렀을 때 공개 버튼의 선택을 해제
+                inquiryWriteButton.isSelected = false
+                inquiryWriteButtonPrivate.setBackgroundResource(R.drawable.button_setting) // 선택된 버튼의 배경 변경
+                inquiryWriteButton.setBackgroundResource(R.color.white) // 선택되지 않은 버튼의 배경 변경
+
+                // 글씨 색상 변경
+                inquiryWriteButtonPrivate.setTextColor(resources.getColor(R.color.black, null)) // 선택된 버튼의 글씨 색상 변경
+                inquiryWriteButton.setTextColor(resources.getColor(R.color.gray, null)) // 선택되지 않은 버튼의 글씨 색상 변경
+            }
+
+            inquiryWriteButtonSubmit.setOnClickListener {
+                showConfirmCancelDialog()
+            }
+        }
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InquiryWriteFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InquiryWriteFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    // 다이얼로그
+    fun showConfirmCancelDialog() {
+        val dialogBinding = DialogConfirmCancelBinding.inflate(layoutInflater)
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogBinding.root)
+            .create()
+
+        dialogBinding.apply {
+            textViewDialogConfirmCancelSubject.text = "문의글 작성완료?"
+            textViewDialogConfirmCancelContent.text = "입력하신 문의 내용을 제출하시겠습니까?"
+
+            buttonDialogConfirmCancelCancel.setOnClickListener {
+                dialog.dismiss() // 다이얼로그 닫기
             }
+
+            buttonDialogConfirmCancelConfirm.setOnClickListener {
+                // 확인 버튼 클릭 시 InquiryTabFragment로 이동
+                dialog.dismiss()
+                inquiryActivity.replaceFragment(InquiryFragmentName.INQUIRY_TAB_FRAGMENT, false, true, null)
+            }
+        }
+
+        dialog.show()
     }
+
+
 }

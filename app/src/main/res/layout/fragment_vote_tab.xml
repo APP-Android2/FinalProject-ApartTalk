@@ -6,10 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
-    android:padding="20dp"
     tools:context=".ui.vote.VoteListFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
+        app:titleCentered="true"
         android:id="@+id/voteTabToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,34 +17,39 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme" />
 
+
+
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/voteTapLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:tabTextAppearance="@style/MySelectedTabTextAppearance"
+        app:tabTextColor="@color/gray"
+        app:tabIndicatorColor="@color/third"
+        app:tabIndicatorHeight="2dp"
+        app:tabIndicatorGravity="bottom"
+        app:tabRippleColor="@color/fourth"
+        app:tabSelectedTextColor="@android:color/black"
+        app:tabIndicatorFullWidth="true">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="주민투표" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="설문조사" />
+    </com.google.android.material.tabs.TabLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/voteTapLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:tabTextAppearance="@style/MySelectedTabTextAppearance"
-            app:tabTextColor="@color/lightGray"
-            app:tabIndicatorColor="@color/third"
-            app:tabIndicatorHeight="2dp"
-            app:tabIndicatorGravity="bottom"
-            app:tabRippleColor="@color/fourth"
-            app:tabIndicatorFullWidth="true">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="주민투표" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="설문조사" />
-        </com.google.android.material.tabs.TabLayout>
+        android:orientation="vertical"
+        android:padding="20dp">
 
         <ScrollView
             android:layout_width="match_parent"

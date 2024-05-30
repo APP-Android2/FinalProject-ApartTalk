@@ -35,9 +35,8 @@ class DatePickerDialogFragment(
         super.onViewCreated(view, savedInstanceState)
 
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-
         setupNumberPicker(
-            picker = binding.yearPicker,
+            picker = binding.dateYearPicker,
             minValue = 1900,
             maxValue = currentYear,
             initialValue = initialYear,
@@ -45,7 +44,7 @@ class DatePickerDialogFragment(
         )
 
         setupNumberPicker(
-            picker = binding.monthPicker,
+            picker = binding.dateMonthPicker,
             minValue = 1,
             maxValue = 12,
             initialValue = initialMonth,
@@ -54,29 +53,16 @@ class DatePickerDialogFragment(
 
         val initialDaysInMonth = getDaysInMonth(initialYear, initialMonth)
         setupNumberPicker(
-            picker = binding.dayPicker,
+            picker = binding.dateDayPicker,
             minValue = 1,
             maxValue = initialDaysInMonth,
             initialValue = initialDay,
             formatter = { value -> "${value}일" }
         )
 
-        binding.monthPicker.setOnValueChangedListener { _, _, newVal ->
-            updateDayPicker(binding.yearPicker.value, newVal)
-        }
-
-        binding.yearPicker.setOnValueChangedListener { _, _, newVal ->
-            updateDayPicker(newVal, binding.monthPicker.value)
-        }
-
-        binding.cancelButton.setOnClickListener {
-            dismiss()
-        }
-
-        binding.confirmButton.setOnClickListener {
-            onDateSelected(binding.yearPicker.value, binding.monthPicker.value, binding.dayPicker.value)
-            dismiss()
-        }
+        datePickerListeners()
+        cancelButton()
+        confirmButton()
     }
 
     private fun setupNumberPicker(picker: NumberPicker, minValue: Int, maxValue: Int, initialValue: Int, formatter: (Int) -> String) {
@@ -89,8 +75,18 @@ class DatePickerDialogFragment(
         }
     }
 
+    private fun datePickerListeners(){
+        binding.dateMonthPicker.setOnValueChangedListener { _, _, newVal ->
+            updateDayPicker(binding.dateYearPicker.value, newVal)
+        }
+
+        binding.dateYearPicker.setOnValueChangedListener { _, _, newVal ->
+            updateDayPicker(newVal, binding.dateMonthPicker.value)
+        }
+    }
+
     private fun updateDayPicker(year: Int, month: Int) {
-        val dayPicker = binding.dayPicker
+        val dayPicker = binding.dateDayPicker
         val daysInMonth = getDaysInMonth(year, month)
         val displayedDays = (1..daysInMonth).map { day -> "${day}일" }.toTypedArray()
         dayPicker.displayedValues = null  // 기존 값을 지우기
@@ -109,6 +105,19 @@ class DatePickerDialogFragment(
 
     private fun isLeapYear(year: Int): Boolean {
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)
+    }
+
+    private fun cancelButton(){
+        binding.datePickerCancelButton.setOnClickListener {
+            dismiss()
+        }
+    }
+
+    private fun confirmButton(){
+        binding.datePickerConfirmButton.setOnClickListener {
+            onDateSelected(binding.dateYearPicker.value, binding.dateMonthPicker.value, binding.dateDayPicker.value)
+            dismiss()
+        }
     }
 
     override fun onDestroyView() {

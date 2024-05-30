@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context="ui.vote.SurveyWriteFragment"
-    android:padding="20dp">
+    android:padding="20dp"
+    tools:context="ui.vote.SurveyWriteFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/surveyWriteToolbar"
@@ -18,7 +18,8 @@
         android:gravity="start"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:titleCentered="true"/>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -37,7 +38,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/color_text_input_stroke"
+                app:hintTextColor="@color/third">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surveyWriteEditTextTitle"
@@ -54,11 +60,18 @@
                 android:layout_height="wrap_content"
                 android:text="최소 2개 이상의 항목을 작성해주세요"
                 android:fontFamily="@font/notosans_semibold"
-                android:includeFontPadding="false"/>
+                android:includeFontPadding="false"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/gray"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/color_text_input_stroke"
+                app:hintTextColor="@color/third">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surveyWirteEditTextWrite1"
@@ -71,7 +84,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/color_text_input_stroke"
+                app:hintTextColor="@color/third">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surveyWriteEditTextWrite2"
@@ -84,7 +103,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/color_text_input_stroke"
+                app:hintTextColor="@color/third">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surveyWirteEditTextWrite3"
@@ -101,11 +126,18 @@
                 android:layout_height="wrap_content"
                 android:text="어떤 내용의 설문조사인지 알려주세요"
                 android:fontFamily="@font/notosans_semibold"
-                android:includeFontPadding="false"/>
+                android:layout_marginTop="10dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/gray"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/gray"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/color_text_input_stroke"
+                app:hintTextColor="@color/third">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surveyWriteTextViewContent"

@@ -1,10 +1,15 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.vote
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toolbar
+import androidx.core.content.ContextCompat
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentVoteHistoryBinding
 import kr.co.lion.application.finalproject_aparttalk.util.VoteFragmentName
@@ -21,22 +26,31 @@ class VoteHistoryFragment : Fragment() {
         fragmentVoteHistoryBinding = FragmentVoteHistoryBinding.inflate(inflater)
         voteActivity = activity as VoteActivity
 
+        voteHistoryToolbar()
+        voteHistoryButton()
+
         return fragmentVoteHistoryBinding.root
     }
 
     // 툴바설정
-    fun voteHistoryToolbar(){
+    fun voteHistoryToolbar() {
         fragmentVoteHistoryBinding.apply {
             voteHistoryToolbar.apply {
-                // 타이틀
-                title = "주민 투표"
+                //title
+                title = "지난 투표 내역"
                 // Back
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
-                    voteActivity.replaceFragment(VoteFragmentName.VOTE_TAB_FRAGMENT, false,true,null)
+                    voteActivity.replaceFragment(
+                        VoteFragmentName.VOTE_TAB_FRAGMENT,
+                        false,
+                        true,
+                        null
+                    )
                 }
             }
         }
+    }
 
         // 버튼
         fun voteHistoryButton(){
@@ -46,5 +60,5 @@ class VoteHistoryFragment : Fragment() {
                 }
             }
         }
-    }
+
 }

@@ -1,12 +1,14 @@
 package kr.co.lion.application.finalproject_aparttalk.util
 
-enum class MainFragmentName(val str:String){
-    COMMUNITY_FRAGMENT("CommunityFragment"),
-    LOCATION_FRAGMENT("LocationFragment"),
-    HOME_FRAGMENT("HomeFragment"),
-    FACILITY_FRAGMENT("FacilityFragment"),
-    ENTIRE_MENU_FRAGMENT("EntireMenuFragment"),
-    ALARM_FRAGMENT("AlarmFragment"),
+import kr.co.lion.application.finalproject_aparttalk.R
+
+enum class MainFragmentName(val id: Int, val str: String) {
+    COMMUNITY_FRAGMENT(R.id.community_item, "CommunityFragment"),
+    LOCATION_FRAGMENT(R.id.location_item, "LocationFragment"),
+    HOME_FRAGMENT(R.id.home_item, "HomeFragment"),
+    FACILITY_FRAGMENT(R.id.facility_item, "FacilityFragment"),
+    ENTIRE_MENU_FRAGMENT(R.id.entiremenu_item, "EntireMenuFragment"),
+    ALARM_FRAGMENT(999, "AlarmFragment")
 }
 
 enum class CommunityTabFragmentName(val str:String) {
@@ -85,4 +87,13 @@ enum class ReserveFragmentName(var str:String){
 enum class ParkingFragmentName(var str:String){
     PARKING_CHECK_FRAGMENT("ParkingCheckFragment"),
     PARKING_RESERVE_FRAGMENT("ParkingReserveFragment")
+}
+
+enum class InquiryFragmentName(var str:String){
+    INQUIRY_FRAGMENT("InquiryFragment"),
+    INQUIRY_COMPLETE_FRAGMENT("InquiryCompleteFragment"),
+    INQUIRY_WRITE_FRAGMENT("InquiryWriteFragment"),
+    INQUIRING_FRAGMENT("InquiringFragment"),
+    INQUIRY_TAB_FRAGMENT("InquiryTabFragment")
+
 }

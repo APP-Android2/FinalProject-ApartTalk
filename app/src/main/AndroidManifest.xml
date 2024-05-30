@@ -19,8 +19,13 @@
             android:name=".ui.parking.ParkingActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.inquiry.InquiryActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
             android:name=".ui.vote.VoteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.reservation.ReserveActivity"
             android:exported="false" />

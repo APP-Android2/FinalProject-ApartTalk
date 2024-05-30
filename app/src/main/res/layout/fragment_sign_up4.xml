@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
     android:padding="20dp"
@@ -37,23 +37,11 @@
             android:textSize="12sp" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="아파트명"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/signup4_find_apartment"
-        style="@style/Widget.Material3.CardView.Filled"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        app:cardBackgroundColor="#F5F5F5"
-        app:contentPadding="15dp"
-        app:rippleColor="@color/fourth">
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,25 +49,65 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/signup4_apart_name_textView"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="아파트명 검색"
-                android:textSize="15sp" />
-
-            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_search" />
+                android:layout_marginEnd="2dp"
+                android:text="아파트명"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="#D50000"
+                android:textSize="16sp" />
+
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/signup4_apart_layout"
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:cardBackgroundColor="#F5F5F5"
+            app:contentPadding="15dp"
+            app:rippleColor="@color/fourth">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/signup4_apart_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:hint="아파트명"
+                    android:textColorHint="@color/gray"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:src="@drawable/icon_search" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/signup4_dongho_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:orientation="vertical">
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,39 +121,30 @@
                 android:text="동호수"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="*"
-                android:textColor="#D50000"
-                android:textSize="16sp" />
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/signup4_select_apart_dong_ho"
             style="@style/Widget.Material3.CardView.Filled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             app:cardBackgroundColor="#F5F5F5"
-            app:contentPadding="15dp">
+            app:contentPadding="15dp"
+            app:rippleColor="@color/fourth">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginHorizontal="15dp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/signup4_apart_dong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1001"
-                    android:textAlignment="center"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="동"
                     android:textAlignment="center"
                     android:textSize="14sp" />
@@ -133,20 +152,74 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="1001"
+                    android:text="/"
                     android:textAlignment="center"
+                    android:textColor="#3C3C3C"
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/signup4_apart_ho"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="호"
                     android:textAlignment="center"
                     android:textSize="14sp" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/signup4_isapartcertification_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:text="아파트 입주민 인증 신청"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="*"
+                android:textColor="#D50000"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/signup4_apartcertification_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/signup4_radio_button_defer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="인증 보류"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/signup4_radio_button_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="인증 신청"
+                android:textSize="14sp" />
+        </RadioGroup>
     </LinearLayout>
 
     <Space
@@ -158,8 +231,10 @@
         android:id="@+id/signup4_agree_button"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:alpha="0.5"
         android:backgroundTint="@color/third"
-        android:enabled="true"
+        android:enabled="false"
         android:insetTop="0dp"
         android:insetBottom="0dp"
         android:text="회원가입"

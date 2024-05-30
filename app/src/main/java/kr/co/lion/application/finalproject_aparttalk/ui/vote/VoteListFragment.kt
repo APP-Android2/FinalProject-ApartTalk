@@ -29,6 +29,7 @@ class VoteListFragment : Fragment() {
         voteActivity = activity as VoteActivity
 
         voteListRecyclerView()
+        voteListButton()
 
 
 
@@ -49,7 +50,7 @@ class VoteListFragment : Fragment() {
             voteListRecyclerView.apply {
 
                 adapter = VoteListAdapter()
-                layoutManager = LinearLayoutManager(requireContext())
+                layoutManager = LinearLayoutManager(voteActivity)
             }
         }
     }
@@ -71,8 +72,12 @@ class VoteListFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: VoteListViewHolder, position: Int) {
-            holder.rowVoteBinding.rowVoteTextView1.text = "00 선거 $position"
-            holder.rowVoteBinding.rowVoteTextView2.text = "2024년 04/01 ~ 04/07 $position"
+            holder.rowVoteBinding.rowVoteTextView1.text = "00 선거"
+            holder.rowVoteBinding.rowVoteTextView2.text = "2024년 04/01 ~ 04/07"
+
+            holder.itemView.setOnClickListener {
+                voteActivity.replaceFragment(VoteFragmentName.VOTE_HISTORY_FRAGMENT, false,true,null)
+            }
         }
     }
 

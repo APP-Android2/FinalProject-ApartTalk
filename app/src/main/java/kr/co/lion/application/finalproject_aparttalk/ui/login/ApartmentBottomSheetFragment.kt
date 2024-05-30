@@ -17,7 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentApartmentBottomSheetBinding
 
-class ApartmentBottomSheetFragment : BottomSheetDialogFragment() {
+class ApartmentBottomSheetFragment(private val onApartmentSelected: (apartmentName: String, apartmentAddress: String) -> Unit) : BottomSheetDialogFragment() {
 
     private var _binding: FragmentApartmentBottomSheetBinding? = null
     private val binding get() = _binding!!
@@ -42,6 +42,12 @@ class ApartmentBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getTempData()
+        recyclerViewAdapter()
+        searchEditTextListener()
+    }
+
+    private fun getTempData(){
         apartments = listOf(
             Pair("한강신도시 반도유보라 2차 아파트", "경기도 김포시 김포한강 11로 276"),
             Pair("송파꿈에그린아파트", "서울시 송파구 위례광장로121(장지동)"),
@@ -58,23 +64,26 @@ class ApartmentBottomSheetFragment : BottomSheetDialogFragment() {
             Pair("금강엑슬루타워", "대전광역시 대덕구 대덕대로 1555 (석봉동 770)"),
             Pair("죽동예미지아파트", "대전광역시 유성구 죽동로 321"),
         )
+    }
 
-        adapter = ApartmentAdapter(emptyList()) {
+    private fun recyclerViewAdapter(){
+        adapter = ApartmentAdapter(apartments) { apartmentName, apartmentAddress ->
+            onApartmentSelected(apartmentName, apartmentAddress)
             SystemClock.sleep(200)
             dismiss()
         }
         binding.apartmentRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.apartmentRecyclerView.adapter = adapter
+    }
 
+    private fun searchEditTextListener(){
         binding.searchEditText.addTextChangedListener {
             val query = it.toString()
             filterApartments(query)
         }
 
-        // 키보드 "완료" 버튼을 눌렀을 때 이벤트 처리
         binding.searchEditText.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                // 키보드 숨기기
                 val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(v.windowToken, 0)
                 true

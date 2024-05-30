@@ -1,11 +1,16 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.vote
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.SystemClock
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.transition.MaterialSharedAxis
@@ -40,6 +45,8 @@ class VoteTabFragment : Fragment() {
         voteTabToolbar()
         voteTabLayout()
 
+        selectDefaultTab()
+
         return fragmentVoteTabBinding.root
     }
 
@@ -47,7 +54,7 @@ class VoteTabFragment : Fragment() {
     fun voteTabToolbar(){
         fragmentVoteTabBinding.apply {
             voteTabToolbar.apply {
-                // title
+                //title
                 title = "주민 투표"
                 // Back
                 setNavigationIcon(R.drawable.icon_back)
@@ -87,7 +94,13 @@ class VoteTabFragment : Fragment() {
         }
     }
 
-    fun replaceFragment(name: VoteFragmentName, addToBackStack:Boolean, isAnimate:Boolean, data:Bundle?){
+    // 기본 탭을 선택하고 해당 프래그먼트를 표시
+    private fun selectDefaultTab() {
+        fragmentVoteTabBinding.voteTapLayout.getTabAt(0)?.select()
+        replaceFragment(VoteFragmentName.VOTE_LIST_FRAGMENT, false, false, null)
+    }
+
+    private fun replaceFragment(name: VoteFragmentName, addToBackStack:Boolean, isAnimate:Boolean, data:Bundle?){
 
         SystemClock.sleep(200)
 
@@ -197,7 +210,7 @@ class VoteTabFragment : Fragment() {
     }
 
     // BackStack에서 Fragment를 제거한다.
-    fun removeFragment(name: VoteFragmentName){
+    private fun removeFragment(name: VoteFragmentName){
         SystemClock.sleep(200)
 
         // 지정한 이름으로 있는 Fragment를 BackStack에서 제거한다.

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_rounding"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".ui.entiremenu.FireCheck.FireExtinguisher3BottomSheetFragment" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewFireExtinguisher3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_fire_extinguisher" />
+
+        <TextView
+            android:id="@+id/textViewFireExtinguisher3Subject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
+            android:text="주거용 주방
+자동소화장치 점검 방법"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textViewFireExtinguisher3Mean"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/notosans_medium"
+        android:gravity="left"
+        android:text="주방자동소화장치란?\n - 가스로 인한 화제를 예방하고 진압하는 장치"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewFireExtinguisher3Content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/notosans_medium"
+        android:gravity="center|left"
+        android:text="1. 지시 압력계의 바늘이 녹색 범위 안에 있다면 ‘정상’을, 녹색범위를 벗어나 있다면 ‘불량’을  의미한다. \n\n2. 설비의 “전원표시등”에 항상 녹색불이 점등돼있어야 하며, 만일 전원표시등에 불이 들어오지 않는다면 이는 ‘불량’을 의미한다. "
+        android:textSize="14sp" />
+</LinearLayout>

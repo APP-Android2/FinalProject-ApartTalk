@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#FFFFFF"
-    android:padding="20dp"
     tools:context="ui.vote.SurveyFragment" >
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -16,12 +15,15 @@
         android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        android:gravity="start"/>
+        android:gravity="start"
+        app:titleCentered="true"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
+
 
         <TextView
             android:id="@+id/surveyTitleTextView"
