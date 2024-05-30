@@ -19,7 +19,7 @@ class FAQRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<FAQRec
 
             this.rowFAQItemBinding.root.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.WRAP_CONTENT
             )
         }
     }
