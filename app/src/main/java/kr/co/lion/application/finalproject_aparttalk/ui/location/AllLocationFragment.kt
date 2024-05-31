@@ -45,6 +45,7 @@ class AllLocationFragment : Fragment() {
         gettingData()
         return binding.root
     }
+    
 
     private fun settingRecyclerview() {
         binding.apply {
