@@ -18,6 +18,11 @@ class AllAdapter : ListAdapter<Place, AllAdapter.AllViewHolder>(differ) {
             binding.textMenuTitleAll.text = locationAllData.place_name
             binding.textAddressMenuAll.text = locationAllData.road_address_name
             binding.textCategoryMenuAll.text = locationAllData.category_name
+            binding.root.setOnClickListener {
+                recyclerviewClick.recyclerviewClickListener(
+                    locationAllData.place_name?:"", locationAllData.category_name?:"", locationAllData.road_address_name?:"",
+                    locationAllData.phone?:"", locationAllData.distance?:"", locationAllData.x?:"", locationAllData.y?:"")
+            }
         }
 
     }
@@ -41,13 +46,10 @@ class AllAdapter : ListAdapter<Place, AllAdapter.AllViewHolder>(differ) {
 
     override fun onBindViewHolder(holder: AllViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.binding.root.setOnClickListener {
-            recyclerviewClick.recyclerviewClickListener()
-        }
     }
 
     interface ItemOnClickListener{
-        fun recyclerviewClickListener()
+        fun recyclerviewClickListener(name:String, category:String, address:String, number:String, distance:String, x:String, y:String)
     }
 
     fun setRecyclerviewClick(recyclerviewClick : ItemOnClickListener){

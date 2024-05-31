@@ -18,6 +18,7 @@ class LocationShowActivity : AppCompatActivity() {
         settingToolbar()
     }
 
+
     //툴바 설정
     private fun settingToolbar(){
         with(binding){

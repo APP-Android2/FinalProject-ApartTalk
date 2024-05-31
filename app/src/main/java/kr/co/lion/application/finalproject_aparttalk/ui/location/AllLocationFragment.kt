@@ -28,9 +28,17 @@ class AllLocationFragment : Fragment() {
     val allAdapter: AllAdapter by lazy {
         AllAdapter().apply {
             setRecyclerviewClick(object : AllAdapter.ItemOnClickListener {
-                override fun recyclerviewClickListener() {
+                override fun recyclerviewClickListener(name:String, category:String, address:String, number:String, distance:String, x:String, y:String) {
                     // 클릭 리스너 처리
-                    startActivity(Intent(requireActivity(), LocationShowActivity::class.java))
+                    val newIntent = Intent(requireActivity(), LocationShowActivity::class.java)
+                    newIntent.putExtra("name", name)
+                    newIntent.putExtra("category", category)
+                    newIntent.putExtra("address", address)
+                    newIntent.putExtra("number", number)
+                    newIntent.putExtra("distance", distance)
+                    newIntent.putExtra("x", x)
+                    newIntent.putExtra("y", y)
+                    startActivity(newIntent)
                 }
             })
         }
