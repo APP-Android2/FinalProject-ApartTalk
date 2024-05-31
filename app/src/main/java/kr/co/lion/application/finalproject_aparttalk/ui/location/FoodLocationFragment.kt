@@ -27,8 +27,16 @@ class FoodLocationFragment : Fragment() {
     val extraAdapter : ExtraAdapter by lazy {
         val adapter = ExtraAdapter()
         adapter.setExtraRecyclerviewClick(object : ExtraAdapter.ExtraItemOnClickListener{
-            override fun extraRecyclerviewClickListener() {
-                startActivity(Intent(requireActivity(), LocationShowActivity::class.java))
+            override fun extraRecyclerviewClickListener(name:String, category:String, address:String, number:String, distance:String, x:String, y:String) {
+                val newIntent = Intent(requireActivity(), LocationShowActivity::class.java)
+                newIntent.putExtra("name", name)
+                newIntent.putExtra("category", category)
+                newIntent.putExtra("address", address)
+                newIntent.putExtra("number", number)
+                newIntent.putExtra("distance", distance)
+                newIntent.putExtra("x", x)
+                newIntent.putExtra("y", y)
+                startActivity(newIntent)
             }
 
         })
