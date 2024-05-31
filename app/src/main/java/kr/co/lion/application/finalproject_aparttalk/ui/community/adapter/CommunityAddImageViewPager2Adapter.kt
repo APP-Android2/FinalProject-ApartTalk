@@ -1,14 +1,21 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community.adapter
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityAddImageBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityAddFragment
 
-class CommunityAddImageViewPager2Adapter(val context : Context) : RecyclerView.Adapter<CommunityAddImageViewPager2Adapter.CommunityAddImageViewHolder>(){
+class CommunityAddImageViewPager2Adapter(val context : Context, var imageCommunityAddBitmapList: MutableList<Bitmap>, var fragment: CommunityAddFragment) : RecyclerView.Adapter<CommunityAddImageViewPager2Adapter.CommunityAddImageViewHolder>(){
+
+    interface OnItemClickListner{
+        fun onItemClick(view: View, position: Int)
+    }
+    
     inner class CommunityAddImageViewHolder(rowCommunityAddImageBinding: RowCommunityAddImageBinding) : RecyclerView.ViewHolder(rowCommunityAddImageBinding.root) {
         val rowCommunityAddImageBinding: RowCommunityAddImageBinding
 
@@ -30,10 +37,26 @@ class CommunityAddImageViewPager2Adapter(val context : Context) : RecyclerView.A
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return imageCommunityAddBitmapList.size
     }
 
     override fun onBindViewHolder(holder: CommunityAddImageViewPager2Adapter.CommunityAddImageViewHolder, position: Int) {
-        holder.rowCommunityAddImageBinding.imageViewRowCommunityAdd.setImageResource(R.drawable.ic_launcher_foreground)
+        holder.rowCommunityAddImageBinding.imageViewRowCommunityAdd.setImageBitmap(imageCommunityAddBitmapList[position])
+        holder.rowCommunityAddImageBinding.imageButtonCommunityAddDelete.setOnClickListener {
+            if (position != imageCommunityAddBitmapList.size-1) {
+                imageCommunityAddBitmapList.removeAt(position)
+                fragment.updateViewPager2CommunityAddImage()
+            } else {
+                imageCommunityAddBitmapList[position] = fragment.getBitmapFromDrawable()
+                fragment.updateViewPager2CommunityAddImage()
+            }
+        }
+        // 마지막 아이템인 경우
+        holder.rowCommunityAddImageBinding.root.setOnClickListener {
+            if (position == imageCommunityAddBitmapList.size-1) {
+                fragment.startAlbumLauncher()
+            }
+        }
     }
+
 }

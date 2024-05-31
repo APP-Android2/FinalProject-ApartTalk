@@ -2,14 +2,16 @@ package kr.co.lion.application.finalproject_aparttalk.ui.community.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabNotificationBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class CommunityTabNotificationRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<CommunityTabNotificationRecyclerViewAdapter.CommunityTabNotificationViewHolder>() {
+class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var tempList: MutableList<MutableList<String>>) : RecyclerView.Adapter<CommunityTabNotificationRecyclerViewAdapter.CommunityTabNotificationViewHolder>() {
     inner class CommunityTabNotificationViewHolder(rowCommunityTabNotificationBinding: RowCommunityTabNotificationBinding) : RecyclerView.ViewHolder(rowCommunityTabNotificationBinding.root) {
         val rowCommunityTabNotificationBinding : RowCommunityTabNotificationBinding
 
@@ -32,16 +34,19 @@ class CommunityTabNotificationRecyclerViewAdapter(val context: Context) : Recycl
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return tempList.size
     }
 
     override fun onBindViewHolder(holder: CommunityTabNotificationViewHolder, position: Int) {
+
+        val tempData = tempList[position]
+
         holder.rowCommunityTabNotificationBinding.apply {
-            textViewCommunityListLabelNotification.text = "공지"
-            textViewCommunityListTitleNotification.text = "글 제목입니다 $position"
-            textViewCommunityListLikeCntNotification.text = "999"
-            textViewCommunityListCommentCntNotification.text = "999"
-            textViewCommunityListDateNotification.text = "2024.05.17"
+            textViewCommunityListLabelNotification.text = tempData[0]
+            textViewCommunityListTitleNotification.text = tempData[1]
+            textViewCommunityListLikeCntNotification.text = tempData[2]
+            textViewCommunityListCommentCntNotification.text = tempData[3]
+            textViewCommunityListDateNotification.text = tempData[4]
 
             linearLayoutCommunityListNotification.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)

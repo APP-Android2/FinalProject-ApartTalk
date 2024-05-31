@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -14,22 +16,44 @@ import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentTabNotificationBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabNotificationBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityTabNotificationRecyclerViewAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.login.SignUpViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class TabNotificationFragment : Fragment() {
     lateinit var fragmentTabNotificationBinding: FragmentTabNotificationBinding
     lateinit var mainActivity: MainActivity
+    private val viewModel: CommunityNotificationViewModel by viewModels()
+
+    lateinit var apartments: MutableList<MutableList<String>>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         fragmentTabNotificationBinding = FragmentTabNotificationBinding.inflate(inflater)
         mainActivity = activity as MainActivity
 
+        getTempData()
         settingRecyclerViewTabNotification()
         settingFabTabNotificationAdd()
         settingFloatingButton()
 
+
         return fragmentTabNotificationBinding.root
+    }
+
+    private fun getTempData(){
+        apartments = mutableListOf(
+            mutableListOf("공지", "글 제목0", "999", "888", "2024.05.17"),
+            mutableListOf("공지", "글 제목1", "999", "888", "2024.05.17"),
+            mutableListOf("공지", "글 제목2", "999", "888", "2024.05.17"),
+            mutableListOf("공지", "글 제목3", "999", "888", "2024.05.17"),
+            mutableListOf("공지", "글 제목4", "999", "888", "2024.05.17"),
+            mutableListOf("공지", "글 제목5", "999", "888", "2024.05.17"),
+            mutableListOf("공지", "글 제목6", "999", "888", "2024.05.17"),
+            mutableListOf("공지", "글 제목7", "999", "888", "2024.05.17"),
+            mutableListOf("공지", "글 제목8", "999", "888", "2024.05.17"),
+            mutableListOf("공지", "글 제목9", "999", "888", "2024.05.17"),
+        )
     }
 
     // 커뮤니티 공지 탭 플로팅 버튼
@@ -69,7 +93,7 @@ class TabNotificationFragment : Fragment() {
     private fun settingRecyclerViewTabNotification() {
         fragmentTabNotificationBinding.apply {
             recyclerViewTabNotification.apply {
-                adapter = CommunityTabNotificationRecyclerViewAdapter(requireContext())
+                adapter = CommunityTabNotificationRecyclerViewAdapter(requireContext(), apartments)
                 layoutManager = LinearLayoutManager(mainActivity)
                 val deco = MaterialDividerItemDecoration(mainActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)
