@@ -16,6 +16,7 @@ class LocationShowActivity : AppCompatActivity() {
         binding = ActivityLocationShowBinding.inflate(layoutInflater)
         setContentView(binding.root)
         settingToolbar()
+        initView()
     }
 
 
@@ -28,6 +29,24 @@ class LocationShowActivity : AppCompatActivity() {
                     finish()
                 }
             }
+        }
+    }
+
+    //화면 구현
+    private fun initView(){
+        binding.apply {
+            //데이터 받아오기
+            val name = intent?.getStringExtra("name")
+            val category = intent?.getStringExtra("category")
+            val address = intent?.getStringExtra("address")
+            val number = intent?.getStringExtra("number")
+            val distance = intent?.getStringExtra("distance")
+
+            textLocationShowTitle.text = name
+            textLocationShowCategory.text = category
+            textLocationShowAddress.text = address
+            textLocationShowNumber.text = number
+            textLocationShowDistance.text = "우리집에서 부터 ${distance}m 떨어져있어요"
         }
     }
 }
