@@ -1,17 +1,15 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.fragment
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireAlarmFacility1BottomSheetBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireRunFacility1BottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 
 class FireRunFacility1BottomSheetFragment : BottomSheetDialogFragment() {
 

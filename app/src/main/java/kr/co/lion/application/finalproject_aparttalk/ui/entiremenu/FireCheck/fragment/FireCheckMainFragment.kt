@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireCheckMainBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.util.FireCheckFragmentName
 
 class FireCheckMainFragment : Fragment() {

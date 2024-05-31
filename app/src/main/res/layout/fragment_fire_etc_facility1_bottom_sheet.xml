@@ -6,7 +6,7 @@ android:layout_height="match_parent"
 android:background="@drawable/bottom_sheet_rounding"
 android:orientation="vertical"
 android:padding="20dp"
-tools:context=".ui.entiremenu.FireCheck.FireEtcFacility1BottomSheetFragment" >
+tools:context=".ui.entiremenu.FireCheck.fragment.FireEtcFacility1BottomSheetFragment" >
 
 <LinearLayout
     android:layout_width="match_parent"

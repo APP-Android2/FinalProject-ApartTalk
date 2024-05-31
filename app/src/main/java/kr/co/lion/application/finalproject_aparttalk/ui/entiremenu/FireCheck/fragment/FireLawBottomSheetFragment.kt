@@ -1,29 +1,25 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.fragment
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireAlarmFacility1BottomSheetBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireAlarmFacility2BottomSheetBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireExtinguisher1BottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireLawBottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 
-class FireAlarmFacility2BottomSheetFragment : BottomSheetDialogFragment() {
+class FireLawBottomSheetFragment : BottomSheetDialogFragment() {
 
-    lateinit var binding: FragmentFireAlarmFacility2BottomSheetBinding
+    lateinit var binding: FragmentFireLawBottomSheetBinding
     lateinit var fireCheckActivity: FireCheckActivity
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
-        binding = FragmentFireAlarmFacility2BottomSheetBinding.inflate(layoutInflater)
+        binding = FragmentFireLawBottomSheetBinding.inflate(layoutInflater)
         fireCheckActivity = activity as FireCheckActivity
 
         return binding.root
@@ -55,6 +51,5 @@ class FireAlarmFacility2BottomSheetFragment : BottomSheetDialogFragment() {
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
         bottomSheet.layoutParams = layoutParams
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
-
     }
 }

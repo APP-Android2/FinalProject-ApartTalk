@@ -2,12 +2,18 @@ package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck
 
 import android.os.Bundle
 import android.os.SystemClock
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityFireCheckBinding
+import kr.co.lion.application.finalproject_aparttalk.repository.FireCheckRepository
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.fragment.FireCheckMainFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.fragment.FireCheckSelfFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.viewmodel.FireCheckViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.viewmodel.FireCheckViewModelFactory
 import kr.co.lion.application.finalproject_aparttalk.util.FireCheckFragmentName
 
 class FireCheckActivity : AppCompatActivity() {
@@ -17,6 +23,11 @@ class FireCheckActivity : AppCompatActivity() {
     // 프래그먼트의 주소값을 담을 프로퍼티
     var oldFragment: Fragment? = null
     var newFragment: Fragment? = null
+
+    // ViewModel 초기화
+    private val repository by lazy { FireCheckRepository() }
+    private val viewModelFactory by lazy { FireCheckViewModelFactory(repository) }
+    private val fireCheckViewModel: FireCheckViewModel by viewModels { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

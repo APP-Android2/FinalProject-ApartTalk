@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireCheckSelfBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.util.FireCheckFragmentName
 
 class FireCheckSelfFragment : Fragment() {

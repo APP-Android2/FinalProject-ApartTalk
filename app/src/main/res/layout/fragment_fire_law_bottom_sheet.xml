@@ -6,7 +6,7 @@
     android:background="@drawable/bottom_sheet_rounding"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.entiremenu.FireCheck.FireLawBottomSheetFragment">
+    tools:context=".ui.entiremenu.FireCheck.fragment.FireLawBottomSheetFragment">
 
     <TextView
         android:id="@+id/textViewFireLawDate"
