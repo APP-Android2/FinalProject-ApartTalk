@@ -73,7 +73,7 @@ class AllLocationFragment : Fragment() {
             allAdapter.submitList(places)
         })
 
-        viewModel.clearCollectedPlaces()
+        //viewModel.clearCollectedPlaces()
 
         viewLifecycleOwner.lifecycleScope.launch {
             //화면이 생성될 때 즉시 데이터 받아오기

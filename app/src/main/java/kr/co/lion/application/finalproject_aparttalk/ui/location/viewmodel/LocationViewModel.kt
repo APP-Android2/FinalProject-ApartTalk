@@ -22,7 +22,7 @@ class LocationViewModel : ViewModel() {
     private val collectedPlaces = mutableListOf<Place>()
 
 
-    fun searchLocationPlace(x: String, y: String, radius: Int) {
+    suspend fun searchLocationPlace(x: String, y: String, radius: Int) {
         viewModelScope.launch {
             try {
                 val responses = mutableListOf<ResultKeyword>()
@@ -50,9 +50,21 @@ class LocationViewModel : ViewModel() {
         }
     }
 
-    fun clearCollectedPlaces() {
-        collectedPlaces.clear()
-        _locationList.value = emptyList()
+    suspend fun searchEachLocationPlace(category:String, x:String, y:String, radius:Int){
+        viewModelScope.launch {
+            try {
+                val response = locationRepository.getSearchFacility(category, x, y, radius)
+                _locationList.value = response.documents
+            }catch (e:Exception){
+
+            }
+        }
     }
+
+    //오류 원인
+//    fun clearCollectedPlaces() {
+//        collectedPlaces.clear()
+//        _locationList.value = emptyList()
+//    }
 }
 

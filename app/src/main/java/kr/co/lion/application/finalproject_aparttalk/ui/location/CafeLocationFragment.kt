@@ -12,18 +12,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.launch
-import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCafeLocationBinding
-import kr.co.lion.application.finalproject_aparttalk.model.LocationAllData
-import kr.co.lion.application.finalproject_aparttalk.model.LocationExtraData
 import kr.co.lion.application.finalproject_aparttalk.ui.location.adapter.ExtraAdapter
-import kr.co.lion.application.finalproject_aparttalk.ui.location.viewmodel.EachLocationViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.location.viewmodel.LocationViewModel
 
 class CafeLocationFragment : Fragment() {
 
     lateinit var binding: FragmentCafeLocationBinding
 
-    val viewModel : EachLocationViewModel by viewModels()
+    val viewModel : LocationViewModel by viewModels()
 
     val extraAdapter : ExtraAdapter by lazy {
         val adapter = ExtraAdapter()
@@ -68,7 +65,7 @@ class CafeLocationFragment : Fragment() {
 
     //데이터 받아오기
     private fun gettingData(){
-        viewModel.eachLocationList.observe(viewLifecycleOwner, Observer { places ->
+        viewModel.locationList.observe(viewLifecycleOwner, Observer { places ->
             extraAdapter.submitList(places)
         })
 
