@@ -19,6 +19,10 @@ class ExtraAdapter() : ListAdapter<Place, ExtraAdapter.ExtraViewHolder>(differ) 
         fun bind(locationExtraData: Place){
             binding.textTitleMenuExtra.text = locationExtraData.place_name
             binding.textAddressMenuExtra.text = locationExtraData.road_address_name
+            binding.root.setOnClickListener {
+                recyclerviewClick.extraRecyclerviewClickListener(locationExtraData.place_name?:"", locationExtraData.category_name?:"", locationExtraData.road_address_name?:"",
+                    locationExtraData.phone?:"", locationExtraData.distance?:"", locationExtraData.x?:"", locationExtraData.y?:"")
+            }
         }
     }
 
@@ -41,13 +45,11 @@ class ExtraAdapter() : ListAdapter<Place, ExtraAdapter.ExtraViewHolder>(differ) 
 
     override fun onBindViewHolder(holder: ExtraViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.binding.root.setOnClickListener {
-            recyclerviewClick.extraRecyclerviewClickListener()
-        }
+
     }
 
     interface ExtraItemOnClickListener{
-        fun extraRecyclerviewClickListener()
+        fun extraRecyclerviewClickListener(name:String, category:String, address:String, number:String, distance:String, x:String, y:String)
     }
 
     fun setExtraRecyclerviewClick(recyclerviewClick: ExtraItemOnClickListener){
