@@ -94,6 +94,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
 
     implementation ("com.kakao.sdk:v2-all:2.20.1")
+    implementation ("com.kakao.maps.open:android:2.9.5")
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -101,4 +102,6 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+
 }

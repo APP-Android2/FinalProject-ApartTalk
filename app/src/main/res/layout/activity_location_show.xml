@@ -79,11 +79,11 @@
                 android:text="우리집에서부터 400m 떨어져있어요"
                 android:textColor="@color/gray" />
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/location_container"
+            <com.kakao.vectormap.MapView
+                android:id="@+id/map_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="40dp" />
+                android:layout_height="400dp" />
+
 
         </LinearLayout>
 
