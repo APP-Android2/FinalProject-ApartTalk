@@ -1,7 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.location
 
 import android.content.Intent
-import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,9 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.launch
-import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentAllLocationBinding
-import kr.co.lion.application.finalproject_aparttalk.model.LocationAllData
 import kr.co.lion.application.finalproject_aparttalk.ui.location.adapter.AllAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.location.viewmodel.LocationViewModel
 

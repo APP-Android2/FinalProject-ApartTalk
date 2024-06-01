@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.ItemExtraMenuBinding
-import kr.co.lion.application.finalproject_aparttalk.model.LocationExtraData
 import kr.co.lion.application.finalproject_aparttalk.model.Place
 
 class ExtraAdapter() : ListAdapter<Place, ExtraAdapter.ExtraViewHolder>(differ) {
