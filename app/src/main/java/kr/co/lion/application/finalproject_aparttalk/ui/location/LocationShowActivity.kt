@@ -97,20 +97,23 @@ class LocationShowActivity : AppCompatActivity() {
                 }
 
             }, object : KakaoMapReadyCallback(){
+
+                val x = intent?.getStringExtra("x")
+                val y = intent?.getStringExtra("y")
+
                 override fun onMapReady(kakaoMap: KakaoMap) {
 
-                    val x = intent?.getStringExtra("x")
-                    val y = intent?.getStringExtra("y")
+                    Log.d("test1234","${x!!.toDouble()}")
 
                     // 인증 후 API 가 정상적으로 실행될 때 호출됨
-                    val position = LatLng.from(37.7251881795884, 127.062005655448)
+                    val position = LatLng.from(y!!.toDouble(), x.toDouble())
                     val cameraUpdate = CameraUpdateFactory.newCenterPosition(position, 15)
                     kakaoMap.moveCamera(cameraUpdate)
                 }
 
                 override fun getPosition(): LatLng {
                     // 지도 시작 시 위치 좌표를 설정
-                    return LatLng.from(37.7251881795884, 127.062005655448)
+                    return LatLng.from(y!!.toDouble(), x!!.toDouble())
                 }
 
                 override fun isVisible(): Boolean {
