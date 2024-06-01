@@ -103,10 +103,10 @@ class LocationShowActivity : AppCompatActivity() {
 
                 override fun onMapReady(kakaoMap: KakaoMap) {
 
-                    Log.d("test1234","${x!!.toDouble()}")
+                    //Log.d("test1234","${x!!.toDouble()}")
 
                     // 인증 후 API 가 정상적으로 실행될 때 호출됨
-                    val position = LatLng.from(y!!.toDouble(), x.toDouble())
+                    val position = LatLng.from(y!!.toDouble(), x!!.toDouble())
                     val cameraUpdate = CameraUpdateFactory.newCenterPosition(position, 15)
                     kakaoMap.moveCamera(cameraUpdate)
                 }
