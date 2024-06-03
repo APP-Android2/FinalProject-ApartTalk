@@ -5,28 +5,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireExtinguisher4BottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.repository.FireCheckRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.viewmodel.FireCheckViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.viewmodel.FireCheckViewModelFactory
 
 class FireExtinguisher4BottomSheetFragment : BottomSheetDialogFragment() {
 
-    lateinit var binding: FragmentFireExtinguisher4BottomSheetBinding
-    lateinit var fireCheckActivity: FireCheckActivity
+    private var _binding: FragmentFireExtinguisher4BottomSheetBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var fireCheckActivity: FireCheckActivity
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+    private val fireCheckViewModel: FireCheckViewModel by activityViewModels{
+        FireCheckViewModelFactory(FireCheckRepository())
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
-        binding = FragmentFireExtinguisher4BottomSheetBinding.inflate(layoutInflater)
+        _binding = FragmentFireExtinguisher4BottomSheetBinding.inflate(layoutInflater)
         fireCheckActivity = activity as FireCheckActivity
 
         return binding.root
-
-        return inflater.inflate(R.layout.fragment_fire_extinguisher4_bottom_sheet, container, false)
     }
 
     // 다이얼로그가 만들어질 때 자동으로 호출되는 메서드
@@ -55,5 +61,24 @@ class FireExtinguisher4BottomSheetFragment : BottomSheetDialogFragment() {
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
         bottomSheet.layoutParams = layoutParams
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        fireCheckViewModel.fireCheckData.observe(viewLifecycleOwner) { data ->
+            // 데이터 리스트가 비어있지 않은 경우
+            if(data.isNotEmpty()) {
+                //  첫 번째 항목을 가져옴 (해당 프래그먼트의 경우, 여러개의 데이터가 있지 않음)
+                val fireCheckViewModel = data[0]
+                binding.textViewFireExtinguisher4Mean.text = fireCheckViewModel.FireCheckExtinguisher4Mean.replace("\\n", "\n")
+                binding.textViewFireExtinguisher4Content.text = fireCheckViewModel.FireCheckExtinguisher4Content.replace("\\n", "\n")
+            }
+        }
+        fireCheckViewModel.fetchFireCheckData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

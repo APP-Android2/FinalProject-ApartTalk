@@ -11,8 +11,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.firestore.FirebaseFirestore
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireExtinguisher1BottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.repository.FireCheckRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.viewmodel.FireCheckViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.viewmodel.FireCheckViewModelFactory
 
 class FireExtinguisher1BottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -20,7 +22,9 @@ class FireExtinguisher1BottomSheetFragment : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private lateinit var fireCheckActivity: FireCheckActivity
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
-    private val fireCheckViewModel: FireCheckViewModel by activityViewModels()
+    private val fireCheckViewModel: FireCheckViewModel by activityViewModels{
+        FireCheckViewModelFactory(FireCheckRepository())
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -67,8 +71,8 @@ class FireExtinguisher1BottomSheetFragment : BottomSheetDialogFragment() {
             if(data.isNotEmpty()) {
                 //  첫 번째 항목을 가져옴 (해당 프래그먼트의 경우, 여러개의 데이터가 있지 않음)
                 val fireCheckViewModel = data[0]
-                binding.textViewFireExtinguisher1Mean.text = fireCheckViewModel.FireCheckExtinguisher1Mean
-                binding.textViewFireExtinguisher1Content.text = fireCheckViewModel.FireCheckExtinguisher1Content
+                binding.textViewFireExtinguisher1Mean.text = fireCheckViewModel.FireCheckExtinguisher1Mean.replace("\\n", "\n")
+                binding.textViewFireExtinguisher1Content.text = fireCheckViewModel.FireCheckExtinguisher1Content.replace("\\n", "\n")
             }
         }
         fireCheckViewModel.fetchFireCheckData()

@@ -5,21 +5,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireRunFacility1BottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.repository.FireCheckRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.viewmodel.FireCheckViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.viewmodel.FireCheckViewModelFactory
 
 class FireRunFacility1BottomSheetFragment : BottomSheetDialogFragment() {
 
-    lateinit var binding: FragmentFireRunFacility1BottomSheetBinding
-    lateinit var fireCheckActivity: FireCheckActivity
+    private var _binding: FragmentFireRunFacility1BottomSheetBinding? = null
+    private val binding get() = _binding!!
+    private lateinit var fireCheckActivity: FireCheckActivity
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+    private val fireCheckViewModel: FireCheckViewModel by activityViewModels{
+        FireCheckViewModelFactory(FireCheckRepository())
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        binding = FragmentFireRunFacility1BottomSheetBinding.inflate(layoutInflater)
+        _binding = FragmentFireRunFacility1BottomSheetBinding.inflate(layoutInflater)
         fireCheckActivity = activity as FireCheckActivity
 
         return binding.root
@@ -51,6 +59,24 @@ class FireRunFacility1BottomSheetFragment : BottomSheetDialogFragment() {
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
         bottomSheet.layoutParams = layoutParams
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        fireCheckViewModel.fireCheckData.observe(viewLifecycleOwner) { data ->
+            // 데이터 리스트가 비어있지 않은 경우
+            if(data.isNotEmpty()) {
+                //  첫 번째 항목을 가져옴 (해당 프래그먼트의 경우, 여러개의 데이터가 있지 않음)
+                val fireCheckViewModel = data[0]
+                binding.textViewFireRunFacility1Mean.text = fireCheckViewModel.FireCheckRunFacility1Mean.replace("\\n", "\n")
+                binding.textViewFireRunFacility1Content.text = fireCheckViewModel.FireCheckRunFacility1Content.replace("\\n", "\n")
+            }
+        }
+        fireCheckViewModel.fetchFireCheckData()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
