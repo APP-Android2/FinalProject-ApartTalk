@@ -9,6 +9,7 @@ import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentMyQBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentServiceBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentViewMyQBinding
+import kr.co.lion.application.finalproject_aparttalk.util.ServiceFragmentName
 
 
 class ViewMyQFragment : Fragment() {
@@ -23,6 +24,8 @@ class ViewMyQFragment : Fragment() {
         fragmentViewMyQBinding = FragmentViewMyQBinding.inflate(layoutInflater)
         serviceActivity = activity as ServiceActivity
 
+        settingToolbar()
+
         // Inflate the layout for this fragment
         return fragmentViewMyQBinding.root
     }
@@ -30,11 +33,12 @@ class ViewMyQFragment : Fragment() {
     fun settingToolbar(){
         fragmentViewMyQBinding.apply {
             viewMyQToolbar.apply {
+                textViewViewMyQToolbarTitle.text = "내 문의"
                 // 뒤로가기
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기.
-                    serviceActivity.finish()
+                    serviceActivity.replaceFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
                 }
             }
         }

@@ -2,23 +2,12 @@ package kr.co.lion.application.finalproject_aparttalk.ui.vote
 
 import android.os.Bundle
 import android.os.SystemClock
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityVoteBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityAddFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityDetailFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityModifyFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunitySearchFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckMainFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckSelfFragment
-import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
-import kr.co.lion.application.finalproject_aparttalk.util.FireCheckFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.VoteFragmentName
 
 class VoteActivity : AppCompatActivity() {

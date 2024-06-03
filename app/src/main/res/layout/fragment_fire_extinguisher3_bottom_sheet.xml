@@ -6,7 +6,7 @@
     android:background="@drawable/bottom_sheet_rounding"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.entiremenu.FireCheck.FireExtinguisher3BottomSheetFragment" >
+    tools:context=".ui.entiremenu.FireCheck.fragment.FireExtinguisher3BottomSheetFragment" >
 
     <LinearLayout
         android:layout_width="match_parent"

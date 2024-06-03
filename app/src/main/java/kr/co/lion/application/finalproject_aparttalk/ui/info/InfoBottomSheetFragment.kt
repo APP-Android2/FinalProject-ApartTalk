@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck
+package kr.co.lion.application.finalproject_aparttalk.ui.info
 
 import android.app.Dialog
 import android.os.Bundle
@@ -10,20 +10,26 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireLawBottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFireAlarmFacility1BottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentInfoBottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 
-class FireLawBottomSheetFragment : BottomSheetDialogFragment() {
 
-    lateinit var binding: FragmentFireLawBottomSheetBinding
-    lateinit var fireCheckActivity: FireCheckActivity
+class InfoBottomSheetFragment : BottomSheetDialogFragment() {
+
+    lateinit var fragmentInfoBottomSheetbinding: FragmentInfoBottomSheetBinding
+    lateinit var infoActivity: InfoActivity
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
 
-        binding = FragmentFireLawBottomSheetBinding.inflate(layoutInflater)
-        fireCheckActivity = activity as FireCheckActivity
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-        return binding.root
+        fragmentInfoBottomSheetbinding = FragmentInfoBottomSheetBinding.inflate(layoutInflater)
+        infoActivity = activity as InfoActivity
+
+        return fragmentInfoBottomSheetbinding.root
     }
 
     // 다이얼로그가 만들어질 때 자동으로 호출되는 메서드
@@ -52,5 +58,7 @@ class FireLawBottomSheetFragment : BottomSheetDialogFragment() {
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
         bottomSheet.layoutParams = layoutParams
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
     }
+
 }

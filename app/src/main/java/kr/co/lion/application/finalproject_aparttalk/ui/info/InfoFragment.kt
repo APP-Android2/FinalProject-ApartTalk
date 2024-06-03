@@ -24,6 +24,7 @@ class InfoFragment : Fragment() {
         infoActivity = activity as InfoActivity
 
         settingToolbar()
+        setEvent()
 
         return fragmentInfoBinding.root
     }
@@ -54,6 +55,14 @@ class InfoFragment : Fragment() {
                 }
             }
 
+        }
+    }
+    fun setEvent() {
+        fragmentInfoBinding.apply {
+            infoImageView.setOnClickListener{
+                val infoBottomSheetFragment = InfoBottomSheetFragment()
+                infoBottomSheetFragment.show(childFragmentManager, infoBottomSheetFragment.tag)
+            }
         }
     }
 }

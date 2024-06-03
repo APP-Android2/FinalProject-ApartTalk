@@ -19,7 +19,7 @@ class MyQRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<MyQRec
 
             this.rowMyQItemBinding.root.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
+                ViewGroup.LayoutParams.WRAP_CONTENT
             )
         }
     }

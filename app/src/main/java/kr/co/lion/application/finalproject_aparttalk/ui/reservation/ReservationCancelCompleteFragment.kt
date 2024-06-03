@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationCancelCompleteBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationConfirmBinding
 import kr.co.lion.application.finalproject_aparttalk.util.ReserveFragmentName
 
 
-class ReservationCancelCompleteFragment : Fragment() {
+class ReservationCancelCompleteFragment() : Fragment() {
 
     lateinit var fragmentReservationCancelCompleteBinding: FragmentReservationCancelCompleteBinding
     lateinit var reserveActivity: ReserveActivity
@@ -37,13 +36,13 @@ class ReservationCancelCompleteFragment : Fragment() {
     fun settingToolbar(){
         fragmentReservationCancelCompleteBinding.apply {
             reservationCancelToolbar.apply {
+                textViewReservationCancelToolbarTitle.text = "예약취소"
                 // 뒤로가기
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기.
-                    reserveActivity.removeFragment(ReserveFragmentName.RESERVATION_FRAGMENT)
+                    reserveActivity.replaceFragment(ReserveFragmentName.RESERVATION_FRAGMENT, true, true, null)
                 }
-
             }
         }
     }
@@ -58,7 +57,7 @@ class ReservationCancelCompleteFragment : Fragment() {
 
     fun settingButton(){
         fragmentReservationCancelCompleteBinding.apply{
-            reservationCancelButton.apply {
+            reservationCancelButton.setOnClickListener {
                 reserveActivity.replaceFragment(ReserveFragmentName.RESERVATION_FRAGMENT, true, true, null)
             }
         }

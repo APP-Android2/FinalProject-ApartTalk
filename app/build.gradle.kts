@@ -1,8 +1,16 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
 }
+
+val localProperties = Properties()
+localProperties.load(project.rootProject.file("local.properties").inputStream())
+val kakaoApikey = localProperties.getProperty("KAKAO_API_KEY")?:""
+val nativeAppkey = localProperties.getProperty("NATIVE_APP_KEY")?:""
+val kakaoRestApiKey = localProperties.getProperty("KAKAO_REST_API_KEY")?:""
 
 android {
     namespace = "kr.co.lion.application.finalproject_aparttalk"
@@ -14,6 +22,10 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "KAKAO_API_KEY", kakaoApikey)
+        buildConfigField("String", "KAKAO_REST_API_KEY", kakaoRestApiKey)
+        manifestPlaceholders["NATIVE_APP_KEY"] = nativeAppkey
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,6 +47,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures{
+        buildConfig = true
         viewBinding = true
         dataBinding = true
     }
@@ -87,4 +100,14 @@ dependencies {
 
     // Gson 라이브러리
     implementation("com.google.code.gson:gson:2.10.1")
+    
+    implementation ("com.kakao.sdk:v2-all:2.20.1")
+    implementation ("com.kakao.maps.open:android:2.9.5")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 }

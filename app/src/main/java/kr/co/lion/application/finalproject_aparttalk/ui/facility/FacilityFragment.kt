@@ -6,19 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.kakao.sdk.common.KakaoSdk
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFacilityBinding
-import kr.co.lion.application.finalproject_aparttalk.model.FacilityData
+import kr.co.lion.application.finalproject_aparttalk.model.FacilityModel
 import kr.co.lion.application.finalproject_aparttalk.ui.facility.adapter.FacilityAdapter
 
 class FacilityFragment : Fragment() {
 
     lateinit var binding:FragmentFacilityBinding
 
-    private val itemList: MutableList<FacilityData> = mutableListOf()
+    private val itemList: MutableList<FacilityModel> = mutableListOf()
 
     val facilityAdapter : FacilityAdapter by lazy {
         val adapter = FacilityAdapter()
@@ -55,7 +54,7 @@ class FacilityFragment : Fragment() {
                     R.drawable.test_facility
                 )
                 for (i in images.indices) {
-                    itemList.add(FacilityData(null, images[i], "Item ${i + 1}"))
+                    itemList.add(FacilityModel(null, images[i], "Item ${i + 1}"))
                 }
 
                 // 어댑터 설정
@@ -66,4 +65,5 @@ class FacilityFragment : Fragment() {
             }
         }
     }
+
 }

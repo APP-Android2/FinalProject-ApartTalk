@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentViewFAQBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentViewMyQBinding
+import kr.co.lion.application.finalproject_aparttalk.util.ServiceFragmentName
 
 
 class ViewFAQFragment : Fragment() {
@@ -22,6 +23,7 @@ class ViewFAQFragment : Fragment() {
         fragmentViewFAQBinding = FragmentViewFAQBinding.inflate(layoutInflater)
         serviceActivity = activity as ServiceActivity
 
+        settingToolbar()
         // Inflate the layout for this fragment
         return fragmentViewFAQBinding.root
     }
@@ -29,11 +31,12 @@ class ViewFAQFragment : Fragment() {
     fun settingToolbar(){
         fragmentViewFAQBinding.apply {
             viewFAQToolbar.apply {
+                textViewViewFAQToolbarTitle.text = "자주 묻는 질문"
                 // 뒤로가기
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기.
-                    serviceActivity.finish()
+                    serviceActivity.replaceFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
                 }
             }
         }
