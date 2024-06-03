@@ -25,17 +25,26 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityAddBinding
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
+import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostDataSource
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityAddImageViewPager2Adapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityAddViewModel
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
+import kr.co.lion.application.finalproject_aparttalk.util.PostState
+import kr.co.lion.application.finalproject_aparttalk.util.PostType
 import kr.co.lion.application.finalproject_aparttalk.util.Tools
+import java.text.SimpleDateFormat
+import java.util.Date
 
-class CommunityAddFragment(data: Bundle?) : Fragment(), CommunityAddImageViewPager2Adapter.OnItemClickListner {
+class CommunityAddFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityAddBinding: FragmentCommunityAddBinding
     lateinit var communityActivity: CommunityActivity
     private val viewModel: CommunityAddViewModel by viewModels()
@@ -60,7 +69,7 @@ class CommunityAddFragment(data: Bundle?) : Fragment(), CommunityAddImageViewPag
         communityActivity = activity as CommunityActivity
 
         settingToolbar()
-        settingData()
+        settingInputForm()
         settingAlbumLauncher(imageUploadPossible)
         settingViewPager2CommunityAddImage()
         settingButtonCommunityAdd()
@@ -88,6 +97,22 @@ class CommunityAddFragment(data: Bundle?) : Fragment(), CommunityAddImageViewPag
         fragmentCommunityAddBinding.viewPager2CommunityAddImage.adapter?.notifyDataSetChanged()
     }
 
+    // 커뮤니티 글 작성 뷰페이저 설정
+    private fun settingViewPager2CommunityAddImage() {
+        fragmentCommunityAddBinding.apply {
+            viewPager2CommunityAddImage.apply {
+                imageCommunityAddBitmapList.add(getBitmapFromDrawable())
+                adapter = CommunityAddImageViewPager2Adapter(requireContext(), imageCommunityAddBitmapList, this@CommunityAddFragment)
+            }
+
+            circleIndicatorCommunityAdd.setViewPager(viewPager2CommunityAddImage)
+            viewPager2CommunityAddImage.adapter?.registerAdapterDataObserver(
+                circleIndicatorCommunityAdd.adapterDataObserver
+            )
+        }
+    }
+
+    // Bitmap으로 반환
     fun getBitmapFromDrawable(): Bitmap {
         val drawable = resources.getDrawable(R.drawable.community_add_default)
         val canvas = Canvas()
@@ -185,38 +210,26 @@ class CommunityAddFragment(data: Bundle?) : Fragment(), CommunityAddImageViewPag
         }
     }
 
-    // 커뮤니티 글 작성 뷰페이저 설정
-    private fun settingViewPager2CommunityAddImage() {
-        fragmentCommunityAddBinding.apply {
-            viewPager2CommunityAddImage.apply {
-                imageCommunityAddBitmapList.add(getBitmapFromDrawable())
-                adapter = CommunityAddImageViewPager2Adapter(requireContext(), imageCommunityAddBitmapList, this@CommunityAddFragment)
-            }
-
-            circleIndicatorCommunityAdd.setViewPager(viewPager2CommunityAddImage)
-            viewPager2CommunityAddImage.adapter?.registerAdapterDataObserver(
-                circleIndicatorCommunityAdd.adapterDataObserver
-            )
-        }
-    }
-
-    // 데이터 설정
-    private fun settingData() {
+    // 드롭다운 설정
+    fun settingTextInputLayoutCommunityAddType() {
         fragmentCommunityAddBinding.apply {
             // 드롭다운 설정
             val typeArray = resources.getStringArray(R.array.type_community)
             val typeArrayAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_community_add, typeArray)
             textViewCommunityAddType.setAdapter(typeArrayAdapter)
-
-            // 입력요소 설정
-            viewModel.textViewCommunityAddSubject.observe(viewLifecycleOwner) { subject ->
-                textViewCommunityAddSubject.setText(subject)
-                Log.d("hyuun", textViewCommunityAddSubject.toString())
-            }
-            viewModel.textViewCommunityAddContent.observe(viewLifecycleOwner) {content ->
-                textViewCommunityAddContent.setText(content)
-            }
         }
+    }
+
+    // 입력 요소 설정
+    fun settingInputForm() {
+        viewModel.initializeType()
+        viewModel.initializeSubject()
+        viewModel.initializeContent()
+        settingTextInputLayoutCommunityAddType()
+
+        isAddImage = false
+
+        Tools.showSoftInput(requireContext(), fragmentCommunityAddBinding.textViewCommunityAddSubject)
     }
 
     // 등록 버튼 활성화 / 비활성화
@@ -261,24 +274,84 @@ class CommunityAddFragment(data: Bundle?) : Fragment(), CommunityAddImageViewPag
             textViewCommunityAddContent.addTextChangedListener(textWatcher)
 
             buttonCommunityAdd.setOnClickListener {
-                val dialog = DialogConfirm(
-                    "게시글 등록 완료",
-                    "게시글 등록이 완료되었습니다.\n확인하러 가시겠습니까?",
-                    communityActivity
-                )
-                dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
-                    override fun okButtonClick() {
-                        dialog.dismiss()
-                    }
 
-                })
-                dialog.show(communityActivity.supportFragmentManager, "DialogConfirm")
+                CoroutineScope(Dispatchers.Main).launch {
+                    // 글 객체 생성
+                    postData = generatingPostObject()
+                    // 글 데이터 업로드
+                    uploadCommunityPostData(postData!!.postIdx)
+
+                    val dialog = DialogConfirm(
+                        "게시글 등록 완료",
+                        "게시글 등록이 완료되었습니다.\n확인하러 가시겠습니까?",
+                        communityActivity
+                    )
+                    dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
+                        override fun okButtonClick() {
+                            communityActivity.finish()
+                        }
+
+                    })
+                    dialog.show(communityActivity.supportFragmentManager, "DialogConfirm")
+                }
             }
         }
     }
 
-    override fun onItemClick(view: View, position: Int) {
-        getBitmapFromDrawable()
+    // 게시글 객체 생성
+    suspend fun generatingPostObject() : PostData {
+        fragmentCommunityAddBinding.apply {
+
+            var postData = PostData()
+
+            val userIdx = 0
+
+            val job1 = CoroutineScope(Dispatchers.Main).launch {
+                // 게시글 시퀀스 값을 가져오기
+                val communityPostSequence = viewModel.getCommunityPostSequence()
+                // 게시글 시퀀스 값을 업데이트 한다.
+                viewModel.updateCommunityPostSequence(communityPostSequence + 1)
+
+                // 업로드할 정보를 담아준다.
+                postData.postIdx = communityPostSequence + 1
+                postData.postTitle = textViewCommunityAddSubject.text.toString()
+                if (viewModel.communityPostAddType.value == "질문") {
+                    postData.postType = PostType.TYPE_QUESTION.str
+                } else if (viewModel.communityPostAddType.value == "거래") {
+                    postData.postType = PostType.TYPE_TRADE.str
+                } else {
+                    postData.postType = PostType.TYPE_ETC.str
+                }
+                postData.postContent = textViewCommunityAddContent.text.toString()
+                postData.postLikeCnt = 0
+                postData.postCommentCnt = 0
+                postData.postImages = mutableListOf<String>()
+                postData.postUserIdx = userIdx
+
+                val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
+                postData.postAddDate = simpleDateFormat.format(Date())
+                postData.postModifyDate = simpleDateFormat.format(Date())
+                postData.postState = PostState.POST_STATE_NORMAL.number
+            }
+            job1.join()
+
+            return postData
+        }
+    }
+
+    // 게시글 작성
+    private fun uploadCommunityPostData(postIdx: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            // 첨부된 이미지가 있다면
+            if (isAddImage == true) {
+                // 서버로 업로드
+                val uploadList = viewModel.uploadImage(requireContext(), postIdx, imageCommunityAddUriList)
+                postData!!.postImages = uploadList
+            } else {
+                postData!!.postImages = null
+            }
+            viewModel.insertCommunityPostData(postData!!)
+        }
     }
 
 }

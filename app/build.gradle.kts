@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.navigation.fragment)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -79,4 +80,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx:22.0.0")
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
+
+    // glide
+    implementation ("com.firebaseui:firebase-ui-storage:7.2.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

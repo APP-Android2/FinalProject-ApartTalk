@@ -11,10 +11,6 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityAdd
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityAddFragment
 
 class CommunityAddImageViewPager2Adapter(val context : Context, var imageCommunityAddBitmapList: MutableList<Bitmap>, var fragment: CommunityAddFragment) : RecyclerView.Adapter<CommunityAddImageViewPager2Adapter.CommunityAddImageViewHolder>(){
-
-    interface OnItemClickListner{
-        fun onItemClick(view: View, position: Int)
-    }
     
     inner class CommunityAddImageViewHolder(rowCommunityAddImageBinding: RowCommunityAddImageBinding) : RecyclerView.ViewHolder(rowCommunityAddImageBinding.root) {
         val rowCommunityAddImageBinding: RowCommunityAddImageBinding
