@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.common.collect.MapMaker
+import com.kakao.vectormap.CurveType
 import com.kakao.vectormap.KakaoMap
 import com.kakao.vectormap.KakaoMapReadyCallback
 import com.kakao.vectormap.KakaoMapSdk
@@ -25,6 +26,11 @@ import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.LabelStyles
 import com.kakao.vectormap.label.LabelTextStyle
+import com.kakao.vectormap.route.RouteLineOptions
+import com.kakao.vectormap.route.RouteLineSegment
+import com.kakao.vectormap.route.RouteLineStyle
+import com.kakao.vectormap.route.RouteLineStyles
+import com.kakao.vectormap.route.RouteLineStylesSet
 import com.kakao.vectormap.shape.MapPoints
 import kr.co.lion.application.finalproject_aparttalk.BuildConfig
 import kr.co.lion.application.finalproject_aparttalk.R
@@ -122,13 +128,16 @@ class LocationShowActivity : AppCompatActivity() {
 
         // 라벨 추가
         settingLabel()
+
+        //RouteLine 추가
+        //settingRouteLine()
     }
 
     private fun settingLabel() {
         val x = intent?.getStringExtra("x")?.toDoubleOrNull()
         val y = intent?.getStringExtra("y")?.toDoubleOrNull()
 
-        val styles = kakaoMap.labelManager?.addLabelStyles(LabelStyles.from(LabelStyle.from(R.drawable.icon_flag)
+        val styles = kakaoMap.labelManager?.addLabelStyles(LabelStyles.from(LabelStyle.from(R.drawable.location_map_label)
             .setAnchorPoint(0.5f, 0.5f)))
 
         val options = LabelOptions.from(LatLng.from(y?:0.0, x?:0.0))
@@ -151,5 +160,36 @@ class LocationShowActivity : AppCompatActivity() {
             // 레이어가 null이면
         }
 
+    }
+
+    //RouteLine 만들기
+    private fun settingRouteLine(){
+
+        val x = intent?.getStringExtra("x")?.toDoubleOrNull()
+        val y = intent?.getStringExtra("y")?.toDoubleOrNull()
+
+        //RouteLineLayer 가져오기
+        val layer = kakaoMap.routeLineManager?.layer
+
+        //RouteLineStyleSet 생성하기
+        val styleSet = RouteLineStylesSet.from("third", RouteLineStyles.from(RouteLineStyle.from(10.0f, R.color.third)))
+
+        //RouteLineSegment 생성
+        val segment = RouteLineSegment.from(listOf(
+            LatLng.from(y?:0.0, x?:0.0),
+            LatLng.from(37.6114538, 126.938461)
+        )).setStyles(styleSet.getStyles(0))
+            .setCurveType(CurveType.LeftCurve)
+
+        //RouteLineStyleSet 추가하고 RouteLineOptions 생성
+        val options = RouteLineOptions.from(segment)
+            .setStylesSet(styleSet)
+
+
+        //RouteLineLayer에 추가하여 RouteLine 생성하기
+        val routeLine = layer?.addRouteLine(options)
+        routeLine?.show()
+
+        Log.d("test1234", "$routeLine")
     }
 }
