@@ -11,7 +11,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/containerViewFireCheck"
-        android:name="kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckMainFragment"
+        android:name="kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.fragment.FireCheckMainFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

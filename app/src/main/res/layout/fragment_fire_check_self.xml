@@ -7,7 +7,7 @@
     android:background="#FFFFFF"
     android:orientation="vertical"
     android:transitionGroup="true"
-    tools:context=".ui.entiremenu.FireCheck.FireCheckSelfFragment">
+    tools:context=".ui.entiremenu.FireCheck.fragment.FireCheckSelfFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarFireCheck2"
