@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.auth.FirebaseAuthService
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityLoginBinding
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
 import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
@@ -20,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var signActivityLauncher: ActivityResultLauncher<Intent>
 
-    val authRepository: AuthRepository by lazy { AuthRepository(FirebaseAuthService()) }
+    val authRepository: AuthRepository by lazy { AuthRepository(FirebaseAuthService(), LocalUserDataSource(this@LoginActivity), LocalApartmentDataSource(this@LoginActivity)) }
     val userRepository: UserRepository by lazy { UserRepository(UserDataSource(), LocalUserDataSource(this@LoginActivity)) }
     private val viewModel: LoginViewModel by viewModels { LoginViewModelFactory(authRepository, userRepository) }
 
@@ -29,20 +30,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userAuthenticationState()
         initializeActivityResultLauncher()
         showPermissionBottomSheet()
-    }
-
-    private fun userAuthenticationState(){
-        viewModel.userAuthenticationState.observe(this@LoginActivity) { event ->
-            when (event) {
-                is NavigationLoginEvent.NavigationToMain -> { navigateToMain() }
-                is NavigationLoginEvent.NavigationToSignUp -> { launchSignActivity() }
-                is NavigationLoginEvent.NavigationToLogin -> { }
-                else -> { }
-            }
-        }
     }
 
     private fun initializeActivityResultLauncher(){

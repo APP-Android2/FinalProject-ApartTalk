@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp4Binding
+import kr.co.lion.application.finalproject_aparttalk.model.ApartmentModel
 
 class SignUp4Fragment : Fragment() {
 
@@ -20,8 +21,13 @@ class SignUp4Fragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SignUpViewModel by viewModels{
-        SignUpViewModelFactory((requireActivity() as SignUpActivity).userRepository)
+        SignUpViewModelFactory(
+            (requireActivity() as SignUpActivity).userRepository,
+            (requireActivity() as SignUpActivity).apartmentRepository
+        )
     }
+
+    private lateinit var apartmentList: List<ApartmentModel>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSignUp4Binding.inflate(inflater)
@@ -46,6 +52,9 @@ class SignUp4Fragment : Fragment() {
                 false -> {binding.signup4RadioButtonDefer.isChecked = true}
             }
         }
+        viewModel.apartmentList.observe(viewLifecycleOwner){
+            apartmentList = it
+        }
     }
 
     private fun searchApartButton() {
@@ -55,17 +64,17 @@ class SignUp4Fragment : Fragment() {
     }
 
     private fun showApartListBottomSheet() {
-        val apartmentBottomSheetFragment = ApartmentBottomSheetFragment{ apartName, apartAddress ->
-            onApartSelected(apartName, apartAddress)
+        val apartmentBottomSheetFragment = ApartmentBottomSheetFragment(apartmentList){ apartmentName, apartmentUid ->
+            onApartSelected(apartmentName, apartmentUid)
         }
         apartmentBottomSheetFragment.show(requireActivity().supportFragmentManager, apartmentBottomSheetFragment.tag)
     }
 
-    private fun onApartSelected(apartName: String, apartAddress: String){
-        binding.signup4ApartName.text = apartName
-        viewModel.setApartInfo(apartName, apartAddress)
-        updateButtonState(apartName.isNotEmpty())
-        updateApartDongHoState(apartName.isNotEmpty())
+    private fun onApartSelected(apartmentName: String, apartmentUid: String){
+        binding.signup4ApartName.text = apartmentName
+        viewModel.setApartInfo(apartmentUid)
+        updateButtonState(apartmentName.isNotEmpty())
+        updateApartDongHoState(apartmentName.isNotEmpty())
         viewModel.resetApartDongHo()
         viewModel.resetApartCertification()
     }

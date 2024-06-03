@@ -1,7 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.db.local
 
 import android.content.Context
-import android.content.SharedPreferences
 import com.google.gson.Gson
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 
@@ -23,5 +22,10 @@ class LocalUserDataSource(context: Context) {
         val userJson = sharedPreferences.getString("user", null) ?: return null
         cachedUser = gson.fromJson(userJson, UserModel::class.java)
         return cachedUser
+    }
+
+    fun clearUser() {
+        cachedUser = null
+        sharedPreferences.edit().remove("user").apply()
     }
 }

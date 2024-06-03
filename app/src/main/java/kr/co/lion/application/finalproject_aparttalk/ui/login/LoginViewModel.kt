@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
@@ -16,24 +17,29 @@ class LoginViewModel(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private val _userAuthenticationState = MutableLiveData<NavigationLoginEvent>()
-    val userAuthenticationState: LiveData<NavigationLoginEvent> = _userAuthenticationState
-
+    private val _userAuthenticationState = MutableLiveData<NavigationState>().apply { value = NavigationState.TO_LOGIN }
+    val userAuthenticationState: LiveData<NavigationState> = _userAuthenticationState
 
     init {
         isAuthenticated()
     }
 
-    private fun isAuthenticated() = viewModelScope.launch {
-        val currentUser = authRepository.getCurrentUser() ?: return@launch
-        val user = userRepository.getUser(currentUser.uid) ?: return@launch  // =0.8초 소요
-        _userAuthenticationState.value = when(user.completeInputUserInfo){
-            true -> { NavigationLoginEvent.NavigationToMain }
-            false -> { NavigationLoginEvent.NavigationToSignUp }
+    private fun isAuthenticated() = viewModelScope.launch(Dispatchers.Main) {
+        val currentUser = authRepository.getCurrentUser()
+        if (currentUser == null) {
+            _userAuthenticationState.value = NavigationState.TO_LOGIN
+            return@launch
         }
+        val user = userRepository.getUser(currentUser.uid)  // =0.8초 소요
+        _userAuthenticationState.value = when (user?.completeInputUserInfo) {
+            true -> { NavigationState.TO_MAIN }
+            false -> { NavigationState.TO_SIGNUP }
+            else -> { NavigationState.TO_LOGIN }
+        }
+
     }
 
-    fun googleLogin(context: Context) = viewModelScope.launch {
+    fun googleLogin(context: Context) = viewModelScope.launch(Dispatchers.Main) {
         try {
             val googleCredential = authRepository.getGoogleCredential(context) ?: return@launch
             val authResult = authRepository.signInWithGoogle(googleCredential)
@@ -62,17 +68,18 @@ class LoginViewModel(
                 )
                 userRepository.createUser(newUser)
                 // SignUp 이동
-                _userAuthenticationState.value = NavigationLoginEvent.NavigationToSignUp
+                _userAuthenticationState.value = NavigationState.TO_SIGNUP
                 return@launch
             }
 
-            _userAuthenticationState.value = when(user.completeInputUserInfo){
-                true -> { NavigationLoginEvent.NavigationToMain }
-                false -> { NavigationLoginEvent.NavigationToSignUp }
+            _userAuthenticationState.value = when (user.completeInputUserInfo) {
+                true -> { NavigationState.TO_MAIN }
+                false -> { NavigationState.TO_SIGNUP }
             }
 
         } catch (e: Exception) {
             Log.d("test1234", "${e.message}")
         }
+        Log.d("test1234", "authState: ${_userAuthenticationState.value}")
     }
 }

@@ -5,12 +5,22 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.auth.AuthResult
 import kr.co.lion.application.finalproject_aparttalk.auth.FirebaseAuthService
 import kr.co.lion.application.finalproject_aparttalk.auth.GoogleCredentialManagerService
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
 
-class AuthRepository(private val firebaseAuthService: FirebaseAuthService) {
+class AuthRepository(
+    private val firebaseAuthService: FirebaseAuthService,
+    private val localUserDataSource: LocalUserDataSource,
+    private val localApartmentDataSource: LocalApartmentDataSource
+) {
 
     fun getCurrentUser() = firebaseAuthService.getCurrentUser()
 
-    fun signOut() = firebaseAuthService.signOut()
+    fun signOut() {
+        firebaseAuthService.signOut()
+        localUserDataSource.clearUser()
+        localApartmentDataSource.clearApartment()
+    }
 
     suspend fun signInWithGoogle(googleAccount: GoogleIdTokenCredential): AuthResult {
         return firebaseAuthService.signInWithGoogle(googleAccount)

@@ -1,6 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.login
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,10 +31,21 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        aaa()
         googleLoginButton()
         kakaoLoginButton()
         socialLoginButton()
         phoneLoginButton()
+    }
+
+    private fun aaa(){
+        viewModel.userAuthenticationState.observe(viewLifecycleOwner){ state ->
+            when (state) {
+                NavigationState.TO_MAIN -> { (requireActivity() as LoginActivity).navigateToMain() }
+                NavigationState.TO_SIGNUP -> { (requireActivity() as LoginActivity).launchSignActivity() }
+                else -> { Log.d("test1234","act else : ${state}") }
+            }
+        }
     }
 
     private fun googleLoginButton() {

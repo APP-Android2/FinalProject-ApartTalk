@@ -21,7 +21,10 @@ class SignUp2Fragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: SignUpViewModel by viewModels{
-        SignUpViewModelFactory((requireActivity() as SignUpActivity).userRepository)
+        SignUpViewModelFactory(
+            (requireActivity() as SignUpActivity).userRepository,
+            (requireActivity() as SignUpActivity).apartmentRepository
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {

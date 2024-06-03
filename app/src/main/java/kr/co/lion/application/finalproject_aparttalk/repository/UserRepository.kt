@@ -52,7 +52,7 @@ class UserRepository(
         localUserDataSource.saveUser(user)
     }
 
-    suspend fun getApartmentUserList(apartmentUid: String) = userDataSource.getApartmentUserList(apartmentUid)
+    suspend fun getApartmentUserList(apartmentUid: String): List<UserModel?> = userDataSource.getApartmentUserList(apartmentUid)
 
     suspend fun isExistUser(uid: String): Boolean = userDataSource.isExistUser(uid)
 }
