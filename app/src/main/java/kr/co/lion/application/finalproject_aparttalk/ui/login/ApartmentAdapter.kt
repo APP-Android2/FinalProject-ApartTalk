@@ -4,18 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.ItemApartmentBinding
+import kr.co.lion.application.finalproject_aparttalk.model.ApartmentModel
 
 class ApartmentAdapter(
-    private var apartments: List<Pair<String, String>>,
-    private val onItemClicked: (apartmentName: String, apartmentAddress: String) -> Unit
+    private var apartments: List<ApartmentModel>,
+    private val onItemClicked: (apartmentName: String, apartmentUid: String) -> Unit
 ) : RecyclerView.Adapter<ApartmentAdapter.ApartmentViewHolder>() {
 
     inner class ApartmentViewHolder(private val binding: ItemApartmentBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(apartment: Pair<String, String>) {
-            binding.itemApartmentName.text = apartment.first
-            binding.itemApartmentAddress.text = apartment.second
+        fun bind(apartment: ApartmentModel) {
+            binding.itemApartmentName.text = apartment.name
+            binding.itemApartmentAddress.text = apartment.address
             binding.root.setOnClickListener {
-                onItemClicked(apartment.first, apartment.second)
+                onItemClicked(apartment.name, apartment.uid)
             }
         }
     }
@@ -31,7 +32,7 @@ class ApartmentAdapter(
         holder.bind(apartments[position])
     }
 
-    fun updateData(newApartments: List<Pair<String, String>>) {
+    fun updateData(newApartments: List<ApartmentModel>) {
         apartments = newApartments
         notifyDataSetChanged()
     }

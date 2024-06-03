@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp1Binding
@@ -18,7 +18,12 @@ class SignUp1Fragment : Fragment() {
     private var _binding: FragmentSignUp1Binding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SignUpViewModel by activityViewModels()
+    private val viewModel: SignUpViewModel by viewModels{
+        SignUpViewModelFactory(
+            (requireActivity() as SignUpActivity).userRepository,
+            (requireActivity() as SignUpActivity).apartmentRepository
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSignUp1Binding.inflate(inflater, container, false)
@@ -37,9 +42,12 @@ class SignUp1Fragment : Fragment() {
     }
 
     private fun initializeDataStates() {
-        binding.signup1Checkbox1.isChecked = viewModel.checkbox1Checked
-        binding.signup1Checkbox2.isChecked = viewModel.checkbox2Checked
-        binding.signup1Checkbox3.isChecked = viewModel.checkbox3Checked
+
+        viewModel.user.value?.let {
+            binding.signup1Checkbox1.isChecked = it.agreementCheck1
+            binding.signup1Checkbox2.isChecked = it.agreementCheck2
+            binding.signup1Checkbox3.isChecked = it.agreementCheck3
+        }
 
         checkAllCheckBoxState()
     }
@@ -51,27 +59,20 @@ class SignUp1Fragment : Fragment() {
             binding.signup1Checkbox1.isChecked = isCheckedAll
             binding.signup1Checkbox2.isChecked = isCheckedAll
             binding.signup1Checkbox3.isChecked = isCheckedAll
-
-            viewModel.checkbox1Checked = isCheckedAll
-            viewModel.checkbox2Checked = isCheckedAll
-            viewModel.checkbox3Checked = isCheckedAll
             updateButtonState()
         }
 
         binding.signup1Checkbox1.setOnClickListener {
-            viewModel.checkbox1Checked = binding.signup1Checkbox1.isChecked
             checkAllCheckBoxState()
             updateButtonState()
         }
 
         binding.signup1Checkbox2.setOnClickListener {
-            viewModel.checkbox2Checked = binding.signup1Checkbox2.isChecked
             checkAllCheckBoxState()
             updateButtonState()
         }
 
         binding.signup1Checkbox3.setOnClickListener {
-            viewModel.checkbox3Checked = binding.signup1Checkbox3.isChecked
             checkAllCheckBoxState()
         }
     }
@@ -107,6 +108,10 @@ class SignUp1Fragment : Fragment() {
 
     private fun nextButton(){
         binding.signup1AgreeButton.setOnClickListener {
+            val check1 = binding.signup1Checkbox1.isChecked
+            val check2 = binding.signup1Checkbox2.isChecked
+            val check3 = binding.signup1Checkbox3.isChecked
+            viewModel.setAgreeCheckBox(check1, check2, check3)
             findNavController().navigate(R.id.action_signUp1Fragment_to_signUp2Fragment)
         }
     }
