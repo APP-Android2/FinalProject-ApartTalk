@@ -30,8 +30,6 @@ class TabNotificationFragment : Fragment() {
     lateinit var mainActivity: MainActivity
     private val viewModel: CommunityNotificationViewModel by viewModels()
 
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         fragmentTabNotificationBinding = FragmentTabNotificationBinding.inflate(inflater)
