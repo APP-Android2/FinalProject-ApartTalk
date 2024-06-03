@@ -72,7 +72,7 @@ class PharmacyLocationFragment : Fragment() {
         })
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.searchEachLocationPlace("PM9", "127.05897078335246", "37.506051888130386", 2000)
+            viewModel.searchEachLocationPlace("PM9", "126.938461", "37.6114538", 2000)
         }
     }
 }

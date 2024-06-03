@@ -71,7 +71,7 @@ class FoodLocationFragment : Fragment() {
         })
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.searchEachLocationPlace("FD6", "127.05897078335246", "37.506051888130386", 2000)
+            viewModel.searchEachLocationPlace("FD6", "126.938461", "37.6114538", 2000)
         }
     }
 }
