@@ -39,12 +39,15 @@ class LoginActivity : AppCompatActivity() {
             if (result.resultCode == Activity.RESULT_OK) {
                 finish()
             }
+            else{
+                authRepository.signOut()
+            }
         }
     }
 
     private fun showPermissionBottomSheet(){
         val bottomSheet = PermissionBottomSheetFragment()
-        bottomSheet.show(supportFragmentManager, "PermissionBottomSheetFragment")
+        bottomSheet.show(supportFragmentManager, bottomSheet.tag)
     }
 
     fun navigateToMain(){
