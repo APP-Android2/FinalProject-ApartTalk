@@ -8,11 +8,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivitySignUpBinding
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
+import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
-    private val viewModel: SignUpViewModel by viewModels()
+
+    val userRepository: UserRepository by lazy { UserRepository(UserDataSource(), LocalUserDataSource(this@SignUpActivity)) }
+    private val viewModel: SignUpViewModel by viewModels { SignUpViewModelFactory(userRepository) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

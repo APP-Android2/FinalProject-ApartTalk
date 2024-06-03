@@ -1,149 +1,164 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.model.UserModel
+import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 
-class SignUpViewModel : ViewModel() {
+class SignUpViewModel(private val userRepository: UserRepository) : ViewModel() {
 
-    private val _loginType = MutableLiveData<String>()
-    val loginType: LiveData<String> get() = _loginType
+    private val _user = MutableLiveData<UserModel>()
+    val user: LiveData<UserModel> get() = _user
 
-    fun setLoginType(loginType: String){
-        _loginType.value = loginType
+    private var initializeUserData: UserModel? = null
+
+    init {
+        getUserInfo()
     }
 
-    // 회원 정보 입력 완료 여부
-    private val _isCompleteInputUserInfo = MutableLiveData<Boolean>().apply { value = false }
-    val isCompleteInputUserInfo: LiveData<Boolean> get() = _isCompleteInputUserInfo
-
-    fun setIsCompleteInputUserInfo(isComplete: Boolean){
-        _isCompleteInputUserInfo.value = isComplete
-    }
-
-    // 회원 아파트 인증 여부
-    private val _isApartCertification = MutableLiveData<Boolean>().apply { value = false }
-    val isApartCertification: LiveData<Boolean> get() = _isApartCertification
-
-    fun initializeIsApartCertification(){
-        _isApartCertification.value = false
-    }
-    fun setIsApartCertification(isCertification: Boolean){
-        _isApartCertification.value = isCertification
+    private fun getUserInfo() = viewModelScope.launch {
+        val authUser = FirebaseAuth.getInstance().currentUser ?: return@launch
+        _user.value = userRepository.getUser(authUser.uid)
+        initializeUserData = _user.value?.copy()
     }
 
     // --- SignUp1 ---
-    var checkbox1Checked: Boolean = false
-    var checkbox2Checked: Boolean = false
-    var checkbox3Checked: Boolean = false
+    fun resetAgreeCheckBox(){
+        if(_user.value != null && initializeUserData != null){
+            _user.value!!.agreementCheck1 = initializeUserData!!.agreementCheck1
+            _user.value!!.agreementCheck2 = initializeUserData!!.agreementCheck2
+            _user.value!!.agreementCheck3 = initializeUserData!!.agreementCheck3
+        }
+    }
+
+    fun setAgreeCheckBox(check1: Boolean, check2: Boolean, check3: Boolean){
+        _user.value?.let {
+            it.agreementCheck1 = check1
+            it.agreementCheck2 = check2
+            it.agreementCheck3 = check3
+        }
+    }
 
     // --- SignUp2 ---
-    private val _name = MutableLiveData<String>()
-    val name: LiveData<String> get() = _name
-
-    fun initializeName(){
-        _name.value = ""
+    fun resetName(){
+        if(_user.value != null && initializeUserData != null){
+            _user.value!!.name = initializeUserData!!.name
+        }
     }
 
     fun setName(name: String){
-        _name.value = name
+        _user.value?.let {
+            it.name = name
+        }
     }
 
-    private val _birthYear = MutableLiveData<Int?>()
-    val birthYear: LiveData<Int?> get() = _birthYear
-
-    private val _birthMonth = MutableLiveData<Int?>()
-    val birthMonth: LiveData<Int?> get() = _birthMonth
-
-    private val _birthDay = MutableLiveData<Int?>()
-    val birthDay: LiveData<Int?> get() = _birthDay
-
-    fun initializeBirthDate(){
-        _birthYear.value = null
-        _birthMonth.value = null
-        _birthDay.value = null
+    fun resetBirthDate(){
+        if(_user.value != null && initializeUserData != null){
+            _user.value!!.birthYear = initializeUserData!!.birthYear
+            _user.value!!.birthMonth = initializeUserData!!.birthMonth
+            _user.value!!.birthDay = initializeUserData!!.birthDay
+        }
     }
 
     fun setBirthDate(year: Int?, month: Int?, day: Int?) {
-        _birthYear.value = year
-        _birthMonth.value = month
-        _birthDay.value = day
+        _user.value?.let {
+            it.birthYear = year
+            it.birthMonth = month
+            it.birthDay = day
+        }
     }
 
     // --- SignUp3 ---
-    private val _gender = MutableLiveData<String>().apply { value = "선택안함" }
-    val gender: LiveData<String> get() = _gender
-
-    fun initializeGender(){
-        _gender.value = "선택안함"
+    fun resetGender(){
+        if(_user.value != null && initializeUserData != null){
+            _user.value!!.gender = initializeUserData!!.gender
+        }
     }
 
     fun setGender(gender: String) {
-        _gender.value = gender
+        _user.value?.let {
+            it.gender = gender
+        }
     }
 
-    private val _email = MutableLiveData<String>()
-    val email: LiveData<String> get() = _email
-
-    fun initializeEmail(){
-        _email.value = ""
+    fun resetEmail(){
+        if(_user.value != null && initializeUserData != null){
+            _user.value!!.email = initializeUserData!!.email
+        }
     }
 
     fun setEmail(email: String) {
-        _email.value = email
+        _user.value?.let {
+            it.gender = email
+        }
     }
 
     // --- SignUp4 ---
-    private val _apartName = MutableLiveData<String>()
-    val apartName: LiveData<String> get() = _apartName
-
-    private val _apartAddress = MutableLiveData<String>()
-    val apartAddress: LiveData<String> get() = _apartAddress
-
-    private val _apartDong = MutableLiveData<Int?>()
-    val apartDong: LiveData<Int?> get() = _apartDong
-
-    private val _apartHo = MutableLiveData<Int?>()
-    val apartHo: LiveData<Int?> get() = _apartHo
-
-    fun initializeApartInfo(){
-        _apartName.value = ""
-        _apartAddress.value = ""
-        _apartDong.value = null
-        _apartHo.value = null
+    fun resetApartInfo(){
+        if(_user.value != null && initializeUserData != null){
+            _user.value!!.apartmentUid = initializeUserData!!.apartmentUid
+            _user.value!!.apartmentDong = initializeUserData!!.apartmentDong
+            _user.value!!.apartmentHo = initializeUserData!!.apartmentHo
+        }
     }
 
-    fun initializeApartDongHo(){
-        _apartDong.value = null
-        _apartHo.value = null
+    fun resetApartDongHo(){
+        if(_user.value != null && initializeUserData != null){
+            _user.value!!.apartmentDong = initializeUserData!!.apartmentDong
+            _user.value!!.apartmentHo = initializeUserData!!.apartmentHo
+        }
     }
 
     fun setApartInfo(apartName: String, apartAddress: String) {
-        _apartName.value = apartName
-        _apartAddress.value = apartAddress
+        _user.value?.let {
+            it.apartmentUid = apartName
+        }
     }
 
     fun setApartDongHo(dong: Int, ho: Int){
-        _apartDong.value = dong
-        _apartHo.value = ho
+        _user.value?.let {
+            it.apartmentDong = dong
+            it.apartmentHo = ho
+        }
     }
 
-    fun userAllInfo(){
+    fun resetApartCertification(){
+        if(_user.value != null && initializeUserData != null){
+            _user.value!!.apartCertification = initializeUserData!!.apartCertification
+        }
+    }
+    fun setApartCertification(isCertification: Boolean){
+        _user.value?.let {
+            it.apartCertification = isCertification
+        }
+    }
 
-        var s = "로그인 타입 : ${_loginType.value}\n" +
-                "회원 정보 입력 완료 여부 : ${_isCompleteInputUserInfo.value}\n" +
-                "회원 아파트 인증 여부 : ${_isApartCertification.value}\n" +
-                "체크1 : ${checkbox1Checked}\n" +
-                "체크2 : ${checkbox2Checked}\n" +
-                "체크3 : ${checkbox3Checked}\n" +
-                "생년월일 : ${_birthYear.value}년 ${_birthMonth.value}월 ${_birthDay.value}일\n" +
-                "성별 : ${_gender.value}\n" +
-                "이메일 : ${_email.value}\n" +
-                "아파트 이름 : ${_apartName.value}\n" +
-                "아파트 주소 : ${_apartAddress.value}\n" +
-                "${_apartDong.value}동 ${_apartHo.value}호"
+    fun saveUserInfo() = viewModelScope.launch {
 
-        Log.d("test1234", s)
+        _user.value?.let {
+            val updateUser = mapOf<String, Any?>(
+                "agreementCheck1" to it.agreementCheck1,
+                "agreementCheck2" to it.agreementCheck2,
+                "agreementCheck3" to it.agreementCheck3,
+                "name" to it.name,
+                "birthYear" to it.birthYear,
+                "birthMonth" to it.birthMonth,
+                "birthDay" to it.birthDay,
+                "gender" to it.gender,
+                "email" to it.email,
+                "phoneNumber" to it.phoneNumber,
+                "apartmentUid" to it.apartmentUid,
+                "apartmentDong" to it.apartmentDong,
+                "apartmentHo" to it.apartmentHo,
+                "apartCertification" to it.apartCertification,
+                "completeInputUserInfo" to true,
+            )
+
+            userRepository.updateUser(it.uid, updateUser)
+        }
     }
 }

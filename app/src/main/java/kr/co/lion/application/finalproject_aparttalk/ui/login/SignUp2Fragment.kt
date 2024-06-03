@@ -1,7 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp2Binding
@@ -21,7 +20,9 @@ class SignUp2Fragment : Fragment() {
     private var _binding: FragmentSignUp2Binding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SignUpViewModel by activityViewModels()
+    private val viewModel: SignUpViewModel by viewModels{
+        SignUpViewModelFactory((requireActivity() as SignUpActivity).userRepository)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSignUp2Binding.inflate(inflater, container, false)
@@ -40,28 +41,20 @@ class SignUp2Fragment : Fragment() {
     }
 
     private fun initializeDataStates() {
-        viewModel.name.observe(viewLifecycleOwner) { name ->
-            binding.signup2NameEditText.setText(name.orEmpty())
-        }
 
-        viewModel.birthYear.observe(viewLifecycleOwner) { year ->
-            binding.signup2Year.text = "${year ?: ""}년"
-        }
+        viewModel.user.observe(viewLifecycleOwner) {
+            binding.signup2NameEditText.setText(it.name)
+            binding.signup2Year.text = "${it.birthYear ?: ""}년"
+            binding.signup2Month.text = "${it.birthMonth ?: ""}월"
+            binding.signup2Day.text = "${it.birthDay ?: ""}일"
 
-        viewModel.birthMonth.observe(viewLifecycleOwner) { month ->
-            binding.signup2Month.text = "${month ?: ""}월"
-        }
-
-        viewModel.birthDay.observe(viewLifecycleOwner) { day ->
-            binding.signup2Day.text = "${day ?: ""}일"
+            if (it.name.isEmpty()){
+                Tools.showSoftInput(requireContext(), binding.signup2NameEditText)
+            }
         }
     }
 
     private fun nameEditTextListeners() {
-        if (viewModel.name.value.isNullOrEmpty()) {
-            Tools.showSoftInput(requireContext(), binding.signup2NameEditText)
-        }
-
         binding.signup2NameEditText.addTextChangedListener {
             updateButtonState()
         }
@@ -91,9 +84,9 @@ class SignUp2Fragment : Fragment() {
     }
 
     private fun showDatePickerDialog() {
-        val initialYear = viewModel.birthYear.value ?: 1980
-        val initialMonth = viewModel.birthMonth.value ?: 1
-        val initialDay = viewModel.birthDay.value ?: 1
+        val initialYear = viewModel.user.value?.birthYear ?: 1980
+        val initialMonth = viewModel.user.value?.birthMonth ?: 1
+        val initialDay = viewModel.user.value?.birthDay ?: 1
 
         val datePickerDialogFragment = DatePickerDialogFragment(initialYear, initialMonth, initialDay) { year, month, day ->
             onDateSelected(year, month, day)
@@ -108,7 +101,7 @@ class SignUp2Fragment : Fragment() {
 
     private fun updateButtonState() {
         val isNameFilled = binding.signup2NameEditText.text.toString().trim().isNotEmpty()
-        val isDateSelected = viewModel.birthYear.value != null && viewModel.birthMonth.value != null && viewModel.birthDay.value != null
+        val isDateSelected = viewModel.user.value?.birthYear != null && viewModel.user.value?.birthMonth != null && viewModel.user.value?.birthDay != null
 
         binding.signup2AgreeButton.isEnabled = isNameFilled && isDateSelected
         binding.signup2AgreeButton.alpha = if (isNameFilled && isDateSelected) 1.0f else 0.5f
@@ -150,8 +143,8 @@ class SignUp2Fragment : Fragment() {
     private fun backProcess() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             Tools.hideSoftInput(requireActivity())
-            viewModel.initializeName()
-            viewModel.initializeBirthDate()
+            viewModel.resetName()
+            viewModel.resetBirthDate()
             findNavController().popBackStack()
         }
     }
