@@ -125,13 +125,13 @@ class LocationShowActivity : AppCompatActivity() {
     }
 
     private fun settingLabel() {
-//        val x = intent?.getStringExtra("x")?.toDoubleOrNull()
-//        val y = intent?.getStringExtra("y")?.toDoubleOrNull()
+        val x = intent?.getStringExtra("x")?.toDoubleOrNull()
+        val y = intent?.getStringExtra("y")?.toDoubleOrNull()
 
-        val styles = kakaoMap.labelManager?.addLabelStyles(LabelStyles.from(LabelStyle.from(R.drawable.icon_donut1)
+        val styles = kakaoMap.labelManager?.addLabelStyles(LabelStyles.from(LabelStyle.from(R.drawable.icon_flag)
             .setAnchorPoint(0.5f, 0.5f)))
 
-        val options = LabelOptions.from(LatLng.from(37.6114538, 126.938461))
+        val options = LabelOptions.from(LatLng.from(y?:0.0, x?:0.0))
             .setStyles(styles)
 
         //Log.d("test1234", "${x},${y}")
