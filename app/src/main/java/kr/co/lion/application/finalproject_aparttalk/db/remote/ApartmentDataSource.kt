@@ -14,11 +14,13 @@ class ApartmentDataSource {
 
     suspend fun getApartment(uid: String): ApartmentModel? {
         val snapshot = apartmentCollection.document(uid).get().await()
-        return snapshot.toObject<ApartmentModel>()
+        val apartment = snapshot.toObject<ApartmentModel>()
+        return apartment
     }
 
-    suspend fun getApartmentList(): List<ApartmentModel?>{
+    suspend fun getApartmentList(): List<ApartmentModel>{
         val snapshot = apartmentCollection.get().await()
-        return snapshot.documents.mapNotNull { it.toObject<ApartmentModel>() }
+        val apartmentList = snapshot.documents.mapNotNull { it.toObject<ApartmentModel>() }
+        return apartmentList
     }
 }
