@@ -51,12 +51,19 @@ class OperationSecondFragment : Fragment() {
 
         TabLayoutMediator(fragmentOperationSecondBinding.tabLayoutAptOperationInfo, fragmentOperationSecondBinding.viewPagerAptOperationInfo) { tab, position ->
             tab.text = when(position){
+                // ContractInfo
                 0 -> "계약서정보"
+                // ManagementRegulation
                 1 -> "관리규악"
+                // BiddingNotice
                 2 -> "입찰공고"
+                // BillingStatement
                 3 -> "부과명세서"
+                // FinancialSystem
                 4 -> "재무제표"
+                // SafetyManagement
                 5 -> "안전관리계획"
+                // RepairPlan
                 6 -> "수선계획"
                 else -> null
             }
