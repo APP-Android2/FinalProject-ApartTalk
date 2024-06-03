@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.storage
 import kotlinx.coroutines.CoroutineScope
@@ -14,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
+import kr.co.lion.application.finalproject_aparttalk.util.PostState
 
 class CommunityPostDataSource {
 
@@ -125,4 +127,30 @@ class CommunityPostDataSource {
 
             return postData
         }
+
+    // 게시글 목록을 가져온다.
+    suspend fun gettingCommunityPostList() : MutableList<PostData> {
+        // 게시글 정보를 담을 리스트
+        val communityPostList = mutableListOf<PostData>()
+
+        val job1 = CoroutineScope(Dispatchers.IO).launch {
+            // 컬렉션에 접근할 수 있는 객체를 가져온다.
+            val collectionReference = Firebase.firestore.collection("CommunityPostData")
+            // 게시글 상태가 정상 상태이고 게시글 번호를 기준으로 내림차순 정렬되게 데이터를 가져올 수 있는 Query 를 생성한다.
+            // 게시글 상태가 정상 또는 수정 상태인 것만 가져오기 위한 조건 설정
+            val validStatus = listOf(PostState.POST_STATE_NORMAL.number, PostState.POST_STATE_MODIFY.number)
+            var query = collectionReference.whereIn("postState", validStatus)
+            val querySnapshot = query.get().await()
+            // 가져온 문서의 수 만큼 반복한다.
+            querySnapshot.forEach {
+                // 현재 번째의 문서를 객체로 받아온다.
+                val postData = it.toObject(PostData::class.java)
+                // 객체를 리스트에 담는다.
+                communityPostList.add(postData)
+            }
+        }
+        job1.join()
+
+        return communityPostList
+    }
 }

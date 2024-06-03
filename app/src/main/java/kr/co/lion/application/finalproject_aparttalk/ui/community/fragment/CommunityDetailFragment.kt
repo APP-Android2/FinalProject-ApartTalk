@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
@@ -13,6 +14,8 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommuni
 import kr.co.lion.application.finalproject_aparttalk.util.SwipeHelperCallback
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailCommentRecyclerViewAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailImageViewPager2Adapter
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityAddViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityDetailViewModel
 
 class CommunityDetailFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityDetailBinding: FragmentCommunityDetailBinding

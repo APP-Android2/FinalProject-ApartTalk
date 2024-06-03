@@ -21,5 +21,5 @@ class CommunityPostRepository {
 
     suspend fun selectCommunityPostData(postIdx: Int) = communityPostDataSource.selectCommunityPostData(postIdx)
 
-
+    suspend fun gettingCommunityPostList() = communityPostDataSource.gettingCommunityPostList()
 }

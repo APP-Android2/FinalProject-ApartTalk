@@ -6,12 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabNotificationBinding
+import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var tempList: MutableList<MutableList<String>>) : RecyclerView.Adapter<CommunityTabNotificationRecyclerViewAdapter.CommunityTabNotificationViewHolder>() {
+class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var notificationList: MutableList<PostData>) : RecyclerView.Adapter<CommunityTabNotificationRecyclerViewAdapter.CommunityTabNotificationViewHolder>() {
     inner class CommunityTabNotificationViewHolder(rowCommunityTabNotificationBinding: RowCommunityTabNotificationBinding) : RecyclerView.ViewHolder(rowCommunityTabNotificationBinding.root) {
         val rowCommunityTabNotificationBinding : RowCommunityTabNotificationBinding
 
@@ -34,25 +39,30 @@ class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var temp
     }
 
     override fun getItemCount(): Int {
-        return tempList.size
+        return notificationList.size
     }
 
     override fun onBindViewHolder(holder: CommunityTabNotificationViewHolder, position: Int) {
 
-        val tempData = tempList[position]
-
         holder.rowCommunityTabNotificationBinding.apply {
-            textViewCommunityListLabelNotification.text = tempData[0]
-            textViewCommunityListTitleNotification.text = tempData[1]
-            textViewCommunityListLikeCntNotification.text = tempData[2]
-            textViewCommunityListCommentCntNotification.text = tempData[3]
-            textViewCommunityListDateNotification.text = tempData[4]
+            textViewCommunityListLabelNotification.text = notificationList[position].postType
+            textViewCommunityListTitleNotification.text = notificationList[position].postTitle
+            textViewCommunityListLikeCntNotification.text = notificationList[position].postLikeCnt.toString()
+            textViewCommunityListCommentCntNotification.text = notificationList[position].postCommentCnt.toString()
+            textViewCommunityListDateNotification.text = notificationList[position].postAddDate
+
+            CoroutineScope(Dispatchers.Main).launch {
+                if (notificationList[position].postImages != null) {
+                    // 어떻게 해야 하나...
+                } else {
+                    imageViewCommunityListNotification.setImageResource(R.color.white)
+                }
+            }
 
             linearLayoutCommunityListNotification.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
-                // 게시글 번호도 주기
-                // communityIntent.putExtra("postIdx", searchList[position].postIdx)
+                 intent.putExtra("postIdx", notificationList[position].postIdx)
                 context.startActivity(intent)
             }
         }

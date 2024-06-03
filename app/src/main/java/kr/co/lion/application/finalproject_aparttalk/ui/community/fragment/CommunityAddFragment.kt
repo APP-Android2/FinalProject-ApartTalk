@@ -315,9 +315,9 @@ class CommunityAddFragment(data: Bundle?) : Fragment() {
                 // 업로드할 정보를 담아준다.
                 postData.postIdx = communityPostSequence + 1
                 postData.postTitle = textViewCommunityAddSubject.text.toString()
-                if (viewModel.communityPostAddType.value == "질문") {
+                if (textViewCommunityAddType.text.toString() == "질문") {
                     postData.postType = PostType.TYPE_QUESTION.str
-                } else if (viewModel.communityPostAddType.value == "거래") {
+                } else if (textViewCommunityAddType.text.toString() == "거래") {
                     postData.postType = PostType.TYPE_TRADE.str
                 } else {
                     postData.postType = PostType.TYPE_ETC.str
