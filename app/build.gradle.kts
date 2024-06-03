@@ -75,8 +75,16 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:5.0")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
-    implementation("com.google.firebase:firebase-analytics-ktx:22.0.0")
+    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx:22.0.1")
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
+
+    // 구글 Credential Manager 라이브러리
+    implementation("androidx.credentials:credentials:1.2.2")
+    implementation("androidx.credentials:credentials-play-services-auth:1.2.2")
+    implementation(libs.googleid)
+
+    // Gson 라이브러리
+    implementation("com.google.code.gson:gson:2.10.1")
 }
