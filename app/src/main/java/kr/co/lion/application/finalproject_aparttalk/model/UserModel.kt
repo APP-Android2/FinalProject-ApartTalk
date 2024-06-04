@@ -10,7 +10,7 @@ data class UserModel(
     var birthDay: Int? = null,
     var gender: String = "",          // 성별
     var email: String = "",           // 이메일
-    var phoneNumber: String = "",     // 휴대폰 번호
+    var phoneNumber: String? = "",     // 휴대폰 번호
     var agreementCheck1: Boolean = false, // 서비스 이용 약관 동의 여부
     var agreementCheck2: Boolean = false, // 개인정보 수집 동의 여부
     var agreementCheck3: Boolean = false, // 마케팅 정보 수신 동의 여부
