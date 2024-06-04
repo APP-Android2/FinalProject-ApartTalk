@@ -18,6 +18,7 @@ class MyWroteFragment : Fragment() {
 
     lateinit var fragmentMyWroteBinding: FragmentMyWroteBinding
     lateinit var myWriteActivity: MyWriteActivity
+    val dataList: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +31,19 @@ class MyWroteFragment : Fragment() {
         myWriteActivity = activity as MyWriteActivity
 
         settingRecyclerview()
+        updateUI()
 
         return fragmentMyWroteBinding.root
 
+    }
+    fun updateUI(){
+        if(dataList.isEmpty()){
+            fragmentMyWroteBinding.myWroteLayout.visibility = View.GONE
+            fragmentMyWroteBinding.myWroteBlankLayout.visibility = View.VISIBLE
+        }else{
+            fragmentMyWroteBinding.myWroteLayout.visibility  = View.VISIBLE
+            fragmentMyWroteBinding.myWroteBlankLayout.visibility = View.GONE
+        }
     }
 
     fun settingRecyclerview(){
