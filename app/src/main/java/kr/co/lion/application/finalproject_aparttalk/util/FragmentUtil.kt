@@ -49,7 +49,8 @@ enum class VoteFragmentName(var str:String){
     VOTE_TAB_FRAGMENT("VoteTabFragment"),
     SURVEY_FRAGMENT("SurveyFragment"),
     SURVEY_LIST_FRAGMENT("SurveyListFragment"),
-    SURVEY_WRITE_FRAGMENT("SurveyWriteFragment")
+    SURVEY_WRITE_FRAGMENT("SurveyWriteFragment"),
+    SURVEY_COMPLETE_FRAGMENT("SurveyCompleteFragment")
 }
 
 enum class InfoFragmentName(var str:String){

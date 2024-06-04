@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityInquiryBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.vote.SurveyFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.vote.SurveyListFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.vote.SurveyWriteFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.vote.VoteFragment

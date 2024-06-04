@@ -17,16 +17,16 @@ class VoteActivity : AppCompatActivity() {
     // 프래그먼트 객체를 담을 변수
     var oldFragment: Fragment? = null
     var newFragment: Fragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVoteBinding.inflate(layoutInflater)
         replaceFragment(VoteFragmentName.VOTE_TAB_FRAGMENT, false, false, null)
 
         setContentView(binding.root)
-
     }
 
-    fun replaceFragment(name: VoteFragmentName, addToBackStack:Boolean, isAnimate:Boolean, data:Bundle?){
+    fun replaceFragment(name: VoteFragmentName, addToBackStack: Boolean, isAnimate: Boolean, data: Bundle?) {
 
         SystemClock.sleep(200)
 
@@ -34,13 +34,13 @@ class VoteActivity : AppCompatActivity() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
         // oldFragment에 newFragment가 가지고 있는 Fragment 객체를 담아준다.
-        if(newFragment != null){
+        if (newFragment != null) {
             oldFragment = newFragment
         }
 
         // 이름으로 분기한다.
         // Fragment의 객체를 생성하여 변수에 담아준다.
-        when(name){
+        when (name) {
             // 투표 탭화면
             VoteFragmentName.VOTE_TAB_FRAGMENT -> {
                 newFragment = VoteTabFragment()
@@ -49,42 +49,41 @@ class VoteActivity : AppCompatActivity() {
             VoteFragmentName.VOTE_FRAGMENT -> {
                 newFragment = VoteFragment()
             }
-
             // 투표 목록
             VoteFragmentName.VOTE_LIST_FRAGMENT -> {
                 newFragment = VoteListFragment()
             }
-
             // 투표 내역
             VoteFragmentName.VOTE_HISTORY_FRAGMENT -> {
                 newFragment = VoteHistoryFragment()
             }
-
             // 설문조사 투표 화면
             VoteFragmentName.SURVEY_FRAGMENT -> {
                 newFragment = SurveyFragment()
             }
-
             // 설문조사 목록
             VoteFragmentName.SURVEY_LIST_FRAGMENT -> {
                 newFragment = SurveyListFragment()
             }
-
             // 설문조사 작성
             VoteFragmentName.SURVEY_WRITE_FRAGMENT -> {
                 newFragment = SurveyWriteFragment()
             }
+            // 설문조사 완료
+            VoteFragmentName.SURVEY_COMPLETE_FRAGMENT -> {
+                newFragment = SurveyCompleteFragment()
+            }
         }
 
         // 새로운 Fragment에 전달할 객체가 있다면 arguments 프로퍼티에 넣어준다.
-        if(data != null){
+        if (data != null) {
             newFragment?.arguments = data
         }
 
-        if(newFragment != null){
+        if (newFragment != null) {
 
             // 애니메이션 설정
-            if(isAnimate == true){
+            if (isAnimate) {
                 // oldFragment -> newFragment
                 // oldFragment : exitTransition
                 // newFragment : enterTransition
@@ -101,7 +100,7 @@ class VoteActivity : AppCompatActivity() {
                 // true : 새로운 화면이 나타나는 애니메이션이 동작한다.
                 // false : 이전으로 되돌아가는 애니메이션이 동작한다.
 
-                if(oldFragment != null){
+                if (oldFragment != null) {
                     // old에서 new가 새롭게 보여질 때 old의 애니메이션
                     oldFragment?.exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
                     // new에서 old로 되돌아갈때 old의 애니메이션
@@ -126,7 +125,7 @@ class VoteActivity : AppCompatActivity() {
             fragmentTransaction.replace(R.id.voteContainer, newFragment!!)
 
             // addToBackStack 변수의 값이 true면 새롭게 보여질 Fragment를 BackStack에 포함시켜 준다.
-            if(addToBackStack == true){
+            if (addToBackStack) {
                 // BackStack 포함 시킬때 이름을 지정해주면 원하는 Fragment를 BackStack에서 제거할 수 있다.
                 fragmentTransaction.addToBackStack(name.str)
             }
@@ -136,11 +135,10 @@ class VoteActivity : AppCompatActivity() {
     }
 
     // BackStack에서 Fragment를 제거한다.
-    fun removeFragment(name: VoteFragmentName){
+    fun removeFragment(name: VoteFragmentName) {
         SystemClock.sleep(200)
 
         // 지정한 이름으로 있는 Fragment를 BackStack에서 제거한다.
         supportFragmentManager.popBackStack(name.str, FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
-
 }
