@@ -1,15 +1,15 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.adapter
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.BiddingNoticeFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.BillingStatementFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.ContractInfoFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.FinancialSystemFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.ManagementRegulationFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.RepairPlanFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.SafetyManagementFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.BiddingNoticeFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.BillingStatementFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.ContractInfoFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.FinancialSystemFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.ManagementRegulationFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.RepairPlanFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.SafetyManagementFragment
 
 class OperationViewPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 

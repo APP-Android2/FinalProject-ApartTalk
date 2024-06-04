@@ -53,7 +53,7 @@
             android:exported="false"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".ui.entiremenu.AptOperationInfo.OperationInfoActivity"
+            android:name=".ui.entiremenu.OperationInfo.OperationInfoActivity"
             android:exported="true" />
         <activity
             android:name=".ui.broadcast.activity.BroadcastActivity"

@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,26 +7,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentRepairPlanBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.adapter.OperationSecondRecyclerView
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentManagementRegulationBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationSecondRecyclerView
 
-class RepairPlanFragment : Fragment() {
+class ManagementRegulationFragment : Fragment() {
 
-    lateinit var fragmentRepairPlanBinding: FragmentRepairPlanBinding
+    lateinit var fragmentManagementRegulationBinding: FragmentManagementRegulationBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        fragmentRepairPlanBinding = FragmentRepairPlanBinding.inflate(layoutInflater)
+        fragmentManagementRegulationBinding = FragmentManagementRegulationBinding.inflate(layoutInflater)
 
         setRecyclerView()
 
-        return fragmentRepairPlanBinding.root
+        return fragmentManagementRegulationBinding.root
     }
-
     // RecyclerView 설정
     fun setRecyclerView(){
-        fragmentRepairPlanBinding.recyclerViewRepairPlan.apply {
+        fragmentManagementRegulationBinding.recyclerViewManagementRegulation.apply {
             // 어댑터 설정
             adapter = OperationSecondRecyclerView(childFragmentManager)
             // 레이아웃
