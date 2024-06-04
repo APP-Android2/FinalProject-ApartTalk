@@ -8,7 +8,6 @@ class UserRepository(
     private val userDataSource: UserDataSource,
     private val localUserDataSource: LocalUserDataSource
 ) {
-
     suspend fun createUser(user: UserModel) {
         userDataSource.createUser(user)
         localUserDataSource.saveUser(user)

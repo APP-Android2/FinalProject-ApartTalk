@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.LoginViewModel
 
 class LoginViewModelFactory(
     private val authRepository: AuthRepository,

@@ -1,12 +1,12 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.login
+package kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.model.ApartmentModel
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.repository.ApartmentRepository
@@ -177,10 +177,9 @@ class SignUpViewModel(
             val apartment = apartmentList.value?.find { it.uid == user.apartmentUid }
             apartment?.let {
                 apartmentRepository.saveApartment(it)
+                App.prefs.setLatitude(apartment.latitude)
+                App.prefs.setLongitude(apartment.longitude)
             }
-
-            Log.d("test1234", "${user}")
-            Log.d("test1234", "${apartment}")
         }
     }
 }

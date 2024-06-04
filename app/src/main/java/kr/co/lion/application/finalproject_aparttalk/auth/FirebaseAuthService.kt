@@ -3,6 +3,7 @@ package kr.co.lion.application.finalproject_aparttalk.auth
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.tasks.await
 
@@ -12,7 +13,7 @@ class FirebaseAuthService {
         FirebaseAuth.getInstance()
     }
 
-    fun getCurrentUser() = firebaseAuth.currentUser
+    fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
 
     fun signOut() {
         firebaseAuth.signOut()
