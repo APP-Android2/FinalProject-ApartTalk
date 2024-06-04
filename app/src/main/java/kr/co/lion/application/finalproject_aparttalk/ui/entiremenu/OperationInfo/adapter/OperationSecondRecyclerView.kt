@@ -1,11 +1,11 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.adapter
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowOperationInfoShowBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.OperationInfoShowBottomSheetFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.OperationInfoShowBottomSheetFragment
 
 class OperationSecondRecyclerView(private val fragmentManager: FragmentManager) : RecyclerView.Adapter<OperationSecondRecyclerView.ViewHolder>(){
 
