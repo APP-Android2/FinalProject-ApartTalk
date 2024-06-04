@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ui.vote.SurveyCompleteFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/surveyCompleteToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:gravity="start"
+        app:titleCentered="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/surveyCompleteTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosans_semibold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="설문조사 제목"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/surveyCompleteTextView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
+            android:text="항목1"
+            android:textSize="16sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+            <ProgressBar
+                android:id="@+id/surveyCompleteProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:max="100"
+                android:progress="0" />
+
+            <TextView
+                android:id="@+id/surveyCompleteCount1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="TextView"
+                android:fontFamily="@font/notosans_semibold"
+                android:includeFontPadding="false"
+                android:textSize="14sp"
+                android:textColor="@color/gray"/>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/surveyCompleteTextView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="항목2"
+            android:textSize="16sp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+            <ProgressBar
+                android:id="@+id/surveyCompleteProgressBar2"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:max="100"
+                android:progress="0" />
+
+            <TextView
+                android:id="@+id/surveyCompleteCount2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="TextView"
+                android:fontFamily="@font/notosans_semibold"
+                android:includeFontPadding="false"
+                android:textSize="14sp"
+                android:textColor="@color/gray"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/surveyCompleteTextView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="항목3"
+            android:textSize="16sp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp">
+
+            <ProgressBar
+                android:id="@+id/surveyCompleteProgressBar3"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:max="100"
+                android:progress="0" />
+
+            <TextView
+                android:id="@+id/surveyCompleteCount3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="TextView"
+                android:fontFamily="@font/notosans_semibold"
+                android:includeFontPadding="false"
+                android:textSize="14sp"
+                android:textColor="@color/gray"/>
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_marginVertical="20dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="설문조사가 완료되었습니다."
+            android:textSize="20sp"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
+            android:gravity="center"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
