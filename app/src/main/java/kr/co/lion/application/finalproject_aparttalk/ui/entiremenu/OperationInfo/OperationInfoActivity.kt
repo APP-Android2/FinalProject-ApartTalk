@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo
 
 import android.os.Bundle
 import android.os.SystemClock
@@ -8,8 +8,8 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityOperationInfoBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.OperationFirstFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment.OperationSecondFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.OperationFirstFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.OperationSecondFragment
 import kr.co.lion.application.finalproject_aparttalk.util.AptOperationInfoFragmentName
 
 class OperationInfoActivity : AppCompatActivity() {

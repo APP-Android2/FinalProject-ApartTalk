@@ -6,7 +6,7 @@
     android:background="@drawable/bottom_sheet_rounding"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.entiremenu.AptOperationInfo.fragment.OperationInfoShowBottomSheetFragment">
+    tools:context=".ui.entiremenu.OperationInfo.fragment.OperationInfoShowBottomSheetFragment">
 
     <TextView
         android:id="@+id/textViewOperationInfoShowSubject"
@@ -18,27 +18,13 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/textViewOperationInfoShowSub"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/notosans_medium"
-        android:gravity="left"
-        android:text="2024년 05월 19일부터 계정된 힐스테이트 계약서 정보에 대해 자세히 설명드리겠습니다."
-        android:textSize="14sp" />
-
-    <TextView
         android:id="@+id/textViewOperationInfoShowContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/notosans_medium"
         android:gravity="center|left"
-        android:text="힐스테이트 동탄 파크릭스 옵션 변경계약서 수취 예약 기간은 2024년 2월 29일(목) 09:00 ~ 2024년 5월 31일(금) 17:00입니다. 1
-계약 진행 시 공급 계약서, 발코니 계약서, 옵션 계약서 등 해당 동·호수 계약 서류를 수령해야 합니다. 문의는 031-319-3311로 가능합니다. 2
-힐스테이트미사역 상가 계약 시, 보증금을 지키기 위해 계약서에 정확한 일정을 명시해야 합니다. 임대인이 여러 명인 경우 각각의 계약서류에 서명을 받아야 합니다. 3
-옵션 신청 시 옵션신청서와 계약서를 작성하고, 계약금(10%)을 이체 또는 입금해야 계약이 성립됩니다. 전자제품 모델은 품질, 품귀 또는 단종 등의 사유로 변경될 수 있습니다. 4
-이상으로 힐스테이트 계약서 정보에 대해 설명드렸습니다. 더 궁금한 점이 있으시면 언제든 문의해 주시기 바랍니다."
+        android:text="2024년 05월 19일부터 계정된 힐스테이트 계약서 정보에 대해 자세히 설명드리겠습니다. 힐스테이트 동탄 파크릭스 옵션 변경계약서 수취 예약 기간은 2024년 2월 29일(목) 09:00 ~ 2024년 5월 31일(금) 17:00입니다. 1 계약 진행 시 공급 계약서, 발코니 계약서, 옵션 계약서 등 해당 동·호수 계약 서류를 수령해야 합니다. 문의는 031-319-3311로 가능합니다. 2 힐스테이트미사역 상가 계약 시, 보증금을 지키기 위해 계약서에 정확한 일정을 명시해야 합니다. 임대인이 여러 명인 경우 각각의 계약서류에 서명을 받아야 합니다. 3 옵션 신청 시 옵션신청서와 계약서를 작성하고, 계약금(10%)을 이체 또는 입금해야 계약이 성립됩니다. 전자제품 모델은 품질, 품귀 또는 단종 등의 사유로 변경될 수 있습니다. 4 이상으로 힐스테이트 계약서 정보에 대해 설명드렸습니다. 더 궁금한 점이 있으시면 언제든 문의해 주시기 바랍니다."
         android:textSize="14sp" />
 
 </LinearLayout>

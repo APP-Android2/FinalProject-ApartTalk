@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".ui.entiremenu.AptOperationInfo.fragment.OperationFirstFragment">
+    tools:context=".ui.entiremenu.OperationInfo.fragment.OperationFirstFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarAptOperationInfo"

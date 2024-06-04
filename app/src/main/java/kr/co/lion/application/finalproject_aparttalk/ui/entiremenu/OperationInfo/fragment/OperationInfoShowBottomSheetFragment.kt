@@ -1,17 +1,15 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentOperationInfoShowBottomSheetBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.OperationInfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
 
 class OperationInfoShowBottomSheetFragment : BottomSheetDialogFragment() {
 

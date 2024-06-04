@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,25 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFinancialSystemBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.adapter.OperationSecondRecyclerView
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentBiddingNoticeBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationSecondRecyclerView
 
-class FinancialSystemFragment : Fragment() {
+class BiddingNoticeFragment : Fragment() {
 
-    lateinit var fragmentFinancialSystemBinding: FragmentFinancialSystemBinding
+    lateinit var fragmentBiddingNoticeBinding: FragmentBiddingNoticeBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        fragmentFinancialSystemBinding = FragmentFinancialSystemBinding.inflate(layoutInflater)
+        fragmentBiddingNoticeBinding = FragmentBiddingNoticeBinding.inflate(layoutInflater)
 
         setRecyclerView()
 
-        return fragmentFinancialSystemBinding.root
+        return fragmentBiddingNoticeBinding.root
     }
+
     // RecyclerView 설정
     fun setRecyclerView(){
-        fragmentFinancialSystemBinding.recyclerViewFinancialSystem.apply {
+        fragmentBiddingNoticeBinding.recyclerViewBiddingNotice.apply {
             // 어댑터 설정
             adapter = OperationSecondRecyclerView(childFragmentManager)
             // 레이아웃

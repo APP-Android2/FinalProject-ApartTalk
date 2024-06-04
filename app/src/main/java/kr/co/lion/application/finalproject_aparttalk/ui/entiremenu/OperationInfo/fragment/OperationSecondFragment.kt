@@ -1,18 +1,15 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.fragment
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.divider.MaterialDividerItemDecoration
 import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentOperationSecondBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.OperationInfoActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.adapter.OperationSecondRecyclerView
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptOperationInfo.adapter.OperationViewPagerAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationViewPagerAdapter
 import kr.co.lion.application.finalproject_aparttalk.util.AptOperationInfoFragmentName
 
 class OperationSecondFragment : Fragment() {
@@ -51,12 +48,19 @@ class OperationSecondFragment : Fragment() {
 
         TabLayoutMediator(fragmentOperationSecondBinding.tabLayoutAptOperationInfo, fragmentOperationSecondBinding.viewPagerAptOperationInfo) { tab, position ->
             tab.text = when(position){
+                // ContractInfo
                 0 -> "계약서정보"
+                // ManagementRegulation
                 1 -> "관리규악"
+                // BiddingNotice
                 2 -> "입찰공고"
+                // BillingStatement
                 3 -> "부과명세서"
+                // FinancialSystem
                 4 -> "재무제표"
+                // SafetyManagement
                 5 -> "안전관리계획"
+                // RepairPlan
                 6 -> "수선계획"
                 else -> null
             }
