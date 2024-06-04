@@ -11,13 +11,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/myWriteToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textViewMyWriteToolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/notosans_bold"
+                android:includeFontPadding="false"
+                android:text="text"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="22dp" />
+        </com.google.android.material.appbar.MaterialToolbar>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/myWriteTabLayout"
@@ -35,14 +53,14 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosans_bold"
                 android:includeFontPadding="false"
-                android:text="공지사항" />
+                android:text="내가쓴글" />
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosans_bold"
                 android:includeFontPadding="false"
-                android:text="FAQ" />
+                android:text="좋아요" />
 
 
         </com.google.android.material.tabs.TabLayout>

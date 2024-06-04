@@ -3,13 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <!-- 앨범으로부터 사진을 가져오기 위한 권한 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+  
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
+        android:name="kr.co.lion.application.finalproject_aparttalk.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -55,7 +61,7 @@
             android:exported="false"
             android:theme="@style/CustomTheme" />
         <activity
-            android:name=".ui.entiremenu.AptOperationInfo.OperationInfoActivity"
+            android:name=".ui.entiremenu.OperationInfo.OperationInfoActivity"
             android:exported="true" />
         <activity
             android:name=".ui.broadcast.activity.BroadcastActivity"
@@ -95,6 +101,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <data
+                    android:host="oauth"
+                    android:scheme="${NATIVE_APP_KEY}" />
             </intent-filter>
         </activity>
     </application>

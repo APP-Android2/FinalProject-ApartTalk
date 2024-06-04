@@ -84,6 +84,7 @@ class ServiceFragment : Fragment() {
     fun settingToolbar(){
         fragmentServiceBinding.apply {
             serviceToolbar.apply {
+                textViewServiceToolbarTitle.text = "고객센터"
                 // 뒤로가기
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {

@@ -18,6 +18,7 @@ class MyLikeFragment : Fragment() {
 
     lateinit var fragmentMyLikeBinding: FragmentMyLikeBinding
     lateinit var myWriteActivity: MyWriteActivity
+    val dataList: MutableList<String> = mutableListOf("Item 1", "Item 2 ", "Item 3")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +31,20 @@ class MyLikeFragment : Fragment() {
         myWriteActivity = activity as MyWriteActivity
 
         settingRecyclerview()
+        updateUI()
 
         return fragmentMyLikeBinding.root
 
+    }
+
+    fun updateUI(){
+        if(dataList.isEmpty()){
+            fragmentMyLikeBinding.myLikeLayout.visibility = View.GONE
+            fragmentMyLikeBinding.myLikeBlankLayout.visibility = View.VISIBLE
+        }else{
+            fragmentMyLikeBinding.myLikeLayout.visibility  = View.VISIBLE
+            fragmentMyLikeBinding.myLikeBlankLayout.visibility = View.GONE
+        }
     }
 
     fun settingRecyclerview(){

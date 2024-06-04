@@ -6,18 +6,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kr.co.lion.application.finalproject_aparttalk.R
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentServiceBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSingleServiceBinding
 
 
 class SingleServiceFragment : Fragment() {
 
-    lateinit var fragmentSingServicebinding : FragmentSingleServiceBinding
+    lateinit var fragmentSingleServiceBinding : FragmentSingleServiceBinding
+    lateinit var serviceActivity: ServiceActivity
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_single_service, container, false)
+
+        fragmentSingleServiceBinding = FragmentSingleServiceBinding.inflate(layoutInflater)
+        serviceActivity = activity as ServiceActivity
+
+        settingToolbar()
+
+        return fragmentSingleServiceBinding.root
     }
+
+
+        fun settingToolbar() {
+            fragmentSingleServiceBinding.apply {
+                singleServiceToolbar.apply {
+                    textViewSingleServiceToolbarTitle.text = "고객센터"
+                    // 뒤로가기
+                    setNavigationIcon(R.drawable.icon_back)
+                    setNavigationOnClickListener {
+                        // 전화면으로 돌아가기.
+                        serviceActivity.finish()
+                    }
+                }
+            }
+        }
 
 }

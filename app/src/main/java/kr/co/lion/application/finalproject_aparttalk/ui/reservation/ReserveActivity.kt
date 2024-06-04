@@ -8,14 +8,11 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityReserveBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.info.EditUserInfoFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.info.EditUserInfoNumberFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoFragment
-import kr.co.lion.application.finalproject_aparttalk.util.InfoFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.ReserveFragmentName
 
 class ReserveActivity : AppCompatActivity() {
-    lateinit var binding: ActivityReserveBinding
+    lateinit var activityReservebinding: ActivityReserveBinding
+
 
     // 프래그먼트의 주소값을 담을 프로퍼티
     var oldFragment: Fragment? = null
@@ -24,8 +21,8 @@ class ReserveActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityReserveBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        activityReservebinding = ActivityReserveBinding.inflate(layoutInflater)
+        setContentView(activityReservebinding.root)
 
         // FireCheckMainFragment 나타나도록 한다.
         replaceFragment(ReserveFragmentName.RESERVATION_FRAGMENT, false, false, null)
@@ -67,14 +64,12 @@ class ReserveActivity : AppCompatActivity() {
                 newFragment = ReservationCancelCompleteFragment()
             }
         }
-
         // 새로운 Fragment에 전달할 객체가 있다면 arguments 프로퍼티에 넣어준다.
         if(data != null){
             newFragment?.arguments = data
         }
 
         if(newFragment != null){
-
             // 애니메이션 설정
             if(isAnimate == true){
                 // oldFragment -> newFragment
@@ -115,7 +110,7 @@ class ReserveActivity : AppCompatActivity() {
             // Fragment를 교체한다.(이전 Fragment가 없으면 새롭게 추가하는 역할을 수행한다)
             // 첫 번째 매개 변수 : Fragment를 배치할 FragmentContainerView의 ID
             // 두 번째 매개 변수 : 보여주고하는 Fragment 객체를
-            fragmentTransaction.replace(R.id.revervationFragmentContainerView, newFragment!!)
+            fragmentTransaction.replace(R.id.reservationFragmentContainerView, newFragment!!)
 
             // addToBackStack 변수의 값이 true면 새롭게 보여질 Fragment를 BackStack에 포함시켜 준다.
             if(addToBackStack == true){

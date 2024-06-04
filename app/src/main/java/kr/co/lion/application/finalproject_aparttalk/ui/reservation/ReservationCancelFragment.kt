@@ -7,14 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationCancelBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationCompleteBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.MyLikeRecyclerViewAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.reservation.adapter.ReservationCancelRecyclerViewAdapter
 
 
-class ReservationCancelFragment : Fragment() {
+class ReservationCancelFragment() : Fragment() {
 
     lateinit var fragmentReservationCancelBinding: FragmentReservationCancelBinding
     lateinit var reserveActivity: ReserveActivity

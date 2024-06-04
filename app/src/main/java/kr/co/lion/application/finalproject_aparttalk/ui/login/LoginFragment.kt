@@ -5,14 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentLoginBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: LoginViewModel by viewModels {
+        LoginViewModelFactory(
+            (requireActivity() as LoginActivity).authRepository,
+            (requireActivity() as LoginActivity).userRepository
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentLoginBinding.inflate(inflater)
@@ -22,20 +31,35 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        socialLoginButton()
+        userAuthStateToNavigate()
+        googleLoginButton()
+        kakaoLoginButton()
+        naverLoginButton()
         phoneLoginButton()
     }
 
-    private fun socialLoginButton(){
+    private fun userAuthStateToNavigate(){
+        viewModel.userAuthenticationState.observe(viewLifecycleOwner){ state ->
+            when (state) {
+                NavigationState.TO_MAIN -> { (requireActivity() as LoginActivity).navigateToMain() }
+                NavigationState.TO_SIGNUP -> { (requireActivity() as LoginActivity).launchSignActivity() }
+                else -> { }
+            }
+        }
+    }
 
+    private fun googleLoginButton() {
         binding.googleLoginButton.setOnClickListener {
-            (requireActivity() as LoginActivity).navigateToMain()
+            viewModel.googleLogin(requireContext())
         }
+    }
 
+    private fun kakaoLoginButton() {
         binding.kakaoLoginButton.setOnClickListener {
-            (requireActivity() as LoginActivity).navigateToMain()
         }
+    }
 
+    private fun naverLoginButton() {
         binding.naverLoginButton.setOnClickListener {
             (requireActivity() as LoginActivity).navigateToMain()
         }

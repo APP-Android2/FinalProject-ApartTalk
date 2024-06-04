@@ -6,14 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.tabs.TabLayout
-import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentMyWriteBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyLikeFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyWriteActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyWroteFragment
-import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
 
 class ReservationFragment : Fragment() {
 
@@ -44,7 +38,7 @@ class ReservationFragment : Fragment() {
                 tab1 = ReservationCompleteFragment()
                 tab2 = ReservationCancelFragment()
 
-                childFragmentManager.beginTransaction().replace(R.id.reservationFrameLayout, tab1). commit()
+                childFragmentManager.beginTransaction().replace(R.id.reservationLayout, tab1). commit()
 
                 reservationTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
                     override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -52,12 +46,12 @@ class ReservationFragment : Fragment() {
                         when (tab?.position) {
                             0 -> {
                                 childFragmentManager.beginTransaction()
-                                    .replace(R.id.reservationFrameLayout, tab1).commit()
+                                    .replace(R.id.reservationLayout, tab1).commit()
                             }
 
                             1 -> {
                                 childFragmentManager.beginTransaction()
-                                    .replace(R.id.reservationFrameLayout, tab2).commit()
+                                    .replace(R.id.reservationLayout, tab2).commit()
                             }
 
                         }
@@ -79,6 +73,7 @@ class ReservationFragment : Fragment() {
     fun settingToolbar(){
         fragmentReservationBinding.apply {
             reservationToolbar.apply {
+                textViewReservationToolbarTitle.text = "예약내역"
                 // 뒤로가기
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {

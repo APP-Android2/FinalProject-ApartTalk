@@ -1,0 +1,69 @@
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.google.android.material.tabs.TabLayoutMediator
+import kr.co.lion.application.finalproject_aparttalk.R
+import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentOperationSecondBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationViewPagerAdapter
+import kr.co.lion.application.finalproject_aparttalk.util.AptOperationInfoFragmentName
+
+class OperationSecondFragment : Fragment() {
+
+    lateinit var fragmentOperationSecondBinding: FragmentOperationSecondBinding
+    lateinit var operationInfoActivity: OperationInfoActivity
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
+
+        fragmentOperationSecondBinding = FragmentOperationSecondBinding.inflate(layoutInflater)
+        operationInfoActivity = activity as OperationInfoActivity
+
+        setToolbar()
+        setupViewPager()
+
+        return fragmentOperationSecondBinding.root
+    }
+
+    fun setToolbar(){
+        fragmentOperationSecondBinding.apply {
+            toolbarAptOperationInfo.apply {
+                // 뒤로가기
+                setNavigationIcon(R.drawable.icon_back)
+                setNavigationOnClickListener {
+                    // OperationFirstFragment 로 돌아가기
+                    operationInfoActivity.removeFragment(AptOperationInfoFragmentName.OPERATION_SECOND_FRAGMENT)
+                }
+            }
+        }
+    }
+
+    private fun setupViewPager(){
+        val adapter = OperationViewPagerAdapter(requireActivity())
+        fragmentOperationSecondBinding.viewPagerAptOperationInfo.adapter = adapter
+
+        TabLayoutMediator(fragmentOperationSecondBinding.tabLayoutAptOperationInfo, fragmentOperationSecondBinding.viewPagerAptOperationInfo) { tab, position ->
+            tab.text = when(position){
+                // ContractInfo
+                0 -> "계약서정보"
+                // ManagementRegulation
+                1 -> "관리규악"
+                // BiddingNotice
+                2 -> "입찰공고"
+                // BillingStatement
+                3 -> "부과명세서"
+                // FinancialSystem
+                4 -> "재무제표"
+                // SafetyManagement
+                5 -> "안전관리계획"
+                // RepairPlan
+                6 -> "수선계획"
+                else -> null
+            }
+        }.attach()
+    }
+}

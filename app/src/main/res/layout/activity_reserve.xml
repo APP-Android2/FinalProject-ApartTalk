@@ -9,8 +9,7 @@
     tools:context=".ui.reservation.ReserveActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/revervationFragmentContainerView"
-        android:name="kr.co.lion.application.finalproject_aparttalk.ui.reservation.ReservationFragment"
+        android:id="@+id/reservationFragmentContainerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

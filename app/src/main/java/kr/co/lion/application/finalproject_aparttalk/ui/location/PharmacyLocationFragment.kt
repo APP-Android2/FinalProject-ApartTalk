@@ -6,22 +6,35 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import kr.co.lion.application.finalproject_aparttalk.R
+import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentPharmacyLocationBinding
-import kr.co.lion.application.finalproject_aparttalk.model.LocationExtraData
 import kr.co.lion.application.finalproject_aparttalk.ui.location.adapter.ExtraAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.location.viewmodel.LocationViewModel
 
 class PharmacyLocationFragment : Fragment() {
 
     lateinit var binding: FragmentPharmacyLocationBinding
 
+    val viewModel : LocationViewModel by viewModels()
+
     val extraAdapter : ExtraAdapter by lazy {
         val adapter = ExtraAdapter()
         adapter.setExtraRecyclerviewClick(object : ExtraAdapter.ExtraItemOnClickListener{
-            override fun extraRecyclerviewClickListener() {
-                startActivity(Intent(requireActivity(), LocationShowActivity::class.java))
+            override fun extraRecyclerviewClickListener(name:String, category:String, address:String, number:String, distance:String, x:String, y:String) {
+                val newIntent = Intent(requireActivity(), LocationShowActivity::class.java)
+                newIntent.putExtra("name", name)
+                newIntent.putExtra("category", category)
+                newIntent.putExtra("address", address)
+                newIntent.putExtra("number", number)
+                newIntent.putExtra("distance", distance)
+                newIntent.putExtra("x", x)
+                newIntent.putExtra("y", y)
+                startActivity(newIntent)
             }
 
         })
@@ -29,13 +42,14 @@ class PharmacyLocationFragment : Fragment() {
 
     }
 
-    val locationExtraData = mutableListOf<LocationExtraData>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentPharmacyLocationBinding.inflate(layoutInflater)
         settingRecyclerview()
+        gettingData()
         return binding.root
     }
 
@@ -47,13 +61,18 @@ class PharmacyLocationFragment : Fragment() {
                 val deco = MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)
 
-
-                //임의 설정
-                val info = LocationExtraData(title = "아파트톡 약국", address = "서울 종로구 종로3길17")
-                locationExtraData.add(info)
-
-                extraAdapter.submitList(locationExtraData)
             }
+        }
+    }
+
+    //데이터 받아오기
+    private fun gettingData(){
+        viewModel.locationList.observe(viewLifecycleOwner, Observer { places ->
+            extraAdapter.submitList(places)
+        })
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.searchEachLocationPlace("PM9", "126.938461", "37.6114538", 2000)
         }
     }
 }

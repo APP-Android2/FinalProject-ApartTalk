@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import androidx.activity.addCallback
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp3Binding
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.SignUpViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.Tools
 
 class SignUp3Fragment : Fragment() {
@@ -20,7 +19,12 @@ class SignUp3Fragment : Fragment() {
     private var _binding: FragmentSignUp3Binding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SignUpViewModel by activityViewModels()
+    private val viewModel: SignUpViewModel by viewModels{
+        SignUpViewModelFactory(
+            (requireActivity() as SignUpActivity).userRepository,
+            (requireActivity() as SignUpActivity).apartmentRepository
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentSignUp3Binding.inflate(inflater, container, false)
@@ -38,16 +42,14 @@ class SignUp3Fragment : Fragment() {
     }
 
     private fun initializeDataStates() {
-        viewModel.gender.observe(viewLifecycleOwner) { gender ->
-            when (gender) {
+        viewModel.user.observe(viewLifecycleOwner) {
+            when (it.gender) {
                 "남자" -> binding.signup3RadioButtonMale.isChecked = true
                 "여자" -> binding.signup3RadioButtonFemale.isChecked = true
                 else -> binding.signup3RadioButtonNone.isChecked = true
             }
-        }
 
-        viewModel.email.observe(viewLifecycleOwner) { email ->
-            binding.signup3EmailEditText.setText(email)
+            binding.signup3EmailEditText.setText(it.email)
         }
     }
 
@@ -110,8 +112,8 @@ class SignUp3Fragment : Fragment() {
     private fun backProcess() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             Tools.hideSoftInput(requireActivity())
-            viewModel.initializeGender()
-            viewModel.initializeEmail()
+            viewModel.resetGender()
+            viewModel.resetEmail()
             findNavController().popBackStack()
         }
     }

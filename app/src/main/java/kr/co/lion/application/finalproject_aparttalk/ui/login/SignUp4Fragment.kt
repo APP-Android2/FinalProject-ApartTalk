@@ -8,18 +8,27 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp4Binding
+import kr.co.lion.application.finalproject_aparttalk.model.ApartmentModel
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.SignUpViewModel
 
 class SignUp4Fragment : Fragment() {
 
     private var _binding: FragmentSignUp4Binding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SignUpViewModel by activityViewModels()
+    private val viewModel: SignUpViewModel by viewModels{
+        SignUpViewModelFactory(
+            (requireActivity() as SignUpActivity).userRepository,
+            (requireActivity() as SignUpActivity).apartmentRepository
+        )
+    }
+
+    private lateinit var apartmentList: List<ApartmentModel>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentSignUp4Binding.inflate(inflater)
@@ -38,29 +47,14 @@ class SignUp4Fragment : Fragment() {
     }
 
     private fun initializeDataStates() {
-        viewModel.apartName.observe(viewLifecycleOwner) { apartName ->
-            binding.signup4ApartName.text = apartName
-            updateApartDongHoState(apartName.isNotEmpty())
-            updateButtonState(apartName.isNotEmpty())
-            viewModel.initializeApartDongHo()
-            viewModel.initializeIsApartCertification()
-        }
-
-        viewModel.apartDong.observe(viewLifecycleOwner) { dong ->
-            binding.signup4ApartDong.text = "${dong ?: ""}동"
-            viewModel.initializeIsApartCertification()
-            updateIsApartCertificationState(dong != null)
-        }
-
-        viewModel.apartHo.observe(viewLifecycleOwner) { ho ->
-            binding.signup4ApartHo.text = "${ho ?: ""}호"
-        }
-
-        viewModel.isApartCertification.observe(viewLifecycleOwner) { isApartCertification ->
-            when (isApartCertification) {
-                true -> binding.signup4RadioButtonRequest.isChecked = true
-                false -> binding.signup4RadioButtonDefer.isChecked = true
+        viewModel.user.observe(viewLifecycleOwner){
+            when(it.apartCertification){
+                true -> {binding.signup4RadioButtonRequest.isChecked = true}
+                false -> {binding.signup4RadioButtonDefer.isChecked = true}
             }
+        }
+        viewModel.apartmentList.observe(viewLifecycleOwner){
+            apartmentList = it
         }
     }
 
@@ -71,14 +65,19 @@ class SignUp4Fragment : Fragment() {
     }
 
     private fun showApartListBottomSheet() {
-        val apartmentBottomSheetFragment = ApartmentBottomSheetFragment{ apartName, apartAddress ->
-            onApartSelected(apartName, apartAddress)
+        val apartmentBottomSheetFragment = ApartmentBottomSheetFragment(apartmentList){ apartmentName, apartmentUid ->
+            onApartSelected(apartmentName, apartmentUid)
         }
         apartmentBottomSheetFragment.show(requireActivity().supportFragmentManager, apartmentBottomSheetFragment.tag)
     }
 
-    private fun onApartSelected(apartName: String, apartAddress: String){
-        viewModel.setApartInfo(apartName, apartAddress)
+    private fun onApartSelected(apartmentName: String, apartmentUid: String){
+        binding.signup4ApartName.text = apartmentName
+        viewModel.setApartInfo(apartmentUid)
+        updateButtonState(apartmentName.isNotEmpty())
+        updateApartDongHoState(apartmentName.isNotEmpty())
+        viewModel.resetApartDongHo()
+        viewModel.resetApartCertification()
     }
 
     private fun updateApartDongHoState(isApartInfoExist:Boolean){
@@ -99,10 +98,14 @@ class SignUp4Fragment : Fragment() {
     }
 
     private fun onApartDongHoSelected(dong: Int, ho: Int){
+        binding.signup4ApartDong.text = "${dong}동"
+        binding.signup4ApartHo.text = "${ho}호"
+        updateApartCertificationState(true)
         viewModel.setApartDongHo(dong, ho)
+        viewModel.resetApartCertification()
     }
 
-    private fun updateIsApartCertificationState(isApartDongHoExist:Boolean){
+    private fun updateApartCertificationState(isApartDongHoExist:Boolean){
         binding.signup4IsapartcertificationLayout.isVisible = isApartDongHoExist
     }
 
@@ -113,7 +116,7 @@ class SignUp4Fragment : Fragment() {
                 R.id.signup4_radio_button_defer -> false
                 else -> false
             }
-            viewModel.setIsApartCertification(selected)
+            viewModel.setApartCertification(selected)
         }
     }
 
@@ -124,8 +127,7 @@ class SignUp4Fragment : Fragment() {
 
     private fun completeButton(){
         binding.signup4AgreeButton.setOnClickListener {
-            viewModel.setIsCompleteInputUserInfo(true)
-            viewModel.userAllInfo()
+            viewModel.saveUserInfo()
             (activity as? SignUpActivity)?.setResultAndFinish()
             startActivity(Intent(requireContext(), MainActivity::class.java))
             requireActivity().finish()
@@ -134,8 +136,8 @@ class SignUp4Fragment : Fragment() {
 
     private fun backProcess(){
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            viewModel.initializeApartInfo()
-            viewModel.initializeIsApartCertification()
+            viewModel.resetApartInfo()
+            viewModel.resetApartCertification()
             findNavController().popBackStack()
         }
     }
