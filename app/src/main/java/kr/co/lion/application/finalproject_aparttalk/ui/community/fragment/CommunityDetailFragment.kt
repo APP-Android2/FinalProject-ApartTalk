@@ -22,6 +22,11 @@ import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.Commun
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityAddViewModel
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityDetailViewModel
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunitySearchViewModel
+import kr.co.lion.application.finalproject_aparttalk.util.CommentState
+import kr.co.lion.application.finalproject_aparttalk.util.Tools
+import java.text.FieldPosition
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class CommunityDetailFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityDetailBinding: FragmentCommunityDetailBinding
@@ -38,6 +43,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 댓글 모델
     var commentData:CommentData? = null
+    // 댓글 정보를 가지고 있는 리스트
+    var commentList = mutableListOf<CommentData>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -50,6 +57,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
         settingToolbar()
         settingViewPager2CommunityDetailImage()
         settingData()
+        settingCommentInputForm()
+        commentDoneProcess()
         settingRecyclerViewCommunityDetailComment()
 
         return fragmentCommunityDetailBinding.root
@@ -115,6 +124,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 //                // 사용자 정보를 가져온다.
 //                val userModel = UserDao.gettingUserInfoByUserIdx(communityPostModel!!.postUserIdx)
 
+                commentData = generatingCommentObject()
+
                 if (postData?.postImages != null) {
                     imageCommunityDetailList = postData.postImages!!
                 } else {
@@ -127,6 +138,12 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 textViewCommunityDetailSubject.text = postData?.postTitle
                 textViewCommunityDetailContent.text = postData?.postContent
                 textViewCommunityDetailToolbarTitle.text = postData?.postType
+                textViewCommunityDetailLikeCnt.text = postData?.postLikeCnt.toString()
+
+                val job1 = CoroutineScope(Dispatchers.IO).launch {
+                    textViewCommunityDetailCommentCnt.setText(commentData?.commentCnt.toString())
+                }
+                job1.join()
             }
 
         }
@@ -142,12 +159,15 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     private fun settingRecyclerViewCommunityDetailComment() {
         fragmentCommunityDetailBinding.apply {
             recyclerViewCommunityDetailComment.apply {
-                adapter = CommunityDetailCommentRecyclerViewAdapter(requireContext())
-                layoutManager = LinearLayoutManager(communityActivity)
+                CoroutineScope(Dispatchers.Main).launch {
+                    commentList = gettingCommentData()
+                    adapter = CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, this@CommunityDetailFragment)
+                    layoutManager = LinearLayoutManager(communityActivity)
+                }
             }
 
             // 리사이클러뷰에 스와이프, 드래그 기능 달기
-            val swipeHelperCallback = SwipeHelperCallback(CommunityDetailCommentRecyclerViewAdapter(requireContext())).apply {
+            val swipeHelperCallback = SwipeHelperCallback(CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, this@CommunityDetailFragment)).apply {
                 // 스와이프한 뒤 고정시킬 위치 지정
                 setClamp(resources.displayMetrics.widthPixels.toFloat() * 2 / 7)    // 1080 / 4 = 270
             }
@@ -158,6 +178,77 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 swipeHelperCallback.removePreviousClamp(fragmentCommunityDetailBinding.recyclerViewCommunityDetailComment)
                 false
             }
+        }
+    }
+
+    // 댓글 입력 요소 설정
+    private fun settingCommentInputForm() {
+        fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.setText(" ")
+    }
+
+    // 댓글 입력 객체 생성
+    suspend fun generatingCommentObject() : CommentData {
+        var commentData = CommentData()
+        var userIdx = 0
+
+        val job1 = CoroutineScope(Dispatchers.Main).launch {
+            // 댓글 번호를 가져온다.
+            val commentSequence = viewModel.getCommunityCommentSequence()
+            // 댓글 번호를 업데이트한다.
+            viewModel.updateCommunityCommentSequence(commentSequence + 1)
+            // 저장할 데이터를 담는다.
+            commentData.commentIdx = commentSequence + 1
+            commentData.commentUserIdx = userIdx
+            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
+            commentData.commentAddDate = simpleDateFormat.format(Date())
+            commentData.commentModifyDate = simpleDateFormat.format(Date())
+            commentData.commentPostIdx = postIdx!!
+            commentData.commentContent = fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text.toString()
+            commentData.commentCnt = commentList.size
+            commentData.commentState = CommentState.COMMENT_STATE_NORMAL.number
+        }
+        job1.join()
+
+        return commentData
+    }
+
+    // 댓글 정보를 가져온다.
+    suspend fun gettingCommentData(): MutableList<CommentData> {
+        val job1 = CoroutineScope(Dispatchers.Main).launch {
+            // 댓글 정보를 가져온다.
+            commentList = viewModel.gettingCommunityCommentList(postIdx!!)
+            // 사용자 정보를 가져온다.
+            // ~~~
+        }
+        job1.join()
+        return commentList
+    }
+
+    // 댓글 입력 완료 처리
+    private fun commentDoneProcess() {
+        fragmentCommunityDetailBinding.imageViewCommunityDetailSendComment.setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
+                commentData = generatingCommentObject()
+                viewModel.insertCommunityCommentData(commentData!!)
+                settingRecyclerViewCommunityDetailComment()
+                Tools.hideSoftInput(requireActivity())
+                settingCommentInputForm()
+            }
+        }
+    }
+
+    // 댓글 수정 완료 처리
+    fun commentModifyProcess(position: Int, commentIdx: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            var map = mutableMapOf<String, Any>(
+                "commentContent" to fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text!!,
+                "commentModifyDate" to SimpleDateFormat("yyyy.MM.dd").format(Date()),
+                "commentState" to CommentState.COMMENT_STATE_MODIFY.number
+            )
+            viewModel.updateCommunityCommentData(commentIdx, map)
+            settingRecyclerViewCommunityDetailComment()
+            Tools.hideSoftInput(requireActivity())
+            settingCommentInputForm()
         }
     }
 
