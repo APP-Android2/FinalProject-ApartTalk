@@ -9,6 +9,7 @@ import androidx.credentials.GetCredentialRequest
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
+import kr.co.lion.application.finalproject_aparttalk.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.security.MessageDigest
@@ -23,7 +24,7 @@ class GoogleCredentialManagerService {
         val credentialManager = CredentialManager.create(context)
         val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
             .setFilterByAuthorizedAccounts(false)
-            .setServerClientId("15976848355-8mnfgjeuv7jchcap53epu72hi7bk3ua3.apps.googleusercontent.com")
+            .setServerClientId(BuildConfig.SERVER_CLIENT_ID)
             .setNonce(hashedNonce)
             .build()
 

@@ -11,6 +11,7 @@ localProperties.load(project.rootProject.file("local.properties").inputStream())
 val kakaoApikey = localProperties.getProperty("KAKAO_API_KEY")?:""
 val nativeAppkey = localProperties.getProperty("NATIVE_APP_KEY")?:""
 val kakaoRestApiKey = localProperties.getProperty("KAKAO_REST_API_KEY")?:""
+val serverClientId = localProperties.getProperty("SERVER_CLIENT_ID") ?: ""
 
 android {
     namespace = "kr.co.lion.application.finalproject_aparttalk"
@@ -26,6 +27,7 @@ android {
         buildConfigField("String", "KAKAO_API_KEY", kakaoApikey)
         buildConfigField("String", "KAKAO_REST_API_KEY", kakaoRestApiKey)
         manifestPlaceholders["NATIVE_APP_KEY"] = nativeAppkey
+        buildConfigField("String", "SERVER_CLIENT_ID", serverClientId)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -105,8 +107,8 @@ dependencies {
     implementation ("com.kakao.maps.open:android:2.9.5")
 
     //Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
