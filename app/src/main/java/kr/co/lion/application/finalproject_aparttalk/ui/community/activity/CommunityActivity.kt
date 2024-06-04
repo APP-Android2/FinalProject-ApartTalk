@@ -17,7 +17,7 @@ import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 class CommunityActivity : AppCompatActivity() {
     lateinit var activityCommunityBinding: ActivityCommunityBinding
 
-    var idx : Int? = null
+    var postIdx : Int? = null
 
     // 프래그먼트 객체를 담을 변수
     var oldFragment: Fragment? = null
@@ -29,9 +29,9 @@ class CommunityActivity : AppCompatActivity() {
         setContentView(activityCommunityBinding.root)
 
         val fragmentName = intent.getSerializableExtra("fragmentName")
-        idx = intent.getIntExtra("idx", 0)
+        postIdx = intent.getIntExtra("postIdx", 0)
         val bundle = Bundle()
-        bundle.putInt("idx", idx!!)
+        bundle.putInt("postIdx", postIdx!!)
         replaceFragment(fragmentName as CommunityFragmentName, false, true, bundle)
 
     }

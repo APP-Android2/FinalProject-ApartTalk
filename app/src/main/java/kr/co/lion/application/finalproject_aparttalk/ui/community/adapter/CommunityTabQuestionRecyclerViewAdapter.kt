@@ -5,11 +5,16 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabQuestionBinding
+import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class CommunityTabQuestionRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<CommunityTabQuestionRecyclerViewAdapter.CommunityTabQuestionViewHolder>() {
+class CommunityTabQuestionRecyclerViewAdapter(val context: Context, var questionList: MutableList<PostData>) : RecyclerView.Adapter<CommunityTabQuestionRecyclerViewAdapter.CommunityTabQuestionViewHolder>() {
     inner class CommunityTabQuestionViewHolder(rowCommunityTabQuestionBinding: RowCommunityTabQuestionBinding) : RecyclerView.ViewHolder(rowCommunityTabQuestionBinding.root) {
         val rowCommunityTabQuestionBinding : RowCommunityTabQuestionBinding
 
@@ -32,22 +37,29 @@ class CommunityTabQuestionRecyclerViewAdapter(val context: Context) : RecyclerVi
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return questionList.size
     }
 
     override fun onBindViewHolder(holder: CommunityTabQuestionViewHolder, position: Int) {
         holder.rowCommunityTabQuestionBinding.apply {
-            textViewCommunityListLabelQuestion.text = "질문"
-            textViewCommunityListTitleQuestion.text = "글 제목입니다 $position"
-            textViewCommunityListLikeCntQuestion.text = "999"
-            textViewCommunityListCommentCntQuestion.text = "999"
-            textViewCommunityListDateQuestion.text = "2024.05.17"
+            textViewCommunityListLabelQuestion.text = questionList[position].postType
+            textViewCommunityListTitleQuestion.text = questionList[position].postTitle
+            textViewCommunityListLikeCntQuestion.text = questionList[position].postLikeCnt.toString()
+            textViewCommunityListCommentCntQuestion.text = questionList[position].postCommentCnt.toString()
+            textViewCommunityListDateQuestion.text = questionList[position].postAddDate
+
+            CoroutineScope(Dispatchers.Main).launch {
+                if (questionList[position].postImages != null) {
+                    // 어떻게 해야 하나...
+                } else {
+                    imageViewCommunityListQuestion.setImageResource(R.color.white)
+                }
+            }
 
             linearLayoutCommunityListQuestion.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
-                // 게시글 번호도 주기
-                // communityIntent.putExtra("postIdx", searchList[position].postIdx)
+                intent.putExtra("postIdx", questionList[position].postIdx)
                 context.startActivity(intent)
             }
         }

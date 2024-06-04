@@ -7,7 +7,6 @@
     tools:context=".ui.service.MyQFragment"
     android:background="@color/white">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMyQ"
         android:layout_width="match_parent"

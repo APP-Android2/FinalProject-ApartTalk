@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.media3.common)
     implementation(libs.androidx.navigation.fragment)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -95,6 +96,10 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
 
+    // glide
+    implementation ("com.firebaseui:firebase-ui-storage:7.2.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
     // 구글 Credential Manager 라이브러리
     implementation("androidx.credentials:credentials:1.2.2")
     implementation("androidx.credentials:credentials-play-services-auth:1.2.2")
@@ -112,4 +117,5 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
 }
