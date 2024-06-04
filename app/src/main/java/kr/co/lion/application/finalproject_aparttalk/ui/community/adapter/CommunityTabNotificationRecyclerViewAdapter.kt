@@ -62,7 +62,7 @@ class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var noti
             linearLayoutCommunityListNotification.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
-                 intent.putExtra("postIdx", notificationList[position].postIdx)
+                intent.putExtra("postIdx", notificationList[position].postIdx)
                 context.startActivity(intent)
             }
         }

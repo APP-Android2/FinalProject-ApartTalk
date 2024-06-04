@@ -1,6 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,23 +9,43 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityDetailBinding
+import kr.co.lion.application.finalproject_aparttalk.model.CommentData
 import kr.co.lion.application.finalproject_aparttalk.util.SwipeHelperCallback
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailCommentRecyclerViewAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailImageViewPager2Adapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityAddViewModel
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityDetailViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunitySearchViewModel
 
 class CommunityDetailFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityDetailBinding: FragmentCommunityDetailBinding
     lateinit var communityActivity: CommunityActivity
+    private val viewModel: CommunityDetailViewModel by viewModels()
+
+    // 이미지 저장용 리스트
+    var imageCommunityDetailList = mutableListOf<String>()
+    // 뷰페이저용 리스트
+    var imageViewPagerList = mutableListOf<String>()
+
+    // 현재 글 번호를 담을 변수
+    var postIdx: Int? = null
+
+    // 댓글 모델
+    var commentData:CommentData? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         fragmentCommunityDetailBinding = FragmentCommunityDetailBinding.inflate(inflater)
         communityActivity = activity as CommunityActivity
+
+        // 글 번호를 받는다.
+        postIdx = arguments?.getInt("postIdx", 0)
 
         settingToolbar()
         settingViewPager2CommunityDetailImage()
@@ -38,7 +59,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     private fun settingToolbar() {
         fragmentCommunityDetailBinding.apply {
             toolbarCommunityDetail.apply {
-                textViewCommunityDetailToolbarTitle.text = "질문"
+                textViewCommunityDetailToolbarTitle.text = " "
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     communityActivity.finish()
@@ -81,17 +102,41 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     // 초기 데이터 설정
     private fun settingData() {
         fragmentCommunityDetailBinding.apply {
-            textViewCommunityDetailDate.text = "2024.05.17"
-            textViewCommunityDetailWriter.text = "글 작성자"
-            textViewCommunityDetailLikeCnt.text = "999"
-            textViewCommunityDetailCommentCnt.text = "999"
-            textViewCommunityDetailSubject.text = "글 제목 (30자 제한)"
-            textViewCommunityDetailContent.text = "글 내용입니다 글 내용입니다 글 내용입니다 글 내용입니다\n" +
-                    "글 내용입니다 글 내용입니다 글 내용입니다 글 내용입니다\n" +
-                    "글 내용입니다 글 내용입니다 글 내용입니다 (2000자 제한)"
+            textViewCommunityDetailDate.text = " "
+            textViewCommunityDetailWriter.text = " "
+            textViewCommunityDetailLikeCnt.text = " "
+            textViewCommunityDetailCommentCnt.text = " "
+            textViewCommunityDetailSubject.text = " "
+            textViewCommunityDetailContent.text = " "
+
+            CoroutineScope(Dispatchers.Main).launch {
+                // 현재 글 번호에 해당하는 글 데이터를 가져온다.
+                val postData = viewModel.selectCommunityPostData(postIdx!!)
+//                // 사용자 정보를 가져온다.
+//                val userModel = UserDao.gettingUserInfoByUserIdx(communityPostModel!!.postUserIdx)
+
+                if (postData?.postImages != null) {
+                    imageCommunityDetailList = postData.postImages!!
+                } else {
+                    viewPager2CommunityDetailImage.visibility = View.GONE
+                    circleIndicatorCommunityDetail.visibility = View.GONE
+                }
+
+                textViewCommunityDetailDate.text = postData?.postAddDate
+                textViewCommunityDetailWriter.text = "홍길동"
+                textViewCommunityDetailSubject.text = postData?.postTitle
+                textViewCommunityDetailContent.text = postData?.postContent
+                textViewCommunityDetailToolbarTitle.text = postData?.postType
+            }
 
         }
     }
+
+//    // 뷰페이저 리스트
+//    private fun gettingViewPagerList() : MutableList<String> {
+//        imageViewPagerList = viewModel.gettingCommunityPostImage(requireContext(), imageCommunityDetailList)
+//        return imageViewPagerList
+//    }
 
     // 커뮤니티 댓글 설정
     private fun settingRecyclerViewCommunityDetailComment() {

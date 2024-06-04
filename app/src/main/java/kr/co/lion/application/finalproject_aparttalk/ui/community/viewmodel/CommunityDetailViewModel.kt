@@ -1,8 +1,11 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel
 
+import android.content.Context
+import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
 
 class CommunityDetailViewModel: ViewModel() {
@@ -40,4 +43,14 @@ class CommunityDetailViewModel: ViewModel() {
     // 커뮤니티 상세조회 댓글 입력요소
     private val _textInputCommunityDetailSendComment = MutableLiveData<String>()
     val textInputCommunityDetailSendComment: LiveData<String> get() = _textInputCommunityDetailSendComment
+
+    // 이미지 데이터를 받아오는 메서드
+    suspend fun gettingCommunityPostImage(context: Context, imageFileName:String, imageView: ImageView) {
+        return communityPostRepository.gettingCommunityPostImage(context, imageFileName, imageView)
+    }
+
+    // 글 번호를 이용해 글 데이터를 가져와 반환한다.
+    suspend fun selectCommunityPostData(postIdx: Int): PostData?{
+        return communityPostRepository.selectCommunityPostData(postIdx)
+    }
 }
