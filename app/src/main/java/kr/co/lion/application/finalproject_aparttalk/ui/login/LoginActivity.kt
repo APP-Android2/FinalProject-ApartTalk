@@ -15,6 +15,7 @@ import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSourc
 import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
 import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
 

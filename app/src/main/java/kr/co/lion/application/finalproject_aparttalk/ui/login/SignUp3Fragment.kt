@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp3Binding
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.SignUpViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.Tools
 
 class SignUp3Fragment : Fragment() {

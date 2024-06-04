@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.login
+package kr.co.lion.application.finalproject_aparttalk.ui.login.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

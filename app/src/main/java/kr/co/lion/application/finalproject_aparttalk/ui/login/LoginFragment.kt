@@ -1,7 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentLoginBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
 
@@ -31,19 +31,19 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        aaa()
+        userAuthStateToNavigate()
         googleLoginButton()
         kakaoLoginButton()
-        socialLoginButton()
+        naverLoginButton()
         phoneLoginButton()
     }
 
-    private fun aaa(){
+    private fun userAuthStateToNavigate(){
         viewModel.userAuthenticationState.observe(viewLifecycleOwner){ state ->
             when (state) {
                 NavigationState.TO_MAIN -> { (requireActivity() as LoginActivity).navigateToMain() }
                 NavigationState.TO_SIGNUP -> { (requireActivity() as LoginActivity).launchSignActivity() }
-                else -> { Log.d("test1234","act else : ${state}") }
+                else -> { }
             }
         }
     }
@@ -59,8 +59,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun socialLoginButton() {
-
+    private fun naverLoginButton() {
         binding.naverLoginButton.setOnClickListener {
             (requireActivity() as LoginActivity).navigateToMain()
         }

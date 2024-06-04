@@ -3,6 +3,7 @@ package kr.co.lion.application.finalproject_aparttalk.repository
 import android.content.Context
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseUser
 import kr.co.lion.application.finalproject_aparttalk.auth.FirebaseAuthService
 import kr.co.lion.application.finalproject_aparttalk.auth.GoogleCredentialManagerService
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
@@ -14,7 +15,7 @@ class AuthRepository(
     private val localApartmentDataSource: LocalApartmentDataSource
 ) {
 
-    fun getCurrentUser() = firebaseAuthService.getCurrentUser()
+    fun getCurrentUser(): FirebaseUser? = firebaseAuthService.getCurrentUser()
 
     fun signOut() {
         firebaseAuthService.signOut()

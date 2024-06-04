@@ -12,6 +12,7 @@ import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp1Binding
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.PrivacyPolicyActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.UserAgreementActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.SignUpViewModel
 
 class SignUp1Fragment : Fragment() {
 

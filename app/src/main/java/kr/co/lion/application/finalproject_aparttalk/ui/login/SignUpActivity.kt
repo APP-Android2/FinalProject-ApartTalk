@@ -14,6 +14,7 @@ import kr.co.lion.application.finalproject_aparttalk.db.remote.ApartmentDataSour
 import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
 import kr.co.lion.application.finalproject_aparttalk.repository.ApartmentRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.SignUpViewModel
 
 class SignUpActivity : AppCompatActivity() {
 

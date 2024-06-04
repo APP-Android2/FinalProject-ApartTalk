@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.login
+package kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel
 
 import android.content.Context
 import android.util.Log
@@ -8,16 +8,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
+import kr.co.lion.application.finalproject_aparttalk.ui.login.NavigationState
 
 class LoginViewModel(
     private val authRepository: AuthRepository,
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private val _userAuthenticationState = MutableLiveData<NavigationState>().apply { value = NavigationState.TO_LOGIN }
+    private val _userAuthenticationState = MutableLiveData<NavigationState>().apply { value =
+        NavigationState.TO_LOGIN
+    }
     val userAuthenticationState: LiveData<NavigationState> = _userAuthenticationState
 
     init {
@@ -32,9 +36,15 @@ class LoginViewModel(
         }
         val user = userRepository.getUser(currentUser.uid)  // =0.8초 소요
         _userAuthenticationState.value = when (user?.completeInputUserInfo) {
-            true -> { NavigationState.TO_MAIN }
-            false -> { NavigationState.TO_SIGNUP }
-            else -> { NavigationState.TO_LOGIN }
+            true -> {
+                NavigationState.TO_MAIN
+            }
+            false -> {
+                NavigationState.TO_SIGNUP
+            }
+            else -> {
+                NavigationState.TO_LOGIN
+            }
         }
 
     }
@@ -67,19 +77,26 @@ class LoginViewModel(
                     apartCertification = false
                 )
                 userRepository.createUser(newUser)
-                // SignUp 이동
                 _userAuthenticationState.value = NavigationState.TO_SIGNUP
                 return@launch
             }
 
             _userAuthenticationState.value = when (user.completeInputUserInfo) {
-                true -> { NavigationState.TO_MAIN }
-                false -> { NavigationState.TO_SIGNUP }
+                true -> {
+                    val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
+                    if (apartment != null){
+                        App.prefs.setLatitude(apartment.latitude)
+                        App.prefs.setLongitude(apartment.longitude)
+                    }
+                    NavigationState.TO_MAIN
+                }
+                false -> {
+                    NavigationState.TO_SIGNUP
+                }
             }
 
         } catch (e: Exception) {
             Log.d("test1234", "${e.message}")
         }
-        Log.d("test1234", "authState: ${_userAuthenticationState.value}")
     }
 }

@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentApartmentBottomSheetBinding
 import kr.co.lion.application.finalproject_aparttalk.model.ApartmentModel
+import kr.co.lion.application.finalproject_aparttalk.ui.login.adapter.ApartmentAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.SignUpViewModel
 
 class ApartmentBottomSheetFragment(
     private val apartments: List<ApartmentModel>,

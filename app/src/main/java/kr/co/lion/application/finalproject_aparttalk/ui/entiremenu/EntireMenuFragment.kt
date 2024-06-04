@@ -2,10 +2,18 @@ package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
+import kr.co.lion.application.finalproject_aparttalk.MainActivity
+import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentEntireMenuBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
@@ -13,6 +21,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.A
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.inquiry.InquiryActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.login.LoginActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyWriteActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.parking.ParkingActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.reservation.ReserveActivity
@@ -29,7 +38,6 @@ class EntireMenuFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentEntireMenuBinding.inflate(layoutInflater)
-
 
         settingEvent()
         extraEvent()
@@ -88,6 +96,12 @@ class EntireMenuFragment : Fragment() {
             buttonAptInfoMenu.setOnClickListener {
                 //아파트 운영정보로 이동
                 startActivity(Intent(requireActivity(), OperationInfoActivity::class.java))
+            }
+            buttonUserLogout.setOnClickListener {
+                // 로그인 화면으로 이동
+                App.authRepository.signOut()
+                startActivity(Intent(requireActivity(), LoginActivity::class.java))
+                requireActivity().finish()
             }
         }
     }
