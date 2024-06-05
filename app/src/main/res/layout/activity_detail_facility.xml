@@ -32,37 +32,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPagerDetail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <me.relex.circleindicator.CircleIndicator3
-            android:id="@+id/springDotIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:ci_animator="@animator/scale_with_alpha"
-            app:ci_drawable="@drawable/indicator_selected"
-            app:ci_drawable_unselected="@drawable/indicator_unselected"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/imageFacilityDetail"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:srcCompat="@drawable/aparttalkcompany" />
 
         <TextView
             android:id="@+id/textDetailName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/notosans_semibold"
             android:gravity="center"
             android:text="101동 놀이터"

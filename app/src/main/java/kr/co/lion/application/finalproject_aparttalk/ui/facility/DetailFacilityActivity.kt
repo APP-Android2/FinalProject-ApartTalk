@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityDetailFacilityBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.facility.adapter.DetailViewPagerAdapter
+import kr.co.lion.application.finalproject_aparttalk.util.setImage
 
 class DetailFacilityActivity : AppCompatActivity() {
 
@@ -21,7 +22,6 @@ class DetailFacilityActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         settingToolbar()
-        connectAdapter()
         settingEvent()
         checkButton()
         initView()
@@ -39,24 +39,6 @@ class DetailFacilityActivity : AppCompatActivity() {
         }
     }
 
-
-    //뷰페이저 어댑터 연결
-    private fun connectAdapter(){
-        binding.apply {
-            val adapter = DetailViewPagerAdapter()
-
-            viewPagerDetail.adapter = adapter
-
-            val imageResIds = listOf(
-                R.drawable.test_facility, R.drawable.test_facility, R.drawable.icon_settings,
-                R.drawable.icon_facility
-            )
-
-            adapter.submitList(imageResIds)
-
-            springDotIndicator.setViewPager(viewPagerDetail)
-        }
-    }
 
     private fun settingEvent(){
         with(binding){
@@ -86,10 +68,12 @@ class DetailFacilityActivity : AppCompatActivity() {
             val titleText = intent?.getStringExtra("titleText")
             val content = intent?.getStringExtra("content")
             val price = intent?.getStringExtra("price")
+            val image = intent?.getStringExtra("imageRes")
 
             textDetailName.text = titleText
             textDetailInfo.text = content
             textFacilityPrice.text = "가격 : ${price}"
+            imageFacilityDetail.context.setImage(imageFacilityDetail, image)
         }
     }
 }
