@@ -23,6 +23,19 @@ class OperationInfoShowBottomSheetFragment : BottomSheetDialogFragment() {
         binding = FragmentOperationInfoShowBottomSheetBinding.inflate(layoutInflater)
         operationInfoActivity = activity as OperationInfoActivity
 
+        // OperationSecondRecyclerView 에서 부터 전달받은 데이터로 UI를 업데이트
+        arguments?.let {
+            val operationInfoWriter = it.getString("writer")
+            val operationInfoType = it.getString("type")
+            val operationInfoSubject = it.getString("subject")
+            val operationInfoDate = it.getString("date")
+            val operationContent = it.getString("content")
+            val operationInfoIdx = it.getInt("idx")
+
+            binding.textViewOperationInfoShowSubject.text = operationInfoSubject
+            binding.textViewOperationInfoShowContent.text = operationContent
+        }
+
         return binding.root
     }
 
