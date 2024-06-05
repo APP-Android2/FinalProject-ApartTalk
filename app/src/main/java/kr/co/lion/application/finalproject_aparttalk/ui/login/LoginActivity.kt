@@ -1,8 +1,12 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -21,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var signActivityLauncher: ActivityResultLauncher<Intent>
+    private lateinit var sharedPreferences: SharedPreferences
 
     val authRepository: AuthRepository by lazy { AuthRepository(FirebaseAuthService(), LocalUserDataSource(this@LoginActivity), LocalApartmentDataSource(this@LoginActivity)) }
     val userRepository: UserRepository by lazy { UserRepository(UserDataSource(), LocalUserDataSource(this@LoginActivity)) }
@@ -31,8 +36,25 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
+
         initializeActivityResultLauncher()
-        showPermissionBottomSheet()
+        checkFirstRun()
+    }
+
+    private fun checkFirstRun() {
+        val isFirstRun = sharedPreferences.getBoolean("is_first_run", true)
+        if (isFirstRun) {
+            showPermissionBottomSheet()
+            sharedPreferences.edit().putBoolean("is_first_run", false).apply()
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PermissionBottomSheetFragment.REQUEST_CODE) {
+            grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }
+        }
     }
 
     private fun initializeActivityResultLauncher(){
