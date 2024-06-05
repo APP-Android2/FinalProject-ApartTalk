@@ -32,6 +32,7 @@ import com.kakao.vectormap.route.RouteLineStyle
 import com.kakao.vectormap.route.RouteLineStyles
 import com.kakao.vectormap.route.RouteLineStylesSet
 import com.kakao.vectormap.shape.MapPoints
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.BuildConfig
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityLocationShowBinding
@@ -121,7 +122,10 @@ class LocationShowActivity : AppCompatActivity() {
     private fun setupMap() {
         // 인증 후 API 가 정상적으로 실행될 때 호출됨
         // 좌표값은 추후 수정 예정
-        val position = LatLng.from(37.6114538, 126.938461)
+        val y = App.prefs.getLatitude("").toDoubleOrNull()
+        val x = App.prefs.getLongitude("").toDoubleOrNull()
+
+        val position = LatLng.from(y?:0.0, x?:0.0)
         val cameraUpdate = CameraUpdateFactory.newCenterPosition(position, 15)
         kakaoMap.moveCamera(cameraUpdate)
 
@@ -177,7 +181,9 @@ class LocationShowActivity : AppCompatActivity() {
             .setTextStyles(25, Color.BLACK)))
 
 
-        val options = LabelOptions.from(LatLng.from(37.6114538, 126.938461))
+        val y = App.prefs.getLatitude("").toDoubleOrNull()
+        val x = App.prefs.getLongitude("").toDoubleOrNull()
+        val options = LabelOptions.from(LatLng.from(y?:0.0, x?:0.0))
             .setStyles(styles)
 
 
