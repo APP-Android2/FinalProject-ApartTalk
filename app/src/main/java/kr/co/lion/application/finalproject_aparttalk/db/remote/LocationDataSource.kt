@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.db
+package kr.co.lion.application.finalproject_aparttalk.db.remote
 
 import android.util.Log
 import kr.co.lion.application.finalproject_aparttalk.BuildConfig

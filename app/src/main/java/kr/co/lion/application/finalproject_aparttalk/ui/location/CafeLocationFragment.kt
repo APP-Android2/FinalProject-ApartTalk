@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCafeLocationBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.location.adapter.ExtraAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.location.viewmodel.LocationViewModel
@@ -69,8 +70,11 @@ class CafeLocationFragment : Fragment() {
             extraAdapter.submitList(places)
         })
 
+        val y = App.prefs.getLatitude("")
+        val x = App.prefs.getLongitude("")
+
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.searchEachLocationPlace("CE7", "126.938461", "37.6114538", 2000)
+            viewModel.searchEachLocationPlace("CE7", x, y, 2000)
         }
     }
 }
