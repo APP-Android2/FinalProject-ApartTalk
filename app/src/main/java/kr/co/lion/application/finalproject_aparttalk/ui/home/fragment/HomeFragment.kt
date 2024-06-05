@@ -15,6 +15,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.A
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.home.adapter.HomeNotificationRecyclerView
 import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.inquiry.InquiryActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.parking.ParkingActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.vote.VoteActivity
 import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
@@ -62,7 +63,8 @@ class HomeFragment : Fragment() {
                 startActivity(Intent(requireActivity(), VoteActivity::class.java))
             }
             homeAllManagementOfficeLayout.setOnClickListener {
-                //관리실 문의
+                //관리사무소 문의로 이동
+                startActivity(Intent(requireActivity(), InquiryActivity::class.java))
             }
             homeAllAnnouncementLayout.setOnClickListener {
                 //안내방송
