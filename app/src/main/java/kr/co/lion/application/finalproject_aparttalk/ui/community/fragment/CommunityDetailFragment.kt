@@ -55,7 +55,6 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
         postIdx = arguments?.getInt("postIdx", 0)
 
         settingToolbar()
-        settingViewPager2CommunityDetailImage()
         settingData()
         settingCommentInputForm()
         commentDoneProcess()
@@ -98,7 +97,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     private fun settingViewPager2CommunityDetailImage() {
         fragmentCommunityDetailBinding.apply {
             viewPager2CommunityDetailImage.apply {
-                adapter = CommunityDetailImageViewPager2Adapter(requireContext())
+                adapter = CommunityDetailImageViewPager2Adapter(requireContext(), this@CommunityDetailFragment, viewModel)
             }
 
             circleIndicatorCommunityDetail.setViewPager(viewPager2CommunityDetailImage)
@@ -144,6 +143,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                     textViewCommunityDetailCommentCnt.setText(commentData?.commentCnt.toString())
                 }
                 job1.join()
+
+                settingViewPager2CommunityDetailImage()
             }
 
         }
