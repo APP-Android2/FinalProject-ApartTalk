@@ -63,6 +63,7 @@ class FacilityFragment : Fragment() {
     private fun getFacilityData(){
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.facilityInfo.observe(requireActivity()){ value ->
+                binding.progressBarFacility.visibility = View.GONE
                 facilityAdapter.submitList(value)
                 Log.d("seonguk1234", "${value}")
             }
