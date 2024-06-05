@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentHomeBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
@@ -34,6 +37,7 @@ class HomeFragment : Fragment() {
 
         settingRecyclerViewHomeNotification()
         settingEvent()
+        initView()
 
         return binding.root
     }
@@ -44,6 +48,28 @@ class HomeFragment : Fragment() {
             homeNotificationRecyclerView.apply {
                 adapter = HomeNotificationRecyclerView(requireContext())
                 layoutManager = LinearLayoutManager(mainActivity)
+            }
+        }
+    }
+
+    //화면 설정
+    private fun initView(){
+        binding.apply {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val authUser = App.authRepository.getCurrentUser()
+                if (authUser != null){
+                    val user = App.userRepository.getUser(authUser.uid)
+                    if (user != null){
+                        val apart = App.apartmentRepository.getApartment(user.uid)
+
+                        textHomeAddress.text = apart?.address
+                        textHomeApt.text = apart?.name
+                        textHomeHouse.text = apart?.totalHouseholds.toString()
+                        textHomeParking.text = apart?.totalCarParked.toString()
+                        textHomeMoveIn.text = apart?.moveIn
+                        textHomeSize.text = apart?.sizeOfComplex
+                    }
+                }
             }
         }
     }
