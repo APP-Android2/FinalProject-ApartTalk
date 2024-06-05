@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,7 +42,34 @@ class EntireMenuFragment : Fragment() {
 
         settingEvent()
         extraEvent()
+        settingToolbar()
         return binding.root
+    }
+
+    //툴바 설정
+    private fun settingToolbar(){
+        binding.apply {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val authUser = App.authRepository.getCurrentUser()
+                if (authUser != null){
+                    val user = App.userRepository.getUser(authUser.uid)
+                    if (user != null){
+                        textNameMenu.text = user.name
+
+                        if (user.apartCertification == true){
+                            textUserCheckMenu.text = "인증 완료"
+                        }else{
+                            textUserCheckMenu.text = "미인증"
+                        }
+
+                        val apartInfo = App.apartmentRepository.getApartment(user.uid)
+                        if (apartInfo != null){
+                            textAddressMenu.text = apartInfo.address
+                        }
+                    }
+                }
+            }
+        }
     }
 
     //클릭 이벤트
