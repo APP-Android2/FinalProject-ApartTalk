@@ -20,6 +20,11 @@ class FacilityAdapter : ListAdapter<FacilityModel, FacilityAdapter.FacilityViewH
             binding.root.context.setImage(binding.imageFacilityGrid, item.imageRes)
             binding.textFacilityGrid.text = item.titleText
             //Log.e("seonguk1234", "${item.titleText}")
+            binding.root.setOnClickListener {
+                gridRecyclerviewClick.gridRecyclerClickListener(
+                    item.titleText, item.imageRes, item.canReserve, item.content?:"", item.price?:""
+                )
+            }
         }
     }
 
@@ -41,13 +46,10 @@ class FacilityAdapter : ListAdapter<FacilityModel, FacilityAdapter.FacilityViewH
 
     override fun onBindViewHolder(holder: FacilityViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.binding.root.setOnClickListener {
-            gridRecyclerviewClick.gridRecyclerClickListener()
-        }
     }
 
     interface FacilityItemClickListener{
-        fun gridRecyclerClickListener()
+        fun gridRecyclerClickListener(titleText:String, imageRes:String, canReserve:Boolean, content:String, price:String)
     }
 
     fun setGridRecyclerviewClick(gridRecyclerviewClick: FacilityItemClickListener){

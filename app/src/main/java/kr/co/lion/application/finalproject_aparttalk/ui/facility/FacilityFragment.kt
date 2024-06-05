@@ -27,8 +27,20 @@ class FacilityFragment : Fragment() {
     val facilityAdapter : FacilityAdapter by lazy {
         val adapter = FacilityAdapter()
         adapter.setGridRecyclerviewClick(object : FacilityAdapter.FacilityItemClickListener{
-            override fun gridRecyclerClickListener() {
-                startActivity(Intent(requireActivity(), DetailFacilityActivity::class.java))
+            override fun gridRecyclerClickListener(
+                titleText: String,
+                imageRes: String,
+                canReserve: Boolean,
+                content: String,
+                price: String
+            ) {
+                val newIntent = Intent(requireActivity(), DetailFacilityActivity::class.java)
+                newIntent.putExtra("titleText", titleText)
+                newIntent.putExtra("imageRes", imageRes)
+                newIntent.putExtra("canReserve", canReserve)
+                newIntent.putExtra("content", content)
+                newIntent.putExtra("price", price)
+                startActivity(newIntent)
             }
 
         })
