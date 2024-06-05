@@ -1,7 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel
 
 import android.content.Context
-import android.util.Log
 import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 
 class CommunityNotificationViewModel: ViewModel() {
 

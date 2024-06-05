@@ -86,7 +86,7 @@ class TabTradeFragment : Fragment() {
     private fun settingRecyclerViewTabTrade() {
         fragmentTabTradeBinding.apply {
             recyclerViewTabTrade.apply {
-                adapter = CommunityTabTradeRecyclerViewAdapter(requireContext(), viewModel.tradeList)
+                adapter = CommunityTabTradeRecyclerViewAdapter(requireContext(), viewModel)
                 layoutManager = LinearLayoutManager(mainActivity)
                 val deco = MaterialDividerItemDecoration(mainActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)

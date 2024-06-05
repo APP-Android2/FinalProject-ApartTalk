@@ -1,6 +1,7 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.community
+package kr.co.lion.application.finalproject_aparttalk.repository
 
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
+import kr.co.lion.application.finalproject_aparttalk.db.remote.CommunityCommentDataSource
 import kr.co.lion.application.finalproject_aparttalk.util.CommentState
 
 class CommunityCommentRepository {

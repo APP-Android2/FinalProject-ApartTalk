@@ -22,7 +22,6 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTab
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityTabNotificationRecyclerViewAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
-import kr.co.lion.application.finalproject_aparttalk.ui.login.SignUpViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class TabNotificationFragment : Fragment() {
@@ -88,7 +87,7 @@ class TabNotificationFragment : Fragment() {
     private fun settingRecyclerViewTabNotification() {
         fragmentTabNotificationBinding.apply {
             recyclerViewTabNotification.apply {
-                adapter = CommunityTabNotificationRecyclerViewAdapter(requireContext(), viewModel.notificationList)
+                adapter = CommunityTabNotificationRecyclerViewAdapter(requireContext(), viewModel)
                 layoutManager = LinearLayoutManager(mainActivity)
                 val deco = MaterialDividerItemDecoration(mainActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)

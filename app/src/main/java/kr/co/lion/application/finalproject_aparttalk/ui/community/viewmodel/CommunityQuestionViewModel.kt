@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 
 class CommunityQuestionViewModel: ViewModel() {
     private val communityPostRepository = CommunityPostRepository()

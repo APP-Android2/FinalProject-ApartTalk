@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.community
+package kr.co.lion.application.finalproject_aparttalk.db.remote
 
 import android.util.Log
 import com.google.firebase.Firebase
@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
 import kr.co.lion.application.finalproject_aparttalk.util.CommentState
-import org.w3c.dom.Comment
 
 class CommunityCommentDataSource {
 

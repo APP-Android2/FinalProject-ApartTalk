@@ -12,9 +12,10 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunitySea
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunitySearchFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunitySearchViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class CommunitySearchRecyclerViewAdapter(val context: Context, var searchList: MutableList<PostData>) : RecyclerView.Adapter<CommunitySearchRecyclerViewAdapter.CommunitySearchViewHolder>() {
+class CommunitySearchRecyclerViewAdapter(val context: Context, var viewModel: CommunitySearchViewModel) : RecyclerView.Adapter<CommunitySearchRecyclerViewAdapter.CommunitySearchViewHolder>() {
     inner class CommunitySearchViewHolder(rowCommunitySearchBinding: RowCommunitySearchBinding) : RecyclerView.ViewHolder(rowCommunitySearchBinding.root) {
         val rowCommunitySearchBinding : RowCommunitySearchBinding
 
@@ -37,20 +38,20 @@ class CommunitySearchRecyclerViewAdapter(val context: Context, var searchList: M
     }
 
     override fun getItemCount(): Int {
-        return searchList.size
+        return viewModel.searchList.size
     }
 
     override fun onBindViewHolder(holder: CommunitySearchViewHolder, position: Int) {
         holder.rowCommunitySearchBinding.apply {
-            textViewCommunityListLabelSearch.text = searchList[position].postType
-            textViewCommunityListTitleSearch.text = searchList[position].postTitle
-            textViewCommunityListLikeCntSearch.text = searchList[position].postLikeCnt.toString()
-            textViewCommunityListCommentCntSearch.text = searchList[position].postCommentCnt.toString()
-            textViewCommunityListDateSearch.text = searchList[position].postAddDate
+            textViewCommunityListLabelSearch.text = viewModel.searchList[position].postType
+            textViewCommunityListTitleSearch.text = viewModel.searchList[position].postTitle
+            textViewCommunityListLikeCntSearch.text = viewModel.searchList[position].postLikeCnt.toString()
+            textViewCommunityListCommentCntSearch.text = viewModel.searchList[position].postCommentCnt.toString()
+            textViewCommunityListDateSearch.text = viewModel.searchList[position].postAddDate
 
             CoroutineScope(Dispatchers.Main).launch {
-                if (searchList[position].postImages != null) {
-                    // 어떻게 해야 하나...
+                if (viewModel.searchList[position].postImages != null) {
+                    viewModel.gettingCommunityPostImage(context, viewModel.searchList[position].postImages!![0], imageViewCommunityListSearch)
                 } else {
                     imageViewCommunityListSearch.setImageResource(R.color.white)
                 }

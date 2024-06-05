@@ -2,12 +2,11 @@ package kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel
 
 import android.content.Context
 import android.net.Uri
-import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 
 class CommunityAddViewModel: ViewModel() {
 

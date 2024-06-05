@@ -85,7 +85,7 @@ class TabEtcFragment : Fragment() {
     private fun settingRecyclerViewTabTrade() {
         fragmentTabEtcBinding.apply {
             recyclerViewTabEtc.apply {
-                adapter = CommunityTabEtcRecyclerViewAdapter(requireContext(), viewModel.etcList)
+                adapter = CommunityTabEtcRecyclerViewAdapter(requireContext(), viewModel)
                 layoutManager = LinearLayoutManager(mainActivity)
                 val deco = MaterialDividerItemDecoration(mainActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)

@@ -60,7 +60,7 @@ class CommunitySearchFragment : Fragment() {
     private fun settingRecyclerViewSearch() {
         fragmentCommunitySearchBinding.apply {
             recyclerViewCommunitySearch.apply {
-                adapter = CommunitySearchRecyclerViewAdapter(requireContext(), viewModel.searchList)
+                adapter = CommunitySearchRecyclerViewAdapter(requireContext(), viewModel)
                 layoutManager = LinearLayoutManager(communityActivity)
                 val deco = MaterialDividerItemDecoration(communityActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)

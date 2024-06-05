@@ -1,9 +1,10 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.community
+package kr.co.lion.application.finalproject_aparttalk.repository
 
 import android.content.Context
 import android.net.Uri
 import android.widget.ImageView
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
+import kr.co.lion.application.finalproject_aparttalk.db.remote.CommunityPostDataSource
 
 class CommunityPostRepository {
 

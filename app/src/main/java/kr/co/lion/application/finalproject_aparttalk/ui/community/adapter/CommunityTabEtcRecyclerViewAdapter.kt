@@ -14,9 +14,10 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTab
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.TabEtcFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityEtcViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class CommunityTabEtcRecyclerViewAdapter(val context: Context, var etcList: MutableList<PostData>) : RecyclerView.Adapter<CommunityTabEtcRecyclerViewAdapter.CommunityTabEtcViewHolder>() {
+class CommunityTabEtcRecyclerViewAdapter(val context: Context, var viewModel: CommunityEtcViewModel) : RecyclerView.Adapter<CommunityTabEtcRecyclerViewAdapter.CommunityTabEtcViewHolder>() {
     inner class CommunityTabEtcViewHolder(rowCommunityTabEtcBinding: RowCommunityTabEtcBinding) : RecyclerView.ViewHolder(rowCommunityTabEtcBinding.root) {
         val rowCommunityTabEtcBinding : RowCommunityTabEtcBinding
 
@@ -39,20 +40,20 @@ class CommunityTabEtcRecyclerViewAdapter(val context: Context, var etcList: Muta
     }
 
     override fun getItemCount(): Int {
-        return etcList.size
+        return viewModel.etcList.size
     }
 
     override fun onBindViewHolder(holder: CommunityTabEtcViewHolder, position: Int) {
         holder.rowCommunityTabEtcBinding.apply {
-            textViewCommunityListLabelEtc.text = etcList[position].postType
-            textViewCommunityListTitleEtc.text = etcList[position].postTitle
-            textViewCommunityListLikeCntEtc.text = etcList[position].postLikeCnt.toString()
-            textViewCommunityListCommentCntEtc.text = etcList[position].postCommentCnt.toString()
-            textViewCommunityListDateEtc.text = etcList[position].postAddDate
+            textViewCommunityListLabelEtc.text = viewModel.etcList[position].postType
+            textViewCommunityListTitleEtc.text = viewModel.etcList[position].postTitle
+            textViewCommunityListLikeCntEtc.text = viewModel.etcList[position].postLikeCnt.toString()
+            textViewCommunityListCommentCntEtc.text = viewModel.etcList[position].postCommentCnt.toString()
+            textViewCommunityListDateEtc.text = viewModel.etcList[position].postAddDate
 
             CoroutineScope(Dispatchers.Main).launch {
-                if (etcList[position].postImages != null) {
-                    // 어떻게 해야 하나...
+                if (viewModel.etcList[position].postImages != null) {
+                    viewModel.gettingCommunityPostImage(context, viewModel.etcList[position].postImages!![0], imageViewCommunityListEtc)
                 } else {
                     imageViewCommunityListEtc.setImageResource(R.color.white)
                 }
@@ -61,7 +62,7 @@ class CommunityTabEtcRecyclerViewAdapter(val context: Context, var etcList: Muta
             linearLayoutCommunityListEtc.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
-                intent.putExtra("postIdx", etcList[position].postIdx)
+                intent.putExtra("postIdx", viewModel.etcList[position].postIdx)
                 context.startActivity(intent)
             }
         }

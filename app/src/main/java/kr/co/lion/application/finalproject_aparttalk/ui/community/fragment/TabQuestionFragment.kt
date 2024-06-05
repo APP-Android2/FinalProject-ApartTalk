@@ -84,7 +84,7 @@ class TabQuestionFragment : Fragment() {
     private fun settingRecyclerViewTabQuestion() {
         fragmentTabQuestionBinding.apply {
             recyclerViewTabQuestion.apply {
-                adapter = CommunityTabQuestionRecyclerViewAdapter(requireContext(), viewModel.questionList)
+                adapter = CommunityTabQuestionRecyclerViewAdapter(requireContext(), viewModel)
                 layoutManager = LinearLayoutManager(mainActivity)
                 val deco = MaterialDividerItemDecoration(mainActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)

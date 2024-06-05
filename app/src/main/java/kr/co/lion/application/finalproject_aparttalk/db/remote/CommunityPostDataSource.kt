@@ -1,13 +1,11 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.community
+package kr.co.lion.application.finalproject_aparttalk.db.remote
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.google.firebase.Firebase
-import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.storage
 import kotlinx.coroutines.CoroutineScope

@@ -14,7 +14,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -27,16 +26,13 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityAddBinding
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostDataSource
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityAddImageViewPager2Adapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityAddViewModel
-import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
 import kr.co.lion.application.finalproject_aparttalk.util.PostState
 import kr.co.lion.application.finalproject_aparttalk.util.PostType
