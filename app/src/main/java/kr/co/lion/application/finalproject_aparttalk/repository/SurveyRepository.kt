@@ -85,28 +85,3 @@ class SurveyRepository {
         }
     }
 }
-
-// Survey 데이터 클래스에 toMap 메서드 추가
-data class Survey(
-    val surveyTitle: String = "",
-    val surveyContent: String = "",
-    val surveyDate: String = "",
-    val surveyIdx: Int = 0,
-    val surveyState: Boolean = true,
-    val surveycheck1: Boolean = false,
-    val surveycheck2: Boolean = false,
-    val surveycheck3: Boolean = false
-) {
-    fun toMap(): Map<String, Any> {
-        return mapOf(
-            "surveyTitle" to surveyTitle,
-            "surveyContent" to surveyContent,
-            "surveyDate" to surveyDate,
-            "surveyIdx" to surveyIdx,
-            "surveyState" to surveyState,
-            "surveycheck1" to surveycheck1,
-            "surveycheck2" to surveycheck2,
-            "surveycheck3" to surveycheck3
-        )
-    }
-}
