@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.facility.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.ItemFacilityGridBinding
 import kr.co.lion.application.finalproject_aparttalk.model.FacilityModel
+import kr.co.lion.application.finalproject_aparttalk.util.setImage
 
 class FacilityAdapter : ListAdapter<FacilityModel, FacilityAdapter.FacilityViewHolder>(differ) {
 
@@ -15,8 +17,9 @@ class FacilityAdapter : ListAdapter<FacilityModel, FacilityAdapter.FacilityViewH
     inner class FacilityViewHolder(val binding:ItemFacilityGridBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: FacilityModel){
-            binding.imageFacilityGrid.setImageResource(item.imageRes)
+            binding.root.context.setImage(binding.imageFacilityGrid, item.imageRes)
             binding.textFacilityGrid.text = item.titleText
+            //Log.e("seonguk1234", "${item.titleText}")
         }
     }
 
