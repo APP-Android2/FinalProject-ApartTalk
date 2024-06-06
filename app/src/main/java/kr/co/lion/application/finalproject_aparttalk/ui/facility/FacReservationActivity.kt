@@ -1,9 +1,12 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.facility
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -12,19 +15,26 @@ import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityFacReservationBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.facility.viewmodel.FacilityResInfoViewmodel
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Locale
 
 class FacReservationActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityFacReservationBinding
+
+    val viewModel : FacilityResInfoViewmodel by viewModels()
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFacReservationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         settingToolbar()
         connectingAdapter()
-        settingEvent()
         initView()
+        settingEvent()
 
     }
 
@@ -69,20 +79,53 @@ class FacReservationActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun settingEvent(){
         binding.apply {
             buttonReserve.setOnClickListener {
-                val dialog = DialogConfirm("예약 완료", "예약이 완료되셨습니다.\n결제는 현장에서 진행해주시면 됩니다.", this@FacReservationActivity)
-                dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
-                    override fun okButtonClick() {
-                        finish()
-                    }
-
-                })
-                dialog.show(this@FacReservationActivity.supportFragmentManager, "DialogConfirm")
-
+                insertResData()
             }
         }
     }
+
+    //예약정보를 저장한다
+        @RequiresApi(Build.VERSION_CODES.O)
+        private fun insertResData(){
+            lifecycleScope.launch {
+                binding.apply {
+                    val authUser = App.authRepository.getCurrentUser()
+                    if (authUser != null){
+                        val user = App.userRepository.getUser(authUser.uid)
+                        if (user != null){
+                            val title = intent?.getStringExtra("titleText")
+                            val price = intent?.getStringExtra("price")
+                            val image = intent?.getStringExtra("imageRes")
+
+                            val userUid = user.uid
+                            val titleText = title
+                            val useTime = timeSpinner.selectedItem
+                            val imageRes = image
+                            val usePrice = price
+                            val reservationState = true
+                            val localDate: String = LocalDate.now().toString()
+
+                            viewModel.insertResData(userUid, titleText?:"", useTime.toString(), imageRes?:"", usePrice?:"", reservationState, localDate){ success ->
+                                if (success){
+                                    val dialog = DialogConfirm("예약 완료", "예약이 완료되셨습니다.\n결제는 현장에서 진행해주시면 됩니다.", this@FacReservationActivity)
+                                    dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
+                                        override fun okButtonClick() {
+                                            finish()
+                                        }
+
+                                    })
+                                    dialog.show(this@FacReservationActivity.supportFragmentManager, "DialogConfirm")
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
 }
