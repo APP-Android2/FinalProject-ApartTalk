@@ -5,57 +5,68 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentMyLikeBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentMyWroteBinding
+import kr.co.lion.application.finalproject_aparttalk.model.PostData
+import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.MyLikeRecyclerViewAdapter
-import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.MyWroteRecyclerViewAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.OnItemClickListener
+import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
+class MyLikeFragment : Fragment(), OnItemClickListener {
 
-class MyLikeFragment : Fragment() {
-
-    lateinit var fragmentMyLikeBinding: FragmentMyLikeBinding
-    lateinit var myWriteActivity: MyWriteActivity
-    val dataList: MutableList<String> = mutableListOf("Item 1", "Item 2 ", "Item 3")
+    private lateinit var binding: FragmentMyLikeBinding
+    private val myLikeViewModel: MyLikeViewModel by viewModels { MyLikeViewModelFactory(CommunityPostRepository()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        binding = FragmentMyLikeBinding.inflate(inflater, container, false)
 
+        setupRecyclerView()
+        observeViewModel()
 
-        fragmentMyLikeBinding = FragmentMyLikeBinding.inflate(inflater)
-        myWriteActivity = activity as MyWriteActivity
+        val userId = arguments?.getInt("userId") ?: 0
+        myLikeViewModel.loadMyLikedPosts(userId)
 
-        settingRecyclerview()
-        updateUI()
-
-        return fragmentMyLikeBinding.root
-
+        return binding.root
     }
 
-    fun updateUI(){
-        if(dataList.isEmpty()){
-            fragmentMyLikeBinding.myLikeLayout.visibility = View.GONE
-            fragmentMyLikeBinding.myLikeBlankLayout.visibility = View.VISIBLE
-        }else{
-            fragmentMyLikeBinding.myLikeLayout.visibility  = View.VISIBLE
-            fragmentMyLikeBinding.myLikeBlankLayout.visibility = View.GONE
+    private fun observeViewModel() {
+        myLikeViewModel.myLikeList.observe(viewLifecycleOwner, Observer { posts ->
+            updateUI(posts)
+            (binding.recyclerViewTabMyLike.adapter as MyLikeRecyclerViewAdapter).submitList(posts)
+        })
+    }
+
+    private fun updateUI(postList: List<PostData>) {
+        if (postList.isEmpty()) {
+            binding.myLikeLayout.visibility = View.GONE
+            binding.myLikeBlankLayout.visibility = View.VISIBLE
+        } else {
+            binding.myLikeLayout.visibility = View.VISIBLE
+            binding.myLikeBlankLayout.visibility = View.GONE
         }
     }
 
-    fun settingRecyclerview(){
-        fragmentMyLikeBinding.apply{
-            recyclerViewTabMyLike.apply{
-                adapter = MyLikeRecyclerViewAdapter(requireContext())
-                layoutManager = LinearLayoutManager(myWriteActivity)
-                val deco = MaterialDividerItemDecoration(myWriteActivity, MaterialDividerItemDecoration.VERTICAL)
-                addItemDecoration(deco)
-            }
+    private fun setupRecyclerView() {
+        binding.recyclerViewTabMyLike.apply {
+            adapter = MyLikeRecyclerViewAdapter(requireContext(), this@MyLikeFragment)
+            layoutManager = LinearLayoutManager(requireContext())
+            val deco = MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
+            addItemDecoration(deco)
         }
     }
 
+    override fun onItemClick(post: PostData) {
+        val myWriteActivity = activity as MyWriteActivity
+        val bundle = Bundle().apply {
+            putInt("postIdx", post.postIdx)
+        }
+        myWriteActivity.replaceFragment(CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT, true, true, bundle)
+    }
 }
