@@ -5,6 +5,8 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.OAuthProvider
+import com.kakao.sdk.auth.model.OAuthToken
 import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthService {
@@ -21,6 +23,12 @@ class FirebaseAuthService {
 
     suspend fun signInWithGoogle(googleAccount: GoogleIdTokenCredential): AuthResult{
         val credential = GoogleAuthProvider.getCredential(googleAccount.idToken, null)
+        return firebaseAuth.signInWithCredential(credential).await()
+    }
+
+    suspend fun signInWithKaKao(oAuthToken: OAuthToken): AuthResult{
+        val providerId = "oidc.aparttalk"
+        val credential = OAuthProvider.newCredentialBuilder(providerId).setIdToken(oAuthToken.idToken).build()
         return firebaseAuth.signInWithCredential(credential).await()
     }
 }

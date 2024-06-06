@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
@@ -24,11 +23,14 @@ class LoginViewModel(
     }
     val userAuthenticationState: LiveData<NavigationState> = _userAuthenticationState
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     init {
         isAuthenticated()
     }
 
-    private fun isAuthenticated() = viewModelScope.launch(Dispatchers.Main) {
+    private fun isAuthenticated() = viewModelScope.launch {
         val currentUser = authRepository.getCurrentUser()
         if (currentUser == null) {
             _userAuthenticationState.value = NavigationState.TO_LOGIN
@@ -49,9 +51,10 @@ class LoginViewModel(
 
     }
 
-    fun googleLogin(context: Context) = viewModelScope.launch(Dispatchers.Main) {
+    fun googleLogin(context: Context) = viewModelScope.launch {
         try {
             val googleCredential = authRepository.getGoogleCredential(context) ?: return@launch
+            _isLoading.value = true
             val authResult = authRepository.signInWithGoogle(googleCredential)
             val authUser = authResult.user ?: return@launch
             val user = userRepository.getUser(authUser.uid)
@@ -94,9 +97,65 @@ class LoginViewModel(
                     NavigationState.TO_SIGNUP
                 }
             }
+            _isLoading.value = false
 
         } catch (e: Exception) {
-            Log.d("test1234", "${e.message}")
+            _isLoading.value = false
+            Log.d("test1234", "google : ${e.message}")
+        }
+    }
+
+    fun kakaoLogin(context: Context) = viewModelScope.launch {
+        try {
+            val kakaoAccount = authRepository.getKaKaoAccount(context) ?: return@launch
+            _isLoading.value = true
+            val authResult = authRepository.signInWithKaKao(kakaoAccount)
+            val authUser = authResult.user ?: return@launch
+            val user = userRepository.getUser(authUser.uid)
+            if (user == null) {
+                val newUser = UserModel(
+                    uid = authUser.uid,
+                    idx = 0,  // 유저 번호를 설정하는 로직 필요
+                    name = authUser.displayName ?: "",  // 사용자 이름 입력 필요
+                    loginType = "카카오",
+                    birthYear = null,
+                    birthMonth = null,
+                    birthDay = null,
+                    gender = "",
+                    email = authUser.email ?: "",
+                    phoneNumber = authUser.phoneNumber ?: "",
+                    agreementCheck1 = false,
+                    agreementCheck2 = false,
+                    agreementCheck3 = false,
+                    apartmentUid = "",
+                    apartmentDong = null,
+                    apartmentHo = null,
+                    completeInputUserInfo = false,
+                    apartCertification = false
+                )
+                userRepository.createUser(newUser)
+                _userAuthenticationState.value = NavigationState.TO_SIGNUP
+                return@launch
+            }
+
+            _userAuthenticationState.value = when (user.completeInputUserInfo) {
+                true -> {
+                    val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
+                    if (apartment != null){
+                        App.prefs.setLatitude(apartment.latitude)
+                        App.prefs.setLongitude(apartment.longitude)
+                    }
+                    NavigationState.TO_MAIN
+                }
+                false -> {
+                    NavigationState.TO_SIGNUP
+                }
+            }
+            _isLoading.value = false
+
+        } catch (e: Exception) {
+            _isLoading.value = false
+            Log.d("test1234", "kakao : ${e.message}")
         }
     }
 }
