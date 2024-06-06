@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
@@ -21,7 +22,7 @@ class SignUp4Fragment : Fragment() {
     private var _binding: FragmentSignUp4Binding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SignUpViewModel by viewModels{
+    private val viewModel: SignUpViewModel by activityViewModels {
         SignUpViewModelFactory(
             (requireActivity() as SignUpActivity).userRepository,
             (requireActivity() as SignUpActivity).apartmentRepository

@@ -25,6 +25,9 @@ class SignUpViewModel(
     private val _apartmentList = MutableLiveData<List<ApartmentModel>>()
     val apartmentList: MutableLiveData<List<ApartmentModel>> get() = _apartmentList
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     init {
         getUserInfo()
         getApartmentList()
@@ -153,7 +156,7 @@ class SignUpViewModel(
     }
 
     fun saveUserInfo() = viewModelScope.launch {
-
+        _isLoading.value = true
         _user.value?.let { user ->
             val updateUser = mapOf<String, Any?>(
                 "agreementCheck1" to user.agreementCheck1,
@@ -181,5 +184,6 @@ class SignUpViewModel(
                 App.prefs.setLongitude(apartment.longitude)
             }
         }
+        _isLoading.value = false
     }
 }

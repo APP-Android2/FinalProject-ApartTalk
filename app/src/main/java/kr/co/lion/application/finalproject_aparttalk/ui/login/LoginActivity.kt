@@ -6,7 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -38,8 +38,15 @@ class LoginActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
 
+        loading()
         initializeActivityResultLauncher()
         checkFirstRun()
+    }
+
+    private fun loading(){
+        viewModel.isLoading.observe(this) { isLoading ->
+            binding.loginProgressBar.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+        }
     }
 
     private fun checkFirstRun() {
