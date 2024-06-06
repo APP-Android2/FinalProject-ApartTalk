@@ -72,7 +72,7 @@ class SurveyCompleteFragment : Fragment() {
             title = "설문조사 결과"
             setNavigationIcon(R.drawable.icon_back)
             setNavigationOnClickListener {
-                voteActivity.replaceFragment(VoteFragmentName.SURVEY_LIST_FRAGMENT, false, true, null)
+                voteActivity.replaceFragment(VoteFragmentName.VOTE_TAB_FRAGMENT, false, true, null)
             }
         }
     }
