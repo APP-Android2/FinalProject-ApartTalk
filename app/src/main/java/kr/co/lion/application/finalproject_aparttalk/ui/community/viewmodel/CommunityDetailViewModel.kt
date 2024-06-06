@@ -11,6 +11,7 @@ import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.repository.CommunityCommentRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 import kr.co.lion.application.finalproject_aparttalk.util.CommentState
+import kr.co.lion.application.finalproject_aparttalk.util.PostState
 
 class CommunityDetailViewModel: ViewModel() {
 
@@ -87,5 +88,10 @@ class CommunityDetailViewModel: ViewModel() {
     // 댓글의 상태를 변경하는 메서드
     suspend fun updateCommunityCommentState(commentData: CommentData, newState: CommentState){
         return communityCommentRepository.updateCommunityCommentState(commentData, newState)
+    }
+
+    // 글의 상태를 변경하는 메서드
+    suspend fun updateCommunityPostState(postIdx: Int, newState: PostState) {
+        return communityPostRepository.updateCommunityPostState(postIdx, newState)
     }
 }

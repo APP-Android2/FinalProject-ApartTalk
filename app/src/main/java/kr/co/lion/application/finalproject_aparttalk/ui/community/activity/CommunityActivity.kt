@@ -34,7 +34,7 @@ class CommunityActivity : AppCompatActivity() {
         postId = intent.getStringExtra("postId")
         val bundle = Bundle()
         bundle.putInt("postIdx", postIdx!!)
-        bundle.putString("postId", postId!!)
+        bundle.putString("postId", postId.orEmpty())
         replaceFragment(fragmentName as CommunityFragmentName, false, true, bundle)
 
     }

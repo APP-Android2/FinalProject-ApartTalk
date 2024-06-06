@@ -152,4 +152,22 @@ class CommunityPostDataSource {
 
         return communityPostList
     }
+
+    // 글의 상태를 변경하는 메서드
+    suspend fun updateCommunityPostState(postIdx: Int, newState:PostState) {
+        val job1 = CoroutineScope(Dispatchers.IO).launch {
+            // 컬렉션에 접근할 수 있는 객체를 가져온다.
+            val collectionReference = Firebase.firestore.collection("CommunityPostData")
+            // 컬렉션이 가지고 있는 문서들 중에 contentIdx 필드가 지정된 글 번호값하고 같은 Document 들을 가져온다.
+            val query = collectionReference.whereEqualTo("postIdx", postIdx).get().await()
+
+            // 저장할 데이터를 담을 HashMap을 만들어준다.
+            val map = mutableMapOf<String, Any>()
+            map["postState"] = newState.number.toLong()
+            // 저장한다.
+            // 가져온 문서 중 첫 번째 문서에 접근하여 데이터를 수정한다.
+            query.documents[0].reference.update(map)
+        }
+        job1.join()
+    }
 }

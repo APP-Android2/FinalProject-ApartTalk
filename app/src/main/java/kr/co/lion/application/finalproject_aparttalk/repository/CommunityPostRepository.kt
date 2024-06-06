@@ -5,6 +5,7 @@ import android.net.Uri
 import android.widget.ImageView
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.db.remote.CommunityPostDataSource
+import kr.co.lion.application.finalproject_aparttalk.util.PostState
 
 class CommunityPostRepository {
 
@@ -23,4 +24,6 @@ class CommunityPostRepository {
     suspend fun selectCommunityPostData(postIdx: Int) = communityPostDataSource.selectCommunityPostData(postIdx)
 
     suspend fun gettingCommunityPostList() = communityPostDataSource.gettingCommunityPostList()
+
+    suspend fun updateCommunityPostState(postIdx: Int, newState: PostState) = communityPostDataSource.updateCommunityPostState(postIdx, newState)
 }

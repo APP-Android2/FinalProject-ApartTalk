@@ -93,7 +93,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 커뮤니티 바텀시트 띄우기
     private fun settingCommunityBottom() {
-        val communityBottomSheetFragment = CommunityBottomSheetFragment(this, 0)
+        val communityBottomSheetFragment = CommunityBottomSheetFragment(this, viewModel, postIdx!!)
         communityBottomSheetFragment.show(communityActivity.supportFragmentManager, "CommunityBottomSheetFragment")
     }
 
