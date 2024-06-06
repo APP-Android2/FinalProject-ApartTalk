@@ -2,6 +2,7 @@ package kr.co.lion.application.finalproject_aparttalk.ui.community.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +21,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.Comm
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.PostState
 
-class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailFragment, var viewModel: CommunityDetailViewModel, var postIdx: Int) : BottomSheetDialogFragment(),
+class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailFragment, var viewModel: CommunityDetailViewModel, var postIdx: Int, var postId: String) : BottomSheetDialogFragment(),
     DialogConfirmCancelInterface {
     lateinit var fragmentCommunityBottomSheetBinding: FragmentCommunityBottomSheetBinding
     lateinit var communityActivity: CommunityActivity
@@ -42,8 +43,9 @@ class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailF
             buttonCommunityDetailModify.setOnClickListener {
                 dismiss()
                 val bundle = Bundle()
-                // bundle.putInt("communityIdx", communityIdx) 게시글 아이디 넘겨주기
-                communityActivity.replaceFragment(CommunityFragmentName.COMMUNITY_MODIFY_FRAGMENT, true, false, null)
+                bundle.putInt("postIdx", postIdx)
+                bundle.putString("postId", postId)
+                communityActivity.replaceFragment(CommunityFragmentName.COMMUNITY_MODIFY_FRAGMENT, true, false, bundle)
             }
 
             // 삭제

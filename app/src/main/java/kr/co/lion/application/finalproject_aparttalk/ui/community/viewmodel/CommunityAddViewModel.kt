@@ -26,7 +26,7 @@ class CommunityAddViewModel: ViewModel() {
 
     // 글 종류 초기화
     fun initializeType(){
-        _communityPostAddType.value = ""
+        _communityPostAddType.value = " "
     }
 
     // 글 종류 데이터 삽입
@@ -36,7 +36,7 @@ class CommunityAddViewModel: ViewModel() {
 
     // 글 제목 초기화
     fun initializeSubject(){
-        _textViewCommunityAddSubject.value = ""
+        _textViewCommunityAddSubject.value = " "
     }
 
     // 글 제목 데이터 삽입
@@ -46,7 +46,7 @@ class CommunityAddViewModel: ViewModel() {
 
     // 글 내용 초기화
     fun initializeContent(){
-        _textViewCommunityAddContent.value = ""
+        _textViewCommunityAddContent.value = " "
     }
 
     // 글 내용 데이터 삽입

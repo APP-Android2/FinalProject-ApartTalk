@@ -4,10 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityModifyImageBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityModifyFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityModifyViewModel
 
-class CommunityModifyImageViewPager2Adapter(val context : Context) : RecyclerView.Adapter<CommunityModifyImageViewPager2Adapter.CommunityModifyImageViewHolder>(){
+class CommunityModifyImageViewPager2Adapter(val context : Context, var fragment: CommunityModifyFragment, var viewModel: CommunityModifyViewModel) : RecyclerView.Adapter<CommunityModifyImageViewPager2Adapter.CommunityModifyImageViewHolder>(){
     inner class CommunityModifyImageViewHolder(rowCommunityModifyImageBinding: RowCommunityModifyImageBinding) : RecyclerView.ViewHolder(rowCommunityModifyImageBinding.root) {
         val rowCommunityModifyImageBinding: RowCommunityModifyImageBinding
 
@@ -29,10 +34,12 @@ class CommunityModifyImageViewPager2Adapter(val context : Context) : RecyclerVie
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return fragment.imageCommunityModifyList.size
     }
 
     override fun onBindViewHolder(holder: CommunityModifyImageViewHolder, position: Int) {
-        holder.rowCommunityModifyImageBinding.imageViewRowCommunityModify.setImageResource(R.drawable.ic_launcher_foreground)
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.gettingCommunityPostImage(context, fragment.imageCommunityModifyList[position], holder.rowCommunityModifyImageBinding.imageViewRowCommunityModify)
+        }
     }
 }

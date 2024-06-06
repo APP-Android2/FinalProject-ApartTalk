@@ -4,32 +4,54 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityModifyBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityModifyImageBinding
+import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityModifyImageViewPager2Adapter
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityAddViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityModifyViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
+import kr.co.lion.application.finalproject_aparttalk.util.PostState
+import kr.co.lion.application.finalproject_aparttalk.util.PostType
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.UUID
 
 class CommunityModifyFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityModifyBinding: FragmentCommunityModifyBinding
     lateinit var communityActivity: CommunityActivity
+    private val viewModel: CommunityModifyViewModel by viewModels()
+
+    var postData: PostData? = null
+    var postIdx = 0
+    var postId = ""
+    var postModifyDate = ""
+    var imageCommunityModifyList = mutableListOf<String>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         fragmentCommunityModifyBinding = FragmentCommunityModifyBinding.inflate(inflater)
         communityActivity = activity as CommunityActivity
 
+        postIdx = arguments?.getInt("postIdx")!!
+        postId = arguments?.getString("postId")!!
+
         settingToolbar()
-        settingViewPager2CommunityModifyImage()
         settingData()
         settingButtonCommunityAdd()
 
@@ -52,7 +74,7 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
     private fun settingViewPager2CommunityModifyImage() {
         fragmentCommunityModifyBinding.apply {
             viewPager2CommunityModifyImage.apply {
-                adapter = CommunityModifyImageViewPager2Adapter(requireContext())
+                adapter = CommunityModifyImageViewPager2Adapter(requireContext(), this@CommunityModifyFragment, viewModel)
             }
 
             circleIndicatorCommunityModify.setViewPager(viewPager2CommunityModifyImage)
@@ -62,13 +84,40 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
         }
     }
 
-    // 데이터 설정
-    private fun settingData() {
+    // 드롭다운 설정
+    fun settingTextInputLayoutCommunityModifyType() {
         fragmentCommunityModifyBinding.apply {
             // 드롭다운 설정
             val typeArray = resources.getStringArray(R.array.type_community)
             val typeArrayAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_community_add, typeArray)
             textViewCommunityModifyType.setAdapter(typeArrayAdapter)
+        }
+    }
+
+    // 데이터 설정
+    private fun settingData() {
+        fragmentCommunityModifyBinding.apply {
+            viewModel.initializeSubject()
+            viewModel.initializeContent()
+
+            CoroutineScope(Dispatchers.Main).launch {
+                val postData = viewModel.selectCommunityPostData(postIdx)
+
+                if (postData?.postImages != null) {
+                    imageCommunityModifyList = postData?.postImages!!
+                } else {
+                    viewPager2CommunityModifyImage.visibility = View.GONE
+                    circleIndicatorCommunityModify.visibility = View.GONE
+                }
+
+                textViewCommunityModifyType.setText(postData?.postType)
+                textViewCommunityModifySubject.setText(postData?.postTitle)
+                textViewCommunityModifyContent.setText(postData?.postContent)
+
+                settingTextInputLayoutCommunityModifyType()
+                settingViewPager2CommunityModifyImage()
+
+            }
         }
     }
 
@@ -114,20 +163,71 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
             textViewCommunityModifyContent.addTextChangedListener(textWatcher)
 
             buttonCommunityModify.setOnClickListener {
-                val dialog = DialogConfirm(
-                    "게시글 수정 완료",
-                    "게시글 수정이 완료되었습니다.\n확인하러 가시겠습니까?",
-                    communityActivity
-                )
-                dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
-                    override fun okButtonClick() {
-                        dialog.dismiss()
-                    }
 
-                })
-                dialog.show(communityActivity.supportFragmentManager, "DialogConfirm")
+                CoroutineScope(Dispatchers.Main).launch {
+                    postData = generatingPostObject()
+                    updateCommunityPostData(postIdx)
+                    Log.d("hyuun", postData.toString())
 
+                    val dialog = DialogConfirm(
+                        "게시글 수정 완료",
+                        "게시글 수정이 완료되었습니다.\n확인하러 가시겠습니까?",
+                        communityActivity
+                    )
+                    dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
+                        override fun okButtonClick() {
+                            dialog.dismiss()
+                            communityActivity.finish()
+                        }
+
+                    })
+                    dialog.show(communityActivity.supportFragmentManager, "DialogConfirm")
+                }
             }
+        }
+    }
+
+    // 게시글 수정 객체 생성
+    suspend fun generatingPostObject() : PostData {
+        fragmentCommunityModifyBinding.apply {
+
+            var postDataModify = PostData()
+
+            val job1 = CoroutineScope(Dispatchers.Main).launch {
+
+                val postData = viewModel.selectCommunityPostData(postIdx)
+
+                postDataModify.postId = postData!!.postId
+                postDataModify.postIdx = postData.postIdx
+                if (textViewCommunityModifyType.text.toString() == "질문") {
+                    postDataModify.postType = PostType.TYPE_QUESTION.str
+                } else if (textViewCommunityModifyType.text.toString() == "거래") {
+                    postDataModify.postType = PostType.TYPE_TRADE.str
+                } else {
+                    postDataModify.postType = PostType.TYPE_ETC.str
+                }
+                postDataModify.postTitle = textViewCommunityModifySubject.text.toString()
+                postDataModify.postContent = textViewCommunityModifyContent.text.toString()
+                postDataModify.postLikeCnt = postData.postLikeCnt
+                postDataModify.postCommentCnt = postData.postCommentCnt
+                postDataModify.postImages = postData.postImages
+                postDataModify.postAddDate = postData.postAddDate
+                postDataModify.postUserIdx = postData.postUserIdx
+                val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
+                postDataModify.postModifyDate = simpleDateFormat.format(Date())
+                postDataModify.postState = PostState.POST_STATE_MODIFY.number
+            }
+            job1.join()
+
+            return postDataModify
+        }
+    }
+
+    // 게시글 수정 작성
+    private fun updateCommunityPostData(postIdx: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.updateCommunityPostData(postData!!)
+            viewModel.updateCommunityPostState(postIdx, PostState.POST_STATE_MODIFY)
         }
     }
 }

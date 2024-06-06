@@ -36,8 +36,6 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 이미지 저장용 리스트
     var imageCommunityDetailList = mutableListOf<String>()
-    // 뷰페이저용 리스트
-    var imageViewPagerList = mutableListOf<String>()
 
     // 현재 글 번호를 담을 변수
     var postIdx: Int? = null
@@ -93,7 +91,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 커뮤니티 바텀시트 띄우기
     private fun settingCommunityBottom() {
-        val communityBottomSheetFragment = CommunityBottomSheetFragment(this, viewModel, postIdx!!)
+        val communityBottomSheetFragment = CommunityBottomSheetFragment(this, viewModel, postIdx!!, postId!!)
         communityBottomSheetFragment.show(communityActivity.supportFragmentManager, "CommunityBottomSheetFragment")
     }
 
@@ -153,12 +151,6 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
         }
     }
-
-//    // 뷰페이저 리스트
-//    private fun gettingViewPagerList() : MutableList<String> {
-//        imageViewPagerList = viewModel.gettingCommunityPostImage(requireContext(), imageCommunityDetailList)
-//        return imageViewPagerList
-//    }
 
     // 커뮤니티 댓글 설정
     private fun settingRecyclerViewCommunityDetailComment() {

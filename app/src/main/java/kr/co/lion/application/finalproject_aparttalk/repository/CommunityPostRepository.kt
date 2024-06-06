@@ -26,4 +26,6 @@ class CommunityPostRepository {
     suspend fun gettingCommunityPostList() = communityPostDataSource.gettingCommunityPostList()
 
     suspend fun updateCommunityPostState(postIdx: Int, newState: PostState) = communityPostDataSource.updateCommunityPostState(postIdx, newState)
+
+    suspend fun updateCommunityPostData(postData: PostData) = communityPostDataSource.updateCommunityPostData(postData)
 }
