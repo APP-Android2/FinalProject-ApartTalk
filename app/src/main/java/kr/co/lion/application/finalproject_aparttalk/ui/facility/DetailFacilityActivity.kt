@@ -9,7 +9,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityDetailFacilityBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.facility.adapter.DetailViewPagerAdapter
 import kr.co.lion.application.finalproject_aparttalk.util.setImage
 
 class DetailFacilityActivity : AppCompatActivity() {

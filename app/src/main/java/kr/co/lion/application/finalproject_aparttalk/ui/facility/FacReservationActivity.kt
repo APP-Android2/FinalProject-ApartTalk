@@ -7,6 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityFacReservationBinding
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
@@ -21,7 +24,26 @@ class FacReservationActivity : AppCompatActivity() {
         settingToolbar()
         connectingAdapter()
         settingEvent()
+        initView()
 
+    }
+
+    private fun initView(){
+        binding.apply {
+            lifecycleScope.launch {
+                val authUser = App.authRepository.getCurrentUser()
+                if (authUser != null){
+                    val user = App.userRepository.getUser(authUser.uid)
+                    if (user != null){
+                        val apart = App.apartmentRepository.getApartment(user.uid)
+
+                        textFacReservationPerson.text = user.name
+                        textFacReservationNumber.text = user.phoneNumber
+                        textFacReservationAddress.text = apart?.address
+                    }
+                }
+            }
+        }
     }
 
 
