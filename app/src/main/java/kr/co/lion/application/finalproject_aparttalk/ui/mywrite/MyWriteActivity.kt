@@ -8,6 +8,11 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityMyWriteBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityAddFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityDetailFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityModifyFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunitySearchFragment
+import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.MyWriteFragmentName
 
 class MyWriteActivity : AppCompatActivity() {
@@ -38,38 +43,36 @@ class MyWriteActivity : AppCompatActivity() {
     // addToBackStack : BackStack에 포함 시킬 것인지
     // isAnimate : 애니메이션을 보여줄 것인지
     // data : 새로운 프래그먼트에 전달할 값이 담겨져 있는 Bundle 객체
-    fun replaceFragment(name: MyWriteFragmentName, addToBackStack: Boolean, isAnimate: Boolean, data: Bundle?) {
-
+    fun replaceFragment(name: Any, addToBackStack: Boolean, isAnimate: Boolean, data: Bundle?) {
         SystemClock.sleep(200)
 
-        // Fragment를 교체할 수 있는 객체를 추출한다.
         val fragmentTransaction = supportFragmentManager.beginTransaction()
 
-        // oldFragment에 newFragment가 가지고 있는 Fragment 객체를 담아준다.
         if (newFragment != null) {
             oldFragment = newFragment
         }
 
-        // 이름으로 분기한다.
-        // Fragment의 객체를 생성하여 변수에 담아준다.
         newFragment = when (name) {
-            MyWriteFragmentName.MY_WRITE_FRAGMENT -> MyWriteFragment()
-            MyWriteFragmentName.MY_WROTE_FRAGMENT -> MyWroteFragment().apply {
-                arguments = Bundle().apply {
-                    putInt("userId", getUserId())
-                }
+            is MyWriteFragmentName -> when (name) {
+                MyWriteFragmentName.MY_WRITE_FRAGMENT -> MyWriteFragment()
+                MyWriteFragmentName.MY_WROTE_FRAGMENT -> MyWroteFragment()
+                MyWriteFragmentName.MY_LIKE_FRAGMENT -> MyLikeFragment()
             }
-            MyWriteFragmentName.MY_LIKE_FRAGMENT -> MyLikeFragment()
+            is CommunityFragmentName -> when (name) {
+                CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT -> CommunityDetailFragment(data)
+                CommunityFragmentName.COMMUNITY_ADD_FRAGMENT -> CommunityAddFragment(data)
+                CommunityFragmentName.COMMUNITY_MODIFY_FRAGMENT -> CommunityModifyFragment(data)
+                CommunityFragmentName.COMMUNITY_SEARCH_FRAGMENT -> CommunitySearchFragment()
+                // 필요한 다른 CommunityFragment들을 여기에 추가
+            }
+            else -> throw IllegalArgumentException("Unknown fragment name: $name")
         }
 
-        // 새로운 Fragment에 전달할 객체가 있다면 arguments 프로퍼티에 넣어준다.
         if (data != null) {
             newFragment?.arguments = data
         }
 
         if (newFragment != null) {
-
-            // 애니메이션 설정
             if (isAnimate) {
                 if (oldFragment != null) {
                     oldFragment?.exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
@@ -77,22 +80,18 @@ class MyWriteActivity : AppCompatActivity() {
                     oldFragment?.enterTransition = null
                     oldFragment?.returnTransition = null
                 }
-
                 newFragment?.enterTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
                 newFragment?.returnTransition = MaterialSharedAxis(MaterialSharedAxis.X, false)
                 newFragment?.exitTransition = null
                 newFragment?.reenterTransition = null
             }
 
-            // Fragment를 교체한다.
             fragmentTransaction.replace(R.id.myWriteFragmentContainerView, newFragment!!)
 
-            // addToBackStack 변수의 값이 true면 새롭게 보여질 Fragment를 BackStack에 포함시켜 준다.
             if (addToBackStack) {
-                fragmentTransaction.addToBackStack(name.str)
+                fragmentTransaction.addToBackStack(name.toString())
             }
 
-            // Fragment 교체를 확정한다.
             fragmentTransaction.commit()
         }
     }
