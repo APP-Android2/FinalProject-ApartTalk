@@ -85,7 +85,7 @@ class CommunityDetailViewModel: ViewModel() {
     }
 
     // 댓글의 상태를 변경하는 메서드
-    suspend fun updateCommunityCommentState(commentIdx:Int, newState: CommentState){
-        return communityCommentRepository.updateCommunityCommentState(commentIdx, newState)
+    suspend fun updateCommunityCommentState(commentData: CommentData, newState: CommentState){
+        return communityCommentRepository.updateCommunityCommentState(commentData, newState)
     }
 }

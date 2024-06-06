@@ -166,13 +166,13 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
             recyclerViewCommunityDetailComment.apply {
                 CoroutineScope(Dispatchers.Main).launch {
                     commentList = gettingCommentData()
-                    adapter = CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, this@CommunityDetailFragment)
+                    adapter = CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, this@CommunityDetailFragment, viewModel)
                     layoutManager = LinearLayoutManager(communityActivity)
                 }
             }
 
             // 리사이클러뷰에 스와이프, 드래그 기능 달기
-            val swipeHelperCallback = SwipeHelperCallback(CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, this@CommunityDetailFragment)).apply {
+            val swipeHelperCallback = SwipeHelperCallback(CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, this@CommunityDetailFragment, viewModel)).apply {
                 // 스와이프한 뒤 고정시킬 위치 지정
                 setClamp(resources.displayMetrics.widthPixels.toFloat() * 2 / 7)    // 1080 / 4 = 270
             }
@@ -257,6 +257,14 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
             settingRecyclerViewCommunityDetailComment()
             Tools.hideSoftInput(requireActivity())
             settingCommentInputForm()
+        }
+    }
+
+    // 댓글 삭제 후 리사이클러뷰 갱신
+    fun removingCommentData(position: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            commentList.removeAt(position)
+            fragmentCommunityDetailBinding.recyclerViewCommunityDetailComment.adapter?.notifyDataSetChanged()
         }
     }
 

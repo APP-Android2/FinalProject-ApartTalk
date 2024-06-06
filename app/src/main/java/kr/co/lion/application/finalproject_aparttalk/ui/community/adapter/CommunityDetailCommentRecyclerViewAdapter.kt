@@ -12,9 +12,11 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityDet
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityAddFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityDetailFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityDetailViewModel
+import kr.co.lion.application.finalproject_aparttalk.util.CommentState
 import kr.co.lion.application.finalproject_aparttalk.util.Tools
 
-class CommunityDetailCommentRecyclerViewAdapter(val context : Context, var commentList: MutableList<CommentData>, var fragment: CommunityDetailFragment) : RecyclerView.Adapter<CommunityDetailCommentRecyclerViewAdapter.CommunityDetailViewHolder>(){
+class CommunityDetailCommentRecyclerViewAdapter(val context : Context, var commentList: MutableList<CommentData>, var fragment: CommunityDetailFragment, var viewModel: CommunityDetailViewModel) : RecyclerView.Adapter<CommunityDetailCommentRecyclerViewAdapter.CommunityDetailViewHolder>(){
     inner class CommunityDetailViewHolder(rowCommunityDetailCommentBinding: RowCommunityDetailCommentBinding) : RecyclerView.ViewHolder(rowCommunityDetailCommentBinding.root) {
         val rowCommunityDetailCommentBinding: RowCommunityDetailCommentBinding
 
@@ -52,6 +54,14 @@ class CommunityDetailCommentRecyclerViewAdapter(val context : Context, var comme
                     fragment.fragmentCommunityDetailBinding.imageViewCommunityDetailSendComment.setOnClickListener {
                         fragment.commentModifyProcess(position, commentList[position])
                     }
+                }
+            }
+
+            // 삭제 기능
+            imageViewRowCommunityDetailCommentDelete.setOnClickListener {
+                CoroutineScope(Dispatchers.Main).launch {
+                    viewModel.updateCommunityCommentState(commentList[position], CommentState.COMMENT_STATE_REMOVE)
+                    fragment.removingCommentData(position)
                 }
             }
         }

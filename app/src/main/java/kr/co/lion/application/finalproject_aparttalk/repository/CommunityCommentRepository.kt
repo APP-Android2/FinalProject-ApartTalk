@@ -16,7 +16,7 @@ class CommunityCommentRepository {
 
     suspend fun gettingCommunityCommentList(postId: String) = communityCommentDataSource.gettingCommunityCommentList(postId)
 
-    suspend fun updateCommunityCommentState(commentIdx:Int, newState: CommentState) = communityCommentDataSource.updateCommunityCommentState(commentIdx, newState)
+    suspend fun updateCommunityCommentState(commentData: CommentData, newState: CommentState) = communityCommentDataSource.updateCommunityCommentState(commentData, newState)
 
     suspend fun updateCommunityCommentData(commentData: CommentData, mapComment: MutableMap<String, Any>) = communityCommentDataSource.updateCommunityCommentData(commentData, mapComment)
 }
