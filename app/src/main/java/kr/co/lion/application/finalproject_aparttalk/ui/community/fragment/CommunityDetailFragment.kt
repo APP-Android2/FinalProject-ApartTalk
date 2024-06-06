@@ -27,6 +27,7 @@ import kr.co.lion.application.finalproject_aparttalk.util.Tools
 import java.text.FieldPosition
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.UUID
 
 class CommunityDetailFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityDetailBinding: FragmentCommunityDetailBinding
@@ -40,6 +41,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 현재 글 번호를 담을 변수
     var postIdx: Int? = null
+    // 현재 글 번호를 담을 변수
+    var postId: String? = null
 
     // 댓글 모델
     var commentData:CommentData? = null
@@ -53,6 +56,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
         // 글 번호를 받는다.
         postIdx = arguments?.getInt("postIdx", 0)
+        postId = arguments?.getString("postId")
 
         settingToolbar()
         settingData()
@@ -192,12 +196,15 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
         var commentData = CommentData()
         var userIdx = 0
 
+
         val job1 = CoroutineScope(Dispatchers.Main).launch {
             // 댓글 번호를 가져온다.
             val commentSequence = viewModel.getCommunityCommentSequence()
             // 댓글 번호를 업데이트한다.
             viewModel.updateCommunityCommentSequence(commentSequence + 1)
             // 저장할 데이터를 담는다.
+            commentData.commentId = UUID.randomUUID().toString()
+            commentData.commentPostId = postId!!
             commentData.commentIdx = commentSequence + 1
             commentData.commentUserIdx = userIdx
             val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
@@ -217,7 +224,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     suspend fun gettingCommentData(): MutableList<CommentData> {
         val job1 = CoroutineScope(Dispatchers.Main).launch {
             // 댓글 정보를 가져온다.
-            commentList = viewModel.gettingCommunityCommentList(postIdx!!)
+            commentList = viewModel.gettingCommunityCommentList(postId!!)
             // 사용자 정보를 가져온다.
             // ~~~
         }
@@ -239,14 +246,14 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     }
 
     // 댓글 수정 완료 처리
-    fun commentModifyProcess(position: Int, commentIdx: Int) {
+    fun commentModifyProcess(position: Int, commentData: CommentData) {
         CoroutineScope(Dispatchers.Main).launch {
             var map = mutableMapOf<String, Any>(
                 "commentContent" to fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text!!,
                 "commentModifyDate" to SimpleDateFormat("yyyy.MM.dd").format(Date()),
                 "commentState" to CommentState.COMMENT_STATE_MODIFY.number
             )
-            viewModel.updateCommunityCommentData(commentIdx, map)
+            viewModel.updateCommunityCommentData(commentData, map)
             settingRecyclerViewCommunityDetailComment()
             Tools.hideSoftInput(requireActivity())
             settingCommentInputForm()

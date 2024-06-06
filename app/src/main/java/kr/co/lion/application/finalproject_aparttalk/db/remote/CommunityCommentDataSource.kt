@@ -8,6 +8,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
 import kr.co.lion.application.finalproject_aparttalk.util.CommentState
 
@@ -52,29 +53,29 @@ class CommunityCommentDataSource {
         suspend fun insertCommunityCommentData(commentData: CommentData){
             val job1 = CoroutineScope(Dispatchers.IO).launch {
                 // 컬렉션에 접근할 수 있는 객체를 가져온다.
-                val collectionReference = Firebase.firestore.collection("CommunityCommentData")
+                val collectionReference = Firebase.firestore.collection("CommunityPostData").document(commentData.commentPostId).collection("CommunityCommentData").document(commentData.commentId)
                 // 컬럭션에 문서를 추가한다.
                 // 문서를 추가할 때 객체나 맵을 지정한다.
                 // 추가된 문서 내부의 필드는 객체가 가진 프로퍼티의 이름이나 맵에 있는 데이터의 이름과 동일하게 결정된다.
-                collectionReference.add(commentData)
+                collectionReference.set(commentData)
             }
             job1.join()
         }
 
         // 댓글 목록을 가져온다.
-        suspend fun gettingCommunityCommentList(postIdx:Int):MutableList<CommentData>{
+        suspend fun gettingCommunityCommentList(postId: String):MutableList<CommentData>{
             // 댓글 정보를 담을 리스트
             val communityCommentList = mutableListOf<CommentData>()
 
             val job1 = CoroutineScope(Dispatchers.IO).launch {
                 // 컬렉션에 접근할 수 있는 객체를 가져온다.
-                val collectionReference = Firebase.firestore.collection("CommunityCommentData")
+                val collectionReference = Firebase.firestore.collection("CommunityPostData").document(postId).collection("CommunityCommentData")
                 // 댓글 상태가 정상 상태이고 댓글 번호를 기준으로 내림차순 정렬되게 데이터를 가져올 수 있는
                 // Query를 생성한다.
                 // 댓글 상태가 정상과 수정 상태인 것만..
                 var query = collectionReference.whereIn("commentState", listOf(CommentState.COMMENT_STATE_NORMAL.number, CommentState.COMMENT_STATE_MODIFY.number))
                 // 글 번호에 해당하는 것들만
-                query = query.whereEqualTo("commentPostIdx", postIdx)
+                query = query.whereEqualTo("commentPostId", postId)
                 // 댓글 번호를 기준으로 내림 차순 정렬..
                 query = query.orderBy("commentIdx", Query.Direction.ASCENDING)
                 val queryShapshot = query.get().await()
@@ -111,17 +112,10 @@ class CommunityCommentDataSource {
         }
 
         // 댓글의 내용을 변경하는 메서드
-        suspend fun updateCommunityCommentData(commentIdx: Int, mapComment: MutableMap<String, Any>){
+        suspend fun updateCommunityCommentData(commentData: CommentData, mapComment: MutableMap<String, Any>){
             val job1 = CoroutineScope(Dispatchers.IO).launch {
                 // 컬렉션에 접근할 수 있는 객체를 가져온다.
-                val collectionReference = Firebase.firestore.collection("CommunityCommentData")
-                // 컬렉션이 가지고 있는 문서들 중에 commentIdx 필드가 지정된 댓글 번호값하고 같은 Document들을 가져온다.
-                val query = collectionReference.whereEqualTo("commentIdx", commentIdx).get().await()
-                // 저장한다.
-                Log.d("hyuun", "${query},\n ${query.documents[0]},\n ${query.documents[0].reference}")
-                // 가져온 문서 중 첫 번째 문서에 접근하여 데이터를 수정한다.
-                query.documents[0].reference.update(mapComment)
-
+                Firebase.firestore.collection("CommunityPostData").document(commentData.commentPostId).collection("CommunityCommentData").document(commentData.commentId).update(mapComment).await()
             }
             job1.join()
         }

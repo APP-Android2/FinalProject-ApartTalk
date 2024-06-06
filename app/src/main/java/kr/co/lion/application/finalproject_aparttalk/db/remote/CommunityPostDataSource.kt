@@ -2,6 +2,7 @@ package kr.co.lion.application.finalproject_aparttalk.db.remote
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -96,11 +97,11 @@ class CommunityPostDataSource {
         suspend fun insertCommunityPostData(postData: PostData){
             val job1 = CoroutineScope(Dispatchers.IO).launch {
                 // 컬렉션에 접근할 수 있는 객체를 가져온다.
-                val collectionReference = Firebase.firestore.collection("CommunityPostData")
+                val collectionReference = Firebase.firestore.collection("CommunityPostData").document(postData.postId)
                 // 컬럭션에 문서를 추가한다.
                 // 문서를 추가할 때 객체나 맵을 지정한다.
                 // 추가된 문서 내부의 필드는 객체가 가진 프로퍼티의 이름이나 맵에 있는 데이터의 이름과 동일하게 결정된다.
-                collectionReference.add(postData)
+                collectionReference.set(postData)
             }
             job1.join()
         }

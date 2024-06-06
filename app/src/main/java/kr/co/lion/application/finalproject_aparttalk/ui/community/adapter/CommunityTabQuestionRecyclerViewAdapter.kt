@@ -61,6 +61,7 @@ class CommunityTabQuestionRecyclerViewAdapter(val context: Context, var viewMode
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
                 intent.putExtra("postIdx", viewModel.questionList[position].postIdx)
+                intent.putExtra("postId", viewModel.questionList[position].postId)
                 context.startActivity(intent)
             }
         }

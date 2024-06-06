@@ -50,7 +50,7 @@ class CommunityDetailCommentRecyclerViewAdapter(val context : Context, var comme
                     fragment.fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.setText(commentList[position].commentContent)
                     Tools.showSoftInput(context, fragment.fragmentCommunityDetailBinding.textInputLayoutCommunityDetailSendComment)
                     fragment.fragmentCommunityDetailBinding.imageViewCommunityDetailSendComment.setOnClickListener {
-                        fragment.commentModifyProcess(position, commentList[position].commentIdx)
+                        fragment.commentModifyProcess(position, commentList[position])
                     }
                 }
             }

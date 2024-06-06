@@ -63,6 +63,7 @@ class CommunityTabEtcRecyclerViewAdapter(val context: Context, var viewModel: Co
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
                 intent.putExtra("postIdx", viewModel.etcList[position].postIdx)
+                intent.putExtra("postId", viewModel.etcList[position].postId)
                 context.startActivity(intent)
             }
         }

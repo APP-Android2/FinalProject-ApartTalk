@@ -63,6 +63,7 @@ class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var view
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
                 intent.putExtra("postIdx", viewModel.notificationList[position].postIdx)
+                intent.putExtra("postId", viewModel.notificationList[position].postId)
                 context.startActivity(intent)
             }
         }

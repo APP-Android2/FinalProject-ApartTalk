@@ -1,6 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel
 
 import android.content.Context
+import android.util.Log
 import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -74,13 +75,13 @@ class CommunityDetailViewModel: ViewModel() {
     }
 
     // 댓글 목록을 가져온다.
-    suspend fun gettingCommunityCommentList(postIdx:Int):MutableList<CommentData>{
-        return communityCommentRepository.gettingCommunityCommentList(postIdx)
+    suspend fun gettingCommunityCommentList(postId: String):MutableList<CommentData>{
+        return communityCommentRepository.gettingCommunityCommentList(postId)
     }
 
     // 댓글의 내용을 변경하는 메서드
-    suspend fun updateCommunityCommentData(commentIdx: Int, mapComment: MutableMap<String, Any>){
-        return communityCommentRepository.updateCommunityCommentData(commentIdx, mapComment)
+    suspend fun updateCommunityCommentData(commentData: CommentData, mapComment: MutableMap<String, Any>){
+        return communityCommentRepository.updateCommunityCommentData(commentData, mapComment)
     }
 
     // 댓글의 상태를 변경하는 메서드

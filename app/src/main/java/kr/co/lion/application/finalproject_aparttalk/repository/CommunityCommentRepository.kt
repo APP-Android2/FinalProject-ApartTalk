@@ -14,9 +14,9 @@ class CommunityCommentRepository {
 
     suspend fun insertCommunityCommentData(commentData: CommentData) = communityCommentDataSource.insertCommunityCommentData(commentData)
 
-    suspend fun gettingCommunityCommentList(postIdx: Int) = communityCommentDataSource.gettingCommunityCommentList(postIdx)
+    suspend fun gettingCommunityCommentList(postId: String) = communityCommentDataSource.gettingCommunityCommentList(postId)
 
     suspend fun updateCommunityCommentState(commentIdx:Int, newState: CommentState) = communityCommentDataSource.updateCommunityCommentState(commentIdx, newState)
 
-    suspend fun updateCommunityCommentData(commentIdx: Int, mapComment: MutableMap<String, Any>) = communityCommentDataSource.updateCommunityCommentData(commentIdx, mapComment)
+    suspend fun updateCommunityCommentData(commentData: CommentData, mapComment: MutableMap<String, Any>) = communityCommentDataSource.updateCommunityCommentData(commentData, mapComment)
 }

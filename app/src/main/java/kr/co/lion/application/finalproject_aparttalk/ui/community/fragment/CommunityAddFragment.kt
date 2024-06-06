@@ -39,6 +39,7 @@ import kr.co.lion.application.finalproject_aparttalk.util.PostType
 import kr.co.lion.application.finalproject_aparttalk.util.Tools
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.UUID
 
 class CommunityAddFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityAddBinding: FragmentCommunityAddBinding
@@ -309,6 +310,7 @@ class CommunityAddFragment(data: Bundle?) : Fragment() {
                 viewModel.updateCommunityPostSequence(communityPostSequence + 1)
 
                 // 업로드할 정보를 담아준다.
+                postData.postId = UUID.randomUUID().toString()
                 postData.postIdx = communityPostSequence + 1
                 postData.postTitle = textViewCommunityAddSubject.text.toString()
                 if (textViewCommunityAddType.text.toString() == "질문") {
