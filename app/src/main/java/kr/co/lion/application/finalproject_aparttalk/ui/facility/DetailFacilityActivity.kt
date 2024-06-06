@@ -9,7 +9,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityDetailFacilityBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.facility.adapter.DetailViewPagerAdapter
 import kr.co.lion.application.finalproject_aparttalk.util.setImage
 
 class DetailFacilityActivity : AppCompatActivity() {
@@ -22,7 +21,6 @@ class DetailFacilityActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         settingToolbar()
-        settingEvent()
         checkButton()
         initView()
 
@@ -40,14 +38,6 @@ class DetailFacilityActivity : AppCompatActivity() {
     }
 
 
-    private fun settingEvent(){
-        with(binding){
-            buttonGoReservation.setOnClickListener {
-                startActivity(Intent(this@DetailFacilityActivity, FacReservationActivity::class.java))
-                finish()
-            }
-        }
-    }
 
     //버튼 활성화
     private fun checkButton(){
@@ -74,6 +64,14 @@ class DetailFacilityActivity : AppCompatActivity() {
             textDetailInfo.text = content
             textFacilityPrice.text = "가격 : ${price}"
             imageFacilityDetail.context.setImage(imageFacilityDetail, image)
+
+            buttonGoReservation.setOnClickListener {
+                val newIntent = Intent(this@DetailFacilityActivity, FacReservationActivity::class.java)
+                newIntent.putExtra("titleText", titleText)
+                newIntent.putExtra("price", price)
+                newIntent.putExtra("imageRes", image)
+                startActivity(newIntent)
+            }
         }
     }
 }
