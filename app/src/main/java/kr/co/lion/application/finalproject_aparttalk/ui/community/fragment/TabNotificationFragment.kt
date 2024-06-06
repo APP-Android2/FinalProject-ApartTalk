@@ -42,6 +42,11 @@ class TabNotificationFragment : Fragment() {
         return fragmentTabNotificationBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        gettingCommunityPostList()
+    }
+
     // 게시글 리스트 받아오기
     private fun gettingCommunityPostList() {
         CoroutineScope(Dispatchers.Main).launch {
