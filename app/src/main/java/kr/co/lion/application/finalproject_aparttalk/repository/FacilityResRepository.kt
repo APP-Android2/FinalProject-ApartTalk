@@ -8,4 +8,6 @@ class FacilityResRepository {
     private var facilityResDataSource = FacilityResDataSource()
 
     suspend fun insertResData(facilityResModel: FacilityResModel) = facilityResDataSource.insertResInfo(facilityResModel)
+
+    suspend fun getFacilityInfoData(userUid:String) = facilityResDataSource.getFacilityResInfo(userUid)
 }

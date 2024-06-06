@@ -40,6 +40,12 @@ class FacilityResInfoViewmodel : ViewModel() {
     }
 
 
+    //예약 정보를 userUid값으로 가져온다
+    suspend fun getFacilityData(userUid:String):FacilityResModel?{
+        return facilityResRepository.getFacilityInfoData(userUid)
+    }
+
+
 
 }
 
