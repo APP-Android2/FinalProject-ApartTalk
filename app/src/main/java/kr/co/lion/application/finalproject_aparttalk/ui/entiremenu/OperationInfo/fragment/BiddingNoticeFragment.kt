@@ -12,19 +12,27 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentBiddingNoticeBinding
+import kr.co.lion.application.finalproject_aparttalk.db.OperationInfoDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
+import kr.co.lion.application.finalproject_aparttalk.repository.OperationInfoRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationSecondRecyclerView
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.BiddingNoticeViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModelFactory
 
 class BiddingNoticeFragment : Fragment() {
 
     lateinit var fragmentBiddingNoticeBinding: FragmentBiddingNoticeBinding
-    private val viewModel: BiddingNoticeViewModel by viewModels()
+    private val viewModel: OperationInfoViewModel by viewModels {
+        OperationInfoViewModelFactory(OperationInfoRepository(OperationInfoDataSource()), LocalApartmentDataSource(requireContext())
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         fragmentBiddingNoticeBinding = FragmentBiddingNoticeBinding.inflate(layoutInflater)
 
         setRecyclerView()
+        observeViewModel()
 
         return fragmentBiddingNoticeBinding.root
     }
@@ -33,7 +41,7 @@ class BiddingNoticeFragment : Fragment() {
     fun setRecyclerView(){
         fragmentBiddingNoticeBinding.recyclerViewBiddingNotice.apply {
             // 어댑터 설정
-            adapter = OperationSecondRecyclerView(requireContext(), viewModel.biddingNoticeList)
+            adapter = OperationSecondRecyclerView(parentFragmentManager, mutableListOf())
             // 레이아웃
             layoutManager = LinearLayoutManager(requireContext())
             // 데코
@@ -42,11 +50,13 @@ class BiddingNoticeFragment : Fragment() {
         }
     }
 
-    // 입찰공고 리스트 받아오기
-    private fun gettingBiddingNoticeList(){
-        CoroutineScope(Dispatchers.Main).launch {
-            viewModel.gettingBiddingNoticeList()
-            fragmentBiddingNoticeBinding.recyclerViewBiddingNotice.adapter?.notifyDataSetChanged()
+    // ViewModel 관찰 설정
+    private fun observeViewModel() {
+        viewModel.filteredList.observe(viewLifecycleOwner) { list ->
+            (fragmentBiddingNoticeBinding.recyclerViewBiddingNotice.adapter as OperationSecondRecyclerView).updateList(list)
         }
+
+        viewModel.getOperationInfoList()
+        viewModel.filterOperationInfoList("BiddingNotice")
     }
 }

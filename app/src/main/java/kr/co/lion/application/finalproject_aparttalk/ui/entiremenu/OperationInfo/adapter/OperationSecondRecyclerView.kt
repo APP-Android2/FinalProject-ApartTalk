@@ -4,15 +4,16 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowOperationInfoShowBinding
 import kr.co.lion.application.finalproject_aparttalk.model.OperationInfoModel
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment.OperationInfoShowBottomSheetFragment
 
 class OperationSecondRecyclerView(
-    private val fragmentManager: Context,
-    private val operationInfoList: List<OperationInfoModel>
-    ) : RecyclerView.Adapter<OperationSecondRecyclerView.ViewHolder>(){
+    private val fragmentManager: FragmentManager,
+    private var operationInfoList: MutableList<OperationInfoModel>
+) : RecyclerView.Adapter<OperationSecondRecyclerView.ViewHolder>(){
 
     inner class ViewHolder(rowOperationInfoShowBinding: RowOperationInfoShowBinding) : RecyclerView.ViewHolder(rowOperationInfoShowBinding.root) {
         val rowOperationInfoShowBinding : RowOperationInfoShowBinding
@@ -60,5 +61,11 @@ class OperationSecondRecyclerView(
             }
             bottomSheetFragment.show(fragmentManager, bottomSheetFragment.tag)
         }
+    }
+
+    fun updateList(newItems: List<OperationInfoModel>) {
+        operationInfoList.clear()
+        operationInfoList.addAll(newItems)
+        notifyDataSetChanged()
     }
 }

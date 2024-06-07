@@ -11,7 +11,7 @@ import kr.co.lion.application.finalproject_aparttalk.model.OperationInfoModel
 class OperationInfoDataSource {
 
     // 글 번호를 이용해 글 데이터를 가져와 반환한다.
-    suspend fun selectOperationInfoData(
+    suspend fun selectingOperationInfoData(
         OperationInfoIdx: Int,
         apartmentUid: String
     ): OperationInfoModel? {

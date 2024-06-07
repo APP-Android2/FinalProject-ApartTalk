@@ -7,6 +7,6 @@ import kr.co.lion.application.finalproject_aparttalk.model.FireCheckModel
 import kr.co.lion.application.finalproject_aparttalk.model.OperationInfoModel
 
 class OperationInfoRepository(private val operationInfoDataSource: OperationInfoDataSource){
-    suspend fun selectOperationInfoData(OperationInfoIdx: Int, apartmentUid: String) = operationInfoDataSource.selectOperationInfoData(OperationInfoIdx, apartmentUid)
+    suspend fun selectingOperationInfoData(OperationInfoIdx: Int, apartmentUid: String) = operationInfoDataSource.selectingOperationInfoData(OperationInfoIdx, apartmentUid)
     suspend fun gettingOperationInfoList(apartmentUid: String) = operationInfoDataSource.gettingOperationInfoList(apartmentUid)
 }
