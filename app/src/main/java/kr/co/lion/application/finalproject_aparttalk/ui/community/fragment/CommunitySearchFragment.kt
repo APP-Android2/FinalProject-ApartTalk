@@ -1,6 +1,8 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community.fragment
 
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,19 +32,11 @@ class CommunitySearchFragment : Fragment() {
         fragmentCommunitySearchBinding = FragmentCommunitySearchBinding.inflate(inflater)
         communityActivity = activity as CommunityActivity
 
-        gettingCommunityPostList()
         settingEvent()
+        settingSearch()
         settingRecyclerViewSearch()
 
         return fragmentCommunitySearchBinding.root
-    }
-
-    // 게시글 리스트 받아오기
-    private fun gettingCommunityPostList() {
-        CoroutineScope(Dispatchers.Main).launch {
-            viewModel.gettingCommunitySearchList()
-            fragmentCommunitySearchBinding.recyclerViewCommunitySearch.adapter?.notifyDataSetChanged()
-        }
     }
 
     // 뒤로 가기
@@ -51,6 +45,21 @@ class CommunitySearchFragment : Fragment() {
             textInputLayoutCommunitySearch.apply {
                 setStartIconOnClickListener {
                     communityActivity.finish()
+                }
+            }
+        }
+    }
+
+    // 검색창 설정
+    private fun settingSearch() {
+        fragmentCommunitySearchBinding.apply {
+            textInputCommunitySearch.apply {
+                setOnEditorActionListener { v, actionId, event ->
+                    if (event != null && event.action == KeyEvent.ACTION_DOWN) {
+                        // 검색 결과 가져오는 메서드
+                        gettingSearchData()
+                    }
+                    true
                 }
             }
         }
@@ -65,6 +74,24 @@ class CommunitySearchFragment : Fragment() {
                 val deco = MaterialDividerItemDecoration(communityActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)
             }
+        }
+    }
+
+    // 검색 결과의 데이터를 가져와 검색 화면의 리사이클러뷰를 갱신
+    private fun gettingSearchData() {
+        val keyword = fragmentCommunitySearchBinding.textInputCommunitySearch.text.toString()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.allList = viewModel.gettingCommunityPostList()
+            Log.d("hyuun", viewModel.allList.toString())
+            viewModel.searchList.clear()
+            viewModel.allList.forEach {
+                if (it.postTitle.contains(keyword) || it.postContent.contains(keyword)) {
+                    viewModel.searchList.add(it)
+                }
+            }
+
+            fragmentCommunitySearchBinding.recyclerViewCommunitySearch.adapter?.notifyDataSetChanged()
         }
     }
 }

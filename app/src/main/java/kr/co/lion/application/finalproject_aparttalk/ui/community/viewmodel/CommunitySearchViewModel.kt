@@ -45,20 +45,4 @@ class CommunitySearchViewModel: ViewModel() {
     suspend fun gettingCommunityPostImage(context: Context, imageFileName:String, imageView: ImageView) {
         return communityPostRepository.gettingCommunityPostImage(context, imageFileName, imageView)
     }
-
-    // 게시글 검색 리스트 받아오기
-    suspend fun gettingCommunitySearchList() : MutableList<PostData> {
-        val job1 = CoroutineScope(Dispatchers.Main).launch {
-            allList = gettingCommunityPostList()
-            searchList.clear()
-            allList.forEach {
-                when(it.postType) {
-                    "기타" -> searchList.add(it)
-                }
-            }
-        }
-        job1.join()
-
-        return searchList
-    }
 }
