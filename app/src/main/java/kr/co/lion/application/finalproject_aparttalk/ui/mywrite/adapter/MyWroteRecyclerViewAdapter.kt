@@ -1,6 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowMywroteTabWroteBinding
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyWroteViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class MyWroteRecyclerViewAdapter(val context: Context) : ListAdapter<PostData, MyWroteRecyclerViewAdapter.MyWroteViewHolder>(PostDiffCallback()) {
+class MyWroteRecyclerViewAdapter(val context: Context, val viewModel: MyWroteViewModel) : ListAdapter<PostData, MyWroteRecyclerViewAdapter.MyWroteViewHolder>(PostDiffCallback()) {
 
     inner class MyWroteViewHolder(val binding: RowMywroteTabWroteBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -30,7 +32,10 @@ class MyWroteRecyclerViewAdapter(val context: Context) : ListAdapter<PostData, M
             textViewMyWroteListContent.text = post.postContent
 
             rowMyWroteLayout.setOnClickListener {
-                (context as CommunityActivity).replaceFragment(CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT, true, true, null)
+                val intent = Intent(context, CommunityActivity::class.java)
+                intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
+                intent.putExtra("postIdx", viewModel.myWroteList.value!!.get(position).postIdx)
+                context.startActivity(intent)
             }
         }
     }

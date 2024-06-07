@@ -2,6 +2,7 @@ package kr.co.lion.application.finalproject_aparttalk.ui.info
 
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -29,6 +30,12 @@ class InfoActivity : AppCompatActivity() {
         // 초기 프래그먼트 설정
         if (savedInstanceState == null) {
             replaceFragment(InfoFragmentName.INFO_FRAGMENT, false, false, null)
+        }
+        userViewModel.isUserUpdated.observe(this) { isUserUpdated ->
+            if (isUserUpdated) {
+                userViewModel.loadUser()
+                Log.d("test1111", "${userViewModel.user.value}")
+            }
         }
     }
 

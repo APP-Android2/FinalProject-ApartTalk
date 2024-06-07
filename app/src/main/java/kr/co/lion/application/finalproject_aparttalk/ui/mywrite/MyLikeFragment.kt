@@ -13,10 +13,9 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentMyLikeB
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.MyLikeRecyclerViewAdapter
-import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.OnItemClickListener
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class MyLikeFragment : Fragment(), OnItemClickListener {
+class MyLikeFragment : Fragment() {
 
     private lateinit var binding: FragmentMyLikeBinding
     private val myLikeViewModel: MyLikeViewModel by viewModels { MyLikeViewModelFactory(CommunityPostRepository()) }
@@ -55,18 +54,10 @@ class MyLikeFragment : Fragment(), OnItemClickListener {
 
     private fun setupRecyclerView() {
         binding.recyclerViewTabMyLike.apply {
-            adapter = MyLikeRecyclerViewAdapter(requireContext(), this@MyLikeFragment)
+            adapter = MyLikeRecyclerViewAdapter(requireContext(), myLikeViewModel)
             layoutManager = LinearLayoutManager(requireContext())
             val deco = MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
             addItemDecoration(deco)
         }
-    }
-
-    override fun onItemClick(post: PostData) {
-        val myWriteActivity = activity as MyWriteActivity
-        val bundle = Bundle().apply {
-            putInt("postIdx", post.postIdx)
-        }
-        myWriteActivity.replaceFragment(CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT, true, true, bundle)
     }
 }

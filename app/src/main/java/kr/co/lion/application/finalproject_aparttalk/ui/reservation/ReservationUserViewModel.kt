@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.info
+package kr.co.lion.application.finalproject_aparttalk.ui.reservation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 
-class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
+class ReservationUserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     private val _isUserUpdated = MutableLiveData<Boolean>()
     val isUserUpdated: LiveData<Boolean> get() = _isUserUpdated

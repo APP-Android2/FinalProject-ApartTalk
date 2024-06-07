@@ -1,23 +1,19 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.lion.application.finalproject_aparttalk.databinding.RowMylikeTabLikeBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowMywroteTabWroteBinding
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.service.ServiceActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyLikeViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
-import kr.co.lion.application.finalproject_aparttalk.util.ServiceFragmentName
 
-class MyLikeRecyclerViewAdapter(
-    val context: Context,
-    private val itemClickListener: OnItemClickListener
-) : ListAdapter<PostData, MyLikeRecyclerViewAdapter.MyLikeViewHolder>(PostDiffCallback()) {
+class MyLikeRecyclerViewAdapter(val context: Context,val viewModel: MyLikeViewModel) : ListAdapter<PostData, MyLikeRecyclerViewAdapter.MyLikeViewHolder>(PostDiffCallback()) {
 
     inner class MyLikeViewHolder(val binding: RowMywroteTabWroteBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -36,7 +32,10 @@ class MyLikeRecyclerViewAdapter(
             textViewMyWroteListContent.text = post.postContent
 
             rowMyWroteLayout.setOnClickListener {
-                itemClickListener.onItemClick(post)
+                val intent = Intent(context, CommunityActivity::class.java)
+                intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
+                intent.putExtra("postIdx", viewModel.myLikeList.value!!.get(position).postIdx)
+                context.startActivity(intent)
             }
         }
     }
@@ -52,6 +51,3 @@ class MyLikeRecyclerViewAdapter(
     }
 }
 
-interface OnItemClickListener {
-    fun onItemClick(post: PostData)
-}
