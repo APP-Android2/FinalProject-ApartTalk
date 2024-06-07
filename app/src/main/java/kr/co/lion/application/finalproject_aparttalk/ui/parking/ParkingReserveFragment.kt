@@ -43,7 +43,9 @@ class ParkingReserveFragment : Fragment() {
                 ownerName: String
             ) {
                 binding.apply {
-
+                    textViewParkingCarNumber.setText(carNumber)
+                    textViewParkingOwnerNumber.setText(ownerNumber)
+                    textViewParkingOwnerName.setText(ownerName)
                 }
             }
 
