@@ -1,5 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.parking.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -12,6 +14,9 @@ import kr.co.lion.application.finalproject_aparttalk.repository.ParkingRepositor
 class ParkingViewModel : ViewModel() {
 
     private val parkingRepository = ParkingRepository()
+
+    private val _parkingList = MutableLiveData<List<ParkingModel>>()
+    var parkingList : LiveData<List<ParkingModel>> = _parkingList
 
     suspend fun insertParkingData(
         userUid:String, ownerNumber:String, ownerName:String, carNumber:String, visitDate:String
@@ -29,6 +34,17 @@ class ParkingViewModel : ViewModel() {
             }
             callback(success)
 
+        }
+    }
+
+    suspend fun getParkingResData(userUid:String){
+        val parkingInfo = parkingRepository.parkingResInfo(userUid)
+        val parkingInfoList = mutableListOf<ParkingModel>()
+
+        parkingInfo.forEach {
+            parkingInfoList.add(it)
+
+            _parkingList.value = parkingInfoList
         }
     }
 

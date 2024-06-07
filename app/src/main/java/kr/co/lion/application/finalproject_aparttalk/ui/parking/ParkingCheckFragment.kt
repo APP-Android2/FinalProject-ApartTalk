@@ -1,15 +1,22 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.parking
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentParkingCheckBinding
+import kr.co.lion.application.finalproject_aparttalk.model.ParkingModel
 import kr.co.lion.application.finalproject_aparttalk.ui.parking.adapter.ParkingCheckAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.parking.viewmodel.ParkingViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.ParkingFragmentName
 
 class ParkingCheckFragment : Fragment() {
@@ -23,6 +30,8 @@ class ParkingCheckFragment : Fragment() {
         adapter
     }
 
+    val viewModel : ParkingViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -31,6 +40,7 @@ class ParkingCheckFragment : Fragment() {
         settingToolbar()
         settingEvent()
         connectAdapter()
+        getParkingData()
         return binding.root
     }
 
@@ -57,6 +67,36 @@ class ParkingCheckFragment : Fragment() {
             }
         }
     }
+
+    //데이터 받아오기
+    private fun getParkingData(){
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val authUser = App.authRepository.getCurrentUser()
+            if (authUser != null){
+                val user = App.userRepository.getUser(authUser.uid)
+                if (user != null){
+
+                    viewModel.getParkingResData(user.uid)
+
+                }
+            }
+        }
+        viewModel.parkingList.observe(requireActivity()){ value ->
+            Log.d("test1234", "${value}")
+            parkingAdapter.submitList(value)
+
+
+//                        parkingAdapter.submitList(value)
+
+        }
+    }
+
+
+
+
+
+
 
     private fun settingEvent(){
         binding.apply {
