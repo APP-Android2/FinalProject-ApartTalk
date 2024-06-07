@@ -241,9 +241,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     fun commentModifyProcess(position: Int, commentData: CommentData) {
         CoroutineScope(Dispatchers.Main).launch {
             var map = mutableMapOf<String, Any>(
-                "commentContent" to fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text!!,
-                "commentModifyDate" to SimpleDateFormat("yyyy.MM.dd").format(Date()),
-                "commentState" to CommentState.COMMENT_STATE_MODIFY.number
+                "commentContent" to fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text!!.toString(),
+                "commentModifyDate" to SimpleDateFormat("yyyy.MM.dd").format(Date())
             )
             viewModel.updateCommunityCommentData(commentData, map)
             settingRecyclerViewCommunityDetailComment()

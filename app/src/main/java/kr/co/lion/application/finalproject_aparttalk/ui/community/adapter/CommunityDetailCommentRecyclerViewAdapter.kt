@@ -48,13 +48,14 @@ class CommunityDetailCommentRecyclerViewAdapter(val context : Context, var comme
 
             // 수정 기능
             imageViewRowCommunityDetailCommentModify.setOnClickListener {
-                CoroutineScope(Dispatchers.Main).launch {
                     fragment.fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.setText(commentList[position].commentContent)
                     Tools.showSoftInput(context, fragment.fragmentCommunityDetailBinding.textInputLayoutCommunityDetailSendComment)
                     fragment.fragmentCommunityDetailBinding.imageViewCommunityDetailSendComment.setOnClickListener {
-                        fragment.commentModifyProcess(position, commentList[position])
+                        CoroutineScope(Dispatchers.Main).launch {
+                            fragment.commentModifyProcess(position, commentList[position])
+                            viewModel.updateCommunityCommentState(commentList[position], CommentState.COMMENT_STATE_MODIFY)
+                        }
                     }
-                }
             }
 
             // 삭제 기능

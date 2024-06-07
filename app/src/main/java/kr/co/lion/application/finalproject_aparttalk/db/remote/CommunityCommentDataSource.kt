@@ -109,7 +109,7 @@ class CommunityCommentDataSource {
         suspend fun updateCommunityCommentData(commentData: CommentData, mapComment: MutableMap<String, Any>){
             val job1 = CoroutineScope(Dispatchers.IO).launch {
                 // 컬렉션에 접근할 수 있는 객체를 가져온다.
-                Firebase.firestore.collection("CommunityPostData").document(commentData.commentPostId).collection("CommunityCommentData").document(commentData.commentId).update(mapComment).await()
+                Firebase.firestore.collection("CommunityPostData").document(commentData.commentPostId).collection("CommunityCommentData").document(commentData.commentId).update(mapComment)
             }
             job1.join()
         }

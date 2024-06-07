@@ -167,7 +167,6 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
                 CoroutineScope(Dispatchers.Main).launch {
                     postData = generatingPostObject()
                     updateCommunityPostData(postIdx)
-                    Log.d("hyuun", postData.toString())
 
                     val dialog = DialogConfirm(
                         "게시글 수정 완료",
