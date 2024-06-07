@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentLoginBinding
@@ -16,7 +16,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: LoginViewModel by viewModels {
+    private val viewModel: LoginViewModel by activityViewModels {
         LoginViewModelFactory(
             (requireActivity() as LoginActivity).authRepository,
             (requireActivity() as LoginActivity).userRepository
@@ -56,12 +56,13 @@ class LoginFragment : Fragment() {
 
     private fun kakaoLoginButton() {
         binding.kakaoLoginButton.setOnClickListener {
+            viewModel.kakaoLogin(requireContext())
         }
     }
 
     private fun naverLoginButton() {
         binding.naverLoginButton.setOnClickListener {
-            (requireActivity() as LoginActivity).navigateToMain()
+            viewModel.naverLogin(requireContext())
         }
     }
 

@@ -3,6 +3,7 @@ package kr.co.lion.application.finalproject_aparttalk.ui.login
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -29,6 +30,8 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        loading()
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.signup_fragmentContainerView) as NavHostFragment
         val navController = navHostFragment.navController
 
@@ -47,6 +50,12 @@ class SignUpActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.signup_fragmentContainerView) as NavHostFragment
         return navHostFragment.navController.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    private fun loading(){
+        viewModel.isLoading.observe(this) { isLoading ->
+            binding.signupProgressBar2.visibility = if (isLoading) View.VISIBLE else View.INVISIBLE
+        }
     }
 
     private fun updateProgressBar(destinationId: Int) {
