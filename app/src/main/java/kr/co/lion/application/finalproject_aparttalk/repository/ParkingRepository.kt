@@ -9,4 +9,6 @@ class ParkingRepository {
 
     suspend fun parkingInfoData(parkingModel: ParkingModel) = parkingDataSource.insertParkingData(parkingModel)
 
+    suspend fun parkingResInfo(userUid:String) = parkingDataSource.getParkingResInfo(userUid)
+
 }

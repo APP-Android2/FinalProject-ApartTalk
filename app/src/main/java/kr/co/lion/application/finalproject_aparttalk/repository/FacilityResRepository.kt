@@ -12,5 +12,4 @@ class FacilityResRepository {
     suspend fun getFacilityInfoData(userUid:String) = facilityResDataSource.getFacilityResInfo(userUid)
 
 
-    suspend fun getFacilityImage(image:String) = facilityResDataSource.getFacilityInfoImg(image)
 }
