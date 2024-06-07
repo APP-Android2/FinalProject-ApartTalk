@@ -10,11 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentParkingReserveBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.parking.adapter.ParkingReserveAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.parking.viewmodel.ParkingViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
 import kr.co.lion.application.finalproject_aparttalk.util.ParkingFragmentName
 import java.text.SimpleDateFormat
@@ -38,6 +43,8 @@ class ParkingReserveFragment : Fragment() {
         })
         adapter
     }
+
+    val viewModel : ParkingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -140,18 +147,43 @@ class ParkingReserveFragment : Fragment() {
             textViewParkingVisitDate.addTextChangedListener(textWatcher)
 
             buttonGoParking.setOnClickListener {
-                val dialog = DialogConfirm(
-                    "방문차량 신청", "방문차량 신청이 완료되었습니다.", parkingActivity
-                )
-                dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
-                    override fun okButtonClick() {
-                        parkingActivity.finish()
-                    }
-
-                })
-                dialog.show(parkingActivity.supportFragmentManager, "DialogConfirm")
+                insertParkingData()
             }
 
+        }
+    }
+
+    //데이터 저장하기
+    private fun insertParkingData(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            binding.apply {
+                val authUser = App.authRepository.getCurrentUser()
+                if (authUser != null){
+                    val user = App.userRepository.getUser(authUser.uid)
+                    if (user != null){
+                        val userUid = user.uid
+                        val ownerNumber = textViewParkingOwnerNumber.text.toString()
+                        val ownerName = textViewParkingOwnerName.text.toString()
+                        val carNumber = textViewParkingCarNumber.text.toString()
+                        val visitDate = textViewParkingVisitDate.text.toString()
+
+                        viewModel.insertParkingData(userUid, ownerNumber, ownerName, carNumber, visitDate){ success ->
+                            if (success){
+                                val dialog = DialogConfirm(
+                                    "방문차량 신청", "방문차량 신청이 완료되었습니다.", parkingActivity
+                                )
+                                dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
+                                    override fun okButtonClick() {
+                                        parkingActivity.finish()
+                                    }
+
+                                })
+                                dialog.show(parkingActivity.supportFragmentManager, "DialogConfirm")
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
