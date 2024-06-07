@@ -85,7 +85,7 @@ class ParkingCheckFragment : Fragment() {
             }
         }
         viewModel.parkingList.observe(requireActivity()){ value ->
-            Log.d("test1234", "${value.size}")
+            //Log.d("test1234", "${value.size}")
             parkingAdapter.submitList(value)
 
             //예약 횟수 제한
