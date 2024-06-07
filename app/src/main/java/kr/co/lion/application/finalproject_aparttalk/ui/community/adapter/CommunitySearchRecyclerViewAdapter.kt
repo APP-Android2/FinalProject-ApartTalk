@@ -1,6 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.community.adapter
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -59,7 +60,10 @@ class CommunitySearchRecyclerViewAdapter(val context: Context, var viewModel: Co
             }
 
             linearLayoutCommunityListSearch.setOnClickListener {
-                (context as CommunityActivity).replaceFragment(CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT, false, true, null)
+                val bundle = Bundle()
+                bundle.putInt("postIdx", viewModel.searchList[position].postIdx)
+                bundle.putString("postId", viewModel.searchList[position].postId)
+                (context as CommunityActivity).replaceFragment(CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT, false, true, bundle)
             }
         }
     }

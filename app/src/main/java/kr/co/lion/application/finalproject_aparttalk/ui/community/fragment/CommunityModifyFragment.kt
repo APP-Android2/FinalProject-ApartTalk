@@ -211,7 +211,8 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
                 postDataModify.postCommentCnt = postData.postCommentCnt
                 postDataModify.postImages = postData.postImages
                 postDataModify.postAddDate = postData.postAddDate
-                postDataModify.postUserIdx = postData.postUserIdx
+                postDataModify.postUserId = postData.postUserId
+                postDataModify.postApartID = postData.postApartID
                 val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
                 postDataModify.postModifyDate = simpleDateFormat.format(Date())
                 postDataModify.postState = PostState.POST_STATE_MODIFY.number

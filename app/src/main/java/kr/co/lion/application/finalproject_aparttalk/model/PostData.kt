@@ -3,7 +3,7 @@ package kr.co.lion.application.finalproject_aparttalk.model
 data class PostData (
     var postId: String,
     var postIdx: Int,
-    var postUserIdx: Int,
+    var postUserId: String,
     var postApartID: String,
     var postType: String,
     var postTitle: String,
@@ -15,6 +15,6 @@ data class PostData (
     var postImages: MutableList<String>?,
     var postState: Int
 ) {
-    constructor(): this("",0, 0, "", "", "", "",
+    constructor(): this("",0, "", "", "", "", "",
         0, 0, "", "", mutableListOf(), 0)
 }
