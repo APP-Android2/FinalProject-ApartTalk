@@ -48,8 +48,13 @@ class AuthRepository(
         return firebaseAuthService.signInWithNaver(customToken)
     }
 
-    suspend fun getNaverAccount(context: Context): String? {
+    suspend fun getNaverAccessToken(context: Context): String? {
         val naverAccountService = NaverAccountService()
-        return naverAccountService.getNaverAccount(context)
+        return naverAccountService.getNaverAccessToken(context)
+    }
+
+    suspend fun getNaverCustomToken(accessToken: String): String? {
+        val naverAccountService = NaverAccountService()
+        return naverAccountService.getNaverCustomToken(accessToken)
     }
 }

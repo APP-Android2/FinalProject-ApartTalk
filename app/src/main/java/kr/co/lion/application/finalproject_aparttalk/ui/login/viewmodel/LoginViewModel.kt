@@ -73,9 +73,10 @@ class LoginViewModel(
 
     fun naverLogin(context: Context) = viewModelScope.launch {
         try {
-            val naverAccount = authRepository.getNaverAccount(context) ?: return@launch
+            val naverAccessToken = authRepository.getNaverAccessToken(context) ?: return@launch
             _isLoading.value = true
-            val authResult = authRepository.signInWithNaver(naverAccount)
+            val naverCustomToken = authRepository.getNaverCustomToken(naverAccessToken) ?: return@launch
+            val authResult = authRepository.signInWithNaver(naverCustomToken)
             val authUser = authResult?.user ?: return@launch
             handleUserAuthentication(authUser, "네이버")
         } catch (e: Exception) {
