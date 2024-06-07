@@ -3,9 +3,11 @@ package kr.co.lion.application.finalproject_aparttalk
 import android.content.Intent
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.kakao.sdk.common.util.Utility
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivitySplashScreenBinding

@@ -27,22 +27,21 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.joinAll
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityAddBinding
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostDataSource
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityAddImageViewPager2Adapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityAddViewModel
-import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
 import kr.co.lion.application.finalproject_aparttalk.util.PostState
 import kr.co.lion.application.finalproject_aparttalk.util.PostType
 import kr.co.lion.application.finalproject_aparttalk.util.Tools
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.UUID
 
 class CommunityAddFragment(data: Bundle?) : Fragment() {
     lateinit var fragmentCommunityAddBinding: FragmentCommunityAddBinding
@@ -304,37 +303,44 @@ class CommunityAddFragment(data: Bundle?) : Fragment() {
 
             var postData = PostData()
 
-            val userIdx = 0
+            val authUser = App.authRepository.getCurrentUser()
+            if (authUser != null) {
+                val user = App.userRepository.getUser(authUser.uid)
+                if (user != null) {
+                    val aprtment = App.apartmentRepository.getApartment(user.apartmentUid)
 
-            val job1 = CoroutineScope(Dispatchers.Main).launch {
-                // 게시글 시퀀스 값을 가져오기
-                val communityPostSequence = viewModel.getCommunityPostSequence()
-                // 게시글 시퀀스 값을 업데이트 한다.
-                viewModel.updateCommunityPostSequence(communityPostSequence + 1)
+                    val job1 = CoroutineScope(Dispatchers.Main).launch {
+                        // 게시글 시퀀스 값을 가져오기
+                        val communityPostSequence = viewModel.getCommunityPostSequence()
+                        // 게시글 시퀀스 값을 업데이트 한다.
+                        viewModel.updateCommunityPostSequence(communityPostSequence + 1)
 
-                // 업로드할 정보를 담아준다.
-                postData.postIdx = communityPostSequence + 1
-                postData.postTitle = textViewCommunityAddSubject.text.toString()
-                if (textViewCommunityAddType.text.toString() == "질문") {
-                    postData.postType = PostType.TYPE_QUESTION.str
-                } else if (textViewCommunityAddType.text.toString() == "거래") {
-                    postData.postType = PostType.TYPE_TRADE.str
-                } else {
-                    postData.postType = PostType.TYPE_ETC.str
+                        // 업로드할 정보를 담아준다.
+                        postData.postId = UUID.randomUUID().toString()
+                        postData.postIdx = communityPostSequence + 1
+                        postData.postTitle = textViewCommunityAddSubject.text.toString()
+                        if (textViewCommunityAddType.text.toString() == "질문") {
+                            postData.postType = PostType.TYPE_QUESTION.str
+                        } else if (textViewCommunityAddType.text.toString() == "거래") {
+                            postData.postType = PostType.TYPE_TRADE.str
+                        } else {
+                            postData.postType = PostType.TYPE_ETC.str
+                        }
+                        postData.postContent = textViewCommunityAddContent.text.toString()
+                        postData.postLikeCnt = 0
+                        postData.postCommentCnt = 0
+                        postData.postImages = mutableListOf<String>()
+                        postData.postUserId = user.uid
+                        postData.postApartId = aprtment!!.uid
+
+                        val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
+                        postData.postAddDate = simpleDateFormat.format(Date())
+                        postData.postModifyDate = simpleDateFormat.format(Date())
+                        postData.postState = PostState.POST_STATE_NORMAL.number
+                    }
+                    job1.join()
                 }
-                postData.postContent = textViewCommunityAddContent.text.toString()
-                postData.postLikeCnt = 0
-                postData.postCommentCnt = 0
-                postData.postImages = mutableListOf<String>()
-                postData.postUserIdx = userIdx
-
-                val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
-                postData.postAddDate = simpleDateFormat.format(Date())
-                postData.postModifyDate = simpleDateFormat.format(Date())
-                postData.postState = PostState.POST_STATE_NORMAL.number
             }
-            job1.join()
-
             return postData
         }
     }

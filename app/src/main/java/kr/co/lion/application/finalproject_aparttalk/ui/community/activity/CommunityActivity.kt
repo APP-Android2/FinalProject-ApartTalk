@@ -18,6 +18,8 @@ class CommunityActivity : AppCompatActivity() {
     lateinit var activityCommunityBinding: ActivityCommunityBinding
 
     var postIdx : Int? = null
+    var postId : String? = null
+    var postApartId : String? = null
 
     // 프래그먼트 객체를 담을 변수
     var oldFragment: Fragment? = null
@@ -30,8 +32,12 @@ class CommunityActivity : AppCompatActivity() {
 
         val fragmentName = intent.getSerializableExtra("fragmentName")
         postIdx = intent.getIntExtra("postIdx", 0)
+        postId = intent.getStringExtra("postId")
+        postApartId = intent.getStringExtra("postApartId")
         val bundle = Bundle()
         bundle.putInt("postIdx", postIdx!!)
+        bundle.putString("postId", postId.orEmpty())
+        bundle.putString("postApartId", postApartId.orEmpty())
         replaceFragment(fragmentName as CommunityFragmentName, false, true, bundle)
 
     }
