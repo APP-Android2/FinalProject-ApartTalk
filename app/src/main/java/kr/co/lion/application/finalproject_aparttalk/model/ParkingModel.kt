@@ -5,6 +5,6 @@ data class ParkingModel(
     val ownerNumber:String = "",
     val ownerName:String = "",
     val carNumber:String = "",
-    val visitDate:String = "",
-    
+    val visitDate:String = ""
+
 )
