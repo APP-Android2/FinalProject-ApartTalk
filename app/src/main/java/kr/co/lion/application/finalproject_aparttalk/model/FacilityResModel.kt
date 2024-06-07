@@ -4,7 +4,7 @@ data class FacilityResModel (
     val userUid:String = "",
     val titleText:String = "",
     val useTime:String = "",
-    val imageRes:String = "",
+    var imageRes:String = "",
     val usePrice:String = "",
     val reservationState:Boolean = true,
     val reservationDate:String = ""
