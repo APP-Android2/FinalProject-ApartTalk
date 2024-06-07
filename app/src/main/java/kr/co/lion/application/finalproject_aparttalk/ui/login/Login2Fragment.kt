@@ -11,7 +11,6 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentLogin2Binding
 import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.LoginViewModel
