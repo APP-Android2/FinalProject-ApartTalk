@@ -19,6 +19,7 @@ class FacilityResInfoViewmodel : ViewModel() {
     var facilityList : LiveData<List<FacilityResModel>> = _facilityResList
 
 
+
     //예약 정보를 저장한다
     suspend fun insertResData(
         userUid:String, titleText:String, useTime:String, imageRes:String, usePrice:String, reservationState:Boolean, reservationData:String
@@ -41,8 +42,22 @@ class FacilityResInfoViewmodel : ViewModel() {
 
 
     //예약 정보를 userUid값으로 가져온다
-    suspend fun getFacilityData(userUid:String):FacilityResModel?{
-        return facilityResRepository.getFacilityInfoData(userUid)
+    suspend fun getFacilityResData(userUid:String) {
+        val facilityInfo = facilityResRepository.getFacilityInfoData(userUid)
+        val facilityInfoList = mutableListOf<FacilityResModel>()
+
+        facilityInfo.forEach { facilityInfoData ->
+            facilityInfoList.add(facilityInfoData)
+
+            _facilityResList.value = facilityInfoList
+
+        }
+    }
+
+
+    //facility Image를 가져온다
+    private suspend fun getFacilityInfoImage(image:String):String?{
+        return facilityResRepository.getFacilityImage(image)
     }
 
 
