@@ -41,7 +41,6 @@ class ParkingCheckFragment : Fragment() {
         binding = FragmentParkingCheckBinding.inflate(layoutInflater)
         parkingActivity = activity as ParkingActivity
         settingToolbar()
-        settingEvent()
         connectAdapter()
         getParkingData()
         return binding.root
@@ -88,8 +87,11 @@ class ParkingCheckFragment : Fragment() {
         viewModel.parkingList.observe(requireActivity()){ value ->
             Log.d("test1234", "${value.size}")
             parkingAdapter.submitList(value)
+
+            //예약 횟수 제한
             binding.parkingReserveCount.text = "이번달 남은 예약 횟수 : ${10 - value.size}회"
 
+            //예약 횟수 확인
             if (10 - value.size > 0){
                 binding.parkingAdd.setOnClickListener {
                     parkingActivity.replaceFragment(ParkingFragmentName.PARKING_RESERVE_FRAGMENT, true, null)
@@ -110,21 +112,6 @@ class ParkingCheckFragment : Fragment() {
                 }
             }
 
-        }
-    }
-
-
-
-
-
-
-
-    private fun settingEvent(){
-        binding.apply {
-            parkingAdd.setOnClickListener {
-                parkingActivity.replaceFragment(ParkingFragmentName.PARKING_RESERVE_FRAGMENT, true, null)
-
-            }
         }
     }
 }
