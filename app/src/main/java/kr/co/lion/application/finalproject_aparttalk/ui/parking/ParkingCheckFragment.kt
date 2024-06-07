@@ -83,11 +83,9 @@ class ParkingCheckFragment : Fragment() {
             }
         }
         viewModel.parkingList.observe(requireActivity()){ value ->
-            Log.d("test1234", "${value}")
+            Log.d("test1234", "${value.size}")
             parkingAdapter.submitList(value)
-
-
-//                        parkingAdapter.submitList(value)
+            binding.parkingReserveCount.text = "이번달 남은 예약 횟수 : ${10 - value.size}회"
 
         }
     }
