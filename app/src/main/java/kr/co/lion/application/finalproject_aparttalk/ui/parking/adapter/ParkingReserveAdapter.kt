@@ -8,18 +8,28 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowParkingReserveBinding
 import kr.co.lion.application.finalproject_aparttalk.model.ParkingModel
 
-class ParkingReserveAdapter : ListAdapter<ParkingModel, ParkingReserveViewHolder>(differ) {
+class ParkingReserveAdapter : ListAdapter<ParkingModel, ParkingReserveAdapter.ParkingReserveViewHolder>(differ) {
 
     lateinit var recyclerviewClick: ItemOnClickListener
+
+    inner class ParkingReserveViewHolder(val binding: RowParkingReserveBinding): RecyclerView.ViewHolder(binding.root){
+
+        fun bind(item : ParkingModel){
+            binding.textCarNumberRecycler.text = item.carNumber
+            binding.textOwnerNameRecycler.text = item.ownerName
+            binding.root.setOnClickListener {
+                recyclerviewClick.recyclerviewOnClickListener(item.carNumber, item.ownerNumber, item.ownerName)
+            }
+        }
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParkingReserveViewHolder {
         return ParkingReserveViewHolder(RowParkingReserveBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ParkingReserveViewHolder, position: Int) {
         holder.bind(currentList[position])
-        holder.binding.root.setOnClickListener {
-            recyclerviewClick.recyclerviewOnClickListener()
-        }
     }
 
     companion object{
@@ -35,7 +45,7 @@ class ParkingReserveAdapter : ListAdapter<ParkingModel, ParkingReserveViewHolder
         }
     }
     interface ItemOnClickListener{
-        fun recyclerviewOnClickListener()
+        fun recyclerviewOnClickListener(carNumber:String, ownerNumber:String, ownerName:String)
     }
 
     fun setRecyclerview(recyclerviewClick : ItemOnClickListener){
@@ -43,10 +53,3 @@ class ParkingReserveAdapter : ListAdapter<ParkingModel, ParkingReserveViewHolder
     }
 }
 
-class ParkingReserveViewHolder(val binding: RowParkingReserveBinding): RecyclerView.ViewHolder(binding.root){
-
-    fun bind(item : ParkingModel){
-        binding.textCarNumberRecycler.text = item.carNumber
-        binding.textOwnerNameRecycler.text = item.ownerName
-    }
-}

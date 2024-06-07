@@ -4,6 +4,7 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,10 +37,16 @@ class ParkingReserveFragment : Fragment() {
     val parkingAdapter: ParkingReserveAdapter by lazy {
         val adapter = ParkingReserveAdapter()
         adapter.setRecyclerview(object : ParkingReserveAdapter.ItemOnClickListener{
-            override fun recyclerviewOnClickListener() {
-                //클릭 이벤트
-                //클릭하면 정보를 가져와서 보여준다
+            override fun recyclerviewOnClickListener(
+                carNumber: String,
+                ownerNumber: String,
+                ownerName: String
+            ) {
+                binding.apply {
+
+                }
             }
+
         })
         adapter
     }
@@ -55,6 +62,7 @@ class ParkingReserveFragment : Fragment() {
         settingButtonParkingAdd()
         settingCal()
         connectAdapter()
+        gettingData()
         return binding.root
     }
 
@@ -184,6 +192,25 @@ class ParkingReserveFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    //데이터 받아오기
+    private fun gettingData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val authUser = App.authRepository.getCurrentUser()
+            if (authUser != null) {
+                val user = App.userRepository.getUser(authUser.uid)
+                if (user != null) {
+
+                    viewModel.getParkingResData(user.uid)
+
+                }
+            }
+        }
+        viewModel.parkingList.observe(requireActivity()) { value ->
+            Log.d("test1234", "${value.size}")
+            parkingAdapter.submitList(value)
         }
     }
 }
