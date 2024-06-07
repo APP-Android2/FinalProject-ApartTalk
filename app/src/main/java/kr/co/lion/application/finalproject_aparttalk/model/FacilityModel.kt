@@ -6,5 +6,6 @@ data class FacilityModel(
     val titleText:String = "",
     val canReserve:Boolean = false,
     val price:String? = "",
-    val content:String? = ""
+    val content:String? = "",
+
 )

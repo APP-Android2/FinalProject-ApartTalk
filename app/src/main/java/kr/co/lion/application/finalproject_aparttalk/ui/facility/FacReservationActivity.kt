@@ -119,8 +119,10 @@ class FacReservationActivity : AppCompatActivity() {
                             val usePrice = price
                             val reservationState = true
                             val localDate: String = LocalDate.now().toString()
+                            val userName = user.name
+                            val userNumber = user.phoneNumber
 
-                            viewModel.insertResData(userUid, titleText?:"", useTime.toString(), imageRes?:"", usePrice?:"", reservationState, localDate){ success ->
+                            viewModel.insertResData(userUid, titleText?:"", useTime.toString(), imageRes?:"", usePrice?:"", reservationState, localDate, userName, userNumber){ success ->
                                 if (success){
                                     val dialog = DialogConfirm("예약 완료", "예약이 완료되셨습니다.\n결제는 현장에서 진행해주시면 됩니다.", this@FacReservationActivity)
                                     dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
