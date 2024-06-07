@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentMyLikeBinding
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.MyLikeRecyclerViewAdapter
-import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class MyLikeFragment : Fragment() {
 
     private lateinit var binding: FragmentMyLikeBinding
-    private val myLikeViewModel: MyLikeViewModel by viewModels { MyLikeViewModelFactory(CommunityPostRepository()) }
+    private val myLikeViewModel: MyLikeViewModel by viewModels { MyLikeViewModelFactory(
+        CommunityPostRepository()
+    ) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +30,7 @@ class MyLikeFragment : Fragment() {
         setupRecyclerView()
         observeViewModel()
 
-        val userId = arguments?.getInt("userId") ?: 0
-        myLikeViewModel.loadMyLikedPosts(userId)
+        myLikeViewModel.loadMyLikedPosts()
 
         return binding.root
     }

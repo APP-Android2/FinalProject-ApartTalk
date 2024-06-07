@@ -1,6 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.mywrite
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentMyWroteBinding
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.MyWroteRecyclerViewAdapter
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
 
 class MyWroteFragment : Fragment() {
 
@@ -31,8 +32,7 @@ class MyWroteFragment : Fragment() {
         observeViewModel()
 
         // 전달받은 userId를 사용하여 데이터 로드
-        val userId = arguments?.getInt("userId") ?: 0
-        myWroteViewModel.loadMyWrotePosts(userId)
+        myWroteViewModel.loadMyWrotePosts()
 
         return binding.root
     }
