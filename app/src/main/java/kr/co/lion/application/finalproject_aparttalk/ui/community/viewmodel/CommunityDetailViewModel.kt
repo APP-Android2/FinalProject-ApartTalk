@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
+import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.repository.CommunityCommentRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 import kr.co.lion.application.finalproject_aparttalk.util.CommentState
@@ -71,27 +72,32 @@ class CommunityDetailViewModel: ViewModel() {
     }
 
     // 댓글 정보를 저장한다.
-    suspend fun insertCommunityCommentData(commentData: CommentData){
-        return communityCommentRepository.insertCommunityCommentData(commentData)
+    suspend fun insertCommunityCommentData(postApartId: String, commentData: CommentData){
+        return communityCommentRepository.insertCommunityCommentData(postApartId, commentData)
     }
 
     // 댓글 목록을 가져온다.
-    suspend fun gettingCommunityCommentList(postId: String):MutableList<CommentData>{
-        return communityCommentRepository.gettingCommunityCommentList(postId)
+    suspend fun gettingCommunityCommentList(postApartId: String, postId: String):MutableList<CommentData>{
+        return communityCommentRepository.gettingCommunityCommentList(postApartId, postId)
     }
 
     // 댓글의 내용을 변경하는 메서드
-    suspend fun updateCommunityCommentData(commentData: CommentData, mapComment: MutableMap<String, Any>){
-        return communityCommentRepository.updateCommunityCommentData(commentData, mapComment)
+    suspend fun updateCommunityCommentData(postApartId: String, commentData: CommentData, mapComment: MutableMap<String, Any>){
+        return communityCommentRepository.updateCommunityCommentData(postApartId, commentData, mapComment)
     }
 
     // 댓글의 상태를 변경하는 메서드
-    suspend fun updateCommunityCommentState(commentData: CommentData, newState: CommentState){
-        return communityCommentRepository.updateCommunityCommentState(commentData, newState)
+    suspend fun updateCommunityCommentState(postApartId: String, commentData: CommentData, newState: CommentState){
+        return communityCommentRepository.updateCommunityCommentState(postApartId, commentData, newState)
     }
 
     // 글의 상태를 변경하는 메서드
     suspend fun updateCommunityPostState(postApartId: String, postIdx: Int, newState: PostState) {
         return communityPostRepository.updateCommunityPostState(postApartId, postIdx, newState)
+    }
+
+    // 한 아파트의 모든 사용자 정보 가져오는 메서드
+    suspend fun getApartmentUserList(apartmentUid: String): List<UserModel?> {
+        return communityCommentRepository.getApartmentUserList(apartmentUid)
     }
 }

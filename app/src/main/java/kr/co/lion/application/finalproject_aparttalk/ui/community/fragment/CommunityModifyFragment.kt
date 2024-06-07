@@ -44,6 +44,7 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
     var postId: String? = null
     // 현재 글이 담긴 아파트 아이디
     var postApartId: String? = null
+
     var imageCommunityModifyList = mutableListOf<String>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

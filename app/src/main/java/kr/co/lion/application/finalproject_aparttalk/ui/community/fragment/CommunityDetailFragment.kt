@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityDetailBinding
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
+import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.util.SwipeHelperCallback
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailCommentRecyclerViewAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailImageViewPager2Adapter
@@ -48,6 +50,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     var commentData:CommentData? = null
     // 댓글 정보를 가지고 있는 리스트
     var commentList = mutableListOf<CommentData>()
+    // 댓글 유저 리스트
+    var userList = listOf<UserModel?>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -79,15 +83,29 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 }
 
                 inflateMenu(R.menu.menu_community_detail)
-                setOnMenuItemClickListener {
-                    when(it.itemId) {
-                        // 더보기
-                        R.id.menuItemCommunityKebab -> {
-                            settingCommunityBottom()
-                        }
+                menu.findItem(R.id.menuItemCommunityKebab).isVisible = false
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    // 현재 글 번호에 해당하는 글 데이터를 가져온다.
+                    val postData = viewModel.selectCommunityPostData(postApartId!!, postId!!)
+                    // 사용자 정보를 가져온다.
+                    val user = gettingUserData()
+
+                    if (postData!!.postUserId == user.uid) {
+                        menu.findItem(R.id.menuItemCommunityKebab).isVisible = true
                     }
-                    true
+
+                    setOnMenuItemClickListener {
+                        when(it.itemId) {
+                            // 더보기
+                            R.id.menuItemCommunityKebab -> {
+                                settingCommunityBottom()
+                            }
+                        }
+                        true
+                    }
                 }
+
             }
         }
     }
@@ -112,6 +130,16 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
         }
     }
 
+    // 사용자 정보 가져오기
+    suspend fun gettingUserData(): UserModel {
+        val authUser = App.authRepository.getCurrentUser()
+        var user: UserModel? = null
+        if (authUser != null) {
+            user = App.userRepository.getUser(authUser.uid)
+        }
+        return user!!
+    }
+
     // 초기 데이터 설정
     private fun settingData() {
         fragmentCommunityDetailBinding.apply {
@@ -125,8 +153,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
             CoroutineScope(Dispatchers.Main).launch {
                 // 현재 글 번호에 해당하는 글 데이터를 가져온다.
                 val postData = viewModel.selectCommunityPostData(postApartId!!, postId!!)
-//                // 사용자 정보를 가져온다.
-//                val userModel = UserDao.gettingUserInfoByUserIdx(communityPostModel!!.postUserIdx)
+                // 사용자 정보를 가져온다.
+                val user = gettingUserData()
 
                 commentData = generatingCommentObject()
 
@@ -138,7 +166,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 }
 
                 textViewCommunityDetailDate.text = postData?.postAddDate
-                textViewCommunityDetailWriter.text = "홍길동"
+                textViewCommunityDetailWriter.text = user.name
                 textViewCommunityDetailSubject.text = postData?.postTitle
                 textViewCommunityDetailContent.text = postData?.postContent
                 textViewCommunityDetailToolbarTitle.text = postData?.postType
@@ -161,13 +189,14 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
             recyclerViewCommunityDetailComment.apply {
                 CoroutineScope(Dispatchers.Main).launch {
                     commentList = gettingCommentData()
-                    adapter = CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, this@CommunityDetailFragment, viewModel)
+                    userList = gettingCommentUserData()
+                    adapter = CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, userList, this@CommunityDetailFragment, viewModel, postApartId!!)
                     layoutManager = LinearLayoutManager(communityActivity)
                 }
             }
 
             // 리사이클러뷰에 스와이프, 드래그 기능 달기
-            val swipeHelperCallback = SwipeHelperCallback(CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, this@CommunityDetailFragment, viewModel)).apply {
+            val swipeHelperCallback = SwipeHelperCallback(CommunityDetailCommentRecyclerViewAdapter(requireContext(), commentList, userList, this@CommunityDetailFragment, viewModel, postApartId!!)).apply {
                 // 스와이프한 뒤 고정시킬 위치 지정
                 setClamp(resources.displayMetrics.widthPixels.toFloat() * 2 / 7)    // 1080 / 4 = 270
             }
@@ -189,8 +218,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     // 댓글 입력 객체 생성
     suspend fun generatingCommentObject() : CommentData {
         var commentData = CommentData()
-        var userIdx = 0
-
+        // 사용자 정보를 가져온다.
+        val user = gettingUserData()
 
         val job1 = CoroutineScope(Dispatchers.Main).launch {
             // 댓글 번호를 가져온다.
@@ -201,7 +230,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
             commentData.commentId = UUID.randomUUID().toString()
             commentData.commentPostId = postId!!
             commentData.commentIdx = commentSequence + 1
-            commentData.commentUserIdx = userIdx
+            commentData.commentUserIdx = user.idx
+            commentData.commentUserId = user.uid
             val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
             commentData.commentAddDate = simpleDateFormat.format(Date())
             commentData.commentModifyDate = simpleDateFormat.format(Date())
@@ -219,12 +249,19 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     suspend fun gettingCommentData(): MutableList<CommentData> {
         val job1 = CoroutineScope(Dispatchers.Main).launch {
             // 댓글 정보를 가져온다.
-            commentList = viewModel.gettingCommunityCommentList(postId!!)
-            // 사용자 정보를 가져온다.
-            // ~~~
+            commentList = viewModel.gettingCommunityCommentList(postApartId!!, postId!!)
         }
         job1.join()
         return commentList
+    }
+
+    // 댓글 유저 정보를 가져온다.
+    suspend fun gettingCommentUserData(): List<UserModel?> {
+        val job1 = CoroutineScope(Dispatchers.Main).launch {
+            userList = viewModel.getApartmentUserList(postApartId!!)
+        }
+        job1.join()
+        return  userList
     }
 
     // 댓글 입력 완료 처리
@@ -232,7 +269,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
         fragmentCommunityDetailBinding.imageViewCommunityDetailSendComment.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
                 commentData = generatingCommentObject()
-                viewModel.insertCommunityCommentData(commentData!!)
+                viewModel.insertCommunityCommentData(postApartId!!, commentData!!)
                 settingRecyclerViewCommunityDetailComment()
                 Tools.hideSoftInput(requireActivity())
                 settingCommentInputForm()
@@ -247,7 +284,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 "commentContent" to fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text!!.toString(),
                 "commentModifyDate" to SimpleDateFormat("yyyy.MM.dd").format(Date())
             )
-            viewModel.updateCommunityCommentData(commentData, map)
+            viewModel.updateCommunityCommentData(postApartId!!, commentData, map)
             settingRecyclerViewCommunityDetailComment()
             Tools.hideSoftInput(requireActivity())
             settingCommentInputForm()
