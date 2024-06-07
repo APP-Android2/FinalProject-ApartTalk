@@ -5,80 +5,86 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.tabs.TabLayout
-import kr.co.lion.application.finalproject_aparttalk.MainActivity
-import kr.co.lion.application.finalproject_aparttalk.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentVoteListBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.RowVoteBinding
-import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
+import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.VoteRepository
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
 import kr.co.lion.application.finalproject_aparttalk.util.VoteFragmentName
-
 
 class VoteListFragment : Fragment() {
 
-    lateinit var fragmentVoteListBinding: FragmentVoteListBinding
-    lateinit var voteActivity: VoteActivity
+    private lateinit var binding: FragmentVoteListBinding
+    private lateinit var voteActivity: VoteActivity
+    private val firestore by lazy { FirebaseFirestore.getInstance() }
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
+    // UserDataSource 및 LocalUserDataSource 초기화
+    private val userDataSource by lazy { UserDataSource() }
+    private val localUserDataSource by lazy { LocalUserDataSource(requireContext()) }
+
+    // UserRepository 초기화
+    private val userRepository by lazy { UserRepository(userDataSource, localUserDataSource) }
+
+    // VoteRepository 초기화
+    private val voteRepository by lazy { VoteRepository(firestore) }
+
+    private val voteViewModel: VoteViewModel by viewModels {
+        VoteViewModelFactory(voteRepository, userRepository)
+    }
+
+    private lateinit var voteListAdapter: VoteListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-
-        fragmentVoteListBinding = FragmentVoteListBinding.inflate(inflater)
+        binding = FragmentVoteListBinding.inflate(inflater, container, false)
         voteActivity = activity as VoteActivity
 
-        voteListRecyclerView()
-        voteListButton()
+        setupRecyclerView()
+        setupObservers()
+        setupVoteListButton()
 
-
-
-        return fragmentVoteListBinding.root
+        return binding.root
     }
 
-    fun voteListButton(){
-        fragmentVoteListBinding.apply {
-            voteListButton.setOnClickListener {
-                voteActivity.removeFragment(VoteFragmentName.VOTE_LIST_FRAGMENT)
-                voteActivity.replaceFragment(VoteFragmentName.VOTE_FRAGMENT,false,true,null)
+    private fun setupObservers() {
+        voteViewModel.voteItems.observe(viewLifecycleOwner, Observer { voteItems ->
+            voteItems?.let {
+                voteListAdapter.updateVoteItems(it)
             }
-        }
-    }
+        })
 
-    fun voteListRecyclerView(){
-        fragmentVoteListBinding.apply {
-            voteListRecyclerView.apply {
-
-                adapter = VoteListAdapter()
-                layoutManager = LinearLayoutManager(voteActivity)
+        voteViewModel.hasOngoingVote.observe(viewLifecycleOwner, Observer { hasOngoingVote ->
+            if (hasOngoingVote) {
+                binding.voteListCardTextView.visibility = View.VISIBLE
+                binding.voteListCardTextView1.visibility = View.VISIBLE
+                binding.voteListButton.visibility = View.VISIBLE
+                binding.noVoteTextView.visibility = View.GONE
+            } else {
+                binding.voteListCardTextView.visibility = View.GONE
+                binding.voteListCardTextView1.visibility = View.GONE
+                binding.voteListButton.visibility = View.GONE
+                binding.noVoteTextView.visibility = View.VISIBLE
             }
-        }
+        })
     }
-    inner class VoteListAdapter : RecyclerView.Adapter<VoteListAdapter.VoteListViewHolder>(){
-        inner class VoteListViewHolder(val rowVoteBinding: RowVoteBinding): RecyclerView.ViewHolder(rowVoteBinding.root)
 
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VoteListViewHolder {
-            // LayoutInflater를 parent.context로 부터 가져옴
-            val layoutInflater = LayoutInflater.from(parent.context)
-            // RowVoteBinding 인플레이션
-            val binding = RowVoteBinding.inflate(layoutInflater,parent,false)
-            // ViewHolder 인스턴스 생성 및 반환
-            return VoteListViewHolder(binding)
-        }
-
-        override fun getItemCount(): Int {
-            return 10
-        }
-
-        override fun onBindViewHolder(holder: VoteListViewHolder, position: Int) {
-            holder.rowVoteBinding.rowVoteTextView1.text = "00 선거"
-            holder.rowVoteBinding.rowVoteTextView2.text = "2024년 04/01 ~ 04/07"
-
-            holder.itemView.setOnClickListener {
-                voteActivity.replaceFragment(VoteFragmentName.VOTE_HISTORY_FRAGMENT, false,true,null)
-            }
+    private fun setupRecyclerView() {
+        voteListAdapter = VoteListAdapter(voteActivity, emptyList())
+        binding.voteListRecyclerView.apply {
+            adapter = voteListAdapter
+            layoutManager = LinearLayoutManager(voteActivity)
         }
     }
 
+    private fun setupVoteListButton() {
+        binding.voteListButton.setOnClickListener {
+            voteActivity.removeFragment(VoteFragmentName.VOTE_LIST_FRAGMENT)
+            voteActivity.replaceFragment(VoteFragmentName.VOTE_FRAGMENT, false, true, null)
+        }
+    }
 }
