@@ -49,12 +49,12 @@ enum class VoteFragmentName(var str:String){
     VOTE_TAB_FRAGMENT("VoteTabFragment"),
     SURVEY_FRAGMENT("SurveyFragment"),
     SURVEY_LIST_FRAGMENT("SurveyListFragment"),
-    SURVEY_WRITE_FRAGMENT("SurveyWriteFragment")
+    SURVEY_WRITE_FRAGMENT("SurveyWriteFragment"),
+    SURVEY_COMPLETE_FRAGMENT("SurveyCompleteFragment")
 }
 
 enum class InfoFragmentName(var str:String){
     EDIT_USER_INFO_FRAGMENT("EditUserInfoFragment.kt"),
-    EDIT_USER_INFO_NUMBER_FRAGMENT("EditUserInfoNumberFragment.kt"),
     INFO_FRAGMENT("InfoFragment.kt")
 }
 

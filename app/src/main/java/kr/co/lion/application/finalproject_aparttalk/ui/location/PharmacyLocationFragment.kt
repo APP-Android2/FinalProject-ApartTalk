@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentPharmacyLocationBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.location.adapter.ExtraAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.location.viewmodel.LocationViewModel
@@ -71,8 +72,11 @@ class PharmacyLocationFragment : Fragment() {
             extraAdapter.submitList(places)
         })
 
+        val y = App.prefs.getLatitude("")
+        val x = App.prefs.getLongitude("")
+
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.searchEachLocationPlace("PM9", "126.938461", "37.6114538", 2000)
+            viewModel.searchEachLocationPlace("PM9", x, y, 2000)
         }
     }
 }

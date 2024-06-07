@@ -1,6 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.repository
 
-import kr.co.lion.application.finalproject_aparttalk.db.LocationDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.LocationDataSource
 
 class LocationRepository() {
 

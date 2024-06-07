@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
+import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
@@ -19,84 +19,109 @@ class LoginViewModel(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    private val _userAuthenticationState = MutableLiveData<NavigationState>().apply { value =
-        NavigationState.TO_LOGIN
+    private val _userAuthenticationState = MutableLiveData<NavigationState>().apply {
+        value = NavigationState.TO_LOGIN
     }
     val userAuthenticationState: LiveData<NavigationState> = _userAuthenticationState
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
 
     init {
         isAuthenticated()
     }
 
-    private fun isAuthenticated() = viewModelScope.launch(Dispatchers.Main) {
+    private fun isAuthenticated() = viewModelScope.launch {
         val currentUser = authRepository.getCurrentUser()
         if (currentUser == null) {
             _userAuthenticationState.value = NavigationState.TO_LOGIN
             return@launch
         }
-        val user = userRepository.getUser(currentUser.uid)  // =0.8초 소요
+        val user = userRepository.getUser(currentUser.uid)
         _userAuthenticationState.value = when (user?.completeInputUserInfo) {
-            true -> {
-                NavigationState.TO_MAIN
-            }
-            false -> {
-                NavigationState.TO_SIGNUP
-            }
-            else -> {
-                NavigationState.TO_LOGIN
-            }
+            true -> NavigationState.TO_MAIN
+            false -> NavigationState.TO_SIGNUP
+            else -> NavigationState.TO_LOGIN
         }
-
     }
 
-    fun googleLogin(context: Context) = viewModelScope.launch(Dispatchers.Main) {
+    fun googleLogin(context: Context) = viewModelScope.launch {
         try {
             val googleCredential = authRepository.getGoogleCredential(context) ?: return@launch
+            _isLoading.value = true
             val authResult = authRepository.signInWithGoogle(googleCredential)
-            val authUser = authResult.user ?: return@launch
-            val user = userRepository.getUser(authUser.uid)
-            if (user == null) {
-                val newUser = UserModel(
-                    uid = authUser.uid,
-                    idx = 0,  // 유저 번호를 설정하는 로직 필요
-                    name = authUser.displayName ?: "",  // 사용자 이름 입력 필요
-                    loginType = "구글",
-                    birthYear = null,
-                    birthMonth = null,
-                    birthDay = null,
-                    gender = "",
-                    email = authUser.email ?: "",
-                    phoneNumber = authUser.phoneNumber ?: "",
-                    agreementCheck1 = false,
-                    agreementCheck2 = false,
-                    agreementCheck3 = false,
-                    apartmentUid = "",
-                    apartmentDong = null,
-                    apartmentHo = null,
-                    completeInputUserInfo = false,
-                    apartCertification = false
-                )
-                userRepository.createUser(newUser)
-                _userAuthenticationState.value = NavigationState.TO_SIGNUP
-                return@launch
-            }
+            val authUser = authResult?.user ?: return@launch
+            handleUserAuthentication(authUser, "구글")
+        } catch (e: Exception) {
+            _isLoading.value = false
+            Log.d("test1234", "구글 : ${e.message}")
+        }
+    }
 
+    fun kakaoLogin(context: Context) = viewModelScope.launch {
+        try {
+            val kakaoAccount = authRepository.getKaKaoAccount(context) ?: return@launch
+            _isLoading.value = true
+            val authResult = authRepository.signInWithKaKao(kakaoAccount)
+            val authUser = authResult?.user ?: return@launch
+            handleUserAuthentication(authUser, "카카오")
+        } catch (e: Exception) {
+            _isLoading.value = false
+            Log.d("test1234", "카카오 : ${e.message}")
+        }
+    }
+
+    fun naverLogin(context: Context) = viewModelScope.launch {
+        try {
+            val naverAccount = authRepository.getNaverAccount(context) ?: return@launch
+            _isLoading.value = true
+            val authResult = authRepository.signInWithNaver(naverAccount)
+            val authUser = authResult?.user ?: return@launch
+            handleUserAuthentication(authUser, "네이버")
+        } catch (e: Exception) {
+            _isLoading.value = false
+            Log.d("test1234", "네이버 : ${e.message}")
+        }
+    }
+
+    private suspend fun handleUserAuthentication(authUser: FirebaseUser, loginType: String) {
+        val user = userRepository.getUser(authUser.uid)
+        if (user == null) {
+            val newUser = UserModel(
+                uid = authUser.uid,
+                idx = 0,
+                name = authUser.displayName ?: "",
+                loginType = loginType,
+                birthYear = null,
+                birthMonth = null,
+                birthDay = null,
+                gender = "",
+                email = authUser.email ?: "",
+                phoneNumber = authUser.phoneNumber ?: "",
+                agreementCheck1 = false,
+                agreementCheck2 = false,
+                agreementCheck3 = false,
+                apartmentUid = "",
+                apartmentDong = null,
+                apartmentHo = null,
+                completeInputUserInfo = false,
+                apartCertification = false
+            )
+            userRepository.createUser(newUser)
+            _userAuthenticationState.value = NavigationState.TO_SIGNUP
+        } else {
             _userAuthenticationState.value = when (user.completeInputUserInfo) {
                 true -> {
                     val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
-                    if (apartment != null){
-                        App.prefs.setLatitude(apartment.latitude)
-                        App.prefs.setLongitude(apartment.longitude)
+                    apartment?.let {
+                        App.prefs.setLatitude(it.latitude)
+                        App.prefs.setLongitude(it.longitude)
                     }
                     NavigationState.TO_MAIN
                 }
-                false -> {
-                    NavigationState.TO_SIGNUP
-                }
+                false -> NavigationState.TO_SIGNUP
             }
-
-        } catch (e: Exception) {
-            Log.d("test1234", "${e.message}")
         }
+        _isLoading.value = false
     }
 }

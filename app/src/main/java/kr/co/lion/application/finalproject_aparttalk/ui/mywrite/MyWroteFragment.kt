@@ -5,56 +5,61 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFAQBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentMyWroteBinding
+import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter.MyWroteRecyclerViewAdapter
-import kr.co.lion.application.finalproject_aparttalk.ui.service.ServiceActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.service.adapter.FAQRecyclerViewAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
 
 class MyWroteFragment : Fragment() {
 
-    lateinit var fragmentMyWroteBinding: FragmentMyWroteBinding
-    lateinit var myWriteActivity: MyWriteActivity
-    val dataList: MutableList<String> = mutableListOf()
+    private lateinit var binding: FragmentMyWroteBinding
+    private val myWroteViewModel: MyWroteViewModel by viewModels { MyWroteViewModelFactory(
+        CommunityPostRepository()
+    ) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        binding = FragmentMyWroteBinding.inflate(inflater, container, false)
 
+        setupRecyclerView()
+        observeViewModel()
 
-        fragmentMyWroteBinding = FragmentMyWroteBinding.inflate(inflater)
-        myWriteActivity = activity as MyWriteActivity
+        // 전달받은 userId를 사용하여 데이터 로드
+        val userId = arguments?.getInt("userId") ?: 0
+        myWroteViewModel.loadMyWrotePosts(userId)
 
-        settingRecyclerview()
-        updateUI()
-
-        return fragmentMyWroteBinding.root
-
+        return binding.root
     }
-    fun updateUI(){
-        if(dataList.isEmpty()){
-            fragmentMyWroteBinding.myWroteLayout.visibility = View.GONE
-            fragmentMyWroteBinding.myWroteBlankLayout.visibility = View.VISIBLE
-        }else{
-            fragmentMyWroteBinding.myWroteLayout.visibility  = View.VISIBLE
-            fragmentMyWroteBinding.myWroteBlankLayout.visibility = View.GONE
+
+    private fun observeViewModel() {
+        myWroteViewModel.myWroteList.observe(viewLifecycleOwner, Observer { posts ->
+            updateUI(posts)
+            (binding.recyclerViewTabMyWrote.adapter as MyWroteRecyclerViewAdapter).submitList(posts)
+        })
+    }
+
+    private fun updateUI(postList: List<PostData>) {
+        if (postList.isEmpty()) {
+            binding.myWroteLayout.visibility = View.GONE
+            binding.myWroteBlankLayout.visibility = View.VISIBLE
+        } else {
+            binding.myWroteLayout.visibility = View.VISIBLE
+            binding.myWroteBlankLayout.visibility = View.GONE
         }
     }
 
-    fun settingRecyclerview(){
-        fragmentMyWroteBinding.apply{
-            recyclerViewTabMyWrote.apply{
-                adapter = MyWroteRecyclerViewAdapter(requireContext())
-                layoutManager = LinearLayoutManager(myWriteActivity)
-                val deco = MaterialDividerItemDecoration(myWriteActivity, MaterialDividerItemDecoration.VERTICAL)
-                addItemDecoration(deco)
-            }
+    private fun setupRecyclerView() {
+        binding.recyclerViewTabMyWrote.apply {
+            adapter = MyWroteRecyclerViewAdapter(requireContext(), myWroteViewModel)
+            layoutManager = LinearLayoutManager(requireContext())
+            val deco = MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
+            addItemDecoration(deco)
         }
     }
-
 }

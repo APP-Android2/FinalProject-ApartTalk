@@ -5,42 +5,47 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationCompleteBinding
+import kr.co.lion.application.finalproject_aparttalk.model.FacilityResModel
 import kr.co.lion.application.finalproject_aparttalk.ui.reservation.adapter.ReservationCompleteRecyclerViewAdapter
 
 
-class ReservationCompleteFragment() : Fragment() {
+class ReservationCompleteFragment : Fragment() {
 
-    lateinit var fragmentReservationCompleteBinding: FragmentReservationCompleteBinding
+    private lateinit var fragmentReservationCompleteBinding: FragmentReservationCompleteBinding
+    private val reservationViewModel: ReservationViewModel by activityViewModels()
     lateinit var reserveActivity: ReserveActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-
-
         fragmentReservationCompleteBinding = FragmentReservationCompleteBinding.inflate(inflater)
         reserveActivity = activity as ReserveActivity
 
         settingRecyclerview()
 
-        return fragmentReservationCompleteBinding.root
+        // ViewModel의 데이터를 관찰하여 RecyclerView에 표시
+        reservationViewModel.reservations.observe(viewLifecycleOwner, Observer { reservations ->
+            (fragmentReservationCompleteBinding.recyclerViewTabReservationComplete.adapter as ReservationCompleteRecyclerViewAdapter).submitList(reservations)
+        })
 
+        return fragmentReservationCompleteBinding.root
     }
 
-    fun settingRecyclerview(){
-        fragmentReservationCompleteBinding.apply{
-            recyclerViewTabReservationComplete.apply{
-                adapter = ReservationCompleteRecyclerViewAdapter(requireContext())
+    fun settingRecyclerview() {
+        fragmentReservationCompleteBinding.apply {
+            recyclerViewTabReservationComplete.apply {
+                val viewModel: ReservationViewModel by activityViewModels() // ViewModel 인스턴스 가져오기
+                adapter = ReservationCompleteRecyclerViewAdapter(requireContext(), viewModel)
                 layoutManager = LinearLayoutManager(reserveActivity)
                 val deco = MaterialDividerItemDecoration(reserveActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)
             }
         }
     }
-
 }

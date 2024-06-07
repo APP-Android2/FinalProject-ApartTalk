@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowParkingReserveBinding
+import kr.co.lion.application.finalproject_aparttalk.model.ParkingModel
 
-class ParkingReserveAdapter : ListAdapter<String, ParkingReserveViewHolder>(differ) {
+class ParkingReserveAdapter : ListAdapter<ParkingModel, ParkingReserveViewHolder>(differ) {
 
     lateinit var recyclerviewClick: ItemOnClickListener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ParkingReserveViewHolder {
@@ -15,19 +16,19 @@ class ParkingReserveAdapter : ListAdapter<String, ParkingReserveViewHolder>(diff
     }
 
     override fun onBindViewHolder(holder: ParkingReserveViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(currentList[position])
         holder.binding.root.setOnClickListener {
             recyclerviewClick.recyclerviewOnClickListener()
         }
     }
 
     companion object{
-        val differ = object : DiffUtil.ItemCallback<String>(){
-            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        val differ = object : DiffUtil.ItemCallback<ParkingModel>(){
+            override fun areItemsTheSame(oldItem: ParkingModel, newItem: ParkingModel): Boolean {
                 return oldItem == newItem
             }
 
-            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            override fun areContentsTheSame(oldItem: ParkingModel, newItem: ParkingModel): Boolean {
                 return oldItem == newItem
             }
 
@@ -44,8 +45,8 @@ class ParkingReserveAdapter : ListAdapter<String, ParkingReserveViewHolder>(diff
 
 class ParkingReserveViewHolder(val binding: RowParkingReserveBinding): RecyclerView.ViewHolder(binding.root){
 
-    fun bind(){
-        binding.textCarNumberRecycler.text = "000가 0000"
-        binding.textOwnerNameRecycler.text = "허성욱"
+    fun bind(item : ParkingModel){
+        binding.textCarNumberRecycler.text = item.carNumber
+        binding.textOwnerNameRecycler.text = item.ownerName
     }
 }

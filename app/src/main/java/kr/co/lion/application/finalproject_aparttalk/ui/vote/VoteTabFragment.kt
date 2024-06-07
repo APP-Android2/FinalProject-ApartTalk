@@ -148,6 +148,10 @@ class VoteTabFragment : Fragment() {
             VoteFragmentName.SURVEY_WRITE_FRAGMENT -> {
                 newFragment = SurveyWriteFragment()
             }
+            // 설문조사 완료
+            VoteFragmentName.SURVEY_COMPLETE_FRAGMENT -> {
+                newFragment = SurveyCompleteFragment()
+            }
         }
 
         // 새로운 Fragment에 전달할 객체가 있다면 arguments 프로퍼티에 넣어준다.

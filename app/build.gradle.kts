@@ -12,6 +12,10 @@ val kakaoApikey = localProperties.getProperty("KAKAO_API_KEY")?:""
 val nativeAppkey = localProperties.getProperty("NATIVE_APP_KEY")?:""
 val kakaoRestApiKey = localProperties.getProperty("KAKAO_REST_API_KEY")?:""
 val serverClientId = localProperties.getProperty("SERVER_CLIENT_ID") ?: ""
+val clientId = localProperties.getProperty("CLIENT_ID") ?: ""
+val clientSecret = localProperties.getProperty("CLIENT_SECRET") ?: ""
+val clientName = localProperties.getProperty("CLIENT_NAME") ?: ""
+val naverCallbackUrl = localProperties.getProperty("NAVER_CALLBACK_URL") ?: ""
 
 android {
     namespace = "kr.co.lion.application.finalproject_aparttalk"
@@ -28,6 +32,10 @@ android {
         buildConfigField("String", "KAKAO_REST_API_KEY", kakaoRestApiKey)
         manifestPlaceholders["NATIVE_APP_KEY"] = nativeAppkey
         buildConfigField("String", "SERVER_CLIENT_ID", serverClientId)
+        buildConfigField("String", "CLIENT_ID", clientId)
+        buildConfigField("String", "CLIENT_SECRET", clientSecret)
+        buildConfigField("String", "CLIENT_NAME", clientName)
+        buildConfigField("String", "NAVER_CALLBACK_URL", naverCallbackUrl)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -118,4 +126,6 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
+    // 네이버 로그인
+    implementation("com.navercorp.nid:oauth:5.9.1")
 }

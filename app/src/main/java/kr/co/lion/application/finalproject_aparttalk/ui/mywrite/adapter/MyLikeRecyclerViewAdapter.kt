@@ -1,60 +1,53 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.mywrite.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.lion.application.finalproject_aparttalk.databinding.RowMylikeTabLikeBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowMywroteTabWroteBinding
+import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.service.ServiceActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.mywrite.MyLikeViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
-import kr.co.lion.application.finalproject_aparttalk.util.ServiceFragmentName
 
-class MyLikeRecyclerViewAdapter (val context: Context) : RecyclerView.Adapter<MyLikeRecyclerViewAdapter.MyLikeViewHolder>() {
+class MyLikeRecyclerViewAdapter(val context: Context,val viewModel: MyLikeViewModel) : ListAdapter<PostData, MyLikeRecyclerViewAdapter.MyLikeViewHolder>(PostDiffCallback()) {
 
-    inner class MyLikeViewHolder(rowMyLikeTabLikeBinding: RowMylikeTabLikeBinding) : RecyclerView.ViewHolder(rowMyLikeTabLikeBinding.root) {
-        val rowMyLikeTabLikeBinding: RowMylikeTabLikeBinding
+    inner class MyLikeViewHolder(val binding: RowMywroteTabWroteBinding) : RecyclerView.ViewHolder(binding.root)
 
-        init {
-            this.rowMyLikeTabLikeBinding = rowMyLikeTabLikeBinding
-
-            this.rowMyLikeTabLikeBinding.root.layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyLikeViewHolder {
+        val binding = RowMywroteTabWroteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyLikeViewHolder(binding)
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MyLikeRecyclerViewAdapter.MyLikeViewHolder {
-        val rowMyLikeTabLikeBinding = RowMylikeTabLikeBinding.inflate(LayoutInflater.from(parent.context))
-        val myLikeViewHolder = MyLikeViewHolder(rowMyLikeTabLikeBinding)
+    override fun onBindViewHolder(holder: MyLikeViewHolder, position: Int) {
+        val post = getItem(position)
+        holder.binding.apply {
+            textViewMyWroteListTitle.text = post.postTitle
+            textViewMyWroteListDate.text = post.postAddDate
+            textViewMyWroteListCommentCnt.text = post.postCommentCnt.toString()
+            textViewMyWroteListLikeCnt.text = post.postLikeCnt.toString()
+            textViewMyWroteListContent.text = post.postContent
 
-        return myLikeViewHolder
-    }
-
-    override fun onBindViewHolder(
-        holder: MyLikeRecyclerViewAdapter.MyLikeViewHolder,
-        position: Int
-    ) {
-        holder.rowMyLikeTabLikeBinding.apply{
-            textViewMyLikeListTitle.text = "글 제목"
-            textViewMyLikeListDate.text = "2024.03.01"
-            textViewMyLikeListContent.text = "글 내용입니다."
-            textViewMyLikeListCommentCnt.text = "999"
-            textViewMyLikeListLikeCnt.text = "999"
-
-            rowMyLikeLayout.setOnClickListener {
-                (context as CommunityActivity).replaceFragment(CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT, true, true, null)
+            rowMyWroteLayout.setOnClickListener {
+                val intent = Intent(context, CommunityActivity::class.java)
+                intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
+                intent.putExtra("postIdx", viewModel.myLikeList.value!!.get(position).postIdx)
+                context.startActivity(intent)
             }
         }
     }
 
-    override fun getItemCount(): Int {
-        return 10
-    }
+    class PostDiffCallback : DiffUtil.ItemCallback<PostData>() {
+        override fun areItemsTheSame(oldItem: PostData, newItem: PostData): Boolean {
+            return oldItem.postIdx == newItem.postIdx
+        }
 
+        override fun areContentsTheSame(oldItem: PostData, newItem: PostData): Boolean {
+            return oldItem == newItem
+        }
+    }
 }
+

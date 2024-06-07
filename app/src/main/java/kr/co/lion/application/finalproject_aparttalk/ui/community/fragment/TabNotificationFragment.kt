@@ -2,12 +2,10 @@ package kr.co.lion.application.finalproject_aparttalk.ui.community.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +17,7 @@ import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentTabNotificationBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabNotificationBinding
-import kr.co.lion.application.finalproject_aparttalk.model.PostData
+import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityTabNotificationRecyclerViewAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName

@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
-import kr.co.lion.application.finalproject_aparttalk.db.LocationDataSource
 import kr.co.lion.application.finalproject_aparttalk.model.Place
 import kr.co.lion.application.finalproject_aparttalk.model.ResultKeyword
 import kr.co.lion.application.finalproject_aparttalk.repository.LocationRepository
