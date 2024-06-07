@@ -63,6 +63,7 @@ class CommunityTabTradeRecyclerViewAdapter(val context: Context, var viewModel: 
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
                 intent.putExtra("postIdx", viewModel.tradeList[position].postIdx)
                 intent.putExtra("postId", viewModel.tradeList[position].postId)
+                intent.putExtra("postApartId", viewModel.tradeList[position].postApartId)
                 context.startActivity(intent)
             }
         }

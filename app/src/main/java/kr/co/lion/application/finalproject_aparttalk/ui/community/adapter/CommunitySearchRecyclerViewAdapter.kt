@@ -63,6 +63,7 @@ class CommunitySearchRecyclerViewAdapter(val context: Context, var viewModel: Co
                 val bundle = Bundle()
                 bundle.putInt("postIdx", viewModel.searchList[position].postIdx)
                 bundle.putString("postId", viewModel.searchList[position].postId)
+                bundle.putString("postApartId", viewModel.searchList[position].postApartId)
                 (context as CommunityActivity).replaceFragment(CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT, false, true, bundle)
             }
         }

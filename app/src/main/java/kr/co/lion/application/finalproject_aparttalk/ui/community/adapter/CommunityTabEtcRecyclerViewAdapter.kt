@@ -2,6 +2,7 @@ package kr.co.lion.application.finalproject_aparttalk.ui.community.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat.startActivity
@@ -64,6 +65,7 @@ class CommunityTabEtcRecyclerViewAdapter(val context: Context, var viewModel: Co
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
                 intent.putExtra("postIdx", viewModel.etcList[position].postIdx)
                 intent.putExtra("postId", viewModel.etcList[position].postId)
+                intent.putExtra("postApartId", viewModel.etcList[position].postApartId)
                 context.startActivity(intent)
             }
         }

@@ -21,11 +21,11 @@ class CommunityPostRepository {
 
     suspend fun insertCommunityPostData(postData: PostData) = communityPostDataSource.insertCommunityPostData(postData)
 
-    suspend fun selectCommunityPostData(postIdx: Int) = communityPostDataSource.selectCommunityPostData(postIdx)
+    suspend fun selectCommunityPostData(postApartId: String, postId: String) = communityPostDataSource.selectCommunityPostData(postApartId, postId)
 
-    suspend fun gettingCommunityPostList() = communityPostDataSource.gettingCommunityPostList()
+    suspend fun gettingCommunityPostList(postApartId: String) = communityPostDataSource.gettingCommunityPostList(postApartId)
 
-    suspend fun updateCommunityPostState(postIdx: Int, newState: PostState) = communityPostDataSource.updateCommunityPostState(postIdx, newState)
+    suspend fun updateCommunityPostState(postApartId: String, postIdx: Int, newState: PostState) = communityPostDataSource.updateCommunityPostState(postApartId, postIdx, newState)
 
     suspend fun updateCommunityPostData(postData: PostData) = communityPostDataSource.updateCommunityPostData(postData)
 }

@@ -21,7 +21,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.Comm
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.PostState
 
-class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailFragment, var viewModel: CommunityDetailViewModel, var postIdx: Int, var postId: String) : BottomSheetDialogFragment(),
+class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailFragment, var viewModel: CommunityDetailViewModel, var postIdx: Int, var postId: String, var postApartId: String) : BottomSheetDialogFragment(),
     DialogConfirmCancelInterface {
     lateinit var fragmentCommunityBottomSheetBinding: FragmentCommunityBottomSheetBinding
     lateinit var communityActivity: CommunityActivity
@@ -45,6 +45,7 @@ class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailF
                 val bundle = Bundle()
                 bundle.putInt("postIdx", postIdx)
                 bundle.putString("postId", postId)
+                bundle.putString("postApartId", postApartId)
                 communityActivity.replaceFragment(CommunityFragmentName.COMMUNITY_MODIFY_FRAGMENT, true, false, bundle)
             }
 
@@ -95,7 +96,7 @@ class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailF
     override fun onConfirmButtonClick(id: Int) {
         // 삭제 기능
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.updateCommunityPostState(postIdx, PostState.POST_STATE_REMOVE)
+            viewModel.updateCommunityPostState(postApartId, postIdx, PostState.POST_STATE_REMOVE)
             communityActivity.finish()
         }
     }

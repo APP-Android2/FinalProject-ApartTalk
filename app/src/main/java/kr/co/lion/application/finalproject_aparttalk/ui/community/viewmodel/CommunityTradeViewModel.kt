@@ -37,8 +37,8 @@ class CommunityTradeViewModel: ViewModel() {
     val textViewCommunityListDateTrade: LiveData<String> get() = _textViewCommunityListDateTrade
 
     // 게시글 목록을 가져온다.
-    suspend fun gettingCommunityPostList() : MutableList<PostData> {
-        return communityPostRepository.gettingCommunityPostList()
+    suspend fun gettingCommunityPostList(postApartId: String) : MutableList<PostData> {
+        return communityPostRepository.gettingCommunityPostList(postApartId)
     }
 
     // 이미지 데이터를 받아오는 메서드
@@ -47,9 +47,9 @@ class CommunityTradeViewModel: ViewModel() {
     }
 
     // 게시글 거래 리스트 받아오기
-    suspend fun gettingCommunityTradeList() : MutableList<PostData> {
+    suspend fun gettingCommunityTradeList(postApartId: String) : MutableList<PostData> {
         val job1 = CoroutineScope(Dispatchers.Main).launch {
-            allList = gettingCommunityPostList()
+            allList = gettingCommunityPostList(postApartId)
             tradeList.clear()
             allList.forEach {
                 when(it.postType) {

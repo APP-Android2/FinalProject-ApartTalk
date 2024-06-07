@@ -4,7 +4,7 @@ data class PostData (
     var postId: String,
     var postIdx: Int,
     var postUserId: String,
-    var postApartID: String,
+    var postApartId: String,
     var postType: String,
     var postTitle: String,
     var postContent: String,

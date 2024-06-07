@@ -41,6 +41,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     var postIdx: Int? = null
     // 현재 글 번호를 담을 변수
     var postId: String? = null
+    // 현재 글이 담긴 아파트 아이디
+    var postApartId: String? = null
 
     // 댓글 모델
     var commentData:CommentData? = null
@@ -55,6 +57,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
         // 글 번호를 받는다.
         postIdx = arguments?.getInt("postIdx", 0)
         postId = arguments?.getString("postId")
+        postApartId = arguments?.getString("postApartId")
 
         settingToolbar()
         settingData()
@@ -91,7 +94,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 커뮤니티 바텀시트 띄우기
     private fun settingCommunityBottom() {
-        val communityBottomSheetFragment = CommunityBottomSheetFragment(this, viewModel, postIdx!!, postId!!)
+        val communityBottomSheetFragment = CommunityBottomSheetFragment(this, viewModel, postIdx!!, postId!!, postApartId!!)
         communityBottomSheetFragment.show(communityActivity.supportFragmentManager, "CommunityBottomSheetFragment")
     }
 
@@ -121,7 +124,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
             CoroutineScope(Dispatchers.Main).launch {
                 // 현재 글 번호에 해당하는 글 데이터를 가져온다.
-                val postData = viewModel.selectCommunityPostData(postIdx!!)
+                val postData = viewModel.selectCommunityPostData(postApartId!!, postId!!)
 //                // 사용자 정보를 가져온다.
 //                val userModel = UserDao.gettingUserInfoByUserIdx(communityPostModel!!.postUserIdx)
 

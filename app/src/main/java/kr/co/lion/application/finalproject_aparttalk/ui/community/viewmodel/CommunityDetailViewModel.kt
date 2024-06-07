@@ -56,8 +56,8 @@ class CommunityDetailViewModel: ViewModel() {
     }
 
     // 글 번호를 이용해 글 데이터를 가져와 반환한다.
-    suspend fun selectCommunityPostData(postIdx: Int): PostData?{
-        return communityPostRepository.selectCommunityPostData(postIdx)
+    suspend fun selectCommunityPostData(postApartId: String, postId: String): PostData?{
+        return communityPostRepository.selectCommunityPostData(postApartId, postId)
     }
 
     // 댓글 번호 시퀀스값을 가져온다.
@@ -91,7 +91,7 @@ class CommunityDetailViewModel: ViewModel() {
     }
 
     // 글의 상태를 변경하는 메서드
-    suspend fun updateCommunityPostState(postIdx: Int, newState: PostState) {
-        return communityPostRepository.updateCommunityPostState(postIdx, newState)
+    suspend fun updateCommunityPostState(postApartId: String, postIdx: Int, newState: PostState) {
+        return communityPostRepository.updateCommunityPostState(postApartId, postIdx, newState)
     }
 }

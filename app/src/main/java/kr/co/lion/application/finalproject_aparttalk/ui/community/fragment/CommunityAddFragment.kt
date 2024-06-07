@@ -14,6 +14,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -330,7 +331,7 @@ class CommunityAddFragment(data: Bundle?) : Fragment() {
                         postData.postCommentCnt = 0
                         postData.postImages = mutableListOf<String>()
                         postData.postUserId = user.uid
-                        postData.postApartID = aprtment!!.uid
+                        postData.postApartId = aprtment!!.uid
 
                         val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
                         postData.postAddDate = simpleDateFormat.format(Date())

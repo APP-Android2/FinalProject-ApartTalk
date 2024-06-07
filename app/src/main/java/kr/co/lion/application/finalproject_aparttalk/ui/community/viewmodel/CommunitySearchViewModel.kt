@@ -37,8 +37,8 @@ class CommunitySearchViewModel: ViewModel() {
     val textViewCommunityListDateSearch: LiveData<String> get() = _textViewCommunityListDateSearch
 
     // 게시글 목록을 가져온다.
-    suspend fun gettingCommunityPostList() : MutableList<PostData> {
-        return communityPostRepository.gettingCommunityPostList()
+    suspend fun gettingCommunityPostList(postApartId: String) : MutableList<PostData> {
+        return communityPostRepository.gettingCommunityPostList(postApartId)
     }
 
     // 이미지 데이터를 받아오는 메서드

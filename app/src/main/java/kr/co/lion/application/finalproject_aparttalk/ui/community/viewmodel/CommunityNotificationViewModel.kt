@@ -38,8 +38,8 @@ class CommunityNotificationViewModel: ViewModel() {
     val textViewCommunityListDateNotification: LiveData<String> get() = _textViewCommunityListDateNotification
 
     // 게시글 목록을 가져온다.
-    suspend fun gettingCommunityPostList() : MutableList<PostData> {
-        return communityPostRepository.gettingCommunityPostList()
+    suspend fun gettingCommunityPostList(postApartId: String) : MutableList<PostData> {
+        return communityPostRepository.gettingCommunityPostList(postApartId)
     }
 
     // 이미지 데이터를 받아오는 메서드
@@ -48,9 +48,9 @@ class CommunityNotificationViewModel: ViewModel() {
     }
 
     // 게시글 공지 리스트 받아오기
-    suspend fun gettingCommunityNotificationList() : MutableList<PostData> {
+    suspend fun gettingCommunityNotificationList(postApartId: String) : MutableList<PostData> {
         val job1 = CoroutineScope(Dispatchers.Main).launch {
-            allList = gettingCommunityPostList()
+            allList = gettingCommunityPostList(postApartId)
             notificationList.clear()
             allList.forEach {
                 when(it.postType) {

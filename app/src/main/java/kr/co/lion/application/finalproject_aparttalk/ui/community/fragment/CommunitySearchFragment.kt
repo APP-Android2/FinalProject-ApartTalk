@@ -14,6 +14,7 @@ import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunitySearchBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunitySearchBinding
@@ -37,6 +38,20 @@ class CommunitySearchFragment : Fragment() {
         settingRecyclerViewSearch()
 
         return fragmentCommunitySearchBinding.root
+    }
+
+    // 아파트 아이디 가져오기
+    suspend fun gettingApartId(): String {
+        var apartmentId = ""
+        val authUser = App.authRepository.getCurrentUser()
+        if (authUser != null) {
+            val user = App.userRepository.getUser(authUser.uid)
+            if (user != null) {
+                val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
+                apartmentId = apartment!!.uid
+            }
+        }
+        return  apartmentId
     }
 
     // 뒤로 가기
@@ -82,8 +97,7 @@ class CommunitySearchFragment : Fragment() {
         val keyword = fragmentCommunitySearchBinding.textInputCommunitySearch.text.toString()
 
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.allList = viewModel.gettingCommunityPostList()
-            Log.d("hyuun", viewModel.allList.toString())
+            viewModel.allList = viewModel.gettingCommunityPostList(gettingApartId())
             viewModel.searchList.clear()
             viewModel.allList.forEach {
                 if (it.postTitle.contains(keyword) || it.postContent.contains(keyword)) {

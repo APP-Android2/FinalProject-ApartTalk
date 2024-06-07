@@ -38,9 +38,12 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
     private val viewModel: CommunityModifyViewModel by viewModels()
 
     var postData: PostData? = null
-    var postIdx = 0
-    var postId = ""
-    var postModifyDate = ""
+    // 현재 글 번호를 담을 변수
+    var postIdx: Int? = null
+    // 현재 글 번호를 담을 변수
+    var postId: String? = null
+    // 현재 글이 담긴 아파트 아이디
+    var postApartId: String? = null
     var imageCommunityModifyList = mutableListOf<String>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -50,6 +53,7 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
 
         postIdx = arguments?.getInt("postIdx")!!
         postId = arguments?.getString("postId")!!
+        postApartId = arguments?.getString("postApartId")!!
 
         settingToolbar()
         settingData()
@@ -101,7 +105,7 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
             viewModel.initializeContent()
 
             CoroutineScope(Dispatchers.Main).launch {
-                val postData = viewModel.selectCommunityPostData(postIdx)
+                val postData = viewModel.selectCommunityPostData(postApartId!!, postId!!)
 
                 if (postData?.postImages != null) {
                     imageCommunityModifyList = postData?.postImages!!
@@ -166,7 +170,7 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
 
                 CoroutineScope(Dispatchers.Main).launch {
                     postData = generatingPostObject()
-                    updateCommunityPostData(postIdx)
+                    updateCommunityPostData(postApartId!!, postIdx!!)
 
                     val dialog = DialogConfirm(
                         "게시글 수정 완료",
@@ -194,7 +198,7 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
 
             val job1 = CoroutineScope(Dispatchers.Main).launch {
 
-                val postData = viewModel.selectCommunityPostData(postIdx)
+                val postData = viewModel.selectCommunityPostData(postApartId!!, postId!!)
 
                 postDataModify.postId = postData!!.postId
                 postDataModify.postIdx = postData.postIdx
@@ -212,7 +216,7 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
                 postDataModify.postImages = postData.postImages
                 postDataModify.postAddDate = postData.postAddDate
                 postDataModify.postUserId = postData.postUserId
-                postDataModify.postApartID = postData.postApartID
+                postDataModify.postApartId = postData.postApartId
                 val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
                 postDataModify.postModifyDate = simpleDateFormat.format(Date())
                 postDataModify.postState = PostState.POST_STATE_MODIFY.number
@@ -224,10 +228,10 @@ class CommunityModifyFragment(data: Bundle?) : Fragment() {
     }
 
     // 게시글 수정 작성
-    private fun updateCommunityPostData(postIdx: Int) {
+    private fun updateCommunityPostData(postApartId: String, postIdx: Int) {
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.updateCommunityPostData(postData!!)
-            viewModel.updateCommunityPostState(postIdx, PostState.POST_STATE_MODIFY)
+            viewModel.updateCommunityPostState(postApartId, postIdx, PostState.POST_STATE_MODIFY)
         }
     }
 }
