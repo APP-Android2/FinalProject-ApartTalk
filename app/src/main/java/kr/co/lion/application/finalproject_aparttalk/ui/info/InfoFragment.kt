@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
@@ -22,7 +23,7 @@ class InfoFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var infoActivity: InfoActivity
 
-    private val userViewModel: UserViewModel by viewModels {
+    private val userViewModel: UserViewModel by activityViewModels {
         val userDataSource = UserDataSource()
         val localUserDataSource = LocalUserDataSource(requireContext())
         UserViewModelFactory(UserRepository(userDataSource, localUserDataSource))
@@ -36,7 +37,7 @@ class InfoFragment : Fragment() {
         infoActivity = activity as InfoActivity
 
         val uid = "some-uid"
-        userViewModel.loadUser(uid)
+        userViewModel.loadUser()
 
         userViewModel.user.observe(viewLifecycleOwner, Observer { user ->
             user?.let {
@@ -102,7 +103,7 @@ class InfoFragment : Fragment() {
         super.onResume()
         // InfoFragment가 다시 화면에 나타날 때 사용자를 다시 로드
         val uid = "some-uid" // 실제 사용자 UID로 교체
-        userViewModel.loadUser(uid)
+        userViewModel.loadUser()
     }
 }
 

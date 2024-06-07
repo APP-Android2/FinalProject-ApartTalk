@@ -56,7 +56,7 @@ class MyWroteFragment : Fragment() {
 
     private fun setupRecyclerView() {
         binding.recyclerViewTabMyWrote.apply {
-            adapter = MyWroteRecyclerViewAdapter(requireContext())
+            adapter = MyWroteRecyclerViewAdapter(requireContext(), myWroteViewModel)
             layoutManager = LinearLayoutManager(requireContext())
             val deco = MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
             addItemDecoration(deco)

@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentEditUserInfoBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentEditUserInfoNumberBinding
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
+import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 import kr.co.lion.application.finalproject_aparttalk.util.InfoFragmentName
 
 
@@ -17,8 +21,11 @@ class EditUserInfoFragment : Fragment() {
     lateinit var infoActivity: InfoActivity
 
 
-    private lateinit var userViewModel: UserViewModel
-
+    private val userViewModel: UserViewModel by activityViewModels {
+        val userDataSource = UserDataSource()
+        val localUserDataSource = LocalUserDataSource(requireContext())
+        UserViewModelFactory(UserRepository(userDataSource, localUserDataSource))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,14 +35,13 @@ class EditUserInfoFragment : Fragment() {
 
         _binding = FragmentEditUserInfoBinding.inflate(inflater, container, false)
         infoActivity = activity as InfoActivity
-        userViewModel = infoActivity.userViewModel
 
         settingToolbar()
         settingButton()
         populateUserInfo()
 
         val uid = "some-uid"
-        userViewModel.loadUser(uid)
+        userViewModel.loadUser()
 
 
 
@@ -82,7 +88,7 @@ class EditUserInfoFragment : Fragment() {
             userViewModel.updateUser(updatedUser)
 
             // 데이터 갱신 요청
-            userViewModel.loadUser("some-uid")
+            userViewModel.loadUser()
 
             infoActivity.supportFragmentManager.popBackStack()
 
