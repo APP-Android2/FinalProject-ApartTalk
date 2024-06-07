@@ -35,13 +35,4 @@ class FacilityResDataSource {
         }
     }
 
-    //이미지 데이터 받아오기
-    suspend fun getFacilityInfoImg(image:String) : String?{
-        val path = "facility/$image"
-        return try {
-            storage.child(path).downloadUrl.await().toString()
-        }catch (e:Exception){
-            null
-        }
-    }
 }

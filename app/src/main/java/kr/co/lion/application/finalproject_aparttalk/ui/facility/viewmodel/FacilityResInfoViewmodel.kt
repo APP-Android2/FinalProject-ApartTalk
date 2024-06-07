@@ -55,12 +55,6 @@ class FacilityResInfoViewmodel : ViewModel() {
     }
 
 
-    //facility Image를 가져온다
-    private suspend fun getFacilityInfoImage(image:String):String?{
-        return facilityResRepository.getFacilityImage(image)
-    }
-
-
 
 }
 
