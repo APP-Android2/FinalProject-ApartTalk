@@ -22,11 +22,11 @@ class FacilityResInfoViewmodel : ViewModel() {
 
     //예약 정보를 저장한다
     suspend fun insertResData(
-        userUid:String, titleText:String, useTime:String, imageRes:String, usePrice:String, reservationState:Boolean, reservationData:String
+        userUid:String, titleText:String, useTime:String, imageRes:String, usePrice:String, reservationState:Boolean, reservationData:String, userName:String, userNumber:String
         , callback:(Boolean) -> Unit
     ){
         viewModelScope.launch {
-            val facilityResData = FacilityResModel(userUid, titleText, useTime, imageRes, usePrice, reservationState, reservationData)
+            val facilityResData = FacilityResModel(userUid, titleText, useTime, imageRes, usePrice, reservationState, reservationData, userName, userNumber)
             val success = withContext(Dispatchers.IO){
                 try {
                     facilityResRepository.insertResData(facilityResData)

@@ -211,7 +211,7 @@ class ParkingReserveFragment : Fragment() {
             }
         }
         viewModel.parkingList.observe(requireActivity()) { value ->
-            Log.d("test1234", "${value.size}")
+            //Log.d("test1234", "${value.size}")
             parkingAdapter.submitList(value)
         }
     }
