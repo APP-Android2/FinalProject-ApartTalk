@@ -9,12 +9,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentOperationSecondBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationViewPagerAdapter
-import kr.co.lion.application.finalproject_aparttalk.ui.location.AllLocationFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.location.CafeLocationFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.location.FoodLocationFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.location.HospitalLacationFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.location.PharmacyLocationFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.location.adapter.LocationAdapter
 import kr.co.lion.application.finalproject_aparttalk.util.AptOperationInfoFragmentName
 
