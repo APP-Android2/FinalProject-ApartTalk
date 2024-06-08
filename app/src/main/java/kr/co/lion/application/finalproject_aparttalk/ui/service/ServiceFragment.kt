@@ -15,21 +15,19 @@ import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
 
 class ServiceFragment : Fragment() {
 
-    lateinit var tab1 : AnnouncementFragment
-    lateinit var tab2 : FAQFragment
-    lateinit var tab3 : MyQFragment
+    lateinit var tab1: AnnouncementFragment
+    lateinit var tab2: FAQFragment
+    lateinit var tab3: MyQFragment
 
     lateinit var fragmentServiceBinding: FragmentServiceBinding
     lateinit var serviceActivity: ServiceActivity
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentServiceBinding = FragmentServiceBinding.inflate(layoutInflater)
+        fragmentServiceBinding = FragmentServiceBinding.inflate(inflater, container, false)
         serviceActivity = activity as ServiceActivity
-
 
         settingTabLayout()
         settingToolbar()
@@ -37,7 +35,7 @@ class ServiceFragment : Fragment() {
         return fragmentServiceBinding.root
     }
 
-    fun settingTabLayout(){
+    private fun settingTabLayout() {
         fragmentServiceBinding.apply {
             serviceTabLayout.apply {
 
@@ -45,50 +43,33 @@ class ServiceFragment : Fragment() {
                 tab2 = FAQFragment()
                 tab3 = MyQFragment()
 
-                childFragmentManager.beginTransaction().replace(R.id.serviceFrameLayout, tab1). commit()
+                childFragmentManager.beginTransaction().replace(R.id.serviceFrameLayout, tab1).commit()
 
-                serviceTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+                addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                     override fun onTabSelected(tab: TabLayout.Tab?) {
-
                         when (tab?.position) {
-                            0 -> {
-                                childFragmentManager.beginTransaction()
-                                    .replace(R.id.serviceFrameLayout, tab1).commit()
-                            }
-
-                            1 -> {
-                                childFragmentManager.beginTransaction()
-                                    .replace(R.id.serviceFrameLayout, tab2).commit()
-                            }
-
-                            2 -> {
-                                childFragmentManager.beginTransaction()
-                                    .replace(R.id.serviceFrameLayout, tab3).commit()
-                            }
+                            0 -> childFragmentManager.beginTransaction()
+                                .replace(R.id.serviceFrameLayout, tab1).commit()
+                            1 -> childFragmentManager.beginTransaction()
+                                .replace(R.id.serviceFrameLayout, tab2).commit()
+                            2 -> childFragmentManager.beginTransaction()
+                                .replace(R.id.serviceFrameLayout, tab3).commit()
                         }
                     }
 
-
-                    override fun onTabUnselected(p0: TabLayout.Tab?) {
-                    }
-
-
-                    override fun onTabReselected(p0: TabLayout.Tab?) {
-
-                    }
+                    override fun onTabUnselected(p0: TabLayout.Tab?) {}
+                    override fun onTabReselected(p0: TabLayout.Tab?) {}
                 })
-                }
             }
         }
+    }
 
-    fun settingToolbar(){
+    private fun settingToolbar() {
         fragmentServiceBinding.apply {
             serviceToolbar.apply {
                 textViewServiceToolbarTitle.text = "고객센터"
-                // 뒤로가기
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
-                    // 전화면으로 돌아가기.
                     serviceActivity.finish()
                 }
             }
