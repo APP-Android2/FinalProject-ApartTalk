@@ -2,12 +2,11 @@ package kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel
 
 import android.content.Context
 import android.net.Uri
-import android.widget.ImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 
 class CommunityAddViewModel: ViewModel() {
 
@@ -27,7 +26,7 @@ class CommunityAddViewModel: ViewModel() {
 
     // 글 종류 초기화
     fun initializeType(){
-        _communityPostAddType.value = ""
+        _communityPostAddType.value = " "
     }
 
     // 글 종류 데이터 삽입
@@ -37,7 +36,7 @@ class CommunityAddViewModel: ViewModel() {
 
     // 글 제목 초기화
     fun initializeSubject(){
-        _textViewCommunityAddSubject.value = ""
+        _textViewCommunityAddSubject.value = " "
     }
 
     // 글 제목 데이터 삽입
@@ -47,7 +46,7 @@ class CommunityAddViewModel: ViewModel() {
 
     // 글 내용 초기화
     fun initializeContent(){
-        _textViewCommunityAddContent.value = ""
+        _textViewCommunityAddContent.value = " "
     }
 
     // 글 내용 데이터 삽입

@@ -26,6 +26,17 @@ class VoteActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    override fun onBackPressed() {
+        val fragmentManager = supportFragmentManager
+        val currentFragment = fragmentManager.findFragmentById(R.id.voteContainer)
+
+        if (currentFragment is SurveyCompleteFragment) {
+            replaceFragment(VoteFragmentName.VOTE_TAB_FRAGMENT, false, true, null)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     fun replaceFragment(name: VoteFragmentName, addToBackStack: Boolean, isAnimate: Boolean, data: Bundle?) {
 
         SystemClock.sleep(200)

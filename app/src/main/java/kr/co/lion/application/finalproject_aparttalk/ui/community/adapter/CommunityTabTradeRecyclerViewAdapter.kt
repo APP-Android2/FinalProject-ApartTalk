@@ -12,9 +12,11 @@ import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabTradeBinding
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityQuestionViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityTradeViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class CommunityTabTradeRecyclerViewAdapter(val context: Context, var tradeList: MutableList<PostData>) : RecyclerView.Adapter<CommunityTabTradeRecyclerViewAdapter.CommunityTabTradeViewHolder>() {
+class CommunityTabTradeRecyclerViewAdapter(val context: Context, var viewModel: CommunityTradeViewModel) : RecyclerView.Adapter<CommunityTabTradeRecyclerViewAdapter.CommunityTabTradeViewHolder>() {
     inner class CommunityTabTradeViewHolder(rowCommunityTabTradeBinding: RowCommunityTabTradeBinding) : RecyclerView.ViewHolder(rowCommunityTabTradeBinding.root) {
         val rowCommunityTabTradeBinding : RowCommunityTabTradeBinding
 
@@ -37,20 +39,20 @@ class CommunityTabTradeRecyclerViewAdapter(val context: Context, var tradeList: 
     }
 
     override fun getItemCount(): Int {
-        return tradeList.size
+        return viewModel.tradeList.size
     }
 
     override fun onBindViewHolder(holder: CommunityTabTradeViewHolder, position: Int) {
         holder.rowCommunityTabTradeBinding.apply {
-            textViewCommunityListLabelTrade.text = tradeList[position].postType
-            textViewCommunityListTitleTrade.text = tradeList[position].postTitle
-            textViewCommunityListLikeCntTrade.text = tradeList[position].postLikeCnt.toString()
-            textViewCommunityListCommentCntTrade.text = tradeList[position].postCommentCnt.toString()
-            textViewCommunityListDateTrade.text = tradeList[position].postAddDate
+            textViewCommunityListLabelTrade.text = viewModel.tradeList[position].postType
+            textViewCommunityListTitleTrade.text = viewModel.tradeList[position].postTitle
+            textViewCommunityListLikeCntTrade.text = viewModel.tradeList[position].postLikeCnt.toString()
+            textViewCommunityListCommentCntTrade.text = viewModel.tradeList[position].postCommentCnt.toString()
+            textViewCommunityListDateTrade.text = viewModel.tradeList[position].postAddDate
 
             CoroutineScope(Dispatchers.Main).launch {
-                if (tradeList[position].postImages != null) {
-                    // 어떻게 해야 하나...
+                if (viewModel.tradeList[position].postImages != null) {
+                    viewModel.gettingCommunityPostImage(context, viewModel.tradeList[position].postImages!![0], imageViewCommunityListTrade)
                 } else {
                     imageViewCommunityListTrade.setImageResource(R.color.white)
                 }
@@ -59,7 +61,9 @@ class CommunityTabTradeRecyclerViewAdapter(val context: Context, var tradeList: 
             linearLayoutCommunityListTrade.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
-                intent.putExtra("postIdx", tradeList[position].postIdx)
+                intent.putExtra("postIdx", viewModel.tradeList[position].postIdx)
+                intent.putExtra("postId", viewModel.tradeList[position].postId)
+                intent.putExtra("postApartId", viewModel.tradeList[position].postApartId)
                 context.startActivity(intent)
             }
         }

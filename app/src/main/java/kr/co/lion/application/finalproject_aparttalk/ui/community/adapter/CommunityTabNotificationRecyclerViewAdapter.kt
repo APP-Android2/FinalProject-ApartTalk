@@ -16,7 +16,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.Commu
 import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var notificationList: MutableList<PostData>) : RecyclerView.Adapter<CommunityTabNotificationRecyclerViewAdapter.CommunityTabNotificationViewHolder>() {
+class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var viewModel: CommunityNotificationViewModel) : RecyclerView.Adapter<CommunityTabNotificationRecyclerViewAdapter.CommunityTabNotificationViewHolder>() {
     inner class CommunityTabNotificationViewHolder(rowCommunityTabNotificationBinding: RowCommunityTabNotificationBinding) : RecyclerView.ViewHolder(rowCommunityTabNotificationBinding.root) {
         val rowCommunityTabNotificationBinding : RowCommunityTabNotificationBinding
 
@@ -39,21 +39,21 @@ class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var noti
     }
 
     override fun getItemCount(): Int {
-        return notificationList.size
+        return viewModel.notificationList.size
     }
 
     override fun onBindViewHolder(holder: CommunityTabNotificationViewHolder, position: Int) {
 
         holder.rowCommunityTabNotificationBinding.apply {
-            textViewCommunityListLabelNotification.text = notificationList[position].postType
-            textViewCommunityListTitleNotification.text = notificationList[position].postTitle
-            textViewCommunityListLikeCntNotification.text = notificationList[position].postLikeCnt.toString()
-            textViewCommunityListCommentCntNotification.text = notificationList[position].postCommentCnt.toString()
-            textViewCommunityListDateNotification.text = notificationList[position].postAddDate
+            textViewCommunityListLabelNotification.text = viewModel.notificationList[position].postType
+            textViewCommunityListTitleNotification.text = viewModel.notificationList[position].postTitle
+            textViewCommunityListLikeCntNotification.text = viewModel.notificationList[position].postLikeCnt.toString()
+            textViewCommunityListCommentCntNotification.text = viewModel.notificationList[position].postCommentCnt.toString()
+            textViewCommunityListDateNotification.text = viewModel.notificationList[position].postAddDate
 
             CoroutineScope(Dispatchers.Main).launch {
-                if (notificationList[position].postImages != null) {
-                    // 어떻게 해야 하나...
+                if (viewModel.notificationList[position].postImages != null) {
+                    viewModel.gettingCommunityPostImage(context, viewModel.notificationList[position].postImages!![0], imageViewCommunityListNotification)
                 } else {
                     imageViewCommunityListNotification.setImageResource(R.color.white)
                 }
@@ -62,7 +62,9 @@ class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var noti
             linearLayoutCommunityListNotification.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
-                intent.putExtra("postIdx", notificationList[position].postIdx)
+                intent.putExtra("postIdx", viewModel.notificationList[position].postIdx)
+                intent.putExtra("postId", viewModel.notificationList[position].postId)
+                intent.putExtra("postApartId", viewModel.notificationList[position].postApartId)
                 context.startActivity(intent)
             }
         }

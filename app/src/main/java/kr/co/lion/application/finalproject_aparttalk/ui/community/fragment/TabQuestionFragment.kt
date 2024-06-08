@@ -13,6 +13,7 @@ import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentTabQuestionBinding
@@ -39,10 +40,29 @@ class TabQuestionFragment : Fragment() {
         return fragmentTabQuestionBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        gettingCommunityPostList()
+    }
+
+    // 아파트 아이디 가져오기
+    suspend fun gettingApartId(): String {
+        var apartmentId = ""
+        val authUser = App.authRepository.getCurrentUser()
+        if (authUser != null) {
+            val user = App.userRepository.getUser(authUser.uid)
+            if (user != null) {
+                val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
+                apartmentId = apartment!!.uid
+            }
+        }
+        return  apartmentId
+    }
+
     // 게시글 리스트 받아오기
     private fun gettingCommunityPostList() {
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.gettingCommunityQuestionList()
+            viewModel.gettingCommunityQuestionList(gettingApartId())
             fragmentTabQuestionBinding.recyclerViewTabQuestion.adapter?.notifyDataSetChanged()
         }
     }
@@ -84,7 +104,7 @@ class TabQuestionFragment : Fragment() {
     private fun settingRecyclerViewTabQuestion() {
         fragmentTabQuestionBinding.apply {
             recyclerViewTabQuestion.apply {
-                adapter = CommunityTabQuestionRecyclerViewAdapter(requireContext(), viewModel.questionList)
+                adapter = CommunityTabQuestionRecyclerViewAdapter(requireContext(), viewModel)
                 layoutManager = LinearLayoutManager(mainActivity)
                 val deco = MaterialDividerItemDecoration(mainActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)

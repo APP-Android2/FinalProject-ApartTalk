@@ -51,7 +51,8 @@
                         android:fontFamily="@font/notosans_semibold"
                         android:includeFontPadding="false"
                         android:text="동 대표 선거"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/voteListCardTextView1"
@@ -60,7 +61,8 @@
                         android:layout_marginBottom="16dp"
                         android:fontFamily="@font/notosans_regular"
                         android:includeFontPadding="false"
-                        android:text="2024년 05/01일 부터 05/15일까지 동 대표 선거가 진행되고 있습니다. 많은 참여 부탁드립니다." />
+                        android:text="2024년 05/01일 부터 05/15일까지 동 대표 선거가 진행되고 있습니다. 많은 참여 부탁드립니다."
+                        android:visibility="gone" />
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/voteListButton"
@@ -71,7 +73,20 @@
                         android:includeFontPadding="false"
                         android:text="투표 하기"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/noVoteTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosans_regular"
+                        android:includeFontPadding="false"
+                        android:text="진행 중인 투표가 없습니다."
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        android:visibility="gone" />
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </FrameLayout>

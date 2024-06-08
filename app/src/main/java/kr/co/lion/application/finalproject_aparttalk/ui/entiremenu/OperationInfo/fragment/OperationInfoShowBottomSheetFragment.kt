@@ -5,23 +5,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentOperationInfoShowBottomSheetBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
+import kr.co.lion.application.finalproject_aparttalk.db.OperationInfoDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
+import kr.co.lion.application.finalproject_aparttalk.repository.OperationInfoRepository
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModelFactory
 
 class OperationInfoShowBottomSheetFragment : BottomSheetDialogFragment() {
 
     lateinit var binding: FragmentOperationInfoShowBottomSheetBinding
-    lateinit var operationInfoActivity: OperationInfoActivity
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+    private val viewModel: OperationInfoViewModel by viewModels {
+        OperationInfoViewModelFactory(
+            OperationInfoRepository(OperationInfoDataSource()),
+            LocalApartmentDataSource(requireContext())
+        )
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
         binding = FragmentOperationInfoShowBottomSheetBinding.inflate(layoutInflater)
-        operationInfoActivity = activity as OperationInfoActivity
+
+        // OperationSecondRecyclerView 에서 부터 전달받은 데이터로 UI를 업데이트
+        arguments?.let {
+            val operationInfoIdx = it.getInt("idx")
+            val operationInfoWriter = it.getString("writer")
+            val operationInfoType = it.getString("type")
+            val operationInfoSubject = it.getString("subject")
+            val operationInfoDate = it.getString("date")
+            val operationContent = it.getString("content")
+
+
+            binding.textViewOperationInfoShowSubject.text = operationInfoSubject
+            binding.textViewOperationInfoShowContent.text = operationContent!!.replace("\\n", "\n")
+        }
 
         return binding.root
     }

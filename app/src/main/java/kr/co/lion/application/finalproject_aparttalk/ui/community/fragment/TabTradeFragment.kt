@@ -13,6 +13,7 @@ import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentTabTradeBinding
@@ -27,10 +28,14 @@ class TabTradeFragment : Fragment() {
     lateinit var mainActivity: MainActivity
     private val viewModel: CommunityTradeViewModel by viewModels()
 
+    // 현재 글이 담긴 아파트 아이디
+    var postApartId: String? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         fragmentTabTradeBinding = FragmentTabTradeBinding.inflate(inflater)
         mainActivity = activity as MainActivity
+
 
         gettingCommunityPostList()
         settingRecyclerViewTabTrade()
@@ -40,10 +45,30 @@ class TabTradeFragment : Fragment() {
         return fragmentTabTradeBinding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        gettingCommunityPostList()
+    }
+
+    // 아파트 아이디 가져오기
+    suspend fun gettingApartId(): String {
+        var apartmentId = ""
+        val authUser = App.authRepository.getCurrentUser()
+        if (authUser != null) {
+            val user = App.userRepository.getUser(authUser.uid)
+            if (user != null) {
+                val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
+                apartmentId = apartment!!.uid
+            }
+        }
+        return  apartmentId
+    }
+
+
     // 게시글 리스트 받아오기
     private fun gettingCommunityPostList() {
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.gettingCommunityTradeList()
+            viewModel.gettingCommunityTradeList(gettingApartId())
             fragmentTabTradeBinding.recyclerViewTabTrade.adapter?.notifyDataSetChanged()
         }
     }
@@ -86,7 +111,7 @@ class TabTradeFragment : Fragment() {
     private fun settingRecyclerViewTabTrade() {
         fragmentTabTradeBinding.apply {
             recyclerViewTabTrade.apply {
-                adapter = CommunityTabTradeRecyclerViewAdapter(requireContext(), viewModel.tradeList)
+                adapter = CommunityTabTradeRecyclerViewAdapter(requireContext(), viewModel)
                 layoutManager = LinearLayoutManager(mainActivity)
                 val deco = MaterialDividerItemDecoration(mainActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)

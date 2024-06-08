@@ -2,6 +2,7 @@ package kr.co.lion.application.finalproject_aparttalk.ui.community.fragment
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirmCancel
 import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirmCancelInterface
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityBottomSheetBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityDetailViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
+import kr.co.lion.application.finalproject_aparttalk.util.PostState
 
-class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailFragment, communityIdx:Int) : BottomSheetDialogFragment(),
+class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailFragment, var viewModel: CommunityDetailViewModel, var postIdx: Int, var postId: String, var postApartId: String) : BottomSheetDialogFragment(),
     DialogConfirmCancelInterface {
     lateinit var fragmentCommunityBottomSheetBinding: FragmentCommunityBottomSheetBinding
     lateinit var communityActivity: CommunityActivity
@@ -37,8 +43,10 @@ class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailF
             buttonCommunityDetailModify.setOnClickListener {
                 dismiss()
                 val bundle = Bundle()
-                // bundle.putInt("communityIdx", communityIdx) 게시글 아이디 넘겨주기
-                communityActivity.replaceFragment(CommunityFragmentName.COMMUNITY_MODIFY_FRAGMENT, true, false, null)
+                bundle.putInt("postIdx", postIdx)
+                bundle.putString("postId", postId)
+                bundle.putString("postApartId", postApartId)
+                communityActivity.replaceFragment(CommunityFragmentName.COMMUNITY_MODIFY_FRAGMENT, true, false, bundle)
             }
 
             // 삭제
@@ -86,7 +94,11 @@ class CommunityBottomSheetFragment(var communityDetailFragment: CommunityDetailF
     }
 
     override fun onConfirmButtonClick(id: Int) {
-        // 삭제 기능 넣을 것
+        // 삭제 기능
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.updateCommunityPostState(postApartId, postIdx, PostState.POST_STATE_REMOVE)
+            communityActivity.finish()
+        }
     }
 
     override fun onConfirmButtonClick(activity: AppCompatActivity) {

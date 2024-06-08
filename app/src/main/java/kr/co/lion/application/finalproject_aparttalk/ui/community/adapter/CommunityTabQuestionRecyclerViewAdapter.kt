@@ -12,9 +12,10 @@ import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityTabQuestionBinding
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityQuestionViewModel
 import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
-class CommunityTabQuestionRecyclerViewAdapter(val context: Context, var questionList: MutableList<PostData>) : RecyclerView.Adapter<CommunityTabQuestionRecyclerViewAdapter.CommunityTabQuestionViewHolder>() {
+class CommunityTabQuestionRecyclerViewAdapter(val context: Context, var viewModel: CommunityQuestionViewModel) : RecyclerView.Adapter<CommunityTabQuestionRecyclerViewAdapter.CommunityTabQuestionViewHolder>() {
     inner class CommunityTabQuestionViewHolder(rowCommunityTabQuestionBinding: RowCommunityTabQuestionBinding) : RecyclerView.ViewHolder(rowCommunityTabQuestionBinding.root) {
         val rowCommunityTabQuestionBinding : RowCommunityTabQuestionBinding
 
@@ -37,20 +38,20 @@ class CommunityTabQuestionRecyclerViewAdapter(val context: Context, var question
     }
 
     override fun getItemCount(): Int {
-        return questionList.size
+        return viewModel.questionList.size
     }
 
     override fun onBindViewHolder(holder: CommunityTabQuestionViewHolder, position: Int) {
         holder.rowCommunityTabQuestionBinding.apply {
-            textViewCommunityListLabelQuestion.text = questionList[position].postType
-            textViewCommunityListTitleQuestion.text = questionList[position].postTitle
-            textViewCommunityListLikeCntQuestion.text = questionList[position].postLikeCnt.toString()
-            textViewCommunityListCommentCntQuestion.text = questionList[position].postCommentCnt.toString()
-            textViewCommunityListDateQuestion.text = questionList[position].postAddDate
+            textViewCommunityListLabelQuestion.text = viewModel.questionList[position].postType
+            textViewCommunityListTitleQuestion.text = viewModel.questionList[position].postTitle
+            textViewCommunityListLikeCntQuestion.text = viewModel.questionList[position].postLikeCnt.toString()
+            textViewCommunityListCommentCntQuestion.text = viewModel.questionList[position].postCommentCnt.toString()
+            textViewCommunityListDateQuestion.text = viewModel.questionList[position].postAddDate
 
             CoroutineScope(Dispatchers.Main).launch {
-                if (questionList[position].postImages != null) {
-                    // 어떻게 해야 하나...
+                if (viewModel.questionList[position].postImages != null) {
+                    viewModel.gettingCommunityPostImage(context, viewModel.questionList[position].postImages!![0], imageViewCommunityListQuestion)
                 } else {
                     imageViewCommunityListQuestion.setImageResource(R.color.white)
                 }
@@ -59,7 +60,9 @@ class CommunityTabQuestionRecyclerViewAdapter(val context: Context, var question
             linearLayoutCommunityListQuestion.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
-                intent.putExtra("postIdx", questionList[position].postIdx)
+                intent.putExtra("postIdx", viewModel.questionList[position].postIdx)
+                intent.putExtra("postId", viewModel.questionList[position].postId)
+                intent.putExtra("postApartId", viewModel.questionList[position].postApartId)
                 context.startActivity(intent)
             }
         }

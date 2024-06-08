@@ -55,7 +55,6 @@ enum class VoteFragmentName(var str:String){
 
 enum class InfoFragmentName(var str:String){
     EDIT_USER_INFO_FRAGMENT("EditUserInfoFragment.kt"),
-    EDIT_USER_INFO_NUMBER_FRAGMENT("EditUserInfoNumberFragment.kt"),
     INFO_FRAGMENT("InfoFragment.kt")
 }
 

@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 
 class CommunityEtcViewModel: ViewModel() {
     private val communityPostRepository = CommunityPostRepository()
@@ -37,8 +37,8 @@ class CommunityEtcViewModel: ViewModel() {
     val textViewCommunityListDateEtc: LiveData<String> get() = _textViewCommunityListDateEtc
 
     // 게시글 목록을 가져온다.
-    suspend fun gettingCommunityPostList() : MutableList<PostData> {
-        return communityPostRepository.gettingCommunityPostList()
+    suspend fun gettingCommunityPostList(postApartId: String) : MutableList<PostData> {
+        return communityPostRepository.gettingCommunityPostList(postApartId)
     }
 
     // 이미지 데이터를 받아오는 메서드
@@ -47,9 +47,9 @@ class CommunityEtcViewModel: ViewModel() {
     }
 
     // 게시글 기타 리스트 받아오기
-    suspend fun gettingCommunityEtcList() : MutableList<PostData> {
+    suspend fun gettingCommunityEtcList(postApartId: String) : MutableList<PostData> {
         val job1 = CoroutineScope(Dispatchers.Main).launch {
-            allList = gettingCommunityPostList()
+            allList = gettingCommunityPostList(postApartId)
             etcList.clear()
             allList.forEach {
                 when(it.postType) {

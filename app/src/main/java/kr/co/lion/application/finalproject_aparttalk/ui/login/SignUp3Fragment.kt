@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp3Binding
@@ -19,7 +19,7 @@ class SignUp3Fragment : Fragment() {
     private var _binding: FragmentSignUp3Binding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SignUpViewModel by viewModels{
+    private val viewModel: SignUpViewModel by activityViewModels {
         SignUpViewModelFactory(
             (requireActivity() as SignUpActivity).userRepository,
             (requireActivity() as SignUpActivity).apartmentRepository

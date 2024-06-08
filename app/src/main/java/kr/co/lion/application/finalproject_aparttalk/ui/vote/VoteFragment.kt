@@ -1,72 +1,92 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.vote
 
-import android.graphics.Typeface
 import android.os.Bundle
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toolbar
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentVoteBinding
+import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.VoteRepository
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
 import kr.co.lion.application.finalproject_aparttalk.util.VoteFragmentName
-
 
 class VoteFragment : Fragment() {
 
-    lateinit var fragmentVoteBinding: FragmentVoteBinding
-    lateinit var voteActivity: VoteActivity
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+    private lateinit var binding: FragmentVoteBinding
+    private lateinit var voteActivity: VoteActivity
+    private val firestore by lazy { FirebaseFirestore.getInstance() }
+    private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-        fragmentVoteBinding = FragmentVoteBinding.inflate(inflater)
+    // UserDataSource 및 LocalUserDataSource 초기화
+    private val userDataSource by lazy { UserDataSource() }
+    private val localUserDataSource by lazy { LocalUserDataSource(requireContext()) }
+
+    // UserRepository 초기화
+    private val userRepository by lazy { UserRepository(userDataSource, localUserDataSource) }
+
+    // VoteRepository 초기화
+    private val voteRepository by lazy { VoteRepository(firestore) }
+
+    private val voteViewModel: VoteViewModel by viewModels {
+        VoteViewModelFactory(voteRepository, userRepository)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentVoteBinding.inflate(inflater, container, false)
         voteActivity = activity as VoteActivity
 
         voteToolbar()
         voteButton()
         setupCheckBoxes()
+        setupObservers()
 
-        return fragmentVoteBinding.root
+        // FirebaseAuth를 사용하여 사용자 ID를 가져옵니다.
+        val userIdx = firebaseAuth.currentUser?.uid
+        if (userIdx != null) {
+            voteViewModel.getUserVoteStatus(userIdx)
+            voteViewModel.getUser(userIdx)
+        } else {
+            // 사용자 ID를 가져오지 못한 경우 처리
+            // 예를 들어, 로그인 페이지로 이동하거나 오류 메시지를 표시할 수 있습니다.
+        }
+
+        return binding.root
     }
 
-
-    // 툴바 설정
-    fun voteToolbar() {
-        fragmentVoteBinding.apply {
-            voteToolbar.apply {
-                //title
-                title = "주민 투표"
-                // Back
-                setNavigationIcon(R.drawable.icon_back)
-                setNavigationOnClickListener {
-                    voteActivity.replaceFragment(VoteFragmentName.VOTE_TAB_FRAGMENT, false, true, null)
-                }
+    private fun voteToolbar() {
+        binding.voteToolbar.apply {
+            title = "주민 투표"
+            setNavigationIcon(R.drawable.icon_back)
+            setNavigationOnClickListener {
+                voteActivity.replaceFragment(VoteFragmentName.VOTE_TAB_FRAGMENT, false, true, null)
             }
         }
     }
 
-    fun voteButton(){
-        fragmentVoteBinding.apply {
-            voteButton.apply {
-                setOnClickListener {
-
-                    voteActivity.removeFragment(VoteFragmentName.VOTE_FRAGMENT)
-
-                    voteActivity.replaceFragment(VoteFragmentName.VOTE_TAB_FRAGMENT,false,true,null)
-                }
+    private fun voteButton() {
+        binding.voteButton.setOnClickListener {
+            val userIdx = firebaseAuth.currentUser?.uid
+            if (userIdx != null) {
+                voteViewModel.updateUserVoteStatus(userIdx, true)
+                voteActivity.removeFragment(VoteFragmentName.VOTE_FRAGMENT)
+                voteActivity.replaceFragment(VoteFragmentName.VOTE_TAB_FRAGMENT, false, true, null)
+            } else {
+                // 사용자 ID를 가져오지 못한 경우 처리
             }
         }
     }
 
-    // 체크박스 설정
-    // 체크박스 설정
     private fun setupCheckBoxes() {
-        val checkBox1 = fragmentVoteBinding.voteCheckBox1
-        val checkBox2 = fragmentVoteBinding.voteCheckBox2
-        val checkBox3 = fragmentVoteBinding.voteCheckBox3
+        val checkBox1 = binding.voteCheckBox1
+        val checkBox2 = binding.voteCheckBox2
+        val checkBox3 = binding.voteCheckBox3
 
         var isUpdating = false
 
@@ -76,10 +96,8 @@ class VoteFragment : Fragment() {
             if (isChecked) {
                 checkBox2.isChecked = false
                 checkBox3.isChecked = false
-                // 선택된 체크박스 스타일 변경
                 checkBox1.setTextColor(resources.getColor(R.color.black, null))
             } else {
-                // 선택 해제된 체크박스 스타일 복원
                 checkBox1.setTextColor(resources.getColor(R.color.gray, null))
             }
             isUpdating = false
@@ -91,10 +109,8 @@ class VoteFragment : Fragment() {
             if (isChecked) {
                 checkBox1.isChecked = false
                 checkBox3.isChecked = false
-                // 선택된 체크박스 스타일 변경
                 checkBox2.setTextColor(resources.getColor(R.color.black, null))
             } else {
-                // 선택 해제된 체크박스 스타일 복원
                 checkBox2.setTextColor(resources.getColor(R.color.gray, null))
             }
             isUpdating = false
@@ -106,13 +122,27 @@ class VoteFragment : Fragment() {
             if (isChecked) {
                 checkBox1.isChecked = false
                 checkBox2.isChecked = false
-                // 선택된 체크박스 스타일 변경
                 checkBox3.setTextColor(resources.getColor(R.color.black, null))
             } else {
-                // 선택 해제된 체크박스 스타일 복원
                 checkBox3.setTextColor(resources.getColor(R.color.gray, null))
             }
             isUpdating = false
         }
+    }
+
+    private fun setupObservers() {
+        voteViewModel.userVoteStatus.observe(viewLifecycleOwner, Observer { hasVoted ->
+            if (hasVoted) {
+                binding.voteButton.isEnabled = false
+                binding.voteButton.text = "이미 투표하셨습니다"
+                binding.voteCheckBox1.isEnabled = false
+                binding.voteCheckBox2.isEnabled = false
+                binding.voteCheckBox3.isEnabled = false
+            }
+        })
+
+        voteViewModel.user.observe(viewLifecycleOwner, Observer { user ->
+            // 사용자 정보를 사용하여 UI 업데이트 (필요한 경우)
+        })
     }
 }

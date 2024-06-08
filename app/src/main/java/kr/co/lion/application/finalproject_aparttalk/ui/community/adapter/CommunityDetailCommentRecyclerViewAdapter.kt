@@ -8,13 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCommunityDetailCommentBinding
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
+import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityAddFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityDetailFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityDetailViewModel
+import kr.co.lion.application.finalproject_aparttalk.util.CommentState
 import kr.co.lion.application.finalproject_aparttalk.util.Tools
 
-class CommunityDetailCommentRecyclerViewAdapter(val context : Context, var commentList: MutableList<CommentData>, var fragment: CommunityDetailFragment) : RecyclerView.Adapter<CommunityDetailCommentRecyclerViewAdapter.CommunityDetailViewHolder>(){
+class CommunityDetailCommentRecyclerViewAdapter(val context : Context, var commentList: MutableList<CommentData>, var userList: List<UserModel?>, var fragment: CommunityDetailFragment, var viewModel: CommunityDetailViewModel, var postApartId: String) : RecyclerView.Adapter<CommunityDetailCommentRecyclerViewAdapter.CommunityDetailViewHolder>(){
     inner class CommunityDetailViewHolder(rowCommunityDetailCommentBinding: RowCommunityDetailCommentBinding) : RecyclerView.ViewHolder(rowCommunityDetailCommentBinding.root) {
         val rowCommunityDetailCommentBinding: RowCommunityDetailCommentBinding
 
@@ -41,19 +45,49 @@ class CommunityDetailCommentRecyclerViewAdapter(val context : Context, var comme
 
     override fun onBindViewHolder(holder: CommunityDetailViewHolder, position: Int) {
         holder.rowCommunityDetailCommentBinding.apply {
-            textViewRowCommunityDetailCommentWriter.text = "김길동"
+
+            userList.forEach {
+                if (it!!.uid == commentList[position].commentUserId) {
+                    textViewRowCommunityDetailCommentWriter.text = it.name
+                }
+            }
             textViewRowCommunityDetailCommentContent.text = commentList[position].commentContent
 
-            // 수정 기능
-            imageViewRowCommunityDetailCommentModify.setOnClickListener {
-                CoroutineScope(Dispatchers.Main).launch {
-                    fragment.fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.setText(commentList[position].commentContent)
-                    Tools.showSoftInput(context, fragment.fragmentCommunityDetailBinding.textInputLayoutCommunityDetailSendComment)
-                    fragment.fragmentCommunityDetailBinding.imageViewCommunityDetailSendComment.setOnClickListener {
-                        fragment.commentModifyProcess(position, commentList[position].commentIdx)
+            CoroutineScope(Dispatchers.Main).launch {
+                val user = gettingLoginUserData()
+
+                if (user!!.uid == commentList[position].commentUserId) {
+                    // 수정 기능
+                    imageViewRowCommunityDetailCommentModify.setOnClickListener {
+                        fragment.fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.setText(commentList[position].commentContent)
+                        Tools.showSoftInput(context, fragment.fragmentCommunityDetailBinding.textInputLayoutCommunityDetailSendComment)
+                        fragment.fragmentCommunityDetailBinding.imageViewCommunityDetailSendComment.setOnClickListener {
+                            CoroutineScope(Dispatchers.Main).launch {
+                                fragment.commentModifyProcess(position, commentList[position])
+                                viewModel.updateCommunityCommentState(postApartId, commentList[position], CommentState.COMMENT_STATE_MODIFY)
+                            }
+                        }
+                    }
+
+                    // 삭제 기능
+                    imageViewRowCommunityDetailCommentDelete.setOnClickListener {
+                        CoroutineScope(Dispatchers.Main).launch {
+                            viewModel.updateCommunityCommentState(postApartId, commentList[position], CommentState.COMMENT_STATE_REMOVE)
+                            fragment.removingCommentData(position)
+                        }
                     }
                 }
             }
         }
+    }
+
+    // 로그인한 사용자 정보 가져오기
+    suspend fun gettingLoginUserData(): UserModel? {
+        var user: UserModel? = null
+        val authUser = App.authRepository.getCurrentUser()
+        if (authUser != null) {
+            user = App.userRepository.getUser(authUser.uid)
+        }
+        return  user
     }
 }

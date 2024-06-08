@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
-import kr.co.lion.application.finalproject_aparttalk.ui.community.CommunityPostRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 
 class CommunitySearchViewModel: ViewModel() {
     private val communityPostRepository = CommunityPostRepository()
@@ -37,28 +37,12 @@ class CommunitySearchViewModel: ViewModel() {
     val textViewCommunityListDateSearch: LiveData<String> get() = _textViewCommunityListDateSearch
 
     // 게시글 목록을 가져온다.
-    suspend fun gettingCommunityPostList() : MutableList<PostData> {
-        return communityPostRepository.gettingCommunityPostList()
+    suspend fun gettingCommunityPostList(postApartId: String) : MutableList<PostData> {
+        return communityPostRepository.gettingCommunityPostList(postApartId)
     }
 
     // 이미지 데이터를 받아오는 메서드
     suspend fun gettingCommunityPostImage(context: Context, imageFileName:String, imageView: ImageView) {
         return communityPostRepository.gettingCommunityPostImage(context, imageFileName, imageView)
-    }
-
-    // 게시글 검색 리스트 받아오기
-    suspend fun gettingCommunitySearchList() : MutableList<PostData> {
-        val job1 = CoroutineScope(Dispatchers.Main).launch {
-            allList = gettingCommunityPostList()
-            searchList.clear()
-            allList.forEach {
-                when(it.postType) {
-                    "기타" -> searchList.add(it)
-                }
-            }
-        }
-        job1.join()
-
-        return searchList
     }
 }

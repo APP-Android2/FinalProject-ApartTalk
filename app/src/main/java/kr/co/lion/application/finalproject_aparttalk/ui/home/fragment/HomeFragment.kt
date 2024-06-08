@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentHomeBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
@@ -15,6 +18,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.A
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.home.adapter.HomeNotificationRecyclerView
 import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.inquiry.InquiryActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.parking.ParkingActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.vote.VoteActivity
 import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
@@ -33,6 +37,7 @@ class HomeFragment : Fragment() {
 
         settingRecyclerViewHomeNotification()
         settingEvent()
+        initView()
 
         return binding.root
     }
@@ -43,6 +48,28 @@ class HomeFragment : Fragment() {
             homeNotificationRecyclerView.apply {
                 adapter = HomeNotificationRecyclerView(requireContext())
                 layoutManager = LinearLayoutManager(mainActivity)
+            }
+        }
+    }
+
+    //화면 설정
+    private fun initView(){
+        binding.apply {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val authUser = App.authRepository.getCurrentUser()
+                if (authUser != null){
+                    val user = App.userRepository.getUser(authUser.uid)
+                    if (user != null){
+                        val apart = App.apartmentRepository.getApartment(user.uid)
+
+                        textHomeAddress.text = apart?.address
+                        textHomeApt.text = apart?.name
+                        textHomeHouse.text = "${apart?.totalHouseholds}세대"
+                        textHomeParking.text = "${apart?.totalCarParked}대"
+                        textHomeMoveIn.text = apart?.moveIn
+                        textHomeSize.text = apart?.sizeOfComplex
+                    }
+                }
             }
         }
     }
@@ -62,7 +89,8 @@ class HomeFragment : Fragment() {
                 startActivity(Intent(requireActivity(), VoteActivity::class.java))
             }
             homeAllManagementOfficeLayout.setOnClickListener {
-                //관리실 문의
+                //관리사무소 문의로 이동
+                startActivity(Intent(requireActivity(), InquiryActivity::class.java))
             }
             homeAllAnnouncementLayout.setOnClickListener {
                 //안내방송
