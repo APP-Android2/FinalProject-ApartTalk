@@ -26,7 +26,7 @@ class AuthRepository(
         localApartmentDataSource.clearApartment()
     }
 
-    suspend fun signInWithGoogle(googleAccount: GoogleIdTokenCredential): AuthResult? {
+    suspend fun signInWithGoogle(googleAccount: GoogleIdTokenCredential): AuthResult {
         return firebaseAuthService.signInWithGoogle(googleAccount)
     }
 
@@ -35,7 +35,7 @@ class AuthRepository(
         return googleCredentialManagerService.getGoogleCredential(context)
     }
 
-    suspend fun signInWithKaKao(oAuthToken: OAuthToken): AuthResult? {
+    suspend fun signInWithKaKao(oAuthToken: OAuthToken): AuthResult {
         return firebaseAuthService.signInWithKaKao(oAuthToken)
     }
 

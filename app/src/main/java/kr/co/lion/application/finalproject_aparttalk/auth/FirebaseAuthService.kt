@@ -20,41 +20,22 @@ class FirebaseAuthService {
 
     fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
 
-    fun signOut() {
-        firebaseAuth.signOut()
-    }
+    fun signOut() = firebaseAuth.signOut()
 
-    suspend fun signInWithGoogle(googleAccount: GoogleIdTokenCredential): AuthResult? {
+    suspend fun signInWithGoogle(googleAccount: GoogleIdTokenCredential): AuthResult {
         val credential = GoogleAuthProvider.getCredential(googleAccount.idToken, null)
-        return try {
-            firebaseAuth.signInWithCredential(credential).await()
-        } catch (e: FirebaseAuthUserCollisionException) {
-            handleUserCollision(credential)
-        }
+        return firebaseAuth.signInWithCredential(credential).await()
     }
 
-    suspend fun signInWithKaKao(oAuthToken: OAuthToken): AuthResult? {
+    suspend fun signInWithKaKao(oAuthToken: OAuthToken): AuthResult {
         val providerId = "oidc.aparttalk"
         val credential = OAuthProvider.newCredentialBuilder(providerId).setIdToken(oAuthToken.idToken).build()
-        return try {
-            firebaseAuth.signInWithCredential(credential).await()
-        } catch (e: FirebaseAuthUserCollisionException) {
-            handleUserCollision(credential)
-        }
+        return firebaseAuth.signInWithCredential(credential).await()
     }
 
     suspend fun signInWithNaver(customToken: String?): AuthResult? {
         return customToken?.let { token ->
             firebaseAuth.signInWithCustomToken(token).await()
         }
-    }
-
-    private suspend fun handleUserCollision(credential: AuthCredential): AuthResult? {
-        Log.d("test1234", "handleUserCollision1")
-        val currentUser = firebaseAuth.currentUser
-        Log.d("test1234", "handleUserCollision2")
-        val authResult = currentUser?.linkWithCredential(credential)?.await()
-        Log.d("test1234", "handleUserCollision3 : ${authResult}")
-        return authResult
     }
 }
