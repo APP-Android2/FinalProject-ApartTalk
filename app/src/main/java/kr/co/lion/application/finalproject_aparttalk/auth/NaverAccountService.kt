@@ -67,7 +67,7 @@ class NaverAccountService {
                         continuation.resume(customToken)
                     } else {
                         Log.e("test1234", "Failed to fetch user profile: ${response.code}")
-                        continuation.resume(null)
+                        continuation.resume(response.code.toString())
                     }
                 }
             })

@@ -57,7 +57,7 @@ class LoginViewModel(
         } catch (e: FirebaseAuthUserCollisionException) {
             _isLoading.value = false
             Log.d("test1234", "구글 : ${e.message}")
-            Toast.makeText(context, "이미 사용중인 계정이 존재합니다", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "이미 가입된 계정이 존재합니다", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             _isLoading.value = false
             Log.d("test1234", "구글 : ${e.message}")
@@ -75,7 +75,7 @@ class LoginViewModel(
         } catch (e: FirebaseAuthUserCollisionException) {
             _isLoading.value = false
             Log.d("test1234", "카카오 : ${e.message}")
-            Toast.makeText(context, "이미 사용중인 계정이 존재합니다", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "이미 가입된 계정이 존재합니다", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             _isLoading.value = false
             Log.d("test1234", "카카오 : ${e.message}")
@@ -87,9 +87,22 @@ class LoginViewModel(
         try {
             val naverAccessToken = authRepository.getNaverAccessToken(context) ?: return@launch
             _isLoading.value = true
-            val naverCustomToken = authRepository.getNaverCustomToken(naverAccessToken) ?: return@launch
+            val naverCustomToken = authRepository.getNaverCustomToken(naverAccessToken)
+            if (naverCustomToken == null){
+                _isLoading.value = false
+                return@launch
+            }
+            if (naverCustomToken == "409"){
+                _isLoading.value = false
+                Toast.makeText(context, "이미 가입된 계정이 존재합니다", Toast.LENGTH_SHORT).show()
+                return@launch
+            }
             val authResult = authRepository.signInWithNaver(naverCustomToken)
-            val authUser = authResult?.user ?: return@launch
+            val authUser = authResult?.user
+            if (authUser == null){
+                _isLoading.value = false
+                return@launch
+            }
             handleUserAuthentication(context, authUser, "네이버")
         } catch (e: Exception) {
             _isLoading.value = false
@@ -98,7 +111,11 @@ class LoginViewModel(
         }
     }
 
-    private suspend fun handleUserAuthentication(context: Context, authUser: FirebaseUser, loginType: String) {
+    private suspend fun handleUserAuthentication(
+        context: Context,
+        authUser: FirebaseUser,
+        loginType: String
+    ) {
         try {
             val user = userRepository.getUser(authUser.uid)
             if (user == null) {
@@ -135,11 +152,12 @@ class LoginViewModel(
                         }
                         NavigationState.TO_MAIN
                     }
+
                     false -> NavigationState.TO_SIGNUP
                 }
             }
             _isLoading.value = false
-        } catch (e: Exception){
+        } catch (e: Exception) {
             _isLoading.value = false
             Log.d("test1234", "정보저장 오류 : ${e.message}")
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
