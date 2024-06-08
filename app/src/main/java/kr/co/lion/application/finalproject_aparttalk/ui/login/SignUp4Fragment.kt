@@ -9,7 +9,9 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentSignUp4Binding
@@ -125,14 +127,17 @@ class SignUp4Fragment : Fragment() {
         binding.signup4AgreeButton.alpha = if (isApartInfoExist) 1.0f else 0.5f
     }
 
-    private fun completeButton(){
+    private fun completeButton() {
         binding.signup4AgreeButton.setOnClickListener {
-            viewModel.saveUserInfo()
-            (activity as? SignUpActivity)?.setResultAndFinish()
-            startActivity(Intent(requireContext(), MainActivity::class.java))
-            requireActivity().finish()
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.saveUserInfo(requireContext()).join()
+                (activity as? SignUpActivity)?.setResultAndFinish()
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+                requireActivity().finish()
+            }
         }
     }
+
 
     private fun backProcess(){
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
