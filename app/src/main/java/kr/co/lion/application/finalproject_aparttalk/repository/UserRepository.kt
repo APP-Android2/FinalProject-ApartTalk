@@ -37,6 +37,10 @@ class UserRepository(
 
     suspend fun isExistUser(uid: String): Boolean = userDataSource.isExistUser(uid)
 
+    suspend fun getUserSequence(): Int? = userDataSource.getUserSequence()
+
+    suspend fun incrementUserSequence() = userDataSource.incrementUserSequence()
+
     private fun UserModel.copyFromMap(updates: Map<String, Any?>): UserModel {
         return this.copy(
             name = updates["name"] as? String ?: this.name,

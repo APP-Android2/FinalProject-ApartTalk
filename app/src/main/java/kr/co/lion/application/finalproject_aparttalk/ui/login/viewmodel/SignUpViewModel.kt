@@ -1,6 +1,8 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -156,7 +158,7 @@ class SignUpViewModel(
         }
     }
 
-    fun saveUserInfo() = viewModelScope.launch {
+    fun saveUserInfo(context: Context) = viewModelScope.launch {
         _isLoading.value = true
         _user.value?.let { user ->
             val updateUser = mapOf<String, Any?>(
@@ -185,7 +187,9 @@ class SignUpViewModel(
                     App.prefs.setLongitude(apartment.longitude)
                 }
             } catch (e: Exception) {
+                _isLoading.value = false
                 Log.e("test1234", "Error updating user info", e)
+                Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
             }
         }
         _isLoading.value = false
