@@ -102,12 +102,13 @@ class SignUp2Fragment : Fragment() {
         binding.signup2Year.text = "${year}년"
         binding.signup2Month.text = "${month}월"
         binding.signup2Day.text = "${day}일"
+        viewModel.setBirthDate(year, month, day)
         updateButtonState()
     }
 
     private fun updateButtonState() {
         val isNameFilled = binding.signup2NameEditText.text.toString().trim().isNotEmpty()
-        val isDateSelected = binding.signup2Year.text.trim().toString().replace("년", "").isNotEmpty()
+        val isDateSelected = viewModel.user.value?.birthYear != null
 
         binding.signup2AgreeButton.isEnabled = isNameFilled && isDateSelected
         binding.signup2AgreeButton.alpha = if (isNameFilled && isDateSelected) 1.0f else 0.5f
@@ -133,11 +134,6 @@ class SignUp2Fragment : Fragment() {
         Tools.hideSoftInput(requireActivity())
         findNavController().navigate(R.id.action_signUp2Fragment_to_signUp3Fragment)
         viewModel.setName(binding.signup2NameEditText.text.toString().trim())
-        viewModel.setBirthDate(
-            binding.signup2Year.text.dropLast(1).trim().toString().toInt(),
-            binding.signup2Month.text.dropLast(1).trim().toString().toInt(),
-            binding.signup2Day.text.dropLast(1).trim().toString().toInt()
-        )
     }
 
     private fun nextButton() {

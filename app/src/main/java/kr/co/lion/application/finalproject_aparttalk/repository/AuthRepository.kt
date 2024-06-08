@@ -26,7 +26,7 @@ class AuthRepository(
         localApartmentDataSource.clearApartment()
     }
 
-    suspend fun signInWithGoogle(googleAccount: GoogleIdTokenCredential): AuthResult? {
+    suspend fun signInWithGoogle(googleAccount: GoogleIdTokenCredential): AuthResult {
         return firebaseAuthService.signInWithGoogle(googleAccount)
     }
 
@@ -35,7 +35,7 @@ class AuthRepository(
         return googleCredentialManagerService.getGoogleCredential(context)
     }
 
-    suspend fun signInWithKaKao(oAuthToken: OAuthToken): AuthResult? {
+    suspend fun signInWithKaKao(oAuthToken: OAuthToken): AuthResult {
         return firebaseAuthService.signInWithKaKao(oAuthToken)
     }
 
@@ -48,8 +48,13 @@ class AuthRepository(
         return firebaseAuthService.signInWithNaver(customToken)
     }
 
-    suspend fun getNaverAccount(context: Context): String? {
+    suspend fun getNaverAccessToken(context: Context): String? {
         val naverAccountService = NaverAccountService()
-        return naverAccountService.getNaverAccount(context)
+        return naverAccountService.getNaverAccessToken(context)
+    }
+
+    suspend fun getNaverCustomToken(accessToken: String): String? {
+        val naverAccountService = NaverAccountService()
+        return naverAccountService.getNaverCustomToken(accessToken)
     }
 }

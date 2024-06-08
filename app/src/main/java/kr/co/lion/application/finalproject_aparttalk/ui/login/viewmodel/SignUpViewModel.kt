@@ -1,5 +1,8 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel
 
+import android.content.Context
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -81,7 +84,7 @@ class SignUpViewModel(
         }
     }
 
-    fun setBirthDate(year: Int?, month: Int?, day: Int?) {
+    fun setBirthDate(year: Int, month: Int, day: Int) {
         _user.value?.let {
             it.birthYear = year
             it.birthMonth = month
@@ -155,7 +158,7 @@ class SignUpViewModel(
         }
     }
 
-    fun saveUserInfo() = viewModelScope.launch {
+    fun saveUserInfo(context: Context) = viewModelScope.launch {
         _isLoading.value = true
         _user.value?.let { user ->
             val updateUser = mapOf<String, Any?>(
@@ -175,13 +178,18 @@ class SignUpViewModel(
                 "apartCertification" to user.apartCertification,
                 "completeInputUserInfo" to true,
             )
-
-            userRepository.updateUser(user.uid, updateUser)
-            val apartment = apartmentList.value?.find { it.uid == user.apartmentUid }
-            apartment?.let {
-                apartmentRepository.saveApartment(it)
-                App.prefs.setLatitude(apartment.latitude)
-                App.prefs.setLongitude(apartment.longitude)
+            try {
+                userRepository.updateUser(user.uid, updateUser)
+                val apartment = apartmentList.value?.find { it.uid == user.apartmentUid }
+                apartment?.let {
+                    apartmentRepository.saveApartment(it)
+                    App.prefs.setLatitude(apartment.latitude)
+                    App.prefs.setLongitude(apartment.longitude)
+                }
+            } catch (e: Exception) {
+                _isLoading.value = false
+                Log.e("test1234", "Error updating user info", e)
+                Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
             }
         }
         _isLoading.value = false

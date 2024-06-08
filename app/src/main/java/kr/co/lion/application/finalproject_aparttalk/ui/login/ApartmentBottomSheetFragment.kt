@@ -12,14 +12,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentApartmentBottomSheetBinding
 import kr.co.lion.application.finalproject_aparttalk.model.ApartmentModel
 import kr.co.lion.application.finalproject_aparttalk.ui.login.adapter.ApartmentAdapter
-import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.SignUpViewModel
 
 class ApartmentBottomSheetFragment(
     private val apartments: List<ApartmentModel>,
@@ -30,13 +28,6 @@ class ApartmentBottomSheetFragment(
     private val binding get() = _binding!!
 
     private lateinit var adapter: ApartmentAdapter
-
-    private val viewModel: SignUpViewModel by viewModels {
-        SignUpViewModelFactory(
-            (requireActivity() as SignUpActivity).userRepository,
-            (requireActivity() as SignUpActivity).apartmentRepository
-        )
-    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState) as BottomSheetDialog
