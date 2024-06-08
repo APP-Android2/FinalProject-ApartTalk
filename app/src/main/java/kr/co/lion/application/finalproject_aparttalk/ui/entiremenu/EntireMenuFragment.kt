@@ -75,61 +75,83 @@ class EntireMenuFragment : Fragment() {
     //클릭 이벤트
     private fun settingEvent(){
         with(binding){
-            mypageMenu.setOnClickListener {
-                //마이페이지로 이동
-                startActivity(Intent(requireActivity(), InfoActivity::class.java))
-            }
 
-            LinearWriteMenu.setOnClickListener {
-                //내가 쓴 글로 이동
-                startActivity(Intent(requireActivity(), MyWriteActivity::class.java))
-            }
+            viewLifecycleOwner.lifecycleScope.launch {
+                val authUser = App.authRepository.getCurrentUser()
+                if (authUser != null){
+                    val user = App.userRepository.getUser(authUser.uid)
+                    if (user != null){
+                        if (user.apartCertification == true){
+                            mypageMenu.setOnClickListener {
+                                //마이페이지로 이동
+                                startActivity(Intent(requireActivity(), InfoActivity::class.java))
+                            }
 
-            LinearReservationMenu.setOnClickListener {
-                //예약 내역으로 이동
-                startActivity(Intent(requireActivity(), ReserveActivity::class.java))
-            }
+                            LinearWriteMenu.setOnClickListener {
+                                //내가 쓴 글로 이동
+                                startActivity(Intent(requireActivity(), MyWriteActivity::class.java))
+                            }
 
-            LinearContactMenu.setOnClickListener {
-                //고객센터로 이동
-                startActivity(Intent(requireActivity(), ServiceActivity::class.java))
-            }
 
-            buttonResParkingMenu.setOnClickListener {
-                //방문 주차 예약으로 이동
-                startActivity(Intent(requireActivity(), ParkingActivity::class.java))
-            }
-            buttonVoteMenu.setOnClickListener {
-                //전자 투표로 이동
-                startActivity(Intent(requireActivity(), VoteActivity::class.java))
-            }
-            buttonFireMenu.setOnClickListener {
-                //소방 점검으로 이동
-                startActivity(Intent(requireActivity(), FireCheckActivity::class.java))
-            }
-            buttonContactMenu.setOnClickListener {
-                //관리사무소 문의로 이동
-                startActivity(Intent(requireActivity(), InquiryActivity::class.java))
-            }
-            buttonBroadcastMenu.setOnClickListener {
-                //안내방송으로 이동
-                val intent = Intent(requireActivity(), BroadcastActivity::class.java)
-                intent.putExtra("fragmentName", BroadcastFragmentName.BROADCAST_FRAGMENT)
-                startActivity(intent)
-            }
-            buttonAptSchduleMenu.setOnClickListener {
-                //아파트 일정으로 이동
-                startActivity(Intent(requireActivity(), AptScheduleActivity::class.java))
-            }
-            buttonAptInfoMenu.setOnClickListener {
-                //아파트 운영정보로 이동
-                startActivity(Intent(requireActivity(), OperationInfoActivity::class.java))
-            }
-            buttonUserLogout.setOnClickListener {
-                // 로그인 화면으로 이동
-                App.authRepository.signOut()
-                startActivity(Intent(requireActivity(), LoginActivity::class.java))
-                requireActivity().finish()
+                            LinearReservationMenu.setOnClickListener {
+                                //예약 내역으로 이동
+                                startActivity(Intent(requireActivity(), ReserveActivity::class.java))
+                            }
+
+                            LinearContactMenu.setOnClickListener {
+                                //고객센터로 이동
+                                startActivity(Intent(requireActivity(), ServiceActivity::class.java))
+                            }
+
+                            buttonResParkingMenu.setOnClickListener {
+                                //방문 주차 예약으로 이동
+                                startActivity(Intent(requireActivity(), ParkingActivity::class.java))
+                            }
+                            buttonVoteMenu.setOnClickListener {
+                                //전자 투표로 이동
+                                startActivity(Intent(requireActivity(), VoteActivity::class.java))
+                            }
+                            buttonFireMenu.setOnClickListener {
+                                //소방 점검으로 이동
+                                startActivity(Intent(requireActivity(), FireCheckActivity::class.java))
+                            }
+                            buttonContactMenu.setOnClickListener {
+                                //관리사무소 문의로 이동
+                                startActivity(Intent(requireActivity(), InquiryActivity::class.java))
+                            }
+                            buttonBroadcastMenu.setOnClickListener {
+                                //안내방송으로 이동
+                                val intent = Intent(requireActivity(), BroadcastActivity::class.java)
+                                intent.putExtra("fragmentName", BroadcastFragmentName.BROADCAST_FRAGMENT)
+                                startActivity(intent)
+                            }
+                            buttonAptSchduleMenu.setOnClickListener {
+                                //아파트 일정으로 이동
+                                startActivity(Intent(requireActivity(), AptScheduleActivity::class.java))
+                            }
+                            buttonAptInfoMenu.setOnClickListener {
+                                //아파트 운영정보로 이동
+                                startActivity(Intent(requireActivity(), OperationInfoActivity::class.java))
+                            }
+                            buttonUserLogout.setOnClickListener {
+                                // 로그인 화면으로 이동
+                                App.authRepository.signOut()
+                                startActivity(Intent(requireActivity(), LoginActivity::class.java))
+                                requireActivity().finish()
+                            }
+                        }else{
+                            LinearWriteMenu.isClickable = false
+                            LinearReservationMenu.isClickable = false
+                            buttonResParkingMenu.isClickable = false
+                            buttonVoteMenu.isClickable = false
+                            buttonFireMenu.isClickable = false
+                            buttonContactMenu.isClickable = false
+                            buttonBroadcastMenu.isClickable = false
+                            buttonAptSchduleMenu.isClickable = false
+                            buttonAptInfoMenu.isClickable = false
+                        }
+                    }
+                }
             }
         }
     }

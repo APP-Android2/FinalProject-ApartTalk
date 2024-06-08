@@ -64,8 +64,8 @@ class HomeFragment : Fragment() {
 
                         textHomeAddress.text = apart?.address
                         textHomeApt.text = apart?.name
-                        textHomeHouse.text = apart?.totalHouseholds.toString()
-                        textHomeParking.text = apart?.totalCarParked.toString()
+                        textHomeHouse.text = "${apart?.totalHouseholds}세대"
+                        textHomeParking.text = "${apart?.totalCarParked}대"
                         textHomeMoveIn.text = apart?.moveIn
                         textHomeSize.text = apart?.sizeOfComplex
                     }
