@@ -1,6 +1,5 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,7 +25,6 @@ class OperationInfoViewModel(
 
     fun selectOperationInfoData(operationInfoIdx: Int, apartmentUid: String) {
         viewModelScope.launch {
-            //Log.d("OperationInfoViewModel", "selectOperationInfoData called with idx: $operationInfoIdx and uid: $apartmentUid")
             _operationInfoData.value = operationInfoRepository.selectingOperationInfoData(operationInfoIdx, apartmentUid)
         }
     }
@@ -36,11 +34,8 @@ class OperationInfoViewModel(
             try {
                 val apartment = localApartmentDataSource.getApartment()
                 val apartmentUid = apartment?.uid ?: throw IllegalStateException("Apartment UID is missing")
-                //Log.d("OperationInfoViewModel", "Apartment UID: $apartmentUid")
                 _allList.value = operationInfoRepository.gettingOperationInfoList(apartmentUid)
-                //Log.d("OperationInfoViewModel", "Operation info list size: ${_allList.value?.size}")
             } catch (e: Exception) {
-                //Log.e("OperationInfoViewModel", "Error getting operation info list", e)
                 _allList.value = emptyList()
             }
         }
@@ -49,7 +44,6 @@ class OperationInfoViewModel(
     fun filterOperationInfoList(type: String) {
         _allList.value?.let { list ->
             _filteredList.value = list.filter { it.OperationInfoType == type }
-            //Log.d("OperationInfoViewModel", "Filtered list size: ${_filteredList.value?.size}")
         }
     }
 }

@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textViewBiddingNoticeManager"
+        android:id="@+id/textViewManagementRegulationManager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -16,7 +16,7 @@
         android:textSize="14sp" />
 
     <TextView
-        android:id="@+id/textViewBiddingNoticeType"
+        android:id="@+id/textViewManagementRegulationType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/notosans_regular"
@@ -26,7 +26,7 @@
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/textViewBiddingNoticeSubject"
+        android:id="@+id/textViewManagementRegulationSubject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -37,7 +37,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/textViewBiddingNoticeDate"
+        android:id="@+id/textViewManagementRegulationDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

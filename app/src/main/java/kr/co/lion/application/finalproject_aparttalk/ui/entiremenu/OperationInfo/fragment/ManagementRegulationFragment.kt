@@ -8,48 +8,100 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.auth.FirebaseAuthService
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentManagementRegulationBinding
 import kr.co.lion.application.finalproject_aparttalk.db.OperationInfoDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.ApartmentDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
+import kr.co.lion.application.finalproject_aparttalk.repository.ApartmentRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.OperationInfoRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.ManagementRegulationRecyclerView
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationSecondRecyclerView
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.ManagementRegulationViewModel
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModel
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModelFactory
 
 class ManagementRegulationFragment : Fragment() {
 
     lateinit var fragmentManagementRegulationBinding: FragmentManagementRegulationBinding
-    private val viewModel: OperationInfoViewModel by viewModels {
-        OperationInfoViewModelFactory(OperationInfoRepository(operationInfoDataSource = OperationInfoDataSource()), LocalApartmentDataSource(requireContext()))
+    lateinit var operationInfoActivity: OperationInfoActivity
+    private val viewModel: ManagementRegulationViewModel by viewModels()
+
+    private val authRepository by lazy {
+        AuthRepository(FirebaseAuthService(), LocalUserDataSource(requireContext()), LocalApartmentDataSource(requireContext()))
+    }
+
+    private val userRepository by lazy {
+        UserRepository(UserDataSource(), LocalUserDataSource(requireContext()))
+    }
+
+    private val apartmentRepository by lazy {
+        ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(requireContext()))
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         fragmentManagementRegulationBinding = FragmentManagementRegulationBinding.inflate(layoutInflater)
+        operationInfoActivity = activity as OperationInfoActivity
 
+        gettingOperationInfoList()
         setRecyclerView()
-        observeViewModel()
 
         return fragmentManagementRegulationBinding.root
     }
-    // RecyclerView 설정
-    fun setRecyclerView(){
-        fragmentManagementRegulationBinding.recyclerViewManagementRegulation.apply {
-            // 어댑터 설정
-            adapter = OperationSecondRecyclerView(parentFragmentManager, mutableListOf())
-            // 레이아웃
-            layoutManager = LinearLayoutManager(requireContext())
-            // 데코
-            val deco = MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL)
-            addItemDecoration(deco)
+
+    override fun onResume() {
+        super.onResume()
+        gettingOperationInfoList()
+    }
+
+    // 아파트 아이디 가져오기
+    suspend fun gettingApartId(): String {
+        var apartmentId = ""
+        try {
+            val authUser = authRepository.getCurrentUser()
+            if (authUser != null) {
+                val user = userRepository.getUser(authUser.uid)
+                if (user != null) {
+                    val apartment = apartmentRepository.getApartment(user.apartmentUid)
+                    apartmentId = apartment!!.uid
+                }
+            }
+        } catch (e: Exception) {
+            //Log.e("ManagementRegulationFragment", "Error fetching apartment ID", e)
+        }
+        //Log.d("ManagementRegulationFragment", "Apartment ID: $apartmentId")
+        return apartmentId
+    }
+
+    // 게시글 리스트 받아오기
+    private fun gettingOperationInfoList(){
+        CoroutineScope(Dispatchers.Main).launch {
+            try {
+                val apartmentId = gettingApartId()
+                //Log.d("ManagementRegulationFragment", "Fetching list for apartment ID: $apartmentId")
+                viewModel.gettingManagementRegulationList(apartmentId)
+                //Log.d("ManagementRegulationFragment", "Fetched list: ${viewModel.managementRegulationList}")
+                fragmentManagementRegulationBinding.recyclerViewManagementRegulation.adapter?.notifyDataSetChanged()
+            } catch (e: Exception) {
+                //Log.e("ManagementRegulationFragment", "Error fetching operation info list", e)
+            }
         }
     }
-    // ViewModel 관찰 설정
-    private fun observeViewModel() {
-        viewModel.filteredList.observe(viewLifecycleOwner) { list ->
-            (fragmentManagementRegulationBinding.recyclerViewManagementRegulation.adapter as OperationSecondRecyclerView).updateList(list)
-        }
 
-        viewModel.getOperationInfoList()
-        viewModel.filterOperationInfoList("ManagementRegulation")
+
+    // 운영정보 관리규약 탭 리사이클러뷰 설정
+    private fun setRecyclerView() {
+        fragmentManagementRegulationBinding.recyclerViewManagementRegulation.apply {
+            adapter = ManagementRegulationRecyclerView(requireContext(), viewModel)
+            layoutManager = LinearLayoutManager(operationInfoActivity)
+            addItemDecoration(MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL))
+        }
     }
 }

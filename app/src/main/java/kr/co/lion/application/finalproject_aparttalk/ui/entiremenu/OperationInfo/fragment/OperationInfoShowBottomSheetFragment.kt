@@ -42,7 +42,7 @@ class OperationInfoShowBottomSheetFragment : BottomSheetDialogFragment() {
 
 
             binding.textViewOperationInfoShowSubject.text = operationInfoSubject
-            binding.textViewOperationInfoShowContent.text = operationContent
+            binding.textViewOperationInfoShowContent.text = operationContent!!.replace("\\n", "\n")
         }
 
         return binding.root

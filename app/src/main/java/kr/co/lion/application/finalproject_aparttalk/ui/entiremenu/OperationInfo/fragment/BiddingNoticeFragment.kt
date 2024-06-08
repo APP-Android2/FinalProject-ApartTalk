@@ -11,10 +11,17 @@ import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kr.co.lion.application.finalproject_aparttalk.App
+import kr.co.lion.application.finalproject_aparttalk.auth.FirebaseAuthService
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentBiddingNoticeBinding
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.ApartmentDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
+import kr.co.lion.application.finalproject_aparttalk.repository.ApartmentRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationSecondRecyclerView
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.BiddingNoticeRecyclerView
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.BiddingNoticeViewModel
 
 class BiddingNoticeFragment : Fragment() {
@@ -23,6 +30,17 @@ class BiddingNoticeFragment : Fragment() {
     lateinit var operationInfoActivity: OperationInfoActivity
     private val viewModel: BiddingNoticeViewModel by viewModels()
 
+    private val authRepository by lazy {
+        AuthRepository(FirebaseAuthService(), LocalUserDataSource(requireContext()), LocalApartmentDataSource(requireContext()))
+    }
+
+    private val userRepository by lazy {
+        UserRepository(UserDataSource(), LocalUserDataSource(requireContext()))
+    }
+
+    private val apartmentRepository by lazy {
+        ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(requireContext()))
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentBiddingNoticeBinding = FragmentBiddingNoticeBinding.inflate(layoutInflater)
         operationInfoActivity = activity as OperationInfoActivity
@@ -35,36 +53,49 @@ class BiddingNoticeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // 게시글 리스트 받아옹기
+        gettingOperationInfoList()
     }
 
     // 아파트 아이디 가져오기
     suspend fun gettingApartId(): String {
         var apartmentId = ""
-        val authUser = App.authRepository.getCurrentUser()
-        if (authUser != null) {
-            val user = App.userRepository.getUser(authUser.uid)
-            if (user != null) {
-                val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
-                apartmentId = apartment!!.uid
+        try {
+            val authUser = authRepository.getCurrentUser()
+            if (authUser != null) {
+                val user = userRepository.getUser(authUser.uid)
+                if (user != null) {
+                    val apartment = apartmentRepository.getApartment(user.apartmentUid)
+                    apartmentId = apartment!!.uid
+                }
             }
+        } catch (e: Exception) {
+            //Log.e("BiddingNoticeFragment", "Error fetching apartment ID", e)
         }
-        return  apartmentId
+        //Log.d("BiddingNoticeFragment", "Apartment ID: $apartmentId")
+        return apartmentId
     }
 
     // 게시글 리스트 받아오기
     private fun gettingOperationInfoList(){
         CoroutineScope(Dispatchers.Main).launch {
-            viewModel.gettingBiddingNoticeList(gettingApartId())
-            fragmentBiddingNoticeBinding.recyclerViewBiddingNotice.adapter?.notifyDataSetChanged()
+            try {
+                val apartmentId = gettingApartId()
+                //Log.d("BiddingNoticeFragment", "Fetching list for apartment ID: $apartmentId")
+                viewModel.gettingBiddingNoticeList(apartmentId)
+                //Log.d("BiddingNoticeFragment", "Fetched list: ${viewModel.biddingNoticeList}")
+                fragmentBiddingNoticeBinding.recyclerViewBiddingNotice.adapter?.notifyDataSetChanged()
+            } catch (e: Exception) {
+                //Log.e("BiddingNoticeFragment", "Error fetching operation info list", e)
+            }
         }
     }
 
+
     // 운영정보 입찰공고 탭 리사이클러뷰 설정
-    private fun setRecyclerView(){
+    private fun setRecyclerView() {
         fragmentBiddingNoticeBinding.recyclerViewBiddingNotice.apply {
-            adapter = OperationSecondRecyclerView(parentFragmentManager, mutableListOf())
-            layoutManager = LinearLayoutManager(requireContext())
+            adapter = BiddingNoticeRecyclerView(requireContext(), viewModel)
+            layoutManager = LinearLayoutManager(operationInfoActivity)
             addItemDecoration(MaterialDividerItemDecoration(requireContext(), MaterialDividerItemDecoration.VERTICAL))
         }
     }

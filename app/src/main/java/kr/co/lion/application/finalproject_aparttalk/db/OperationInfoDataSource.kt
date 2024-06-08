@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.db
 
+import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.CoroutineScope
@@ -50,6 +51,9 @@ class OperationInfoDataSource {
             }
         }
         job1.join()
+
+        // 로그를 추가하여 데이터 출력
+        Log.d("OperationInfoDataSource", "Operation Info List: $operationInfoList")
 
         return operationInfoList
     }
