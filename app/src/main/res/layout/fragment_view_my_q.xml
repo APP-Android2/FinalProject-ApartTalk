@@ -104,14 +104,16 @@
                     app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/viewMyQContent"
+                        android:id="@+id/viewMyQTextViewContent"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
                         android:gravity="top"
                         android:text="질문한 내용입니다."
                         android:fontFamily="@font/notosans_medium"
                         android:includeFontPadding="false"
-                        android:inputType="text|textMultiLine"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:cursorVisible="false"
                         android:textSize="14dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,7 +144,9 @@
                         android:fontFamily="@font/notosans_medium"
                         android:includeFontPadding="false"
                         android:text="답변한 내용입니다."
-                        android:inputType="text|textMultiLine"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:cursorVisible="false"
                         android:textSize="14dp" />
                 </com.google.android.material.textfield.TextInputLayout>
 

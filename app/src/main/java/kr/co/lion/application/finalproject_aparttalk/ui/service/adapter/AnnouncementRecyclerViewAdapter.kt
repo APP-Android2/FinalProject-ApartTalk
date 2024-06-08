@@ -5,20 +5,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowAnnouncementItemBinding
+import kr.co.lion.application.finalproject_aparttalk.model.AnnouncementModel
+import kr.co.lion.application.finalproject_aparttalk.model.ServiceModel
 import kr.co.lion.application.finalproject_aparttalk.ui.service.ServiceActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.service.ViewAnnouncementFragment
 import kr.co.lion.application.finalproject_aparttalk.util.BroadcastFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.ServiceFragmentName
 
 
-class AnnouncementRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<AnnouncementRecyclerViewAdapter.AnnouncementViewHolder>() {
+class AnnouncementRecyclerViewAdapter(
+    private val context: Context,
+    private val announcementList: List<AnnouncementModel>
+) : RecyclerView.Adapter<AnnouncementRecyclerViewAdapter.AnnouncementViewHolder>() {
 
-    inner class AnnouncementViewHolder(rowAnnouncementItemBinding: RowAnnouncementItemBinding) : RecyclerView.ViewHolder(rowAnnouncementItemBinding.root) {
-        val rowAnnouncementItemBinding: RowAnnouncementItemBinding
-
+    inner class AnnouncementViewHolder(val binding: RowAnnouncementItemBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
-            this.rowAnnouncementItemBinding = rowAnnouncementItemBinding
-
-            this.rowAnnouncementItemBinding.root.layoutParams = ViewGroup.LayoutParams(
+            binding.root.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
@@ -28,28 +30,29 @@ class AnnouncementRecyclerViewAdapter(val context: Context) : RecyclerView.Adapt
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AnnouncementRecyclerViewAdapter.AnnouncementViewHolder {
-        val rowAnnouncementItemBinding = RowAnnouncementItemBinding.inflate(LayoutInflater.from(parent.context))
-        val announcementViewHolder = AnnouncementViewHolder(rowAnnouncementItemBinding)
-
-        return announcementViewHolder
+    ): AnnouncementViewHolder {
+        val binding = RowAnnouncementItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return AnnouncementViewHolder(binding)
     }
 
     override fun onBindViewHolder(
-        holder: AnnouncementRecyclerViewAdapter.AnnouncementViewHolder,
+        holder: AnnouncementViewHolder,
         position: Int
     ) {
-        holder.rowAnnouncementItemBinding.apply{
-            rowAnnouncementTextViewTitle.text = "[공지]공지 제목"
-            rowAnnouncementTextViewDate.text = "2024.03.01"
+        val announcement = announcementList[position]
+        holder.binding.apply {
+            rowAnnouncementTextViewTitle.text = "[공지]${announcement.AnnouncementTitle}"
+            rowAnnouncementTextViewDate.text = announcement.AnnouncementDate
 
             rowAnnouncementLayout.setOnClickListener {
+                // Create a new instance of ViewAnnouncementFragment with the selected announcement data
+                val fragment = ViewAnnouncementFragment.newInstance(announcement)
                 (context as ServiceActivity).replaceFragment(ServiceFragmentName.VIEW_ANNOUNCEMENT_FRAGMENT, true, true, null)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return announcementList.size
     }
 }
