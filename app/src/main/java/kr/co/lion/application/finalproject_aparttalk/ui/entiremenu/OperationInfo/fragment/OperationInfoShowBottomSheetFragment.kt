@@ -13,7 +13,6 @@ import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentOperati
 import kr.co.lion.application.finalproject_aparttalk.db.OperationInfoDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
 import kr.co.lion.application.finalproject_aparttalk.repository.OperationInfoRepository
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModel
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModelFactory
 

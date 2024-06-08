@@ -8,9 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentFinancialSystemBinding
 import kr.co.lion.application.finalproject_aparttalk.db.OperationInfoDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource

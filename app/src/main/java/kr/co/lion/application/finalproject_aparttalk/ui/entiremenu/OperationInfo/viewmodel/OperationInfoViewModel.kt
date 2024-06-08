@@ -1,6 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel
 
-import android.media.VolumeShaper.Operation
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,26 +24,32 @@ class OperationInfoViewModel(
     private val _filteredList = MutableLiveData<List<OperationInfoModel>>()
     val filteredList: LiveData<List<OperationInfoModel>> get() = _filteredList
 
-    // 특정 OperationInfo를 가져온다
     fun selectOperationInfoData(operationInfoIdx: Int, apartmentUid: String) {
         viewModelScope.launch {
+            //Log.d("OperationInfoViewModel", "selectOperationInfoData called with idx: $operationInfoIdx and uid: $apartmentUid")
             _operationInfoData.value = operationInfoRepository.selectingOperationInfoData(operationInfoIdx, apartmentUid)
         }
     }
 
-    // 운영정보 목록을 가져온댜.
     fun getOperationInfoList() {
         viewModelScope.launch {
-            val apartment = localApartmentDataSource.getApartment()
-            val apartmentUid = apartment?.uid ?: throw IllegalStateException("Apartment UID is missing")
-            _allList.value = operationInfoRepository.gettingOperationInfoList(apartmentUid)
+            try {
+                val apartment = localApartmentDataSource.getApartment()
+                val apartmentUid = apartment?.uid ?: throw IllegalStateException("Apartment UID is missing")
+                //Log.d("OperationInfoViewModel", "Apartment UID: $apartmentUid")
+                _allList.value = operationInfoRepository.gettingOperationInfoList(apartmentUid)
+                //Log.d("OperationInfoViewModel", "Operation info list size: ${_allList.value?.size}")
+            } catch (e: Exception) {
+                //Log.e("OperationInfoViewModel", "Error getting operation info list", e)
+                _allList.value = emptyList()
+            }
         }
     }
 
-    // 특정 타입의 글 목록을 필터링하여 가져온다
     fun filterOperationInfoList(type: String) {
         _allList.value?.let { list ->
             _filteredList.value = list.filter { it.OperationInfoType == type }
+            //Log.d("OperationInfoViewModel", "Filtered list size: ${_filteredList.value?.size}")
         }
     }
 }

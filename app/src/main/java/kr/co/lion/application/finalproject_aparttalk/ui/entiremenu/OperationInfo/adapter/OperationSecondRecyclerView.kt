@@ -2,6 +2,7 @@ package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInf
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
@@ -64,6 +65,7 @@ class OperationSecondRecyclerView(
     }
 
     fun updateList(newItems: List<OperationInfoModel>) {
+        Log.d("OperationSecondRecyclerView", "Updating list with ${newItems.size} items")
         operationInfoList.clear()
         operationInfoList.addAll(newItems)
         notifyDataSetChanged()
