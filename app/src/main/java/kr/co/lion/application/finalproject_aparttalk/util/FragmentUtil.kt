@@ -8,7 +8,6 @@ enum class MainFragmentName(val id: Int, val str: String) {
     HOME_FRAGMENT(R.id.home_item, "HomeFragment"),
     FACILITY_FRAGMENT(R.id.facility_item, "FacilityFragment"),
     ENTIRE_MENU_FRAGMENT(R.id.entiremenu_item, "EntireMenuFragment"),
-    ALARM_FRAGMENT(999, "AlarmFragment")
 }
 
 enum class CommunityTabFragmentName(val str:String) {

@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -38,26 +38,26 @@
                     android:layout_width="60dp"
                     android:layout_height="25dp"
                     android:background="@drawable/community_label_border"
+                    android:fontFamily="@font/notosans_semibold"
                     android:gravity="center"
+                    android:includeFontPadding="false"
                     android:text="text"
                     android:textColor="@color/sixth"
-                    android:textSize="16sp"
-                    android:includeFontPadding="false"
-                    android:fontFamily="@font/notosans_semibold"/>
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textViewCommunityListTitleNotification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginTop="10dp"
-                    android:maxLines="1"
                     android:ellipsize="end"
                     android:fontFamily="@font/notosans_semibold"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
                     android:text="text"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:includeFontPadding="false"
-                    android:layout_gravity="center_vertical"/>
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout3"
@@ -80,11 +80,11 @@
                         android:id="@+id/textViewCommunityListLikeCntNotification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:includeFontPadding="false"
                         android:text="text"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:includeFontPadding="false"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:id="@+id/imageViewCommunityListCommentNotification"
@@ -99,12 +99,12 @@
                         android:id="@+id/textViewCommunityListCommentCntNotification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
+                        android:includeFontPadding="false"
                         android:text="text"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:includeFontPadding="false"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="14sp" />
 
                     <View
                         android:id="@+id/divider"
@@ -117,11 +117,11 @@
                         android:id="@+id/textViewCommunityListDateNotification"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:includeFontPadding="false"
                         android:text="text"
                         android:textColor="@color/black"
-                        android:textSize="14sp"
-                        android:includeFontPadding="false"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="14sp" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
