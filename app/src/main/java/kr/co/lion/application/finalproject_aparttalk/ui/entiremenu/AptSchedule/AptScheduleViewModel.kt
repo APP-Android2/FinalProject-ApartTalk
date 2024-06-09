@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,21 +13,6 @@ import kr.co.lion.application.finalproject_aparttalk.model.AptScheduleModel
 import kr.co.lion.application.finalproject_aparttalk.repository.AptScheduleRepository
 
 class AptScheduleViewModel: ViewModel() {
-
-    /*private val _schedules = MutableLiveData<List<AptScheduleModel>>()
-    val schedules: LiveData<List<AptScheduleModel>> get() = _schedules
-
-    private val _schedule = MutableLiveData<AptScheduleModel?>()
-    val schedule: LiveData<AptScheduleModel?> get() = _schedule
-
-    // 특정 날짜의 일정을 가져오는 메서드
-    fun fetchSchedulesForDate(apartmentUid: String, date: String) {
-        viewModelScope.launch {
-            val allSchedules = repository.gettingAptScheduleList(apartmentUid)
-            val filteredSchedules = allSchedules.filter { it.AptScheduleDate == date }
-            _schedules.value = filteredSchedules
-        }
-    }*/
 
     private val aptScheduleRepository = AptScheduleRepository(AptScheduleDataSource())
     var allDateList = mutableListOf<AptScheduleModel>()
@@ -62,7 +48,7 @@ class AptScheduleViewModel: ViewModel() {
         }
         job1.join()
 
-        //Log.d("AptScheduleViewModel", "Fetched AptSchedule: $selectedDateList")
+        Log.d("AptScheduleViewModel", "Fetched AptSchedule: $selectedDateList")
         return selectedDateList
     }
 }
