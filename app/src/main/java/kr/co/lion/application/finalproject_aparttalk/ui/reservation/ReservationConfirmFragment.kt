@@ -21,24 +21,13 @@ class ReservationConfirmFragment : Fragment() {
     private lateinit var fragmentReservationConfirmBinding: FragmentReservationConfirmBinding
     private val reservationViewModel: ReservationViewModel by activityViewModels()
     private lateinit var reserveActivity: ReserveActivity
-    private lateinit var userModel: UserModel
-    private val userViewModel: ReservationUserViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentReservationConfirmBinding = FragmentReservationConfirmBinding.inflate(inflater)
+        fragmentReservationConfirmBinding = FragmentReservationConfirmBinding.inflate(inflater, container, false)
         reserveActivity = activity as ReserveActivity
-
-        userViewModel.loadUser()
-
-        userViewModel.user.observe(viewLifecycleOwner, Observer { user ->
-            user?.let {
-                fragmentReservationConfirmBinding.reservationConfirmTextViewName.text = it.name
-                fragmentReservationConfirmBinding.reservationConfirmTextViewPhoneNumber.text = it.phoneNumber
-            }
-        })
 
         settingToolbar()
         settingButton()
@@ -76,18 +65,14 @@ class ReservationConfirmFragment : Fragment() {
     }
 
     private fun bindReservationData(reservation: FacilityResModel) {
-        userModel = getUserModelByUid(reservation.userUid) // 유저 정보를 가져오는 함수
         fragmentReservationConfirmBinding.apply {
+            reservationConfirmTextViewName.text = reservation.userName ?: "미입력"
+            reservationConfirmTextViewPhoneNumber.text = reservation.userNumber ?: "미입력"
             reservationConfirmTextViewDate.text = reservation.reservationDate
             reservationConfirmTextViewFacility.text = reservation.titleText
             reservationConfirmTextViewReservedDate.text = reservation.reservationDate
             reservationConfirmTextViewTime.text = reservation.useTime
             reservationConfirmTextViewPrice.text = reservation.usePrice
         }
-    }
-
-    private fun getUserModelByUid(uid: String): UserModel {
-        // 예제 데이터를 반환 (실제 구현은 데이터베이스 또는 다른 소스에서 가져와야 함)
-        return UserModel(uid)
     }
 }
