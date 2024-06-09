@@ -33,4 +33,8 @@ class ReservationViewModel : ViewModel() {
     fun setSelectedReservation(reservation: FacilityResModel) {
         _selectedReservation.value = reservation
     }
+
+    fun removeAllReservations() {
+        _reservations.value = emptyList()
+    }
 }

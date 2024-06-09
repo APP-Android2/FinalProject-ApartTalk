@@ -59,7 +59,7 @@ class SingleServiceFragment : Fragment() {
                     serviceAnsContent = ""
                 )
                 viewModel.addService(service)
-                serviceActivity.replaceFragment(ServiceFragmentName.MY_Q_FRAGMENT, true, true, null)
+                serviceActivity.replaceFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
             }
         }
     }
