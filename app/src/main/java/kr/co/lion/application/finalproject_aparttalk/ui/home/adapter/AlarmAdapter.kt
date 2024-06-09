@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.home.adapter
 
+import android.content.ClipData.Item
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +11,8 @@ import kr.co.lion.application.finalproject_aparttalk.model.PostData
 
 class AlarmAdapter : ListAdapter<PostData, AlarmAdapter.AlarmViewHolder>(differ) {
 
+    private lateinit var recyclerviewClick: ItemOnClickListener
+
     inner class AlarmViewHolder(val binding:RowCommunityTabNotificationBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(item: PostData){
             binding.apply {
@@ -19,10 +22,14 @@ class AlarmAdapter : ListAdapter<PostData, AlarmAdapter.AlarmViewHolder>(differ)
                 textViewCommunityListCommentCntNotification.text = item.postCommentCnt.toString()
                 textViewCommunityListDateNotification.text = item.postAddDate
                 root.setOnClickListener {
-
+                    recyclerviewClick.alarmRecyclerviewClick(item.postIdx, item.postId, item.postApartId)
                 }
             }
         }
+    }
+
+    fun setRecyclerviewClick(recyclerviewClick : ItemOnClickListener){
+        this.recyclerviewClick = recyclerviewClick
     }
 
     companion object {
@@ -44,5 +51,9 @@ class AlarmAdapter : ListAdapter<PostData, AlarmAdapter.AlarmViewHolder>(differ)
 
     override fun onBindViewHolder(holder: AlarmViewHolder, position: Int) {
         holder.bind(currentList[position])
+    }
+
+    interface ItemOnClickListener{
+        fun alarmRecyclerviewClick(postIdx: Int, postId:String, postApartId:String)
     }
 }

@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Adapter
@@ -16,8 +17,10 @@ import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityAlarmBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityMainBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.CommunityActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.home.adapter.AlarmAdapter
 import kr.co.lion.application.finalproject_aparttalk.ui.home.viewmodel.AlarmViewModel
+import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
 
 class AlarmActivity : AppCompatActivity() {
 
@@ -25,6 +28,17 @@ class AlarmActivity : AppCompatActivity() {
 
     val alarmAdapter : AlarmAdapter by lazy {
         val adapter = AlarmAdapter()
+        adapter.setRecyclerviewClick(object : AlarmAdapter.ItemOnClickListener{
+            override fun alarmRecyclerviewClick(postIdx: Int, postId: String, postApartId: String) {
+                val newIntent = Intent(this@AlarmActivity, CommunityActivity::class.java)
+                newIntent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)
+                newIntent.putExtra("postIdx", postIdx)
+                newIntent.putExtra("postId", postId)
+                newIntent.putExtra("postApartId", postApartId)
+                startActivity(newIntent)
+            }
+
+        })
         adapter
     }
 
