@@ -36,12 +36,12 @@
                         android:id="@+id/rowinquiringTextViewLabel"
                         android:layout_width="50dp"
                         android:layout_height="20dp"
-                        android:background="@drawable/community_label_border"
+                        android:background="@drawable/dropdown_box_border"
                         android:fontFamily="@font/notosans_semibold"
                         android:gravity="center"
                         android:includeFontPadding="false"
-                        android:text="비공개"
-                        android:textColor="@color/sixth"
+                        android:text="공개"
+                        android:textColor="@color/third"
                         android:textSize="12sp" />
 
                     <TextView

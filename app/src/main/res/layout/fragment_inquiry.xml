@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosans_regular"
                 android:includeFontPadding="false"
-                android:text="답변입니다. 답변입니다. 답변입니다."
+                android:text="아직 답변을 입력하지 않았습니다."
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
         </LinearLayout>
