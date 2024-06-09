@@ -1,81 +1,77 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.inquiry
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentInquiringBinding
-import kr.co.lion.application.finalproject_aparttalk.databinding.RowInquiringBinding
+import kr.co.lion.application.finalproject_aparttalk.model.InquiryModel
+import kr.co.lion.application.finalproject_aparttalk.repository.InquiryRepository
 import kr.co.lion.application.finalproject_aparttalk.util.InquiryFragmentName
 
 class InquiringFragment : Fragment() {
 
-    lateinit var fragmentInquiringBinding: FragmentInquiringBinding
-    lateinit var inquiryActivity: InquiryActivity
+    private lateinit var binding: FragmentInquiringBinding
+    private lateinit var inquiryActivity: InquiryActivity
+    private lateinit var adapter: InquiringAdapter
+    private val repository = InquiryRepository()
+    private val inquiryViewModel: InquiryViewModel by activityViewModels()
+    private var inquiries: List<InquiryModel> = emptyList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-
-        fragmentInquiringBinding = FragmentInquiringBinding.inflate(inflater)
+        binding = FragmentInquiringBinding.inflate(inflater, container, false)
         inquiryActivity = activity as InquiryActivity
 
-        inquiringRecyclerView()
-        inquiringFloatingButton()
+        setupRecyclerView()
+        setupFloatingActionButton()
+        observeViewModel()
 
-        return fragmentInquiringBinding.root
+        return binding.root
     }
 
-    // RecyclerView
-    fun inquiringRecyclerView(){
-        fragmentInquiringBinding.apply {
-            inquiringRecyclerView.apply {
-                adapter = InquiringAdapter()
-                layoutManager = LinearLayoutManager(inquiryActivity)
+    private fun setupRecyclerView() {
+        adapter = InquiringAdapter(emptyList()) { inquiry ->
+            inquiryViewModel.setSelectedInquiryModel(inquiry)
+            (activity as InquiryActivity).replaceFragment(InquiryFragmentName.INQUIRY_FRAGMENT, false, true, null)
+        }
+        binding.inquiringRecyclerView.layoutManager = LinearLayoutManager(inquiryActivity)
+        binding.inquiringRecyclerView.adapter = adapter
+    }
 
+    private fun setupFloatingActionButton() {
+        binding.inquiringFloatingActionButton.setOnClickListener {
+            (activity as InquiryActivity).replaceFragment(InquiryFragmentName.INQUIRY_WRITE_FRAGMENT, true, true, null)
+        }
+    }
+
+    private fun observeViewModel() {
+        inquiryViewModel.userModel.observe(viewLifecycleOwner) { userModel ->
+            if (userModel != null) {
+                loadInquiries(userModel.apartmentUid)
+            }
+        }
+
+        inquiryViewModel.selectedInquiryModel.observe(viewLifecycleOwner) { inquiryModel ->
+            inquiryModel?.let {
+                loadInquiries(it.apartmentUid)
             }
         }
     }
 
-    //floatingButton
-    fun inquiringFloatingButton(){
-        fragmentInquiringBinding.apply {
-            inquiringFloatingActionButton.setOnClickListener {
-                inquiryActivity.replaceFragment(InquiryFragmentName.INQUIRY_WRITE_FRAGMENT,false,false,null)
-            }
+    private fun loadInquiries(apartmentUid: String) {
+        inquiryViewModel.getPendingInquiries(apartmentUid) { loadedInquiries ->
+            inquiries = loadedInquiries
+            adapter.updateList(loadedInquiries)
         }
     }
 
-    // Adapter
-    inner class InquiringAdapter: RecyclerView.Adapter<InquiringAdapter.InquiringViewHolder>(){
-        inner class InquiringViewHolder(val rowInquiringBinding: RowInquiringBinding): RecyclerView.ViewHolder(rowInquiringBinding.root)
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InquiringViewHolder {
-            // LayoutInflater를 parent.context로부터 가져옴
-            val layoutInflater = LayoutInflater.from(parent.context)
-            // RowReviewListBinding 인플레이션
-            val binding = RowInquiringBinding.inflate(layoutInflater, parent, false)
-            // ViewHolder 인스턴스 생성 및 반환
-            return InquiringViewHolder(binding)
+    fun searchInquiries(query: String) {
+        val filteredInquiries = inquiries.filter {
+            it.inquiryTitle.contains(query, ignoreCase = true)
         }
-
-        override fun getItemCount(): Int {
-            return 10
-        }
-
-        override fun onBindViewHolder(holder: InquiringViewHolder, position: Int) {
-            holder.rowInquiringBinding.rowinquiringTextViewLabel.text = "비공개"
-            holder.rowInquiringBinding.rowinquiringTextViewLabel1.text = "답변중"
-            holder.rowInquiringBinding.rowinquiringTextViewTitle.text = "작성인의 요청으로 내용이 비공개 입니다"
-            holder.rowInquiringBinding.rowinquiringTextViewDate.text = "2024-05-17"
-            holder.rowInquiringBinding.rowinquiringTextViewTime.text = "14:06"
-
-            holder.itemView.setOnClickListener {
-                inquiryActivity.replaceFragment(InquiryFragmentName.INQUIRY_FRAGMENT,false,true,null)
-            }
-        }
+        adapter.updateList(filteredInquiries)
     }
 }
