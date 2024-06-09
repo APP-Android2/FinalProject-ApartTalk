@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentAptScheduleShowBottomSheetBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleActivity
 
@@ -16,11 +17,38 @@ class AptScheduleShowBottomSheetFragment : BottomSheetDialogFragment() {
     lateinit var binding: FragmentAptScheduleShowBottomSheetBinding
     lateinit var aptScheduleActivity: AptScheduleActivity
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
+    private lateinit var aptScheduleType: String // aptScheduleType 변수를 클래스 레벨에서 선언
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
         binding = FragmentAptScheduleShowBottomSheetBinding.inflate(layoutInflater)
         aptScheduleActivity = activity as AptScheduleActivity
+
+        // OperationSecondRecyclerView 에서 부터 전달받은 데이터로 UI를 업데이트
+        arguments?.let {
+            val aptScheduleDate = it.getString("date")
+            val aptScheduleTime = it.getString("time")
+            val aptScheduleSubject = it.getString("subject")
+            val aptScheduleContent = it.getString("content")
+            aptScheduleType = it.getString("type").toString()
+
+            binding.textViewAptScheduleShowDate.text = aptScheduleDate
+            binding.textViewAptScheduleShowTime.text = aptScheduleTime
+            binding.textViewAptScheduleShowSubject.text = aptScheduleSubject
+            binding.textViewAptScheduleShowContent.text = aptScheduleContent!!.replace("\\n", "\n")
+        }
+
+        // aptScheduleType에 따라 이미지 설정
+        val imageResource = when (aptScheduleType) {
+            "가스점검" -> R.drawable.icon_donut1
+            "소독" -> R.drawable.icon_donut2
+            "엘레베이터 점검" -> R.drawable.icon_donut3
+            "알뜰장" -> R.drawable.icon_donut4
+            "쓰레기 수거" -> R.drawable.icon_donut5
+            "관리비 공개" -> R.drawable.icon_donut6
+            else -> R.drawable.icon_donut1 // 기본 이미지 설정
+        }
+       binding.imageViewAptBottom.setImageResource(imageResource)
 
         return binding.root
     }
@@ -56,5 +84,4 @@ class AptScheduleShowBottomSheetFragment : BottomSheetDialogFragment() {
 
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
-
 }
