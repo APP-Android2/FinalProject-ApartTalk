@@ -1,17 +1,23 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Adapter
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityAlarmBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityMainBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.home.adapter.AlarmAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.home.viewmodel.AlarmViewModel
 
 class AlarmActivity : AppCompatActivity() {
 
@@ -21,12 +27,15 @@ class AlarmActivity : AppCompatActivity() {
         val adapter = AlarmAdapter()
         adapter
     }
+
+    val viewModel : AlarmViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAlarmBinding.inflate(layoutInflater)
         setContentView(binding.root)
         settingToolbar()
         connectAdapter()
+        gettingData()
     }
 
     //툴바 설정
@@ -50,6 +59,25 @@ class AlarmActivity : AppCompatActivity() {
                 val deco = MaterialDividerItemDecoration(this@AlarmActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)
             }
+        }
+    }
+
+    //데이터 받아오기
+    private fun gettingData(){
+        lifecycleScope.launch {
+            val authUser = App.authRepository.getCurrentUser()
+            if (authUser != null){
+                val user = App.userRepository.getUser(authUser.uid)
+                if (user != null){
+                    viewModel.getAlarmInfo(user.apartmentUid)
+
+                }
+            }
+        }
+        viewModel.alarmList.observe(this@AlarmActivity){ value ->
+            alarmAdapter.submitList(value)
+
+            Log.d("apartTalk1234", "${value}")
         }
     }
 }
