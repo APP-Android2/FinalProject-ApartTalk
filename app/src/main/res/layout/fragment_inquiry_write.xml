@@ -8,15 +8,15 @@
     android:background="#FFFFFF"
     tools:context="ui.inquiry.InquiryWriteFragment">
 
-
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/inquiryWriteToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:gravity="start"
         app:titleCentered="true"/>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,6 @@
             app:boxBackgroundMode="outline"
             app:boxStrokeColor="@color/color_text_input_stroke"
             app:hintTextColor="@color/third">
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inquiryWriteEditTextTitle"
@@ -91,7 +90,6 @@
             app:boxStrokeColor="@color/color_text_input_stroke"
             app:hintTextColor="@color/third"
             app:hintEnabled="true">
-
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inquiryWriteEditTextContent"

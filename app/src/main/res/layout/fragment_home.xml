@@ -50,6 +50,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/imageToAlarm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="true"
@@ -92,18 +93,19 @@
 
                         <TextView
                             android:id="@+id/textHomeAddress"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosans_semibold"
-                            android:includeFontPadding="false"
-                            android:text="서울 송파구 장지동"
+                            android:layout_marginStart="80dp"
                             android:ellipsize="end"
+                            android:fontFamily="@font/notosans_semibold"
+                            android:gravity="end"
+                            android:includeFontPadding="false"
                             android:singleLine="true"
+                            android:text="서울 송파구 장지동"
                             android:textColor="@color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/textLocationTitle"
-                            android:layout_marginStart="45dp"
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

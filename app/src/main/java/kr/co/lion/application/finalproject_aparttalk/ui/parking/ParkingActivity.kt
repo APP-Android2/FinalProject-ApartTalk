@@ -2,28 +2,11 @@ package kr.co.lion.application.finalproject_aparttalk.ui.parking
 
 import android.os.Bundle
 import android.os.SystemClock
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.replace
-import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityParkingBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityAddFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityDetailFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityModifyFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunitySearchFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.EntireMenuFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.facility.FacilityFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.home.fragment.AlarmFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.home.fragment.HomeFragment
-import kr.co.lion.application.finalproject_aparttalk.ui.location.LocationFragment
-import kr.co.lion.application.finalproject_aparttalk.util.CommunityFragmentName
-import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
 import kr.co.lion.application.finalproject_aparttalk.util.ParkingFragmentName
 
 class ParkingActivity : AppCompatActivity() {

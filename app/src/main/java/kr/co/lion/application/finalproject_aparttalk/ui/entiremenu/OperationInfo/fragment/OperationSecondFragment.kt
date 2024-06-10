@@ -9,7 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentOperationSecondBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationViewPagerAdapter
+import kr.co.lion.application.finalproject_aparttalk.ui.location.adapter.LocationAdapter
 import kr.co.lion.application.finalproject_aparttalk.util.AptOperationInfoFragmentName
 
 class OperationSecondFragment : Fragment() {
@@ -24,7 +24,7 @@ class OperationSecondFragment : Fragment() {
         operationInfoActivity = activity as OperationInfoActivity
 
         setToolbar()
-        setupViewPager()
+        initView()
 
         return fragmentOperationSecondBinding.root
     }
@@ -42,28 +42,32 @@ class OperationSecondFragment : Fragment() {
         }
     }
 
-    private fun setupViewPager(){
-        val adapter = OperationViewPagerAdapter(requireActivity())
-        fragmentOperationSecondBinding.viewPagerAptOperationInfo.adapter = adapter
+    // 탭뷰 설정
+    private fun initView(){
+        val locationViewPager = fragmentOperationSecondBinding.viewPagerAptOperationInfo
+        val locationTabLayout = fragmentOperationSecondBinding.tabLayoutAptOperationInfo
 
-        TabLayoutMediator(fragmentOperationSecondBinding.tabLayoutAptOperationInfo, fragmentOperationSecondBinding.viewPagerAptOperationInfo) { tab, position ->
-            tab.text = when(position){
-                // ContractInfo
-                0 -> "계약서정보"
-                // ManagementRegulation
-                1 -> "관리규악"
-                // BiddingNotice
-                2 -> "입찰공고"
-                // BillingStatement
-                3 -> "부과명세서"
-                // FinancialSystem
-                4 -> "재무제표"
-                // SafetyManagement
-                5 -> "안전관리계획"
-                // RepairPlan
-                6 -> "수선계획"
-                else -> null
-            }
+        //Fragment 추가
+        val fragmentList = ArrayList<Fragment>()
+        fragmentList.add(ContractInfoFragment())
+        fragmentList.add(ManagementRegulationFragment())
+        fragmentList.add(BiddingNoticeFragment())
+        fragmentList.add(BillingStatementFragment())
+        fragmentList.add(FinancialSystemFragment())
+        fragmentList.add(SafetyManagementFragment())
+        fragmentList.add(RepairPlanFragment())
+
+        locationViewPager.adapter = LocationAdapter(fragmentList, requireActivity())
+
+        val tabTextList = arrayOf<String?>("계약서정보", "관리규악", "입찰공고", "부과명세서", "재무제표", "안전관리계획", "수선계획")
+
+        // TabLayout ViewPager 연결
+        TabLayoutMediator(locationTabLayout, locationViewPager) { tab, position ->
+            tab.text = tabTextList[position]
         }.attach()
+
+        // 전달된 인덱스로 초기 탭 선택
+        val tabPosition = arguments?.getInt("tabPosition", 0) ?: 0
+        locationViewPager.currentItem = tabPosition
     }
 }

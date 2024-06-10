@@ -1,17 +1,12 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.inquiry
 
-import android.graphics.Typeface
 import android.os.Bundle
 import android.os.SystemClock
-import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toolbar
-import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.transition.MaterialSharedAxis
@@ -35,7 +30,7 @@ class InquiryTabFragment : Fragment() {
 
         inquiryTabToolbar()
         inquiryTabLayout()
-        setupSearchBar()
+//        setupSearchView()
 
         // 기본 탭을 선택하고 해당 프래그먼트를 표시
         selectDefaultTab()
@@ -86,15 +81,38 @@ class InquiryTabFragment : Fragment() {
         }
     }
 
-    // 서치바 설정
-    private fun setupSearchBar() {
-        fragmentInquiryTabBinding.apply {
-            inquiryTabSearchbar.setOnClickListener {
-                // 서치바 클릭 시 동작을 정의합니다.
-                // 예를 들어 검색 창을 활성화하거나 검색 결과를 보여주는 기능을 추가할 수 있습니다.
-            }
-        }
-    }
+//    // 서치뷰 설정
+//    private fun setupSearchView() {
+//        fragmentInquiryTabBinding.search.isSubmitButtonEnabled = true
+//        fragmentInquiryTabBinding.search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                // 검색 버튼이 눌렸을 때의 동작을 정의합니다.
+//                query?.let {
+//                    searchInquiries(it)
+//                }
+//                return false
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                // 입력된 텍스트가 변경될 때마다 호출
+//                newText?.let {
+//                    searchInquiries(it)
+//                }
+//                return true
+//            }
+//        })
+//    }
+//
+//    // 검색 쿼리를 처리하는 메서드
+//    private fun searchInquiries(query: String) {
+//        // 현재 표시된 프래그먼트를 찾아서 검색 쿼리를 전달
+//        val currentFragment = childFragmentManager.findFragmentById(R.id.inquiryFrameLayout)
+//        if (currentFragment is InquiringFragment) {
+//            currentFragment.searchInquiries(query)
+//        } else if (currentFragment is InquiryCompleteFragment) {
+//            currentFragment.searchInquiries(query)
+//        }
+//    }
 
     // 기본 탭을 선택하고 해당 프래그먼트를 표시
     private fun selectDefaultTab() {
@@ -136,22 +154,6 @@ class InquiryTabFragment : Fragment() {
         if (newFragment != null) {
             // 애니메이션 설정
             if (isAnimate) {
-                // oldFragment -> newFragment
-                // oldFragment : exitTransition
-                // newFragment : enterTransition
-
-                // newFragment -> oldFragment
-                // oldFragment : reenterTransition
-                // newFragment : returnTransition
-
-                // MaterialSharedAxis : 좌우, 위아래, 공중 바닥 사이로 이동하는 애니메이션 효과
-                // X - 좌우
-                // Y - 위아래
-                // Z - 공중 바닥
-                // 두 번째 매개변수 : 새로운 화면이 나타나는 것인지 여부를 설정해준다.
-                // true : 새로운 화면이 나타나는 애니메이션이 동작한다.
-                // false : 이전으로 되돌아가는 애니메이션이 동작한다.
-
                 if (oldFragment != null) {
                     // old에서 new가 새롭게 보여질 때 old의 애니메이션
                     oldFragment?.exitTransition = MaterialSharedAxis(MaterialSharedAxis.X, true)
@@ -172,8 +174,6 @@ class InquiryTabFragment : Fragment() {
             }
 
             // Fragment를 교체한다.(이전 Fragment가 없으면 새롭게 추가하는 역할을 수행한다)
-            // 첫 번째 매개 변수 : Fragment를 배치할 FragmentContainerView의 ID
-            // 두 번째 매개 변수 : 보여주고하는 Fragment 객체를
             fragmentTransaction.replace(R.id.inquiryFrameLayout, newFragment!!)
 
             // addToBackStack 변수의 값이 true면 새롭게 보여질 Fragment를 BackStack에 포함시켜 준다.
@@ -181,6 +181,7 @@ class InquiryTabFragment : Fragment() {
                 // BackStack 포함 시킬 때 이름을 지정해주면 원하는 Fragment를 BackStack에서 제거할 수 있다.
                 fragmentTransaction.addToBackStack(name.str)
             }
+
             // Fragment 교체를 확정한다.
             fragmentTransaction.commit()
         }

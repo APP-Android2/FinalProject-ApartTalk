@@ -81,11 +81,25 @@ class EntireMenuFragment : Fragment() {
                 if (authUser != null){
                     val user = App.userRepository.getUser(authUser.uid)
                     if (user != null){
+
+                        mypageMenu.setOnClickListener {
+                            //마이페이지로 이동
+                            startActivity(Intent(requireActivity(), InfoActivity::class.java))
+                        }
+
+                        buttonUserLogout.setOnClickListener {
+                            // 로그인 화면으로 이동
+                            App.authRepository.signOut()
+                            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+                            requireActivity().finish()
+                        }
+
+                        LinearContactMenu.setOnClickListener {
+                            //고객센터로 이동
+                            startActivity(Intent(requireActivity(), ServiceActivity::class.java))
+                        }
+
                         if (user.apartCertification == true){
-                            mypageMenu.setOnClickListener {
-                                //마이페이지로 이동
-                                startActivity(Intent(requireActivity(), InfoActivity::class.java))
-                            }
 
                             LinearWriteMenu.setOnClickListener {
                                 //내가 쓴 글로 이동
@@ -96,11 +110,6 @@ class EntireMenuFragment : Fragment() {
                             LinearReservationMenu.setOnClickListener {
                                 //예약 내역으로 이동
                                 startActivity(Intent(requireActivity(), ReserveActivity::class.java))
-                            }
-
-                            LinearContactMenu.setOnClickListener {
-                                //고객센터로 이동
-                                startActivity(Intent(requireActivity(), ServiceActivity::class.java))
                             }
 
                             buttonResParkingMenu.setOnClickListener {
@@ -132,12 +141,6 @@ class EntireMenuFragment : Fragment() {
                             buttonAptInfoMenu.setOnClickListener {
                                 //아파트 운영정보로 이동
                                 startActivity(Intent(requireActivity(), OperationInfoActivity::class.java))
-                            }
-                            buttonUserLogout.setOnClickListener {
-                                // 로그인 화면으로 이동
-                                App.authRepository.signOut()
-                                startActivity(Intent(requireActivity(), LoginActivity::class.java))
-                                requireActivity().finish()
                             }
                         }else{
                             LinearWriteMenu.isClickable = false

@@ -2,10 +2,10 @@ package kr.co.lion.application.finalproject_aparttalk.ui.home.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.launch
@@ -13,9 +13,10 @@ import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentHomeBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.home.AlarmActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.home.adapter.HomeNotificationRecyclerView
 import kr.co.lion.application.finalproject_aparttalk.ui.info.InfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.inquiry.InquiryActivity
@@ -109,6 +110,10 @@ class HomeFragment : Fragment() {
             homeAllAptInfoLayout.setOnClickListener {
                 //아파트 운영
                 startActivity(Intent(requireActivity(), OperationInfoActivity::class.java))
+            }
+            imageToAlarm.setOnClickListener {
+                //알림
+                startActivity(Intent(mainActivity, AlarmActivity::class.java))
             }
 
             cardViewRestaurant.setOnClickListener {
