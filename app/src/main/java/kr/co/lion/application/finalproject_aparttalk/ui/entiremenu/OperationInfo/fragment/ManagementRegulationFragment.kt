@@ -1,10 +1,10 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -13,21 +13,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.auth.FirebaseAuthService
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentManagementRegulationBinding
-import kr.co.lion.application.finalproject_aparttalk.db.OperationInfoDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.remote.ApartmentDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
 import kr.co.lion.application.finalproject_aparttalk.repository.ApartmentRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
-import kr.co.lion.application.finalproject_aparttalk.repository.OperationInfoRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.ManagementRegulationRecyclerView
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.adapter.OperationSecondRecyclerView
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.ManagementRegulationViewModel
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModel
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.viewmodel.OperationInfoViewModelFactory
 
 class ManagementRegulationFragment : Fragment() {
 
@@ -36,15 +31,15 @@ class ManagementRegulationFragment : Fragment() {
     private val viewModel: ManagementRegulationViewModel by viewModels()
 
     private val authRepository by lazy {
-        AuthRepository(FirebaseAuthService(), LocalUserDataSource(requireContext()), LocalApartmentDataSource(requireContext()))
+        AuthRepository(FirebaseAuthService())
     }
 
     private val userRepository by lazy {
-        UserRepository(UserDataSource(), LocalUserDataSource(requireContext()))
+        UserRepository(UserDataSource(), LocalUserDataSource(requireActivity().applicationContext))
     }
 
     private val apartmentRepository by lazy {
-        ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(requireContext()))
+        ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(requireActivity().applicationContext))
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentManagementRegulationBinding = FragmentManagementRegulationBinding.inflate(layoutInflater)

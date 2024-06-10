@@ -2,17 +2,12 @@ package kr.co.lion.application.finalproject_aparttalk.ui.reservation
 
 import android.os.Bundle
 import android.os.SystemClock
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.transition.MaterialSharedAxis
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityReserveBinding
-import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
-import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
-import kr.co.lion.application.finalproject_aparttalk.model.UserModel
-import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 import kr.co.lion.application.finalproject_aparttalk.util.ReserveFragmentName
 
 class ReserveActivity : AppCompatActivity() {
