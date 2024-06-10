@@ -33,12 +33,14 @@ class InquiringFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = InquiringAdapter(emptyList()) { inquiry ->
-            inquiryViewModel.setSelectedInquiryModel(inquiry)
-            (activity as InquiryActivity).replaceFragment(InquiryFragmentName.INQUIRY_FRAGMENT, false, true, null)
+        inquiryViewModel.userModel.value?.let { user ->
+            adapter = InquiringAdapter(emptyList(), user.idx.toString()) { inquiry ->
+                inquiryViewModel.setSelectedInquiryModel(inquiry)
+                (activity as InquiryActivity).replaceFragment(InquiryFragmentName.INQUIRY_FRAGMENT, false, true, null)
+            }
+            binding.inquiringRecyclerView.layoutManager = LinearLayoutManager(inquiryActivity)
+            binding.inquiringRecyclerView.adapter = adapter
         }
-        binding.inquiringRecyclerView.layoutManager = LinearLayoutManager(inquiryActivity)
-        binding.inquiringRecyclerView.adapter = adapter
     }
 
     private fun setupFloatingActionButton() {
