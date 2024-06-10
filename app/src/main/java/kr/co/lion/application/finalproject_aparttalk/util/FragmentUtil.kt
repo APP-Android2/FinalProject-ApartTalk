@@ -26,7 +26,7 @@ enum class CommunityFragmentName(val str:String) {
 
 enum class BroadcastFragmentName(val str: String) {
     BROADCAST_FRAGMENT("BroadcastFragment"),
-    BROADCAST_DETIAL_FRAGMENT("BroadcastDetailFragment")
+    BROADCAST_DETAIL_FRAGMENT("BroadcastDetailFragment")
 }
 
 enum class AptOperationInfoFragmentName(val str: String) {

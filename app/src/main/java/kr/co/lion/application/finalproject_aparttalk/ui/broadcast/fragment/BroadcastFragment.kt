@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentBroadcastBinding
+import kr.co.lion.application.finalproject_aparttalk.model.BroadcastModel
 import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.adapter.BroadcastRecyclerViewAdapter
 
-class BroadcastFragment(data: Bundle?) : Fragment() {
+class BroadcastFragment(val data: Bundle?) : Fragment() {
     lateinit var fragmentBroadcastBinding: FragmentBroadcastBinding
     lateinit var broadcastActivity: BroadcastActivity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         fragmentBroadcastBinding = FragmentBroadcastBinding.inflate(inflater)
         broadcastActivity = activity as BroadcastActivity
 
@@ -27,7 +27,7 @@ class BroadcastFragment(data: Bundle?) : Fragment() {
         return fragmentBroadcastBinding.root
     }
 
-    // 툴바
+    // 툴바 설정
     private fun settingToolbar() {
         fragmentBroadcastBinding.apply {
             toolbarBroadcast.apply {
@@ -43,7 +43,7 @@ class BroadcastFragment(data: Bundle?) : Fragment() {
     private fun settingRecyclerViewBroadcast() {
         fragmentBroadcastBinding.apply {
             recyclerViewBroadcast.apply {
-                adapter = BroadcastRecyclerViewAdapter(requireContext())
+                adapter = BroadcastRecyclerViewAdapter(requireContext(), broadcastActivity)
                 layoutManager = LinearLayoutManager(broadcastActivity)
                 val deco = MaterialDividerItemDecoration(broadcastActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)

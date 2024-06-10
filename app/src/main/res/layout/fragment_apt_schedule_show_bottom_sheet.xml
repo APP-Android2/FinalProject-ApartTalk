@@ -7,7 +7,7 @@
     android:background="@drawable/bottom_sheet_rounding"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.entiremenu.AptSchedule.fragment.AptScheduleShowBottomSheetFragment">
+    tools:context=".ui.entiremenu.AptSchedule.AptScheduleShowBottomSheetFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
