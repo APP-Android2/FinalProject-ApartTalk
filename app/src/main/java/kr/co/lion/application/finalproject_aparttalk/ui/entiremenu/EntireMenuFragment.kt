@@ -94,6 +94,11 @@ class EntireMenuFragment : Fragment() {
                             requireActivity().finish()
                         }
 
+                        LinearContactMenu.setOnClickListener {
+                            //고객센터로 이동
+                            startActivity(Intent(requireActivity(), ServiceActivity::class.java))
+                        }
+
                         if (user.apartCertification == true){
 
                             LinearWriteMenu.setOnClickListener {
@@ -105,11 +110,6 @@ class EntireMenuFragment : Fragment() {
                             LinearReservationMenu.setOnClickListener {
                                 //예약 내역으로 이동
                                 startActivity(Intent(requireActivity(), ReserveActivity::class.java))
-                            }
-
-                            LinearContactMenu.setOnClickListener {
-                                //고객센터로 이동
-                                startActivity(Intent(requireActivity(), ServiceActivity::class.java))
                             }
 
                             buttonResParkingMenu.setOnClickListener {
