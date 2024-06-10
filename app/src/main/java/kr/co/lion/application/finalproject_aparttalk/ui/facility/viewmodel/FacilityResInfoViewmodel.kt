@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.Timestamp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,8 +26,10 @@ class FacilityResInfoViewmodel : ViewModel() {
         userUid:String, titleText:String, useTime:String, imageRes:String, usePrice:String, reservationState:Boolean, reservationData:String, userName:String, userNumber:String
         , callback:(Boolean) -> Unit
     ){
+        val reserveTime = Timestamp.now()
+
         viewModelScope.launch {
-            val facilityResData = FacilityResModel(userUid, titleText, useTime, imageRes, usePrice, reservationState, reservationData, userName, userNumber)
+            val facilityResData = FacilityResModel(userUid, titleText, useTime, imageRes, usePrice, reservationState, reservationData, userName, userNumber, reserveTime)
             val success = withContext(Dispatchers.IO){
                 try {
                     facilityResRepository.insertResData(facilityResData)
