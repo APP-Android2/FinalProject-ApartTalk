@@ -9,7 +9,8 @@ import kr.co.lion.application.finalproject_aparttalk.util.VoteFragmentName
 
 class VoteListAdapter(
     private val voteActivity: VoteActivity,
-    private var voteItems: List<VoteResultModel>
+    private var voteItems: List<VoteResultModel>,
+    private var pastVoteItems: List<VoteResultModel>
 ) : RecyclerView.Adapter<VoteListAdapter.VoteListViewHolder>() {
 
     inner class VoteListViewHolder(val binding: RowVoteBinding) : RecyclerView.ViewHolder(binding.root)
@@ -20,12 +21,10 @@ class VoteListAdapter(
         return VoteListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return voteItems.size
-    }
+    override fun getItemCount(): Int = pastVoteItems.size
 
     override fun onBindViewHolder(holder: VoteListViewHolder, position: Int) {
-        val voteItem = voteItems[position]
+        val voteItem = pastVoteItems[position]
         holder.binding.rowVoteTextView1.text = voteItem.electionName
         holder.binding.rowVoteTextView2.text = voteItem.electionDate
 
@@ -34,8 +33,9 @@ class VoteListAdapter(
         }
     }
 
-    fun updateVoteItems(newVoteItems: List<VoteResultModel>) {
+    fun updateVoteItems(newVoteItems: List<VoteResultModel>, newPastVoteItems: List<VoteResultModel>) {
         voteItems = newVoteItems
+        pastVoteItems = newPastVoteItems
         notifyDataSetChanged()
     }
 }
