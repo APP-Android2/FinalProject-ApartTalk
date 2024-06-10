@@ -1,5 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.model
 
+import com.google.firebase.Timestamp
+
 data class FacilityResModel (
     val userUid:String = "",
     val titleText:String = "",
@@ -9,5 +11,6 @@ data class FacilityResModel (
     val reservationState:Boolean = true,
     val reservationDate:String = "",
     val userName:String? = "",
-    val userNumber:String? = ""
+    val userNumber:String? = "",
+    val reserveTime:Timestamp = Timestamp.now()
 )

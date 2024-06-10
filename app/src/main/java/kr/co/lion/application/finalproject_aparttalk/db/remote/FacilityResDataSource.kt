@@ -12,7 +12,6 @@ import kr.co.lion.application.finalproject_aparttalk.model.FacilityResModel
 class FacilityResDataSource {
 
     private val db = Firebase.firestore
-    private val storage = Firebase.storage.reference
 
     //예약 정보를 저장한다
     suspend fun insertResInfo(facilityResModel: FacilityResModel){

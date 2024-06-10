@@ -213,6 +213,58 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:strokeColor="@color/fourth">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:src="@drawable/icon_error_circle"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosans_semibold"
+                        android:includeFontPadding="false"
+                        android:layout_marginLeft="15dp"
+                        android:text="예약 가능횟수"
+                        android:textColor="@color/black"/>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textReserveTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="예약은 하루에 한 번만 가능합니다."/>
+
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
