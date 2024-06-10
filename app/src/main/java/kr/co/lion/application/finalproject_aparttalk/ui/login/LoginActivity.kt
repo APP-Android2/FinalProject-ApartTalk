@@ -16,7 +16,9 @@ import kr.co.lion.application.finalproject_aparttalk.auth.FirebaseAuthService
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityLoginBinding
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
+import kr.co.lion.application.finalproject_aparttalk.db.remote.ApartmentDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
+import kr.co.lion.application.finalproject_aparttalk.repository.ApartmentRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.LoginViewModel
@@ -27,9 +29,10 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var signActivityLauncher: ActivityResultLauncher<Intent>
     private lateinit var sharedPreferences: SharedPreferences
 
-    val authRepository: AuthRepository by lazy { AuthRepository(FirebaseAuthService(), LocalUserDataSource(this@LoginActivity), LocalApartmentDataSource(this@LoginActivity)) }
-    val userRepository: UserRepository by lazy { UserRepository(UserDataSource(), LocalUserDataSource(this@LoginActivity)) }
-    private val viewModel: LoginViewModel by viewModels { LoginViewModelFactory(authRepository, userRepository) }
+    val authRepository: AuthRepository by lazy { AuthRepository(FirebaseAuthService()) }
+    val userRepository: UserRepository by lazy { UserRepository(UserDataSource(), LocalUserDataSource(applicationContext)) }
+    val apartmentRepository: ApartmentRepository by lazy { ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(applicationContext)) }
+    private val viewModel: LoginViewModel by viewModels { LoginViewModelFactory(authRepository, userRepository, apartmentRepository) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

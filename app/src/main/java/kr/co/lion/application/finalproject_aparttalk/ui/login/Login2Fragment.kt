@@ -2,16 +2,17 @@ package kr.co.lion.application.finalproject_aparttalk.ui.login
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentLogin2Binding
 import kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel.LoginViewModel
 
@@ -23,11 +24,12 @@ class Login2Fragment : Fragment() {
     private val viewModel: LoginViewModel by activityViewModels {
         LoginViewModelFactory(
             (requireActivity() as LoginActivity).authRepository,
-            (requireActivity() as LoginActivity).userRepository
+            (requireActivity() as LoginActivity).userRepository,
+            (requireActivity() as LoginActivity).apartmentRepository,
         )
     }
 
-    private var timer: CountDownTimer? = null
+    private var countDownTimer: CountDownTimer? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentLogin2Binding.inflate(inflater, container, false)
@@ -37,11 +39,75 @@ class Login2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observe()
+        getVerificationCodeButton()
         loginButton()
+        updateLoginButtonState()
         backProcess()
-        setupPhoneNumberFormatting()
-        setupVerificationCodeInput()
-        setupSendVerificationButton()
+    }
+
+    private fun observe() {
+        viewModel.verificationId.observe(viewLifecycleOwner) { verificationId ->
+            if (verificationId != null) {
+                binding.login2VerificationCodeLayout.visibility = View.VISIBLE
+                binding.login2VerificationCodeButton.text = "재전송"
+                startTimer()
+            }
+        }
+    }
+
+    private fun getVerificationCodeButton() {
+        binding.login2VerificationCodeButton.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewModel.phoneLogin(requireActivity(), requireContext(), binding.login2PhoneNumberEditText.text.toString().trim()).join()
+            }
+        }
+    }
+
+    private fun startTimer() {
+        countDownTimer?.cancel()
+        countDownTimer = object : CountDownTimer(120000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val minutes = millisUntilFinished / 60000
+                val seconds = (millisUntilFinished % 60000) / 1000
+                binding.login2TimerTextView.text = String.format("%02d:%02d", minutes, seconds)
+            }
+
+            override fun onFinish() {
+                binding.login2VerificationCodeLayout.visibility = View.INVISIBLE
+                binding.verificationCodeEditText.setText("")
+                binding.login2VerificationCodeButton.text = "인증번호"
+                viewModel.resetVerificationId()
+                Toast.makeText(requireContext(), "인증시간이 초과되었습니다.\n다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }.start()
+    }
+
+
+    private fun loginButton() {
+        binding.login2LoginButton.setOnClickListener {
+            viewLifecycleOwner.lifecycleScope.launch {
+                val result = viewModel.verifyCode(requireContext(), binding.verificationCodeEditText.text.toString().trim())
+                if (result) {
+                    (activity as? LoginActivity)?.launchSignActivity()
+                } else {
+                    Toast.makeText(requireContext(), "인증번호가 틀렸습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+
+    private fun updateLoginButtonState(){
+        binding.verificationCodeEditText.addTextChangedListener {
+            if (it?.length == 6){
+                binding.login2LoginButton.isEnabled = true
+                binding.login2LoginButton.alpha = 1.0f
+            } else {
+                binding.login2LoginButton.isEnabled = false
+                binding.login2LoginButton.alpha = 0.5f
+            }
+        }
     }
 
     private fun backProcess() {
@@ -54,90 +120,9 @@ class Login2Fragment : Fragment() {
         }
     }
 
-    private fun loginButton(){
-        binding.login2LoginButton.setOnClickListener {
-            (activity as? LoginActivity)?.launchSignActivity()
-        }
-    }
-
-    private fun setupPhoneNumberFormatting() {
-        binding.phoneNumberEditText.addTextChangedListener(object : TextWatcher {
-            private var current = ""
-            private val phonePattern = "###-####-####"
-            private val phoneRegex = Regex("^\\d{3}-\\d{4}-\\d{4}$")
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.toString() != current) {
-                    val userInput = s.toString().replace(Regex("[^\\d]"), "")
-                    if (userInput.length <= 11) {
-                        current = userInput.chunked(4).joinToString("-")
-                        if (userInput.length > 3) {
-                            current = userInput.substring(0, 3) + "-" + userInput.substring(3).chunked(4).joinToString("-")
-                        }
-                        binding.phoneNumberEditText.setText(current)
-                        binding.phoneNumberEditText.setSelection(current.length)
-                    } else {
-                        current = userInput.chunked(4).joinToString("-")
-                        binding.phoneNumberEditText.setText(current)
-                        binding.phoneNumberEditText.setSelection(current.length)
-                    }
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
-    }
-
-    private fun setupVerificationCodeInput() {
-        binding.verificationCodeEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-
-                if (s?.length == 6) {
-                    binding.login2LoginButton.isEnabled = true
-                    binding.login2LoginButton.alpha = 1.0f
-                } else {
-                    binding.login2LoginButton.isEnabled = false
-                    binding.login2LoginButton.alpha = 0.5f
-                }
-            }
-        })
-    }
-
-    private fun setupSendVerificationButton() {
-        binding.sendVerificationButton.setOnClickListener {
-            startTimer()
-            binding.sendVerificationButtonText.text = "재전송"
-            binding.verificationCodeEditText.isEnabled = true
-            binding.timerTextView.isVisible = true
-        }
-    }
-
-    private fun startTimer() {
-        timer?.cancel()
-        timer = object : CountDownTimer(180000, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                val minutes = millisUntilFinished / 1000 / 60
-                val seconds = (millisUntilFinished / 1000 % 60)
-                binding.timerTextView.text = String.format("%02d:%02d", minutes, seconds)
-            }
-
-            override fun onFinish() {
-                binding.timerTextView.text = "00:00"
-                binding.verificationCodeEditText.isEnabled = false
-                binding.sendVerificationButton.isEnabled = true
-            }
-        }.start()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        timer?.cancel()
+        countDownTimer?.cancel()
     }
 }

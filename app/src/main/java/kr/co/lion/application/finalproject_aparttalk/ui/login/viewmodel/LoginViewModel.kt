@@ -1,5 +1,6 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.login.viewmodel
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
@@ -7,18 +8,28 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
+import kr.co.lion.application.finalproject_aparttalk.repository.ApartmentRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 import kr.co.lion.application.finalproject_aparttalk.ui.login.NavigationState
+import java.util.concurrent.TimeUnit
 
 class LoginViewModel(
     private val authRepository: AuthRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val apartmentRepository: ApartmentRepository,
 ) : ViewModel() {
 
     private val _userAuthenticationState = MutableLiveData<NavigationState>().apply {
@@ -28,6 +39,12 @@ class LoginViewModel(
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
+
+    private val _verificationId = MutableLiveData<String?>()
+    val verificationId: LiveData<String?> = _verificationId
+
+    private val _verificationTime = MutableLiveData<Boolean>().apply { value = false }
+    val verificationTime: LiveData<Boolean> = _verificationTime
 
     init {
         isAuthenticated()
@@ -40,10 +57,16 @@ class LoginViewModel(
             return@launch
         }
         val user = userRepository.getUser(currentUser.uid)
-        _userAuthenticationState.value = when (user?.completeInputUserInfo) {
-            true -> NavigationState.TO_MAIN
+        if (user == null){
+            _userAuthenticationState.value = NavigationState.TO_LOGIN
+            return@launch
+        }
+        _userAuthenticationState.value = when (user.completeInputUserInfo) {
+            true -> {
+                apartmentRepository.getApartment(user.apartmentUid)
+                NavigationState.TO_MAIN
+            }
             false -> NavigationState.TO_SIGNUP
-            else -> NavigationState.TO_LOGIN
         }
     }
 
@@ -52,7 +75,11 @@ class LoginViewModel(
             val googleCredential = authRepository.getGoogleCredential(context) ?: return@launch
             _isLoading.value = true
             val authResult = authRepository.signInWithGoogle(googleCredential)
-            val authUser = authResult.user ?: return@launch
+            val authUser = authResult.user
+            if(authUser == null){
+                _isLoading.value = false
+                return@launch
+            }
             handleUserAuthentication(context, authUser, "구글")
         } catch (e: FirebaseAuthUserCollisionException) {
             _isLoading.value = false
@@ -70,7 +97,11 @@ class LoginViewModel(
             val kakaoAccount = authRepository.getKaKaoAccount(context) ?: return@launch
             _isLoading.value = true
             val authResult = authRepository.signInWithKaKao(kakaoAccount)
-            val authUser = authResult.user ?: return@launch
+            val authUser = authResult.user
+            if(authUser == null){
+                _isLoading.value = false
+                return@launch
+            }
             handleUserAuthentication(context, authUser, "카카오")
         } catch (e: FirebaseAuthUserCollisionException) {
             _isLoading.value = false
@@ -111,11 +142,58 @@ class LoginViewModel(
         }
     }
 
-    private suspend fun handleUserAuthentication(
-        context: Context,
-        authUser: FirebaseUser,
-        loginType: String
-    ) {
+    fun phoneLogin(activity: Activity, context: Context, phoneNumber: String) = viewModelScope.launch {
+        try {
+            val options = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
+                .setPhoneNumber(phoneNumber.replace("010","+8210"))
+                .setTimeout(120L, TimeUnit.SECONDS)
+                .setActivity(activity)
+                .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    override fun onVerificationCompleted(credential: PhoneAuthCredential) {}
+                    override fun onVerificationFailed(e: FirebaseException) {
+                        Log.d("PhoneAuth", "Verification failed: ${e.message}")
+                    }
+                    override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                        _verificationId.value = verificationId
+                    }
+                })
+                .build()
+            PhoneAuthProvider.verifyPhoneNumber(options)
+        } catch (e: Exception) {
+            Log.d("test1234", "휴대폰 : ${e.message}")
+            Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    suspend fun verifyCode(context: Context, code: String): Boolean {
+        return try {
+            _isLoading.value = true
+            if (_verificationId.value == null) {
+                Toast.makeText(context, "인증 ID가 없습니다.\n다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+                _isLoading.value = false
+                false
+            } else {
+                val authResult = authRepository.signInWithPhone(_verificationId.value, code)
+                val authUser = authResult.user
+                if (authUser == null) {
+                    _isLoading.value = false
+                    false
+                } else {
+                    handleUserAuthentication(context, authUser, "휴대폰")
+                    true
+                }
+            }
+        } catch (e: Exception) {
+            _isLoading.value = false
+            Log.d("test1234", "휴대폰 : ${e.message}")
+            Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+            false
+        }
+    }
+
+    fun resetVerificationId() { _verificationId.value = null }
+
+    private suspend fun handleUserAuthentication(context: Context, authUser: FirebaseUser, loginType: String) {
         try {
             val user = userRepository.getUser(authUser.uid)
             if (user == null) {
@@ -145,7 +223,7 @@ class LoginViewModel(
             } else {
                 _userAuthenticationState.value = when (user.completeInputUserInfo) {
                     true -> {
-                        val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
+                        val apartment = apartmentRepository.getApartment(user.apartmentUid)
                         apartment?.let {
                             App.prefs.setLatitude(it.latitude)
                             App.prefs.setLongitude(it.longitude)
