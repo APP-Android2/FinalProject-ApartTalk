@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.fragment
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule
 
 import android.app.Dialog
 import android.os.Bundle
@@ -10,7 +10,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentAptScheduleShowBottomSheetBinding
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleActivity
 
 class AptScheduleShowBottomSheetFragment : BottomSheetDialogFragment() {
 
