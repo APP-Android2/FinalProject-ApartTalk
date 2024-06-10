@@ -6,13 +6,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.OAuthProvider
+import com.google.firebase.auth.PhoneAuthProvider
 import com.kakao.sdk.auth.model.OAuthToken
 import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthService {
 
     private val firebaseAuth: FirebaseAuth by lazy {
-        FirebaseAuth.getInstance()
+        FirebaseAuth.getInstance().apply {
+            setLanguageCode("kr")
+        }
     }
 
     fun getCurrentUser(): FirebaseUser? = firebaseAuth.currentUser
@@ -34,5 +37,10 @@ class FirebaseAuthService {
         return customToken?.let { token ->
             firebaseAuth.signInWithCustomToken(token).await()
         }
+    }
+
+    suspend fun signInWithPhone(verificationId: String?, code: String): AuthResult {
+        val credential = PhoneAuthProvider.getCredential(verificationId!!, code)
+        return firebaseAuth.signInWithCredential(credential).await()
     }
 }

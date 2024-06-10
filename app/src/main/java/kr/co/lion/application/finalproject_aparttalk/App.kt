@@ -22,7 +22,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        authRepository = AuthRepository(FirebaseAuthService(), LocalUserDataSource(applicationContext), LocalApartmentDataSource(applicationContext))
+        authRepository = AuthRepository(FirebaseAuthService())
         userRepository = UserRepository(UserDataSource(), LocalUserDataSource(applicationContext))
         apartmentRepository = ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(applicationContext))
         prefs = PreferenceUtil(applicationContext)

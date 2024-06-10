@@ -13,6 +13,10 @@ class ApartmentRepository(
         localApartmentDataSource.saveApartment(apartment)
     }
 
+    fun clearApartment(){
+        localApartmentDataSource.clearApartment()
+    }
+
     suspend fun getApartment(uid: String): ApartmentModel? {
         return localApartmentDataSource.getApartment() ?: apartmentDataSource.getApartment(uid)?.also { apartment ->
             localApartmentDataSource.saveApartment(apartment)
