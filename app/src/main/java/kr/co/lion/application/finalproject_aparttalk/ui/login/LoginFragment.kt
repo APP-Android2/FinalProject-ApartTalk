@@ -19,7 +19,8 @@ class LoginFragment : Fragment() {
     private val viewModel: LoginViewModel by activityViewModels {
         LoginViewModelFactory(
             (requireActivity() as LoginActivity).authRepository,
-            (requireActivity() as LoginActivity).userRepository
+            (requireActivity() as LoginActivity).userRepository,
+            (requireActivity() as LoginActivity).apartmentRepository,
         )
     }
 

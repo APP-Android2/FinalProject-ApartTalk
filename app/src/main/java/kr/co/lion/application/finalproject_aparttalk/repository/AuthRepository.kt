@@ -5,25 +5,20 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
 import com.kakao.sdk.auth.model.OAuthToken
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.auth.FirebaseAuthService
 import kr.co.lion.application.finalproject_aparttalk.auth.GoogleCredentialManagerService
 import kr.co.lion.application.finalproject_aparttalk.auth.KaKaoAccountService
 import kr.co.lion.application.finalproject_aparttalk.auth.NaverAccountService
-import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
-import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
 
-class AuthRepository(
-    private val firebaseAuthService: FirebaseAuthService,
-    private val localUserDataSource: LocalUserDataSource,
-    private val localApartmentDataSource: LocalApartmentDataSource
-) {
+class AuthRepository(private val firebaseAuthService: FirebaseAuthService) {
 
     fun getCurrentUser(): FirebaseUser? = firebaseAuthService.getCurrentUser()
 
     fun signOut() {
+        App.apartmentRepository.clearApartment()
+        App.userRepository.clearUser()
         firebaseAuthService.signOut()
-        localUserDataSource.clearUser()
-        localApartmentDataSource.clearApartment()
     }
 
     suspend fun signInWithGoogle(googleAccount: GoogleIdTokenCredential): AuthResult {
@@ -56,5 +51,9 @@ class AuthRepository(
     suspend fun getNaverCustomToken(accessToken: String): String? {
         val naverAccountService = NaverAccountService()
         return naverAccountService.getNaverCustomToken(accessToken)
+    }
+
+    suspend fun signInWithPhone(verificationId: String?, code: String): AuthResult {
+        return firebaseAuthService.signInWithPhone(verificationId, code)
     }
 }

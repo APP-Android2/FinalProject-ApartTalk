@@ -21,8 +21,8 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
 
-    val userRepository: UserRepository by lazy { UserRepository(UserDataSource(), LocalUserDataSource(this@SignUpActivity)) }
-    val apartmentRepository: ApartmentRepository by lazy { ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(this@SignUpActivity)) }
+    val userRepository: UserRepository by lazy { UserRepository(UserDataSource(), LocalUserDataSource(applicationContext)) }
+    val apartmentRepository: ApartmentRepository by lazy { ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(applicationContext)) }
     private val viewModel: SignUpViewModel by viewModels { SignUpViewModelFactory(userRepository, apartmentRepository) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
