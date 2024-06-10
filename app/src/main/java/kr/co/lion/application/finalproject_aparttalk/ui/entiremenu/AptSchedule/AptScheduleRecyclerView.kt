@@ -1,4 +1,4 @@
-package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.adapter
+package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowCalendarAptsheduleBinding
 import kr.co.lion.application.finalproject_aparttalk.model.AptScheduleModel
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.fragment.AptScheduleShowBottomSheetFragment
 
 class AptScheduleRecyclerView(private val supportFragmentManager: androidx.fragment.app.FragmentManager) :  RecyclerView.Adapter<AptScheduleRecyclerView.ViewHolder>()  {
 

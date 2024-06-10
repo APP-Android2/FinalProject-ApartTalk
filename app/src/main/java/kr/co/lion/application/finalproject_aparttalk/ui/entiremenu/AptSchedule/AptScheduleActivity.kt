@@ -3,7 +3,6 @@ package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.Dispatchers
@@ -13,16 +12,8 @@ import kr.co.lion.application.finalproject_aparttalk.App.Companion.apartmentRepo
 import kr.co.lion.application.finalproject_aparttalk.App.Companion.authRepository
 import kr.co.lion.application.finalproject_aparttalk.App.Companion.userRepository
 import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.auth.FirebaseAuthService
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityAptScheduleBinding
-import kr.co.lion.application.finalproject_aparttalk.db.local.LocalApartmentDataSource
-import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
-import kr.co.lion.application.finalproject_aparttalk.db.remote.ApartmentDataSource
-import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
-import kr.co.lion.application.finalproject_aparttalk.repository.ApartmentRepository
-import kr.co.lion.application.finalproject_aparttalk.repository.AuthRepository
-import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.adapter.AptScheduleRecyclerView
+import java.util.Calendar
 
 class AptScheduleActivity : AppCompatActivity() {
 
@@ -83,18 +74,30 @@ class AptScheduleActivity : AppCompatActivity() {
 
     // 캘린더뷰 설정
     private fun setCalendarView(apartmentUid: String) {
+
+        // 현재 날짜를 "yyyy-MM-dd" 형식의 문자열로 저장합니다.
+        val calendar = Calendar.getInstance()
+        selectedDate = String.format("%04d-%02d-%02d", calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
+
+        getSelectedDateDate(apartmentUid)
+
         binding.calendarViewAptSchedule.setOnDateChangeListener { _, year, month, dayOfMonth ->
             // 사용자가 선택한 날짜를 "yyyy-MM-dd" 형식의 문자열로 저장합니다.
             selectedDate = String.format("%04d-%02d-%02d", year, month + 1, dayOfMonth)
 
-            // selectedDate가 null이 아닌 경우에만 ViewModel을 통해 해당 날짜의 일정을 가져옵니다.
-            selectedDate?.let { date ->
-                // 코루틴을 사용하여 gettingSelectedDateList를 호출합니다.
-                GlobalScope.launch(Dispatchers.Main) {
-                    val selectedDateList = viewModel.gettingSelectedDateList(apartmentUid, date)
-                    // 선택된 날짜의 일정 목록을 어댑터에 설정합니다.
-                    aptScheduleRecyclerView.setScheduleList(selectedDateList)
-                }
+            getSelectedDateDate(apartmentUid)
+        }
+    }
+
+    // 해당 날짜의 일정을 가져옵니다.
+    fun getSelectedDateDate(apartmentUid: String){
+        // selectedDate가 null이 아닌 경우에만 ViewModel을 통해 해당 날짜의 일정을 가져옵니다.
+        selectedDate?.let { date ->
+            // 코루틴을 사용하여 gettingSelectedDateList를 호출합니다.
+            GlobalScope.launch(Dispatchers.Main) {
+                val selectedDateList = viewModel.gettingSelectedDateList(apartmentUid, date)
+                // 선택된 날짜의 일정 목록을 어댑터에 설정합니다.
+                aptScheduleRecyclerView.setScheduleList(selectedDateList)
             }
         }
     }
