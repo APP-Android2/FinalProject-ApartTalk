@@ -56,11 +56,13 @@
         <activity
             android:name=".ui.inquiry.InquiryActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/CustomTheme"/>
         <activity
             android:name=".ui.vote.VoteActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/CustomTheme"/>
         <activity
             android:name=".ui.reservation.ReserveActivity"
             android:exported="false" />
