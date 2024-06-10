@@ -148,17 +148,17 @@ class LoginViewModel(
                 .setActivity(activity)
                 .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {}
-                    override fun onVerificationFailed(e: FirebaseException) {
-                        Log.d("test1234", "Verification failed: ${e.message}")
-                    }
+                    override fun onVerificationFailed(e: FirebaseException) {}
                     override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                         _verificationId.value = verificationId
                     }
                 })
                 .build()
             PhoneAuthProvider.verifyPhoneNumber(options)
+        } catch (e: FirebaseException) {
+            Log.d("test1234", "Verification failed: ${e.message}")
         } catch (e: Exception) {
-            Log.d("test1234", "휴대폰 : ${e.message}")
+            Log.d("test1234", "Verification failed: ${e.message}")
             Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
         }
     }
