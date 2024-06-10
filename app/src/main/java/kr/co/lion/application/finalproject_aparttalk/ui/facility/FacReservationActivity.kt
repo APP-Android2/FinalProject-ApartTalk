@@ -39,7 +39,6 @@ class FacReservationActivity : AppCompatActivity() {
         connectingAdapter()
         initView()
         settingEvent()
-        check()
 
     }
 
@@ -140,22 +139,5 @@ class FacReservationActivity : AppCompatActivity() {
                 }
             }
         }
-
-    private fun check(){
-        lifecycleScope.launch {
-            val authUser = App.authRepository.getCurrentUser()
-            if (authUser != null){
-                val user = App.userRepository.getUser(authUser.uid)
-                if (user != null){
-                    viewModel.getFacilityResData(user.uid)
-
-                    viewModel.facilityList.observe(this@FacReservationActivity){value ->
-                        Log.e("seong1234", value.toString())
-                    }
-
-                }
-            }
-        }
-    }
 
 }
