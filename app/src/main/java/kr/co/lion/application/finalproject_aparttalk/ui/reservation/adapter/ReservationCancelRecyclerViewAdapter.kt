@@ -4,51 +4,45 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowReservationCancelItemBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.RowReservationItemBinding
+import kr.co.lion.application.finalproject_aparttalk.model.FacilityResModel
+import kr.co.lion.application.finalproject_aparttalk.ui.reservation.ReservationViewModel
 import kr.co.lion.application.finalproject_aparttalk.ui.reservation.ReserveActivity
 import kr.co.lion.application.finalproject_aparttalk.util.ReserveFragmentName
 
-class ReservationCancelRecyclerViewAdapter(val context: Context) : RecyclerView.Adapter<ReservationCancelRecyclerViewAdapter.ReservationCancelViewHolder>() {
+class ReservationCancelRecyclerViewAdapter(
+    val context: Context,
+    private val viewModel: ReservationViewModel
+) : ListAdapter<FacilityResModel, ReservationCancelRecyclerViewAdapter.ReservationCancelViewHolder>(FacilityResModelDiffCallback()) {
 
-    inner class ReservationCancelViewHolder(rowReservationCancelItemBinding: RowReservationCancelItemBinding) :
-        RecyclerView.ViewHolder(rowReservationCancelItemBinding.root) {
-        val rowReservationCancelItemBinding: RowReservationCancelItemBinding
-
-        init {
-            this.rowReservationCancelItemBinding = rowReservationCancelItemBinding
-
-            this.rowReservationCancelItemBinding.root.layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-        }
-    }
+    inner class ReservationCancelViewHolder(val binding: RowReservationCancelItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ReservationCancelRecyclerViewAdapter.ReservationCancelViewHolder {
-        val rowReservationCancelItemBinding =
-            RowReservationCancelItemBinding.inflate(LayoutInflater.from(parent.context))
-        val ReservationCancelViewHolder = ReservationCancelViewHolder(rowReservationCancelItemBinding)
-
-        return ReservationCancelViewHolder
+    ): ReservationCancelViewHolder {
+        val binding = RowReservationCancelItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ReservationCancelViewHolder(binding)
     }
 
     override fun onBindViewHolder(
-        holder: ReservationCancelRecyclerViewAdapter.ReservationCancelViewHolder,
-        position: Int
+        holder: ReservationCancelViewHolder, position: Int
     ) {
-        holder.rowReservationCancelItemBinding.apply {
-            reservationCancelTextViewDate.text = "2024.03.01"
-            textViewReservationCancelLabelEtc.text = "예약취소"
-            reservationCancelTextViewPrice.text = "40,000"
-            reservationCancelTextViewTime.text = "15:00 ~ 17:00"
-            reservationCancelTextViewFacility.text = "수영장"
+        val reservation = getItem(position)
+        holder.binding.apply {
+            reservationCancelTextViewDate.text = reservation.reservationDate
+            textViewReservationCancelLabelEtc.text = if (reservation.reservationState) "예약완료" else "예약취소"
+            reservationCancelTextViewPrice.text = reservation.usePrice
+            reservationCancelTextViewTime.text = reservation.useTime
+            reservationCancelTextViewFacility.text = reservation.titleText
 
             reservationCancelLayout.setOnClickListener {
+                viewModel.setSelectedReservation(reservation)
                 (context as ReserveActivity).replaceFragment(
                     ReserveFragmentName.RESERVATION_CANCEL_COMPLETE_FRAGMENT, true, true, null
                 )
@@ -56,7 +50,13 @@ class ReservationCancelRecyclerViewAdapter(val context: Context) : RecyclerView.
         }
     }
 
-    override fun getItemCount(): Int {
-        return 10
+    class FacilityResModelDiffCallback : DiffUtil.ItemCallback<FacilityResModel>() {
+        override fun areItemsTheSame(oldItem: FacilityResModel, newItem: FacilityResModel): Boolean {
+            return oldItem.userUid == newItem.userUid
+        }
+
+        override fun areContentsTheSame(oldItem: FacilityResModel, newItem: FacilityResModel): Boolean {
+            return oldItem == newItem
+        }
     }
 }
