@@ -15,8 +15,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
@@ -151,7 +149,7 @@ class LoginViewModel(
                 .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                     override fun onVerificationCompleted(credential: PhoneAuthCredential) {}
                     override fun onVerificationFailed(e: FirebaseException) {
-                        Log.d("PhoneAuth", "Verification failed: ${e.message}")
+                        Log.d("test1234", "Verification failed: ${e.message}")
                     }
                     override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                         _verificationId.value = verificationId

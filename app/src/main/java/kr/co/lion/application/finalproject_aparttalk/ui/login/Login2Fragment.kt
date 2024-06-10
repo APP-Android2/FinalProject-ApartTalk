@@ -97,7 +97,6 @@ class Login2Fragment : Fragment() {
         }
     }
 
-
     private fun updateLoginButtonState(){
         binding.verificationCodeEditText.addTextChangedListener {
             if (it?.length == 6){
