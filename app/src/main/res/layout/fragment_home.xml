@@ -75,7 +75,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/homeAptNameAndAlarm">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -86,29 +86,23 @@
                             android:fontFamily="@font/notosans_semibold"
                             android:includeFontPadding="false"
                             android:text="위치"
-                            android:textColor="@color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:id="@+id/textHomeAddress"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="80dp"
+                            android:layout_marginStart="38dp"
+                            android:layout_weight="1"
                             android:ellipsize="end"
                             android:fontFamily="@font/notosans_semibold"
-                            android:gravity="end"
                             android:includeFontPadding="false"
                             android:singleLine="true"
                             android:text="서울 송파구 장지동"
-                            android:textColor="@color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/textLocationTitle"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/white" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
