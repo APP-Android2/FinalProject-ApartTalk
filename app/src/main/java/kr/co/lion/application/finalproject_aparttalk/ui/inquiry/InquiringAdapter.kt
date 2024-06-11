@@ -1,5 +1,7 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.inquiry
 
+import android.app.AlertDialog
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -12,6 +14,7 @@ import java.util.*
 
 class InquiringAdapter(
     private var inquiries: List<InquiryModel>,
+    private val currentUserIdx: String, // 현재 유저의 Idx
     private val onItemClick: (InquiryModel) -> Unit
 ) : RecyclerView.Adapter<InquiringAdapter.InquiringViewHolder>() {
 
@@ -43,7 +46,11 @@ class InquiringAdapter(
             rowinquiringTextViewTime.text = timeFormat.format(date)
 
             root.setOnClickListener {
-                onItemClick(inquiry)
+                if (inquiry.inquiryPrivate && inquiry.userIdx != currentUserIdx) {
+                    showPrivateDocumentDialog(holder.itemView.context)
+                } else {
+                    onItemClick(inquiry)
+                }
             }
         }
     }
@@ -51,5 +58,13 @@ class InquiringAdapter(
     fun updateList(newInquiries: List<InquiryModel>) {
         inquiries = newInquiries
         notifyDataSetChanged()
+    }
+
+    private fun showPrivateDocumentDialog(context: Context) {
+        AlertDialog.Builder(context)
+            .setTitle("비공개 문서")
+            .setMessage("해당 문서는 비공개 문서입니다.")
+            .setPositiveButton("확인", null)
+            .show()
     }
 }

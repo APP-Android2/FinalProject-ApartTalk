@@ -4,16 +4,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityDetailFacilityBinding
+import kr.co.lion.application.finalproject_aparttalk.ui.facility.viewmodel.FacilityResInfoViewmodel
+import kr.co.lion.application.finalproject_aparttalk.util.DialogConfirm
 import kr.co.lion.application.finalproject_aparttalk.util.setImage
 
 class DetailFacilityActivity : AppCompatActivity() {
 
     lateinit var binding:ActivityDetailFacilityBinding
+
+    val viewModel : FacilityResInfoViewmodel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -65,13 +73,56 @@ class DetailFacilityActivity : AppCompatActivity() {
             textFacilityPrice.text = "가격 : ${price}"
             imageFacilityDetail.context.setImage(imageFacilityDetail, image)
 
-            buttonGoReservation.setOnClickListener {
-                val newIntent = Intent(this@DetailFacilityActivity, FacReservationActivity::class.java)
-                newIntent.putExtra("titleText", titleText)
-                newIntent.putExtra("price", price)
-                newIntent.putExtra("imageRes", image)
-                startActivity(newIntent)
+            lifecycleScope.launch {
+                val authUser = App.authRepository.getCurrentUser()
+                if (authUser != null){
+                    val user = App.userRepository.getUser(authUser.uid)
+                    if (user != null){
+                        viewModel.getFacilityResData(user.uid)
+
+                        viewModel.facilityList.observe(this@DetailFacilityActivity){value ->
+                            val isOneDayPassed = viewModel.checkFacilityRes()
+
+                            buttonGoReservation.setOnClickListener {
+                                if (isOneDayPassed) {
+                                    val newIntent = Intent(
+                                        this@DetailFacilityActivity,
+                                        FacReservationActivity::class.java
+                                    )
+                                    newIntent.putExtra("titleText", titleText)
+                                    newIntent.putExtra("price", price)
+                                    newIntent.putExtra("imageRes", image)
+                                    startActivity(newIntent)
+
+                                } else {
+                                    val dialog = DialogConfirm(
+                                        "예약 오류",
+                                        "예약은 하루에 한 번만 가능합니다",
+                                        this@DetailFacilityActivity
+                                    )
+                                    dialog.setDialogButtonClickListener(object :
+                                        DialogConfirm.OnButtonClickListener {
+                                        override fun okButtonClick() {
+                                            dialog.dismiss()
+                                        }
+
+                                    })
+                                    dialog.show(
+                                        this@DetailFacilityActivity.supportFragmentManager,
+                                        "DialogConfirm"
+                                    )
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
         }
     }
+
+    private fun check(){
+
+    }
+
 }
