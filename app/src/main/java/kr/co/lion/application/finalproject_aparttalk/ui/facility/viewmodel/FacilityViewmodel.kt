@@ -18,21 +18,15 @@ class FacilityViewmodel : ViewModel(){
 
     //facility 정보를 가져온다
     fun getFacilityInfoData() = viewModelScope.launch {
-        Log.d("test1234", "1111")
         val facilityInfo = facilityRepository.getFacilityInfoData()
-        Log.d("test1234", "2222")
         val facilityInfoList = mutableListOf<FacilityModel>()
-        Log.d("test1234", "3333")
 
         facilityInfo.forEach {facilityModel ->
             val facilityImg = getFacilityInfoImage(facilityModel.imageRes)
             facilityModel.imageRes = facilityImg?: facilityModel.imageRes
             facilityInfoList.add(facilityModel)
         }
-
-        Log.d("test1234", "4444")
         _facilityList.value = facilityInfoList
-        Log.d("test1234", "5555")
     }
 
 

@@ -45,23 +45,11 @@
             android:text="설문조사" />
     </com.google.android.material.tabs.TabLayout>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/voteTabFrameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="match_parent">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    </FrameLayout>
 
-
-            <FrameLayout
-                android:id="@+id/voteTabFrameLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </FrameLayout>
-        </ScrollView>
-    </LinearLayout>
 </LinearLayout>
