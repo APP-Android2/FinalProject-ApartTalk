@@ -60,7 +60,7 @@ class CommunityTabTradeRecyclerViewAdapter(val context: Context, var viewModel: 
 
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.commentList = viewModel.gettingCommunityCommentList(viewModel.tradeList[position].postApartId, viewModel.tradeList[position].postId)
-                textViewCommunityListLikeCntTrade.text = viewModel.commentList.size.toString()
+                textViewCommunityListCommentCntTrade.text = viewModel.commentList.size.toString()
             }
 
             linearLayoutCommunityListTrade.setOnClickListener {
