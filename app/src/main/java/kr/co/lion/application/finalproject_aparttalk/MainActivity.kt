@@ -6,12 +6,14 @@ import android.os.Looper
 import android.os.SystemClock
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import kr.co.lion.application.finalproject_aparttalk.databinding.ActivityMainBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.community.fragment.CommunityFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.EntireMenuFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.facility.FacilityFragment
+import kr.co.lion.application.finalproject_aparttalk.ui.facility.viewmodel.FacilityViewmodel
 import kr.co.lion.application.finalproject_aparttalk.ui.home.fragment.HomeFragment
 import kr.co.lion.application.finalproject_aparttalk.ui.location.LocationFragment
 import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
@@ -27,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     // 현재 선택된 Fragment ID 저장
     private var currentSelectedItemId: Int? = null
 
+    private val viewModel: FacilityViewmodel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -35,6 +39,8 @@ class MainActivity : AppCompatActivity() {
         initView()
 
         onBackProcess()
+
+        viewModel.getFacilityInfoData()
     }
 
     private fun onBackProcess() {
