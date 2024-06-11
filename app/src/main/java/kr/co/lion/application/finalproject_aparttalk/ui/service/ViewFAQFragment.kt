@@ -24,6 +24,7 @@ class ViewFAQFragment : Fragment() {
         serviceActivity = activity as ServiceActivity
 
         settingToolbar()
+        settingButton()
         // Inflate the layout for this fragment
         return fragmentViewFAQBinding.root
     }
@@ -38,6 +39,13 @@ class ViewFAQFragment : Fragment() {
                     // 전화면으로 돌아가기.
                     serviceActivity.replaceFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
                 }
+            }
+        }
+    }
+    fun settingButton() {
+        fragmentViewFAQBinding.apply {
+            viewFAQButton.setOnClickListener {
+                serviceActivity.addFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
             }
         }
     }

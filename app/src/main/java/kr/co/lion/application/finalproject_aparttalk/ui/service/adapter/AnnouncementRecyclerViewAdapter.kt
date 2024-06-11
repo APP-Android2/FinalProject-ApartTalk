@@ -47,7 +47,7 @@ class AnnouncementRecyclerViewAdapter(
             rowAnnouncementLayout.setOnClickListener {
                 // Create a new instance of ViewAnnouncementFragment with the selected announcement data
                 val fragment = ViewAnnouncementFragment.newInstance(announcement)
-                (context as ServiceActivity).replaceFragment(ServiceFragmentName.VIEW_ANNOUNCEMENT_FRAGMENT, true, true, null)
+                (context as ServiceActivity).replaceFragment(fragment, true, true, null)
             }
         }
     }

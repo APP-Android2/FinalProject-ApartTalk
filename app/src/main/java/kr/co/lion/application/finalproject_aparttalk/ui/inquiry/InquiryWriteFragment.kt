@@ -1,114 +1,85 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.inquiry
 
-import android.app.AlertDialog
-import android.graphics.Typeface
 import android.os.Bundle
-import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.FrameLayout
-import android.widget.TextView
-import android.widget.Toolbar
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import kr.co.lion.application.finalproject_aparttalk.R
-import kr.co.lion.application.finalproject_aparttalk.databinding.DialogConfirmCancelBinding
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentInquiryWriteBinding
+import kr.co.lion.application.finalproject_aparttalk.model.InquiryModel
 import kr.co.lion.application.finalproject_aparttalk.util.InquiryFragmentName
 
 class InquiryWriteFragment : Fragment() {
 
-    lateinit var fragmentInquiryWriteBinding: FragmentInquiryWriteBinding
-    lateinit var inquiryActivity: InquiryActivity
+    private lateinit var binding: FragmentInquiryWriteBinding
+    private val inquiryViewModel: InquiryViewModel by activityViewModels()
+    private lateinit var inquiryActivity: InquiryActivity
+    private var isPrivate = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-
-        fragmentInquiryWriteBinding = FragmentInquiryWriteBinding.inflate(inflater)
+        binding = FragmentInquiryWriteBinding.inflate(inflater, container, false)
         inquiryActivity = activity as InquiryActivity
 
-        // 소프트 입력 모드 설정
-        inquiryActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        setToolbar()
+        setupPrivacyButtons()
 
-        inquiryWriteToolbar()
-        setupButtons()
-
-        return fragmentInquiryWriteBinding.root
+        return binding.root
     }
 
-    fun inquiryWriteToolbar(){
-        fragmentInquiryWriteBinding.apply {
-            inquiryWriteToolbar.apply {
-                //title
-                title = "문의글 작성"
-                // back
-                setNavigationIcon(R.drawable.icon_back)
-                setNavigationOnClickListener {
-                    inquiryActivity.removeFragment(InquiryFragmentName.INQUIRY_WRITE_FRAGMENT)
-                    inquiryActivity.replaceFragment(InquiryFragmentName.INQUIRY_TAB_FRAGMENT,false,true,null)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        inquiryViewModel.userModel.observe(viewLifecycleOwner) { user ->
+            if (user != null) {
+                binding.inquiryWriteButtonSubmit.setOnClickListener {
+                    val title = binding.inquiryWriteEditTextTitle.text.toString()
+                    val content = binding.inquiryWriteEditTextContent.text.toString()
+
+                    val inquiry = InquiryModel(
+                        inquiryTitle = title,
+                        inquiryContent = content,
+                        inquiryPrivate = isPrivate,
+                        apartmentUid = user.apartmentUid,
+                        userIdx = user.idx.toString(),
+                        userName = user.name
+                    )
+
+                    // ViewModel을 통해 InquiryModel을 설정 및 저장
+                    inquiryViewModel.createInquiry(inquiry)
+                    inquiryViewModel.setSelectedInquiryModel(inquiry)
+
+                    // InquiringTabFragment로 돌아가도록 설정
+                    (activity as InquiryActivity).replaceFragment(InquiryFragmentName.INQUIRY_TAB_FRAGMENT, false, true, null)
                 }
             }
         }
     }
 
+    private fun setupPrivacyButtons() {
+        binding.inquiryWriteButton.setOnClickListener {
+            isPrivate = false
+            binding.inquiryWriteButton.setTextColor(resources.getColor(R.color.third, null))
+            binding.inquiryWriteButtonPrivate.setTextColor(resources.getColor(R.color.gray, null))
+        }
 
-    fun setupButtons() {
-        fragmentInquiryWriteBinding.apply {
-            inquiryWriteButton.setOnClickListener {
-                // 공개 버튼을 눌렀을 때 비공개 버튼의 선택을 해제
-                inquiryWriteButtonPrivate.isSelected = false
-                inquiryWriteButton.setBackgroundResource(R.drawable.button_setting) // 선택된 버튼의 배경 변경
-                inquiryWriteButtonPrivate.setBackgroundResource(R.color.white) // 선택되지 않은 버튼의 배경 변경
-
-                // 글씨 색상 변경
-                inquiryWriteButton.setTextColor(resources.getColor(R.color.black, null)) // 선택된 버튼의 글씨 색상 변경
-                inquiryWriteButtonPrivate.setTextColor(resources.getColor(R.color.gray, null)) // 선택되지 않은 버튼의 글씨 색상 변경
-            }
-
-            inquiryWriteButtonPrivate.setOnClickListener {
-                // 비공개 버튼을 눌렀을 때 공개 버튼의 선택을 해제
-                inquiryWriteButton.isSelected = false
-                inquiryWriteButtonPrivate.setBackgroundResource(R.drawable.button_setting) // 선택된 버튼의 배경 변경
-                inquiryWriteButton.setBackgroundResource(R.color.white) // 선택되지 않은 버튼의 배경 변경
-
-                // 글씨 색상 변경
-                inquiryWriteButtonPrivate.setTextColor(resources.getColor(R.color.black, null)) // 선택된 버튼의 글씨 색상 변경
-                inquiryWriteButton.setTextColor(resources.getColor(R.color.gray, null)) // 선택되지 않은 버튼의 글씨 색상 변경
-            }
-
-            inquiryWriteButtonSubmit.setOnClickListener {
-                showConfirmCancelDialog()
-            }
+        binding.inquiryWriteButtonPrivate.setOnClickListener {
+            isPrivate = true
+            binding.inquiryWriteButton.setTextColor(resources.getColor(R.color.gray, null))
+            binding.inquiryWriteButtonPrivate.setTextColor(resources.getColor(R.color.third, null))
         }
     }
 
-    // 다이얼로그
-    fun showConfirmCancelDialog() {
-        val dialogBinding = DialogConfirmCancelBinding.inflate(layoutInflater)
-
-        val dialog = AlertDialog.Builder(requireContext())
-            .setView(dialogBinding.root)
-            .create()
-
-        dialogBinding.apply {
-            textViewDialogConfirmCancelSubject.text = "문의글 작성완료?"
-            textViewDialogConfirmCancelContent.text = "입력하신 문의 내용을 제출하시겠습니까?"
-
-            buttonDialogConfirmCancelCancel.setOnClickListener {
-                dialog.dismiss() // 다이얼로그 닫기
-            }
-
-            buttonDialogConfirmCancelConfirm.setOnClickListener {
-                // 확인 버튼 클릭 시 InquiryTabFragment로 이동
-                dialog.dismiss()
-                inquiryActivity.replaceFragment(InquiryFragmentName.INQUIRY_TAB_FRAGMENT, false, true, null)
+    private fun setToolbar(){
+        binding.apply {
+            binding.inquiryWriteToolbar.apply {
+                title = "문의 작성"
+                setNavigationIcon(R.drawable.icon_back)
+                setNavigationOnClickListener {
+                    inquiryActivity.replaceFragment(InquiryFragmentName.INQUIRY_TAB_FRAGMENT,false,true,null)
+                }
             }
         }
-
-        dialog.show()
     }
-
-
 }

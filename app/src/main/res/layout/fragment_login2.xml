@@ -51,41 +51,39 @@
                 app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phoneNumberEditText"
+                    android:id="@+id/login2_phoneNumberEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="휴대폰 번호를 입력해주세요"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:maxLength="13"
                     android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/sendVerificationButton"
-                style="@style/Widget.Material3.CardView.Elevated"
+            <Button
+                android:id="@+id/login2_verificationCodeButton"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
-                app:cardBackgroundColor="@color/third"
-                app:contentPadding="15dp"
-                app:rippleColor="@color/fourth">
-
-                <TextView
-                    android:id="@+id/sendVerificationButtonText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="인증번호"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </com.google.android.material.card.MaterialCardView>
+                android:backgroundTint="@color/third"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:maxLength="20"
+                android:padding="15dp"
+                android:text="인증번호"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:cornerRadius="10dp" />
 
         </LinearLayout>
 
         <FrameLayout
+            android:id="@+id/login2_verificationCodeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            android:visibility="invisible"
+            tools:visibility="visible">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -110,15 +108,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/timerTextView"
+                android:id="@+id/login2_timerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|end"
                 android:layout_marginEnd="15dp"
-                android:text="03:00"
+                android:text="02:00"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:visibility="invisible" />
+                android:textSize="16sp" />
 
         </FrameLayout>
 

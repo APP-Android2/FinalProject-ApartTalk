@@ -58,8 +58,8 @@ class BroadcastActivity : AppCompatActivity() {
                 newFragment = BroadcastFragment(data)
             }
             // 상세조회
-            BroadcastFragmentName.BROADCAST_DETIAL_FRAGMENT -> {
-                newFragment = BroadcastDetailFragment(data)
+            BroadcastFragmentName.BROADCAST_DETAIL_FRAGMENT -> {
+                newFragment = BroadcastDetailFragment()
             }
         }
         if(data != null){

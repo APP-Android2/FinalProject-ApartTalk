@@ -50,6 +50,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
+                        android:id="@+id/imageToAlarm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:clickable="true"
@@ -74,7 +75,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/homeAptNameAndAlarm">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -85,28 +86,23 @@
                             android:fontFamily="@font/notosans_semibold"
                             android:includeFontPadding="false"
                             android:text="위치"
-                            android:textColor="@color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:id="@+id/textHomeAddress"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="38dp"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
                             android:fontFamily="@font/notosans_semibold"
                             android:includeFontPadding="false"
-                            android:text="서울 송파구 장지동"
-                            android:ellipsize="end"
                             android:singleLine="true"
-                            android:textColor="@color/white"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/textLocationTitle"
-                            android:layout_marginStart="45dp"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:text="서울 송파구 장지동"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/white" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    </LinearLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -575,7 +571,6 @@
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="5dp"
                     android:scrollbars="none"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -584,7 +579,8 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="true">
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cardViewRestaurant"
@@ -593,6 +589,8 @@
                             android:layout_height="120dp"
                             android:backgroundTint="@color/white"
                             android:clickable="true"
+                            android:layout_marginStart="20dp"
+                            app:rippleColor="@color/third"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="3dp"
                             app:cardUseCompatPadding="true"
@@ -634,9 +632,10 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:backgroundTint="@color/white"
                             android:clickable="true"
+                            app:rippleColor="@color/third"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="3dp"
                             app:cardUseCompatPadding="true"
@@ -678,9 +677,10 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:backgroundTint="@color/white"
                             android:clickable="true"
+                            app:rippleColor="@color/third"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="3dp"
                             app:cardUseCompatPadding="true"
@@ -722,9 +722,11 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="20dp"
                             android:backgroundTint="@color/white"
                             android:clickable="true"
+                            app:rippleColor="@color/third"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="3dp"
                             app:cardUseCompatPadding="true"

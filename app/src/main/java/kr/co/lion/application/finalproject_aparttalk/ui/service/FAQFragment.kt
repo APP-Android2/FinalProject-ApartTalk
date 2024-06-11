@@ -35,9 +35,9 @@ class FAQFragment : Fragment() {
     private fun settingRecyclerview() {
         // 더미 데이터 생성
         val dummyData = listOf(
-            ServiceModel(serviceTitle = "질문 제목 1", serviceDate = "2024.03.01"),
-            ServiceModel(serviceTitle = "질문 제목 2", serviceDate = "2024.03.02"),
-            ServiceModel(serviceTitle = "질문 제목 3", serviceDate = "2024.03.03")
+            ServiceModel(serviceTitle = "아파트 인증은 어떻게 하나요?", serviceDate = "2024.03.01"),
+            ServiceModel(serviceTitle = "주변 시설 이용은 어떻게 하나요?", serviceDate = "2024.03.02"),
+            ServiceModel(serviceTitle = "아파트 내의 이용시설은 어떻게 확인을 하나요?", serviceDate = "2024.03.03")
         )
 
         fragmentFAQBinding.apply {

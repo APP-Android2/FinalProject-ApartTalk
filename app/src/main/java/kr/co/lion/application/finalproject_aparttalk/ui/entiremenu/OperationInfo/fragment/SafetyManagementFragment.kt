@@ -1,10 +1,10 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
@@ -31,15 +31,15 @@ class SafetyManagementFragment : Fragment() {
     private val viewModel: SafetyManagementViewModel by viewModels()
 
     private val authRepository by lazy {
-        AuthRepository(FirebaseAuthService(), LocalUserDataSource(requireContext()), LocalApartmentDataSource(requireContext()))
+        AuthRepository(FirebaseAuthService())
     }
 
     private val userRepository by lazy {
-        UserRepository(UserDataSource(), LocalUserDataSource(requireContext()))
+        UserRepository(UserDataSource(), LocalUserDataSource(requireActivity().applicationContext))
     }
 
     private val apartmentRepository by lazy {
-        ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(requireContext()))
+        ApartmentRepository(ApartmentDataSource(), LocalApartmentDataSource(requireActivity().applicationContext))
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         fragmentSafetyManagementBinding = FragmentSafetyManagementBinding.inflate(layoutInflater)

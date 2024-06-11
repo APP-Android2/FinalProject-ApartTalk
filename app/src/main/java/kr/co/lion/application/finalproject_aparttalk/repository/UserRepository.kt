@@ -19,6 +19,10 @@ class UserRepository(
         }
     }
 
+    fun clearUser(){
+        localUserDataSource.clearUser()
+    }
+
     suspend fun updateUser(uid: String, updates: Map<String, Any?>) {
         userDataSource.updateUser(uid, updates)
         val user = getUser(uid)

@@ -32,28 +32,28 @@ class AnnouncementFragment : Fragment() {
         // 더미 데이터 생성
         val dummyData = listOf(
             AnnouncementModel(
-                AnnouncementTitle = "첫 번째 공지",
+                AnnouncementTitle = "1.03 업데이트",
                 AnnouncementIdx = 1,
-                AnnouncementDate = "2024.06.01",
+                AnnouncementDate = "2024.06.11",
                 AnnouncementContent = "첫 번째 공지 내용입니다."
             ),
             AnnouncementModel(
-                AnnouncementTitle = "두 번째 공지",
+                AnnouncementTitle = "1.02 업데이트",
                 AnnouncementIdx = 2,
-                AnnouncementDate = "2024.06.02",
+                AnnouncementDate = "2024.06.08",
                 AnnouncementContent = "두 번째 공지 내용입니다."
             ),
             AnnouncementModel(
-                AnnouncementTitle = "세 번째 공지",
+                AnnouncementTitle = "1.01 업데이트",
                 AnnouncementIdx = 3,
-                AnnouncementDate = "2024.06.03",
+                AnnouncementDate = "2024.06.02",
                 AnnouncementContent = "세 번째 공지 내용입니다."
             )
         )
 
         fragmentAnnouncementBinding.apply {
             recyclerViewAnnouncement.apply {
-                // 어댑터에 더미 데이터 전달
+                // 어댑터에 더미 데이터 전달 및 클릭 리스너 설정
                 adapter = AnnouncementRecyclerViewAdapter(requireContext(), dummyData)
                 layoutManager = LinearLayoutManager(serviceActivity)
                 val deco = MaterialDividerItemDecoration(serviceActivity, MaterialDividerItemDecoration.VERTICAL)

@@ -1,21 +1,18 @@
 package kr.co.lion.application.finalproject_aparttalk.ui.info
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentInfoBinding
 import kr.co.lion.application.finalproject_aparttalk.db.local.LocalUserDataSource
 import kr.co.lion.application.finalproject_aparttalk.db.remote.UserDataSource
 import kr.co.lion.application.finalproject_aparttalk.repository.UserRepository
 import kr.co.lion.application.finalproject_aparttalk.util.InfoFragmentName
-import kr.co.lion.application.finalproject_aparttalk.util.MainFragmentName
 
 class InfoFragment : Fragment() {
 
@@ -25,7 +22,7 @@ class InfoFragment : Fragment() {
 
     private val userViewModel: UserViewModel by activityViewModels {
         val userDataSource = UserDataSource()
-        val localUserDataSource = LocalUserDataSource(requireContext())
+        val localUserDataSource = LocalUserDataSource(requireActivity().applicationContext)
         UserViewModelFactory(UserRepository(userDataSource, localUserDataSource))
     }
     override fun onCreateView(
