@@ -37,7 +37,7 @@ class VoteListFragment : Fragment() {
 
     // 실제 도큐먼트 ID를 전달하도록 수정
     private val voteViewModel: VoteViewModel by viewModels {
-        VoteViewModelFactory(voteRepository, userRepository, "your_vote_document_id")
+        VoteViewModelFactory(voteRepository, userRepository, "ltfkOHDzaur5lHbSxxDp")
     }
 
     private lateinit var voteListAdapter: VoteListAdapter
