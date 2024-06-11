@@ -58,6 +58,10 @@ class CommunityTabNotificationRecyclerViewAdapter(val context: Context, var view
                     imageViewCommunityListNotification.setImageResource(R.color.white)
                 }
             }
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.commentList = viewModel.gettingCommunityCommentList(viewModel.notificationList[position].postApartId, viewModel.notificationList[position].postId)
+                textViewCommunityListCommentCntNotification.text = viewModel.commentList.size.toString()
+            }
 
             linearLayoutCommunityListNotification.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)

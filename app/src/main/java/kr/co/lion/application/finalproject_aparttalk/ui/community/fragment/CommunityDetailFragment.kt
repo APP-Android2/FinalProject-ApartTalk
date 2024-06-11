@@ -46,6 +46,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     // 현재 글이 담긴 아파트 아이디
     var postApartId: String? = null
 
+    var postLikeList = mutableListOf<String>()
+
     // 댓글 모델
     var commentData:CommentData? = null
     // 댓글 정보를 가지고 있는 리스트
@@ -140,6 +142,18 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
         return user!!
     }
 
+    // 좋아요 누를 시
+    private fun touchLikeImage(): MutableList<String> {
+        fragmentCommunityDetailBinding.imageViewCommunityDetailLike.setOnClickListener {
+            fragmentCommunityDetailBinding.imageViewCommunityDetailLike.setImageResource(R.drawable.icon_thumb_liked)
+            CoroutineScope(Dispatchers.Main).launch {
+                val user = gettingUserData()
+                postLikeList.add(user.uid)
+            }
+        }
+        return  postLikeList
+    }
+
     // 초기 데이터 설정
     private fun settingData() {
         fragmentCommunityDetailBinding.apply {
@@ -170,6 +184,9 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 textViewCommunityDetailSubject.text = postData?.postTitle
                 textViewCommunityDetailContent.text = postData?.postContent
                 textViewCommunityDetailToolbarTitle.text = postData?.postType
+
+
+
                 textViewCommunityDetailLikeCnt.text = postData?.postLikeCnt.toString()
 
                 val job1 = CoroutineScope(Dispatchers.IO).launch {

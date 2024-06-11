@@ -8,14 +8,18 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.model.CommentData
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityCommentRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 
 class CommunityNotificationViewModel: ViewModel() {
 
     private val communityPostRepository = CommunityPostRepository()
+    private val communityCommentRepository = CommunityCommentRepository()
     var allList = mutableListOf<PostData>()
     var notificationList = mutableListOf<PostData>()
+    var commentList = mutableListOf<CommentData>()
 
     // 커뮤니티 글 리스트 공지 탭 라벨
     private val _textViewCommunityListLabelNotification = MutableLiveData<String>()
@@ -61,5 +65,10 @@ class CommunityNotificationViewModel: ViewModel() {
         job1.join()
 
         return notificationList
+    }
+
+    // 댓글 목록을 가져온다.
+    suspend fun gettingCommunityCommentList(postApartId: String, postId: String):MutableList<CommentData>{
+        return communityCommentRepository.gettingCommunityCommentList(postApartId, postId)
     }
 }

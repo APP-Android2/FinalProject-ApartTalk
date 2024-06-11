@@ -40,7 +40,7 @@ class TabTradeFragment : Fragment() {
         gettingCommunityPostList()
         settingRecyclerViewTabTrade()
         settingFabTabTradeAdd()
-        settingFloatingButton()
+        //settingFloatingButton()
 
         return fragmentTabTradeBinding.root
     }
