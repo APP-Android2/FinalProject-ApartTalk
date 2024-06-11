@@ -94,6 +94,8 @@ class DetailFacilityActivity : AppCompatActivity() {
                                     newIntent.putExtra("imageRes", image)
                                     startActivity(newIntent)
 
+                                    finish()
+
                                 } else {
                                     val dialog = DialogConfirm(
                                         "예약 오류",
