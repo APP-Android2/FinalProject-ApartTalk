@@ -68,31 +68,26 @@
         <TextView
             android:id="@+id/surveyContentTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="24dp"
-            android:text="오늘 뭘 먹을지 매우매우 고민이 되는데 주민여러분들의 추천을 받습니다~"
+            android:layout_weight="1"
             android:fontFamily="@font/notosans_regular"
             android:includeFontPadding="false"
-            android:textSize="16sp"/>
+            android:text="오늘 뭘 먹을지 매우매우 고민이 되는데 주민여러분들의 추천을 받습니다~"
+            android:textSize="16sp" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/surveyButton"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/style_pointbutton_radias"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
+            android:text="설문조사 참여"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/surveyButton"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:text="설문조사 참여"
-                android:fontFamily="@font/notosans_semibold"
-                android:includeFontPadding="false"
-                android:background="@drawable/style_pointbutton_radias"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
 </LinearLayout>

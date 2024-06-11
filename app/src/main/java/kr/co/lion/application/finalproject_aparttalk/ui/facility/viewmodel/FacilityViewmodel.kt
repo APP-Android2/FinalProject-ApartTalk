@@ -16,15 +16,8 @@ class FacilityViewmodel : ViewModel(){
     private val _facilityList = MutableLiveData<List<FacilityModel>>()
     var facilityInfo : LiveData<List<FacilityModel>> = _facilityList
 
-    init {
-        viewModelScope.launch {
-            getFacilityInfoData()
-        }
-    }
-
-
     //facility 정보를 가져온다
-    suspend fun getFacilityInfoData(){
+    fun getFacilityInfoData() = viewModelScope.launch {
         val facilityInfo = facilityRepository.getFacilityInfoData()
         val facilityInfoList = mutableListOf<FacilityModel>()
 
@@ -33,7 +26,6 @@ class FacilityViewmodel : ViewModel(){
             facilityModel.imageRes = facilityImg?: facilityModel.imageRes
             facilityInfoList.add(facilityModel)
         }
-
         _facilityList.value = facilityInfoList
     }
 
