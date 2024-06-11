@@ -207,7 +207,7 @@ class HomeFragment : Fragment() {
             // 코루틴을 사용하여 gettingSelectedDateList를 호출합니다.
             GlobalScope.launch(Dispatchers.Main) {
                 val selectedDateList = aptViewModel.gettingSelectedDateList(apartmentUid, date)
-                // 선택된 날짜의 일정 목록을 어댑터에 설정합니다.
+                // 선택된 날짜의 일정 목록을 어댑터에 설정합니다.。。
                 homeAptScheduleRecyclerView.setScheduleList(selectedDateList)
             }
         }
