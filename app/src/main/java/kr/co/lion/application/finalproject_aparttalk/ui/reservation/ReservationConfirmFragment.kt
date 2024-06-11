@@ -66,8 +66,8 @@ class ReservationConfirmFragment : Fragment() {
 
     private fun bindReservationData(reservation: FacilityResModel) {
         fragmentReservationConfirmBinding.apply {
-            reservationConfirmTextViewName.text = reservation.userName ?: "미입력"
-            reservationConfirmTextViewPhoneNumber.text = reservation.userNumber ?: "미입력"
+            reservationConfirmTextViewName.text = reservation.userName
+            reservationConfirmTextViewPhoneNumber.text = reservation.userNumber
             reservationConfirmTextViewDate.text = reservation.reservationDate
             reservationConfirmTextViewFacility.text = reservation.titleText
             reservationConfirmTextViewReservedDate.text = reservation.reservationDate
