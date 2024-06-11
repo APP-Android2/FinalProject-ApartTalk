@@ -577,7 +577,6 @@
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="5dp"
                     android:scrollbars="none"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -586,7 +585,8 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="true">
 
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cardViewRestaurant"
@@ -595,6 +595,8 @@
                             android:layout_height="120dp"
                             android:backgroundTint="@color/white"
                             android:clickable="true"
+                            android:layout_marginStart="20dp"
+                            app:rippleColor="@color/third"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="3dp"
                             app:cardUseCompatPadding="true"
@@ -636,9 +638,10 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:backgroundTint="@color/white"
                             android:clickable="true"
+                            app:rippleColor="@color/third"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="3dp"
                             app:cardUseCompatPadding="true"
@@ -680,9 +683,10 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:backgroundTint="@color/white"
                             android:clickable="true"
+                            app:rippleColor="@color/third"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="3dp"
                             app:cardUseCompatPadding="true"
@@ -724,9 +728,11 @@
                             style="?attr/materialCardViewFilledStyle"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="20dp"
                             android:backgroundTint="@color/white"
                             android:clickable="true"
+                            app:rippleColor="@color/third"
                             app:cardCornerRadius="10dp"
                             app:cardElevation="3dp"
                             app:cardUseCompatPadding="true"
