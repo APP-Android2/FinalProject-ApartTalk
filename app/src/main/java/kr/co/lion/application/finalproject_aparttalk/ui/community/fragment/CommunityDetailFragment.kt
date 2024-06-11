@@ -184,7 +184,9 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 textViewCommunityDetailSubject.text = postData?.postTitle
                 textViewCommunityDetailContent.text = postData?.postContent
                 textViewCommunityDetailToolbarTitle.text = postData?.postType
-                postData?.postLikeCnt = touchLikeImage().size
+
+
+
                 textViewCommunityDetailLikeCnt.text = postData?.postLikeCnt.toString()
 
                 val job1 = CoroutineScope(Dispatchers.IO).launch {
