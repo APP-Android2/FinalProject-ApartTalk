@@ -80,11 +80,10 @@
                         android:id="@+id/textViewCommunityListLikeCntTrade"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="text"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
+                        android:layout_gravity="center_vertical"
                         android:includeFontPadding="false"
-                        android:layout_gravity="center_vertical"/>
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                     <ImageView
                         android:id="@+id/imageViewCommunityListCommentTrade"
@@ -99,12 +98,11 @@
                         android:id="@+id/textViewCommunityListCommentCntTrade"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginRight="10dp"
-                        android:text="text"
-                        android:textColor="@color/black"
-                        android:textSize="14sp"
                         android:includeFontPadding="false"
-                        android:layout_gravity="center_vertical"/>
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
                     <View
                         android:id="@+id/divider"
