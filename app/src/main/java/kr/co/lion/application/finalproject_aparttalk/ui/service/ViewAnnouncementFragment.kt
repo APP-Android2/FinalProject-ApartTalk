@@ -18,9 +18,7 @@ class ViewAnnouncementFragment : Fragment() {
     lateinit var fragmentViewAnnouncementBinding: FragmentViewAnnouncementBinding
     lateinit var serviceActivity: ServiceActivity
 
-    private var announcementTitle: String? = null
-    private var announcementDate: String? = null
-    private var announcementContent: String? = null
+    private var announcement: AnnouncementModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,13 +29,13 @@ class ViewAnnouncementFragment : Fragment() {
 
         // arguments에서 데이터 추출
         arguments?.let {
-            announcementTitle = it.getString("title")
-            announcementDate = it.getString("date")
-            announcementContent = it.getString("content")
+            announcement = it.getParcelable("announcement")
         }
 
         settingToolbar()
+        settingButton()
         displayAnnouncement()
+
         return fragmentViewAnnouncementBinding.root
     }
 
@@ -49,32 +47,34 @@ class ViewAnnouncementFragment : Fragment() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기
-                    serviceActivity.replaceFragment(
-                        ServiceFragmentName.SERVICE_FRAGMENT,
-                        true,
-                        true,
-                        null
-                    )
+                    serviceActivity.replaceFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
                 }
+            }
+        }
+    }
+
+    fun settingButton() {
+        fragmentViewAnnouncementBinding.apply {
+            viewMyAnnouncementButton.setOnClickListener {
+                serviceActivity.addFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
             }
         }
     }
 
     private fun displayAnnouncement() {
         fragmentViewAnnouncementBinding.apply {
-            viewAnnouncementTextViewTitle.text = announcementTitle
-            viewAnnouncementTextViewAnsContent.setText(announcementContent)
+            announcement?.let {
+                viewAnnouncementTitle.setText(it.AnnouncementTitle)
+                viewAnnouncementTextViewAnsContent.setText(it.AnnouncementContent)
+            }
         }
     }
-
     companion object {
         // Factory method to create a new instance of this fragment with data
         fun newInstance(announcement: AnnouncementModel): ViewAnnouncementFragment {
             val fragment = ViewAnnouncementFragment()
             val args = Bundle().apply {
-                putString("title", announcement.AnnouncementTitle)
-                putString("date", announcement.AnnouncementDate)
-                putString("content", announcement.AnnouncementContent)
+                putParcelable("announcement", announcement)
             }
             fragment.arguments = args
             return fragment

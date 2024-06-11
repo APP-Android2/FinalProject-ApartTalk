@@ -26,6 +26,7 @@ class ViewMyQFragment : Fragment() {
         serviceActivity = activity as ServiceActivity
 
         settingToolbar()
+        settingButton()
 
         displayServiceDetails() // 서비스 상세 내용 표시 함수 호출
 
@@ -40,6 +41,14 @@ class ViewMyQFragment : Fragment() {
                 setNavigationOnClickListener {
                     serviceActivity.replaceFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
                 }
+            }
+        }
+    }
+
+    fun settingButton() {
+        fragmentViewMyQBinding.apply {
+            viewMyQButton.setOnClickListener {
+                serviceActivity.addFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
             }
         }
     }
