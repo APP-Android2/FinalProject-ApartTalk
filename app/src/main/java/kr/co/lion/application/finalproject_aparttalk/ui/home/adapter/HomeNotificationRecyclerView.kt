@@ -57,7 +57,7 @@ class HomeNotificationRecyclerView(val context: Context, val viewModel: Communit
                 }
                 CoroutineScope(Dispatchers.Main).launch {
                     viewModel.commentList = viewModel.gettingCommunityCommentList(viewModel.notificationList[0].postApartId, viewModel.notificationList[0].postId)
-                    textViewCommunityListLikeCntNotification.text = viewModel.commentList.size.toString()
+                    textViewHomeListCommentCntNotification.text = viewModel.commentList.size.toString()
                 }
 
                 linearLayoutHomeListNotification.setOnClickListener {
