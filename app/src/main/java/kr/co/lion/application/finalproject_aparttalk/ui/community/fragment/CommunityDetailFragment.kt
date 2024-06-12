@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.Commu
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityDetailBinding
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
+import kr.co.lion.application.finalproject_aparttalk.model.LikeData
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.util.SwipeHelperCallback
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailCommentRecyclerViewAdapter
@@ -38,7 +40,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 이미지 저장용 리스트
     var imageCommunityDetailList = mutableListOf<String>()
-    var postLikeList = mutableListOf<String>()
+    var isLiked: Boolean = false
+    var likeList = mutableListOf<LikeData>()
 
     // 현재 글 번호를 담을 변수
     var postIdx: Int? = null
@@ -66,6 +69,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
         settingToolbar()
         settingData()
+        settingLike()
         settingCommentInputForm()
         commentDoneProcess()
         settingRecyclerViewCommunityDetailComment()
@@ -142,15 +146,52 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     }
 
     // 좋아요 누를 시
-    private fun touchLikeImage(): MutableList<String> {
-        fragmentCommunityDetailBinding.imageViewCommunityDetailLike.setOnClickListener {
-            fragmentCommunityDetailBinding.imageViewCommunityDetailLike.setImageResource(R.drawable.icon_thumb_liked)
+    private fun settingLike() {
+        fragmentCommunityDetailBinding.apply {
             CoroutineScope(Dispatchers.Main).launch {
-                val user = gettingUserData()
-                postLikeList.add(user.uid)
+                val likeData = generatingLikeObject()
+                imageViewCommunityDetailLike.setOnClickListener {
+                    if (isLiked == false) {
+                        isLiked = true
+                        imageViewCommunityDetailLike.setImageResource(R.drawable.icon_thumb_liked)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            val likeSequence = viewModel.getLikeSequence()
+                            viewModel.updateLikeSequence(likeSequence)
+                            viewModel.insertLikeData(postApartId!!, likeData)
+                            likeList = viewModel.gettingLikeList(postApartId!!, postId!!)
+                            textViewCommunityDetailLikeCnt.text = likeList.size.toString()
+                        }
+                    } else {
+                        isLiked = false
+                        imageViewCommunityDetailLike.setImageResource(R.drawable.icon_thumb)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            viewModel.deleteLikeData(postApartId!!, likeData)
+                            likeList = viewModel.gettingLikeList(postApartId!!, postId!!)
+                            textViewCommunityDetailCommentCnt.text = likeList.size.toString()
+                        }
+                    }
+                }
             }
         }
-        return  postLikeList
+    }
+
+    // 좋아요 객체 설정
+    suspend fun generatingLikeObject(): LikeData {
+        var likeData = LikeData()
+        val user = gettingUserData()
+
+        val job1 = CoroutineScope(Dispatchers.Main).launch {
+            val likeSequence = viewModel.getLikeSequence()
+            viewModel.updateLikeSequence(likeSequence + 1)
+
+            likeData.likeId = UUID.randomUUID().toString()
+            likeData.likePostId = postId!!
+            likeData.likeUserId = user.uid
+        }
+        job1.join()
+
+        return  likeData
+
     }
 
     // 초기 데이터 설정
@@ -167,7 +208,6 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 // 현재 글 번호에 해당하는 글 데이터를 가져온다.
                 val postData = viewModel.selectCommunityPostData(postApartId!!, postId!!)
                 // 사용자 정보를 가져온다.
-                val user = gettingUserData()
                 userList = gettingCommentUserData()
 
                 commentData = generatingCommentObject()
@@ -239,30 +279,48 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 댓글 입력 객체 생성
     suspend fun generatingCommentObject() : CommentData {
+
+        val authUser = App.authRepository.getCurrentUser()
         var commentData = CommentData()
         // 사용자 정보를 가져온다.
         val user = gettingUserData()
 
-        val job1 = CoroutineScope(Dispatchers.Main).launch {
-            // 댓글 번호를 가져온다.
-            val commentSequence = viewModel.getCommunityCommentSequence()
-            // 댓글 번호를 업데이트한다.
-            viewModel.updateCommunityCommentSequence(commentSequence + 1)
-            // 저장할 데이터를 담는다.
-            commentData.commentId = UUID.randomUUID().toString()
-            commentData.commentPostId = postId!!
-            commentData.commentIdx = commentSequence + 1
-            commentData.commentUserIdx = user.idx
-            commentData.commentUserId = user.uid
-            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
-            commentData.commentAddDate = simpleDateFormat.format(Date())
-            commentData.commentModifyDate = simpleDateFormat.format(Date())
-            commentData.commentPostIdx = postIdx!!
-            commentData.commentContent = fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text.toString()
-            commentData.commentCnt = commentList.size
-            commentData.commentState = CommentState.COMMENT_STATE_NORMAL.number
+        if (authUser != null) {
+            val user = App.userRepository.getUser(authUser.uid)
+            if (user != null) {
+                if (user.apartCertification == true) {
+                    val job1 = CoroutineScope(Dispatchers.Main).launch {
+                        // 댓글 번호를 가져온다.
+                        val commentSequence = viewModel.getCommunityCommentSequence()
+                        // 댓글 번호를 업데이트한다.
+                        viewModel.updateCommunityCommentSequence(commentSequence + 1)
+                        // 저장할 데이터를 담는다.
+                        commentData.commentId = UUID.randomUUID().toString()
+                        commentData.commentPostId = postId!!
+                        commentData.commentIdx = commentSequence + 1
+                        commentData.commentUserIdx = user.idx
+                        commentData.commentUserId = user.uid
+                        val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
+                        commentData.commentAddDate = simpleDateFormat.format(Date())
+                        commentData.commentModifyDate = simpleDateFormat.format(Date())
+                        commentData.commentPostIdx = postIdx!!
+                        commentData.commentContent = fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text.toString()
+                        commentData.commentCnt = commentList.size
+                        commentData.commentState = CommentState.COMMENT_STATE_NORMAL.number
+                    }
+                    job1.join()
+                } else {
+                    fragmentCommunityDetailBinding.imageViewCommunityDetailSendComment.setOnClickListener {
+                        val toast = Toast.makeText(
+                            requireContext(),
+                            "인증된 입주민만 작성할 수 있습니다.",
+                            Toast.LENGTH_SHORT
+                        )
+                        toast.show()
+                    }
+                }
+            }
         }
-        job1.join()
 
         return commentData
     }

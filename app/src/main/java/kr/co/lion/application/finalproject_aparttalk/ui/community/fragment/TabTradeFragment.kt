@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -75,11 +76,35 @@ class TabTradeFragment : Fragment() {
 
     // 커뮤니티 거래 탭 플로팅 버튼
     private fun settingFabTabTradeAdd() {
-        fragmentTabTradeBinding.apply {
-            fabTabTradeAdd.setOnClickListener {
-                val intent = Intent(mainActivity, CommunityActivity::class.java)
-                intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_ADD_FRAGMENT)
-                startActivity(intent)
+        CoroutineScope(Dispatchers.Main).launch {
+            certificationFab()
+        }
+    }
+
+    suspend fun certificationFab() {
+        val authUser = App.authRepository.getCurrentUser()
+
+        if (authUser != null) {
+            val user = App.userRepository.getUser(authUser.uid)
+            fragmentTabTradeBinding.fabTabTradeAdd.setOnClickListener {
+                if (user != null) {
+                    if (user.apartCertification == true) {
+
+                        val intent = Intent(mainActivity, CommunityActivity::class.java)
+                        intent.putExtra(
+                            "fragmentName",
+                            CommunityFragmentName.COMMUNITY_ADD_FRAGMENT
+                        )
+                        startActivity(intent)
+                    } else {
+                        val toast = Toast.makeText(
+                            requireContext(),
+                            "인증된 입주민만 작성할 수 있습니다.",
+                            Toast.LENGTH_SHORT
+                        )
+                        toast.show()
+                    }
+                }
             }
         }
     }
