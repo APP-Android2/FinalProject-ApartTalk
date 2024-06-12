@@ -7,9 +7,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
+import kr.co.lion.application.finalproject_aparttalk.model.LikeData
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.repository.CommunityCommentRepository
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityLikeRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 import kr.co.lion.application.finalproject_aparttalk.util.CommentState
 import kr.co.lion.application.finalproject_aparttalk.util.PostState
@@ -18,6 +20,7 @@ class CommunityDetailViewModel: ViewModel() {
 
     private val communityPostRepository = CommunityPostRepository()
     private val communityCommentRepository = CommunityCommentRepository()
+    private val communityLikeRepository = CommunityLikeRepository()
 
     // 커뮤니티 상세조회 글 종류
     private val _textViewCommunityDetailToolbarTitle = MutableLiveData<String>()
@@ -100,4 +103,31 @@ class CommunityDetailViewModel: ViewModel() {
     suspend fun getApartmentUserList(apartmentUid: String): List<UserModel?> {
         return communityCommentRepository.getApartmentUserList(apartmentUid)
     }
+
+    // 좋아요 번호 시퀀스값을 가져온다.
+    suspend fun getLikeSequence():Int{
+        return communityLikeRepository.getLikeSequence()
+    }
+
+    // 좋아요 시퀀스 값을 업데이트 한다.
+    suspend fun updateLikeSequence(likeSequence:Int){
+        return communityLikeRepository.updateLikeSequence(likeSequence)
+    }
+
+    // 게시글의 좋아요 정보를 저장한다.
+    suspend fun insertLikeData(postApartId: String, likeData: LikeData){
+        return communityLikeRepository.insertLikeData(postApartId, likeData)
+    }
+
+    // 게시글의 좋아요 정보 삭제
+    suspend fun deleteLikeData(postApartId: String, likeData: LikeData) {
+        return communityLikeRepository.deleteLikeData(postApartId, likeData)
+    }
+
+    // 좋아요 목록을 가져온다.
+    suspend fun gettingLikeList(postApartId: String, postId: String): MutableList<LikeData>{
+        return communityLikeRepository.gettingLikeList(postApartId, postId)
+    }
+
+
 }
