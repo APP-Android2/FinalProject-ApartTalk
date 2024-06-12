@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,20 +67,6 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    // 아파트 아이디 가져오기
-    suspend fun gettingApartId(): String {
-        var apartmentId = ""
-        val authUser = App.authRepository.getCurrentUser()
-        if (authUser != null) {
-            val user = App.userRepository.getUser(authUser.uid)
-            if (user != null) {
-                val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
-                apartmentId = apartment!!.uid
-            }
-        }
-        return  apartmentId
     }
 
     // 게시글 리스트 받아오기
