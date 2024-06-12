@@ -58,6 +58,11 @@ class CommunityTabTradeRecyclerViewAdapter(val context: Context, var viewModel: 
                 }
             }
 
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.commentList = viewModel.gettingCommunityCommentList(viewModel.tradeList[position].postApartId, viewModel.tradeList[position].postId)
+                textViewCommunityListCommentCntTrade.text = viewModel.commentList.size.toString()
+            }
+
             linearLayoutCommunityListTrade.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)

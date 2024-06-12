@@ -59,6 +59,11 @@ class CommunitySearchRecyclerViewAdapter(val context: Context, var viewModel: Co
                 }
             }
 
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.commentList = viewModel.gettingCommunityCommentList(viewModel.searchList[position].postApartId, viewModel.searchList[position].postId)
+                textViewCommunityListCommentCntSearch.text = viewModel.commentList.size.toString()
+            }
+
             linearLayoutCommunityListSearch.setOnClickListener {
                 val bundle = Bundle()
                 bundle.putInt("postIdx", viewModel.searchList[position].postIdx)

@@ -1,72 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#FFFFFF"
+    android:orientation="vertical"
     android:padding="20dp"
     tools:context="ui.vote.SurveyListFragment">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/surveyListTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosans_semibold"
+        android:includeFontPadding="false"
+        android:text="설문조사"
+        android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/surveyListTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"
-            android:text="설문조사"
-            android:textSize="20sp" />
+    <TextView
+        android:id="@+id/surveyListTextView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosans_semibold"
+        android:includeFontPadding="false"
+        android:text="설문조사는 입주민도 만들 수 있어요!"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/surveyListTextView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosans_semibold"
-            android:includeFontPadding="false"
-            android:text="설문조사는 입주민도 만들 수 있어요!"
-            android:textSize="16sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="20dp"
+        android:background="#000000" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="20dp"
-            android:background="#000000" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/surveyListRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="550dp" />
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/surveyListRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/surveyListButton"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/style_pointbutton_radias"
         android:fontFamily="@font/notosans_semibold"
         android:includeFontPadding="false"
         android:text="설문 조사 만들기"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="16sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

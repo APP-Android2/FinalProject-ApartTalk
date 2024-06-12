@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentReservationCancelCompleteBinding
+import kr.co.lion.application.finalproject_aparttalk.model.FacilityResModel
 import kr.co.lion.application.finalproject_aparttalk.util.ReserveFragmentName
 
 
@@ -30,6 +32,7 @@ class ReservationCancelCompleteFragment() : Fragment() {
         settingToolbar()
         settingButton()
         settingData()
+        observeSelectedReservation()
 
         return fragmentReservationCancelCompleteBinding.root
     }
@@ -64,9 +67,29 @@ class ReservationCancelCompleteFragment() : Fragment() {
                 val inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
 
-                reservationViewModel.removeAllReservations()
+                // 선택된 예약을 취소
+                reservationViewModel.selectedReservation.value?.let { reservation ->
+                    reservationViewModel.removeReservation(reservation)
+                }
                 reserveActivity.replaceFragment(ReserveFragmentName.RESERVATION_FRAGMENT, true, true, null)
             }
+        }
+    }
+
+    private fun observeSelectedReservation() {
+        reservationViewModel.selectedReservation.observe(viewLifecycleOwner, Observer { reservation ->
+            if (reservation != null) {
+                bindReservationData(reservation)
+            }
+        })
+    }
+
+    private fun bindReservationData(reservation: FacilityResModel) {
+        fragmentReservationCancelCompleteBinding.apply {
+            reservationCancelTextViewDate.text = reservation.reservationDate
+            reservationCancelTextViewPrice.text = reservation.usePrice
+            reservationCancelTextViewTime.text = reservation.useTime
+            reservationCancelTextViewFacility.text = reservation.titleText
         }
     }
 }

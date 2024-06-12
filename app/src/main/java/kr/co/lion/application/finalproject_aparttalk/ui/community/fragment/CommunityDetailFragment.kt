@@ -38,6 +38,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 이미지 저장용 리스트
     var imageCommunityDetailList = mutableListOf<String>()
+    var postLikeList = mutableListOf<String>()
 
     // 현재 글 번호를 담을 변수
     var postIdx: Int? = null
@@ -140,6 +141,18 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
         return user!!
     }
 
+    // 좋아요 누를 시
+    private fun touchLikeImage(): MutableList<String> {
+        fragmentCommunityDetailBinding.imageViewCommunityDetailLike.setOnClickListener {
+            fragmentCommunityDetailBinding.imageViewCommunityDetailLike.setImageResource(R.drawable.icon_thumb_liked)
+            CoroutineScope(Dispatchers.Main).launch {
+                val user = gettingUserData()
+                postLikeList.add(user.uid)
+            }
+        }
+        return  postLikeList
+    }
+
     // 초기 데이터 설정
     private fun settingData() {
         fragmentCommunityDetailBinding.apply {
@@ -155,6 +168,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 val postData = viewModel.selectCommunityPostData(postApartId!!, postId!!)
                 // 사용자 정보를 가져온다.
                 val user = gettingUserData()
+                userList = gettingCommentUserData()
 
                 commentData = generatingCommentObject()
 
@@ -166,10 +180,18 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 }
 
                 textViewCommunityDetailDate.text = postData?.postAddDate
-                textViewCommunityDetailWriter.text = user.name
+
+                userList.forEach {
+                    if (it!!.uid == postData?.postUserId) {
+                        textViewCommunityDetailWriter.text = it.name
+                    }
+                }
                 textViewCommunityDetailSubject.text = postData?.postTitle
                 textViewCommunityDetailContent.text = postData?.postContent
                 textViewCommunityDetailToolbarTitle.text = postData?.postType
+
+
+
                 textViewCommunityDetailLikeCnt.text = postData?.postLikeCnt.toString()
 
                 val job1 = CoroutineScope(Dispatchers.IO).launch {
@@ -255,7 +277,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
         return commentList
     }
 
-    // 댓글 유저 정보를 가져온다.
+    // 유저 정보를 가져온다.
     suspend fun gettingCommentUserData(): List<UserModel?> {
         val job1 = CoroutineScope(Dispatchers.Main).launch {
             userList = viewModel.getApartmentUserList(postApartId!!)

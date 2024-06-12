@@ -32,6 +32,7 @@ class ReservationConfirmFragment : Fragment() {
         settingToolbar()
         settingButton()
         observeSelectedReservation()
+        observeReservationCompletion()
 
         return fragmentReservationConfirmBinding.root
     }
@@ -42,7 +43,7 @@ class ReservationConfirmFragment : Fragment() {
                 textViewReservationConfirmToolbarTitle.text = "예약내역"
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
-                    reserveActivity.replaceFragment(ReserveFragmentName.RESERVATION_FRAGMENT, true, true, null)
+                    reserveActivity.finish()
                 }
             }
         }
@@ -51,7 +52,8 @@ class ReservationConfirmFragment : Fragment() {
     private fun settingButton() {
         fragmentReservationConfirmBinding.apply {
             reservationConfirmButton.setOnClickListener {
-                reserveActivity.replaceFragment(ReserveFragmentName.RESERVATION_FRAGMENT, true, true, null)
+                reservationViewModel.resetReservationCompleted()
+                reserveActivity.finish()
             }
         }
     }
@@ -64,10 +66,18 @@ class ReservationConfirmFragment : Fragment() {
         })
     }
 
+    private fun observeReservationCompletion() {
+        reservationViewModel.isReservationCompleted.observe(viewLifecycleOwner, Observer { isCompleted ->
+            if (isCompleted == true) {
+                fragmentReservationConfirmBinding.reservationConfirmButton.isEnabled = false
+            }
+        })
+    }
+
     private fun bindReservationData(reservation: FacilityResModel) {
         fragmentReservationConfirmBinding.apply {
-            reservationConfirmTextViewName.text = reservation.userName ?: "미입력"
-            reservationConfirmTextViewPhoneNumber.text = reservation.userNumber ?: "미입력"
+            reservationConfirmTextViewName.text = reservation.userName ?: "이름 없음"
+            reservationConfirmTextViewPhoneNumber.text = reservation.userNumber ?: "전화번호 없음"
             reservationConfirmTextViewDate.text = reservation.reservationDate
             reservationConfirmTextViewFacility.text = reservation.titleText
             reservationConfirmTextViewReservedDate.text = reservation.reservationDate
