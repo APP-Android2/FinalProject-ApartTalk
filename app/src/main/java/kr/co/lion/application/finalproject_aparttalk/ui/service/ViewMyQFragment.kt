@@ -55,14 +55,12 @@ class ViewMyQFragment : Fragment() {
 
     // 서비스 상세 내용을 표시하는 함수
     private fun displayServiceDetails() {
-        val serviceTitle = arguments?.getString("serviceTitle") ?: ""
         val serviceContent = arguments?.getString("serviceContent") ?: ""
         val serviceAnsContent = arguments?.getString("serviceAnsContent") ?: ""
 
         fragmentViewMyQBinding.apply {
-            viewMyQTextViewTitle.setText(serviceTitle) // EditText 사용 시 setText() 메서드 사용
-            viewMyQTextViewContent.setText(serviceContent) // EditText 사용 시 setText() 메서드 사용
-            viewMyQTextViewAnswer.setText(serviceAnsContent) // EditText 사용 시 setText() 메서드 사용
+            viewMyQTextViewContent.setText(serviceContent)
+            viewMyQTextViewAnsContent.setText(serviceAnsContent)
         }
     }
 }
