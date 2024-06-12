@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -278,30 +279,48 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 댓글 입력 객체 생성
     suspend fun generatingCommentObject() : CommentData {
+
+        val authUser = App.authRepository.getCurrentUser()
         var commentData = CommentData()
         // 사용자 정보를 가져온다.
         val user = gettingUserData()
 
-        val job1 = CoroutineScope(Dispatchers.Main).launch {
-            // 댓글 번호를 가져온다.
-            val commentSequence = viewModel.getCommunityCommentSequence()
-            // 댓글 번호를 업데이트한다.
-            viewModel.updateCommunityCommentSequence(commentSequence + 1)
-            // 저장할 데이터를 담는다.
-            commentData.commentId = UUID.randomUUID().toString()
-            commentData.commentPostId = postId!!
-            commentData.commentIdx = commentSequence + 1
-            commentData.commentUserIdx = user.idx
-            commentData.commentUserId = user.uid
-            val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
-            commentData.commentAddDate = simpleDateFormat.format(Date())
-            commentData.commentModifyDate = simpleDateFormat.format(Date())
-            commentData.commentPostIdx = postIdx!!
-            commentData.commentContent = fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text.toString()
-            commentData.commentCnt = commentList.size
-            commentData.commentState = CommentState.COMMENT_STATE_NORMAL.number
+        if (authUser != null) {
+            val user = App.userRepository.getUser(authUser.uid)
+            if (user != null) {
+                if (user.apartCertification == true) {
+                    val job1 = CoroutineScope(Dispatchers.Main).launch {
+                        // 댓글 번호를 가져온다.
+                        val commentSequence = viewModel.getCommunityCommentSequence()
+                        // 댓글 번호를 업데이트한다.
+                        viewModel.updateCommunityCommentSequence(commentSequence + 1)
+                        // 저장할 데이터를 담는다.
+                        commentData.commentId = UUID.randomUUID().toString()
+                        commentData.commentPostId = postId!!
+                        commentData.commentIdx = commentSequence + 1
+                        commentData.commentUserIdx = user.idx
+                        commentData.commentUserId = user.uid
+                        val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd")
+                        commentData.commentAddDate = simpleDateFormat.format(Date())
+                        commentData.commentModifyDate = simpleDateFormat.format(Date())
+                        commentData.commentPostIdx = postIdx!!
+                        commentData.commentContent = fragmentCommunityDetailBinding.textInputCommunityDetailSendComment.text.toString()
+                        commentData.commentCnt = commentList.size
+                        commentData.commentState = CommentState.COMMENT_STATE_NORMAL.number
+                    }
+                    job1.join()
+                } else {
+                    fragmentCommunityDetailBinding.imageViewCommunityDetailSendComment.setOnClickListener {
+                        val toast = Toast.makeText(
+                            requireContext(),
+                            "인증된 입주민만 작성할 수 있습니다.",
+                            Toast.LENGTH_SHORT
+                        )
+                        toast.show()
+                    }
+                }
+            }
         }
-        job1.join()
 
         return commentData
     }
