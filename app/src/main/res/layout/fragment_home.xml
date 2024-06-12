@@ -268,9 +268,11 @@
                     app:layout_constraintTop_toBottomOf="@id/homeAptScheduleTitleLayout" />
 
                 <LinearLayout
+                    android:id="@+id/linearLayoutScheduleType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -472,10 +474,28 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayoutScheduleList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/homeCalendarView">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewAptScheduleList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- 공지사항 영역 -->
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/homeNotificationLayout"
                 android:layout_width="match_parent"

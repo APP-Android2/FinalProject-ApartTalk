@@ -39,6 +39,11 @@ class AptScheduleActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        setRecyclerAptSchedule()
+    }
+
     // 툴바 구성
     fun setToolbar(){
         binding.apply {
