@@ -2,6 +2,8 @@ package kr.co.lion.application.finalproject_aparttalk.ui.home.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +15,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import kr.co.lion.application.finalproject_aparttalk.App
 import kr.co.lion.application.finalproject_aparttalk.MainActivity
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentHomeBinding
 import kr.co.lion.application.finalproject_aparttalk.ui.broadcast.activity.BroadcastActivity
+import kr.co.lion.application.finalproject_aparttalk.ui.community.viewmodel.CommunityNotificationViewModel
+import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleRecyclerView
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.AptSchedule.AptScheduleViewModel
 import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.FireCheck.FireCheckActivity
-import kr.co.lion.application.finalproject_aparttalk.ui.entiremenu.OperationInfo.OperationInfoActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.home.AlarmActivity
 import kr.co.lion.application.finalproject_aparttalk.ui.home.adapter.HomeAptScheduleRecyclerView
 import kr.co.lion.application.finalproject_aparttalk.ui.home.adapter.HomeNotificationRecyclerView
@@ -38,6 +42,7 @@ class HomeFragment : Fragment() {
 
     lateinit var binding:FragmentHomeBinding
     lateinit var mainActivity: MainActivity
+    private val viewModel: CommunityNotificationViewModel by viewModels()
 
     private val aptViewModel: AptScheduleViewModel by viewModels()
     private lateinit var homeAptScheduleRecyclerView: HomeAptScheduleRecyclerView
@@ -51,6 +56,7 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         mainActivity = activity as MainActivity
 
+        gettingCommunityPostList()
         settingRecyclerViewHomeNotification()
         settingEvent()
         initView()
@@ -64,11 +70,38 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    // 아파트 아이디 가져오기
+    suspend fun gettingApartId(): String {
+        var apartmentId = ""
+        val authUser = App.authRepository.getCurrentUser()
+        if (authUser != null) {
+            val user = App.userRepository.getUser(authUser.uid)
+            if (user != null) {
+                val apartment = App.apartmentRepository.getApartment(user.apartmentUid)
+                apartmentId = apartment!!.uid
+            }
+        }
+        return  apartmentId
+    }
+
+    // 게시글 리스트 받아오기
+    private fun gettingCommunityPostList() {
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.gettingCommunityNotificationList(gettingApartId())
+            if (viewModel.notificationList.isNotEmpty()) {
+                Log.d("hyuun", viewModel.notificationList[0].toString())
+                binding.homeNotificationRecyclerView.adapter?.notifyDataSetChanged()
+            } else {
+                Log.d("hyuun", "Notification list is empty.")
+            }
+        }
+    }
+
     // 홈 공지 리사이클러뷰 설정
     private fun settingRecyclerViewHomeNotification() {
         binding.apply {
             homeNotificationRecyclerView.apply {
-                adapter = HomeNotificationRecyclerView(requireContext())
+                adapter = HomeNotificationRecyclerView(requireContext(), viewModel)
                 layoutManager = LinearLayoutManager(mainActivity)
             }
         }

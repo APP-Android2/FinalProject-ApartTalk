@@ -35,7 +35,7 @@ class TabQuestionFragment : Fragment() {
         gettingCommunityPostList()
         settingRecyclerViewTabQuestion()
         settingFabTabQuestionAdd()
-        settingFloatingButton()
+        //settingFloatingButton()
 
         return fragmentTabQuestionBinding.root
     }

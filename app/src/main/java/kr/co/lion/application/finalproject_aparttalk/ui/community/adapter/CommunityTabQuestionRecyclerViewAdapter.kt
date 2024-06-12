@@ -57,6 +57,11 @@ class CommunityTabQuestionRecyclerViewAdapter(val context: Context, var viewMode
                 }
             }
 
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.commentList = viewModel.gettingCommunityCommentList(viewModel.questionList[position].postApartId, viewModel.questionList[position].postId)
+                textViewCommunityListCommentCntQuestion.text = viewModel.commentList.size.toString()
+            }
+
             linearLayoutCommunityListQuestion.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)

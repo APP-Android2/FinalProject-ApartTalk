@@ -34,7 +34,7 @@ class TabNotificationFragment : Fragment() {
         gettingCommunityPostList()
         settingRecyclerViewTabNotification()
         settingFabTabNotificationAdd()
-        settingFloatingButton()
+        //settingFloatingButton()
 
         return fragmentTabNotificationBinding.root
     }

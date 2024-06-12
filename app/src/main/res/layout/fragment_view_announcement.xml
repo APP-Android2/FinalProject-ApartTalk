@@ -39,85 +39,103 @@
                 tools:layout_editor_absoluteY="22dp" />
         </com.google.android.material.appbar.MaterialToolbar>
 
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:paddingHorizontal="16dp">
+            android:layout_marginHorizontal="20dp"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/viewAnnouncementTextViewTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/notosans_semibold"
+                android:includeFontPadding="false"
+                android:text="제목"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/viewAnnouncementTextViewTitle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/viewAnnouncementTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp"
-                    android:text="제목"
-                    android:fontFamily="@font/notosans_semibold"
-                    android:includeFontPadding="false"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:endIconMode="clear_text"
-                    app:hintAnimationEnabled="false"
-                    app:hintEnabled="false">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/viewAnnouncementContent"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/notosans_medium"
-                        android:gravity="top"
-                        android:includeFontPadding="false"
-                          android:text="제목입니다."
-                    android:textSize="14dp"
-                        android:inputType="none"
+                    android:cursorVisible="false"
                     android:focusable="false"
-                    android:cursorVisible="false" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:fontFamily="@font/notosans_medium"
+                    android:gravity="top"
+                android:includeFontPadding="false"
+                    android:inputType="none"
+                android:text="제목 이에요."
+                android:textSize="14dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/viewAnnouncementTextViewAnswer"
+            <TextView
+                android:id="@+id/viewAnnouncementTextViewAnswer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="4dp"
+                android:fontFamily="@font/notosans_semibold"
+                android:includeFontPadding="false"
+                android:text="내용"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text"
+                app:hintAnimationEnabled="false"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/viewAnnouncementTextViewAnsContent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/notosans_semibold"
-                    android:includeFontPadding="false"
-                    android:text="내용"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:endIconMode="clear_text"
-                    app:hintAnimationEnabled="false"
-                    app:hintEnabled="false">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/viewAnnouncementTextViewAnsContent"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:gravity="top"
-                        android:fontFamily="@font/notosans_medium"
-                        android:includeFontPadding="false"
-                        android:inputType="none"
-                    android:text="공지사항 입니다."
-                    android:textSize="14dp"
+                    android:layout_height="250dp"
+                    android:cursorVisible="false"
                     android:focusable="false"
-                    android:cursorVisible="false" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:fontFamily="@font/notosans_medium"
+                    android:gravity="top"
+                android:includeFontPadding="false"
+                android:inputType="none"
+                android:text="공지사항 입니다."
+                android:textSize="14dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
+        </LinearLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        </ScrollView>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/viewMyAnnouncementButton"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/style_pointbutton_radias"
+                android:fontFamily="@font/notosans_semibold"
+                android:includeFontPadding="false"
+                android:text="확인"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.979" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 </LinearLayout>

@@ -36,7 +36,7 @@ class TabEtcFragment : Fragment() {
         gettingCommunityPostList()
         settingRecyclerViewTabTrade()
         settingFabTabEtcAdd()
-        settingFloatingButton()
+        //settingFloatingButton()
 
         return fragmentTabEtcBinding.root
     }

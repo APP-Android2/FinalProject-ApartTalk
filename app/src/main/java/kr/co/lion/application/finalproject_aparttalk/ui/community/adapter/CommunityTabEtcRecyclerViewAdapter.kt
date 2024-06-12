@@ -60,6 +60,11 @@ class CommunityTabEtcRecyclerViewAdapter(val context: Context, var viewModel: Co
                 }
             }
 
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.commentList = viewModel.gettingCommunityCommentList(viewModel.etcList[position].postApartId, viewModel.etcList[position].postId)
+                textViewCommunityListCommentCntEtc.text = viewModel.commentList.size.toString()
+            }
+
             linearLayoutCommunityListEtc.setOnClickListener {
                 val intent = Intent(context, CommunityActivity::class.java)
                 intent.putExtra("fragmentName", CommunityFragmentName.COMMUNITY_DETAIL_FRAGMENT)

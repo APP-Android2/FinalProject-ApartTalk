@@ -64,7 +64,6 @@ class VoteFragment : Fragment() {
 
     private fun voteToolbar() {
         binding.voteToolbar.apply {
-            title = "주민 투표"
             setNavigationIcon(R.drawable.icon_back)
             setNavigationOnClickListener {
                 voteActivity.replaceFragment(VoteFragmentName.VOTE_TAB_FRAGMENT, false, true, null)

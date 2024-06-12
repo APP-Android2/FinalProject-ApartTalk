@@ -216,6 +216,7 @@ class CommunityAddFragment(data: Bundle?) : Fragment() {
             val typeArray = resources.getStringArray(R.array.type_community)
             val typeArrayAdapter = ArrayAdapter(requireContext(), R.layout.item_spinner_community_add, typeArray)
             textViewCommunityAddType.setAdapter(typeArrayAdapter)
+            textViewCommunityAddType.setText(typeArray[2], false)
         }
     }
 

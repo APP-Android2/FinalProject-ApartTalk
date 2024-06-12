@@ -8,13 +8,17 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kr.co.lion.application.finalproject_aparttalk.model.CommentData
 import kr.co.lion.application.finalproject_aparttalk.model.PostData
+import kr.co.lion.application.finalproject_aparttalk.repository.CommunityCommentRepository
 import kr.co.lion.application.finalproject_aparttalk.repository.CommunityPostRepository
 
 class CommunitySearchViewModel: ViewModel() {
     private val communityPostRepository = CommunityPostRepository()
+    private val communityCommentRepository = CommunityCommentRepository()
     var allList = mutableListOf<PostData>()
     var searchList = mutableListOf<PostData>()
+    var commentList = mutableListOf<CommentData>()
 
     // 커뮤니티 글 리스트 검색 탭 라벨
     private val _textViewCommunityListLabelSearch = MutableLiveData<String>()
@@ -44,5 +48,10 @@ class CommunitySearchViewModel: ViewModel() {
     // 이미지 데이터를 받아오는 메서드
     suspend fun gettingCommunityPostImage(context: Context, imageFileName:String, imageView: ImageView) {
         return communityPostRepository.gettingCommunityPostImage(context, imageFileName, imageView)
+    }
+
+    // 댓글 목록을 가져온다.
+    suspend fun gettingCommunityCommentList(postApartId: String, postId: String):MutableList<CommentData>{
+        return communityCommentRepository.gettingCommunityCommentList(postApartId, postId)
     }
 }

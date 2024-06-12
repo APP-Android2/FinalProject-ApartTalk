@@ -99,6 +99,7 @@ class EntireMenuFragment : Fragment() {
                             startActivity(Intent(requireActivity(), ServiceActivity::class.java))
                         }
 
+                        //입주민 인증
                         if (user.apartCertification == true){
 
                             LinearWriteMenu.setOnClickListener {
@@ -142,6 +143,7 @@ class EntireMenuFragment : Fragment() {
                                 //아파트 운영정보로 이동
                                 startActivity(Intent(requireActivity(), OperationInfoActivity::class.java))
                             }
+                            //입주민 미인증
                         }else{
                             LinearWriteMenu.isClickable = false
                             LinearReservationMenu.isClickable = false
