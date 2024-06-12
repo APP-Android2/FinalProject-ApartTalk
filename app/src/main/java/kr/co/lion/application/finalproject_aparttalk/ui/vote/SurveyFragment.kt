@@ -139,8 +139,6 @@ class SurveyFragment : Fragment() {
     fun surveyToolbar() {
         fragmentSurveyBinding.apply {
             surveyToolbar.apply {
-                title = "주민 투표"
-                setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     voteActivity.replaceFragment(VoteFragmentName.SURVEY_LIST_FRAGMENT, false, true, null)
                 }

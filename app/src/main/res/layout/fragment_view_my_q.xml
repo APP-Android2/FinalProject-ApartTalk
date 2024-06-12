@@ -101,13 +101,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/viewMyQTextViewContent"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="match_parent"
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:fontFamily="@font/notosans_medium"
                     android:gravity="top"
                     android:includeFontPadding="false"
-                    android:inputType="none"
+                    android:inputType="text|textMultiLine"
                     android:text="질문한 내용입니다."
                     android:textSize="14dp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -134,45 +134,39 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/viewMyQTextViewAnsContent"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="match_parent"
                     android:cursorVisible="false"
                     android:focusable="false"
                     android:fontFamily="@font/notosans_medium"
-                    android:gravity="top"
                     android:includeFontPadding="false"
-                    android:inputType="none"
+                    android:inputType="text|textMultiLine"
                     android:text="답변한 내용입니다."
+                    android:textColor="@color/black"
                     android:textSize="14dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/viewMyQButton"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/style_pointbutton_radias"
-                android:fontFamily="@font/notosans_semibold"
-                android:includeFontPadding="false"
-                android:text="확인"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.979" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/viewMyQButton"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/style_pointbutton_radias"
+            android:fontFamily="@font/notosans_semibold"
+            android:includeFontPadding="false"
+            android:text="확인"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
 
     </LinearLayout>

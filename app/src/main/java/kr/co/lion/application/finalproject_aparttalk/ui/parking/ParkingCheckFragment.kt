@@ -34,6 +34,7 @@ class ParkingCheckFragment : Fragment() {
 
     val viewModel : ParkingViewModel by viewModels()
 
+    private var valueSize: Int = 10
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -90,28 +91,28 @@ class ParkingCheckFragment : Fragment() {
 
             //예약 횟수 제한
             binding.parkingReserveCount.text = "이번달 남은 예약 횟수 : ${10 - value.size}회"
+            valueSize -= value.size
+        }
 
-            //예약 횟수 확인
-            if (10 - value.size > 0){
-                binding.parkingAdd.setOnClickListener {
-                    parkingActivity.replaceFragment(ParkingFragmentName.PARKING_RESERVE_FRAGMENT, true, null)
+        //예약 횟수 확인
+        if (valueSize > 0){
+            binding.parkingAdd.setOnClickListener {
+                parkingActivity.replaceFragment(ParkingFragmentName.PARKING_RESERVE_FRAGMENT, true, null)
 
-                }
-            }else{
-                binding.parkingAdd.setOnClickListener {
-                    val dialog = DialogConfirm(
-                        "예약 횟수 초과", "월 예약 횟수를 초과했습니다", parkingActivity
-                    )
-                    dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
-                        override fun okButtonClick() {
-                            dialog.dismiss()
-                        }
-
-                    })
-                    dialog.show(parkingActivity.supportFragmentManager, "DialogConfirm")
-                }
             }
+        }else{
+            binding.parkingAdd.setOnClickListener {
+                val dialog = DialogConfirm(
+                    "예약 횟수 초과", "월 예약 횟수를 초과했습니다", parkingActivity
+                )
+                dialog.setDialogButtonClickListener(object : DialogConfirm.OnButtonClickListener{
+                    override fun okButtonClick() {
+                        dialog.dismiss()
+                    }
 
+                })
+                dialog.show(parkingActivity.supportFragmentManager, "DialogConfirm")
+            }
         }
     }
 }

@@ -43,13 +43,9 @@ class ReservationCompleteFragment : Fragment() {
     private fun settingRecyclerview() {
         fragmentReservationCompleteBinding.apply {
             recyclerViewTabReservationComplete.apply {
-                adapter =
-                    ReservationCompleteRecyclerViewAdapter(requireContext(), reservationViewModel)
+                adapter = ReservationCompleteRecyclerViewAdapter(requireContext(), reservationViewModel)
                 layoutManager = LinearLayoutManager(reserveActivity)
-                val deco = MaterialDividerItemDecoration(
-                    reserveActivity,
-                    MaterialDividerItemDecoration.VERTICAL
-                )
+                val deco = MaterialDividerItemDecoration(reserveActivity, MaterialDividerItemDecoration.VERTICAL)
                 addItemDecoration(deco)
             }
         }
