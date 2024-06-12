@@ -69,7 +69,6 @@ class HomeFragment : Fragment() {
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.gettingCommunityNotificationList(gettingApartId())
             if (viewModel.notificationList.isNotEmpty()) {
-                Log.d("hyuun", viewModel.notificationList[0].toString())
                 binding.homeNotificationRecyclerView.adapter?.notifyDataSetChanged()
             } else {
                 Log.d("hyuun", "Notification list is empty.")

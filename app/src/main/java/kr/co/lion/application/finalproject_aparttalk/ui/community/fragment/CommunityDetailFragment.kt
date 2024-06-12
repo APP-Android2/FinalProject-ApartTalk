@@ -17,6 +17,7 @@ import kr.co.lion.application.finalproject_aparttalk.ui.community.activity.Commu
 import kr.co.lion.application.finalproject_aparttalk.R
 import kr.co.lion.application.finalproject_aparttalk.databinding.FragmentCommunityDetailBinding
 import kr.co.lion.application.finalproject_aparttalk.model.CommentData
+import kr.co.lion.application.finalproject_aparttalk.model.LikeData
 import kr.co.lion.application.finalproject_aparttalk.model.UserModel
 import kr.co.lion.application.finalproject_aparttalk.util.SwipeHelperCallback
 import kr.co.lion.application.finalproject_aparttalk.ui.community.adapter.CommunityDetailCommentRecyclerViewAdapter
@@ -38,7 +39,8 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
     // 이미지 저장용 리스트
     var imageCommunityDetailList = mutableListOf<String>()
-    var postLikeList = mutableListOf<String>()
+    var isLiked: Boolean = false
+    var likeList = mutableListOf<LikeData>()
 
     // 현재 글 번호를 담을 변수
     var postIdx: Int? = null
@@ -66,6 +68,7 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
 
         settingToolbar()
         settingData()
+        settingLike()
         settingCommentInputForm()
         commentDoneProcess()
         settingRecyclerViewCommunityDetailComment()
@@ -142,15 +145,52 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
     }
 
     // 좋아요 누를 시
-    private fun touchLikeImage(): MutableList<String> {
-        fragmentCommunityDetailBinding.imageViewCommunityDetailLike.setOnClickListener {
-            fragmentCommunityDetailBinding.imageViewCommunityDetailLike.setImageResource(R.drawable.icon_thumb_liked)
+    private fun settingLike() {
+        fragmentCommunityDetailBinding.apply {
             CoroutineScope(Dispatchers.Main).launch {
-                val user = gettingUserData()
-                postLikeList.add(user.uid)
+                val likeData = generatingLikeObject()
+                imageViewCommunityDetailLike.setOnClickListener {
+                    if (isLiked == false) {
+                        isLiked = true
+                        imageViewCommunityDetailLike.setImageResource(R.drawable.icon_thumb_liked)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            val likeSequence = viewModel.getLikeSequence()
+                            viewModel.updateLikeSequence(likeSequence)
+                            viewModel.insertLikeData(postApartId!!, likeData)
+                            likeList = viewModel.gettingLikeList(postApartId!!, postId!!)
+                            textViewCommunityDetailLikeCnt.text = likeList.size.toString()
+                        }
+                    } else {
+                        isLiked = false
+                        imageViewCommunityDetailLike.setImageResource(R.drawable.icon_thumb)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            viewModel.deleteLikeData(postApartId!!, likeData)
+                            likeList = viewModel.gettingLikeList(postApartId!!, postId!!)
+                            textViewCommunityDetailCommentCnt.text = likeList.size.toString()
+                        }
+                    }
+                }
             }
         }
-        return  postLikeList
+    }
+
+    // 좋아요 객체 설정
+    suspend fun generatingLikeObject(): LikeData {
+        var likeData = LikeData()
+        val user = gettingUserData()
+
+        val job1 = CoroutineScope(Dispatchers.Main).launch {
+            val likeSequence = viewModel.getLikeSequence()
+            viewModel.updateLikeSequence(likeSequence + 1)
+
+            likeData.likeId = UUID.randomUUID().toString()
+            likeData.likePostId = postId!!
+            likeData.likeUserId = user.uid
+        }
+        job1.join()
+
+        return  likeData
+
     }
 
     // 초기 데이터 설정
@@ -167,7 +207,6 @@ class CommunityDetailFragment(data: Bundle?) : Fragment() {
                 // 현재 글 번호에 해당하는 글 데이터를 가져온다.
                 val postData = viewModel.selectCommunityPostData(postApartId!!, postId!!)
                 // 사용자 정보를 가져온다.
-                val user = gettingUserData()
                 userList = gettingCommentUserData()
 
                 commentData = generatingCommentObject()
