@@ -47,7 +47,7 @@ class ViewAnnouncementFragment : Fragment() {
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
                     // 전화면으로 돌아가기
-                    serviceActivity.replaceFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
+                    serviceActivity.removeFragment(ServiceFragmentName.VIEW_ANNOUNCEMENT_FRAGMENT)
                 }
             }
         }
@@ -56,7 +56,7 @@ class ViewAnnouncementFragment : Fragment() {
     fun settingButton() {
         fragmentViewAnnouncementBinding.apply {
             viewMyAnnouncementButton.setOnClickListener {
-                serviceActivity.addFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
+                serviceActivity.removeFragment(ServiceFragmentName.VIEW_ANNOUNCEMENT_FRAGMENT)
             }
         }
     }

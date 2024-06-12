@@ -2,6 +2,7 @@ package kr.co.lion.application.finalproject_aparttalk.ui.facility
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -82,42 +83,42 @@ class DetailFacilityActivity : AppCompatActivity() {
 
                         viewModel.facilityList.observe(this@DetailFacilityActivity){value ->
                             val isOneDayPassed = viewModel.checkFacilityRes()
-
-                            buttonGoReservation.setOnClickListener {
-                                if (isOneDayPassed) {
-                                    val newIntent = Intent(
-                                        this@DetailFacilityActivity,
-                                        FacReservationActivity::class.java
-                                    )
-                                    newIntent.putExtra("titleText", titleText)
-                                    newIntent.putExtra("price", price)
-                                    newIntent.putExtra("imageRes", image)
-                                    startActivity(newIntent)
-
-                                    finish()
-
-                                } else {
-                                    val dialog = DialogConfirm(
-                                        "예약 오류",
-                                        "예약은 하루에 한 번만 가능합니다",
-                                        this@DetailFacilityActivity
-                                    )
-                                    dialog.setDialogButtonClickListener(object :
-                                        DialogConfirm.OnButtonClickListener {
-                                        override fun okButtonClick() {
-                                            dialog.dismiss()
-                                        }
-
-                                    })
-                                    dialog.show(
-                                        this@DetailFacilityActivity.supportFragmentManager,
-                                        "DialogConfirm"
-                                    )
-                                }
-                            }
                         }
 
                     }
+                }
+            }
+
+            buttonGoReservation.setOnClickListener {
+                if (true) {
+                    val newIntent = Intent(
+                        this@DetailFacilityActivity,
+                        FacReservationActivity::class.java
+                    )
+                    newIntent.putExtra("titleText", titleText)
+                    newIntent.putExtra("price", price)
+                    newIntent.putExtra("imageRes", image)
+                    startActivity(newIntent)
+
+                    finish()
+
+                } else {
+                    val dialog = DialogConfirm(
+                        "예약 오류",
+                        "예약은 하루에 한 번만 가능합니다",
+                        this@DetailFacilityActivity
+                    )
+                    dialog.setDialogButtonClickListener(object :
+                        DialogConfirm.OnButtonClickListener {
+                        override fun okButtonClick() {
+                            dialog.dismiss()
+                        }
+
+                    })
+                    dialog.show(
+                        this@DetailFacilityActivity.supportFragmentManager,
+                        "DialogConfirm"
+                    )
                 }
             }
         }

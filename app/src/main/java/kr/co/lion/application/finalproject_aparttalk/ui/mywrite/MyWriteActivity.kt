@@ -32,12 +32,6 @@ class MyWriteActivity : AppCompatActivity() {
         replaceFragment(MyWriteFragmentName.MY_WRITE_FRAGMENT, false, false, null)
     }
 
-    // 사용자 ID를 반환하는 메서드
-    fun getUserId(): Int {
-        // 실제 사용자 ID를 반환하도록 구현
-        return 123 // 예시로 123을 반환
-    }
-
     // 지정한 Fragment를 보여주는 메서드
     // name : 프래그먼트 이름
     // addToBackStack : BackStack에 포함 시킬 것인지

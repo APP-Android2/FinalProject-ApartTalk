@@ -39,7 +39,7 @@ class ViewMyQFragment : Fragment() {
                 textViewViewMyQToolbarTitle.text = "내 문의"
                 setNavigationIcon(R.drawable.icon_back)
                 setNavigationOnClickListener {
-                    serviceActivity.replaceFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
+                    serviceActivity.removeFragment(ServiceFragmentName.VIEW_FAQ_FRAGMENT)
                 }
             }
         }
@@ -48,15 +48,15 @@ class ViewMyQFragment : Fragment() {
     fun settingButton() {
         fragmentViewMyQBinding.apply {
             viewMyQButton.setOnClickListener {
-                serviceActivity.addFragment(ServiceFragmentName.SERVICE_FRAGMENT, true, true, null)
+                serviceActivity.removeFragment(ServiceFragmentName.VIEW_FAQ_FRAGMENT)
             }
         }
     }
 
     // 서비스 상세 내용을 표시하는 함수
     private fun displayServiceDetails() {
-        val serviceContent = arguments?.getString("serviceContent") ?: ""
-        val serviceAnsContent = arguments?.getString("serviceAnsContent") ?: ""
+        val serviceContent = arguments?.getString("serviceContent") ?: "질문한 내용입니다."
+        val serviceAnsContent = arguments?.getString("serviceAnsContent") ?: "답변한 내용입니다."
 
         fragmentViewMyQBinding.apply {
             viewMyQTextViewContent.setText(serviceContent)

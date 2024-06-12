@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kr.co.lion.application.finalproject_aparttalk.model.FacilityResModel
 import kr.co.lion.application.finalproject_aparttalk.model.ParkingModel
 import kr.co.lion.application.finalproject_aparttalk.repository.ParkingRepository
 

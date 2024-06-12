@@ -40,7 +40,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/notosans_semibold"
-        android:text="이번달 남은 예약 횟수 : 4회"
+        android:text="이번달 남은 예약 횟수 : 10회"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbarParking" />
